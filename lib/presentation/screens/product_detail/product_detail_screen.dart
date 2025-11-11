@@ -437,7 +437,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: const Color(0xFFD5F4F1), // Light mint color (similar to primary button but lighter)
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFFD5F4F1).withOpacity(0.2)
+                  : const Color(0xFFD5F4F1), // Light mint color
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
@@ -720,7 +722,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: const Color(0xFFC8E6C9), // Darker green color for health benefits
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFFC8E6C9).withOpacity(0.2)
+                  : const Color(0xFFC8E6C9), // Green color for health benefits
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -758,7 +762,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: const Color(0xFFF8BBD0), // Darker pink color for warnings
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFFFFCDD2).withOpacity(0.2)
+                  : const Color(0xFFFFCDD2), // Light pink color for warnings
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
