@@ -26,7 +26,11 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = context.read<ProductProvider>();
-      _displayedProducts = provider.filteredProducts;
+      // Load all products initially (filteredProducts returns empty if no filter/sort)
+      _displayedProducts = provider.filteredProducts.isEmpty
+          ? provider.products
+          : provider.filteredProducts;
+      setState(() {}); // Trigger rebuild to show products
     });
   }
 
@@ -41,7 +45,10 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
       setState(() {
         _isSearching = false;
         final provider = context.read<ProductProvider>();
-        _displayedProducts = provider.filteredProducts;
+        // Show all products or filtered products
+        _displayedProducts = provider.filteredProducts.isEmpty
+            ? provider.products
+            : provider.filteredProducts;
       });
       return;
     }
@@ -61,7 +68,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
     final provider = context.read<ProductProvider>();
     await provider.refresh();
     setState(() {
-      _displayedProducts = provider.filteredProducts;
+      _displayedProducts = provider.filteredProducts.isEmpty
+          ? provider.products
+          : provider.filteredProducts;
       _searchController.clear();
     });
   }
@@ -80,7 +89,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
       if (_searchController.text.isEmpty) {
         setState(() {
           final provider = context.read<ProductProvider>();
-          _displayedProducts = provider.filteredProducts;
+          _displayedProducts = provider.filteredProducts.isEmpty
+              ? provider.products
+              : provider.filteredProducts;
         });
       }
     });
@@ -100,7 +111,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
       if (_searchController.text.isEmpty) {
         setState(() {
           final provider = context.read<ProductProvider>();
-          _displayedProducts = provider.filteredProducts;
+          _displayedProducts = provider.filteredProducts.isEmpty
+              ? provider.products
+              : provider.filteredProducts;
         });
       }
     });
@@ -140,7 +153,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
           ),
         );
         setState(() {
-          _displayedProducts = provider.filteredProducts;
+          _displayedProducts = provider.filteredProducts.isEmpty
+              ? provider.products
+              : provider.filteredProducts;
         });
       }
     }
@@ -158,7 +173,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
         ),
       );
       setState(() {
-        _displayedProducts = provider.filteredProducts;
+        _displayedProducts = provider.filteredProducts.isEmpty
+            ? provider.products
+            : provider.filteredProducts;
       });
     }
   }
@@ -237,7 +254,9 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
                           provider.setCategory('all');
                           if (_searchController.text.isEmpty) {
                             setState(() {
-                              _displayedProducts = provider.filteredProducts;
+                              _displayedProducts = provider.filteredProducts.isEmpty
+                                  ? provider.products
+                                  : provider.filteredProducts;
                             });
                           }
                         },

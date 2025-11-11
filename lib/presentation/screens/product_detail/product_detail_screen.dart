@@ -206,140 +206,133 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Header Card
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  _product.getStatusColor().withOpacity(0.2),
-                  Colors.white,
-                ],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            // Header Card as Sliver
+            SliverToBoxAdapter(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      _product.getStatusColor().withOpacity(0.2),
+                      Colors.white,
+                    ],
+                  ),
+                ),
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    // Icon
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          categoryData['icon'] as String,
+                          style: const TextStyle(fontSize: 48),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // Name
+                    Text(
+                      _product.name,
+                      style: AppTheme.h1.copyWith(fontSize: 24),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    const SizedBox(height: 4),
+
+                    // Category
+                    Chip(
+                      label: Text(
+                        categoryData['name_vi'] as String,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // Status Card
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: _product.getStatusColor(),
+                        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            _product.isExpired
+                                ? 'ĐÃ HẾT HẠN'
+                                : '${_product.daysUntilExpiry} NGÀY',
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            _product.daysRemainingText,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                // Icon
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      categoryData['icon'] as String,
-                      style: const TextStyle(fontSize: 48),
-                    ),
-                  ),
+
+            // Tab Bar as Pinned Sliver
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _StickyTabBarDelegate(
+                TabBar(
+                  controller: _tabController,
+                  labelColor: AppTheme.primaryColor,
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: AppTheme.primaryColor,
+                  tabs: const [
+                    Tab(text: 'Thông Tin'),
+                    Tab(text: 'Dinh Dưỡng'),
+                    Tab(text: 'Sức Khỏe'),
+                  ],
                 ),
-
-                const SizedBox(height: 12),
-
-                // Name
-                Text(
-                  _product.name,
-                  style: AppTheme.h1.copyWith(fontSize: 24),
-                  textAlign: TextAlign.center,
-                ),
-
-                const SizedBox(height: 4),
-
-                // Category
-                Chip(
-                  label: Text(
-                    categoryData['name_vi'] as String,
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-
-                const SizedBox(height: 12),
-
-                // Status Card
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: _product.getStatusColor(),
-                    borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        _product.isExpired
-                            ? 'ĐÃ HẾT HẠN'
-                            : '${_product.daysUntilExpiry} NGÀY',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        _product.daysRemainingText,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-
-          // Tab Bar
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TabBar(
-              controller: _tabController,
-              labelColor: AppTheme.primaryColor,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: AppTheme.primaryColor,
-              tabs: const [
-                Tab(text: 'Thông Tin'),
-                Tab(text: 'Dinh Dưỡng'),
-                Tab(text: 'Sức Khỏe'),
-              ],
-            ),
-          ),
-
-          // Tab Bar View
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildInfoTab(),
-                _buildNutritionTab(),
-                _buildHealthTab(),
-              ],
-            ),
-          ),
-        ],
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            _buildInfoTab(),
+            _buildNutritionTab(),
+            _buildHealthTab(),
+          ],
+        ),
       ),
     );
   }
@@ -877,5 +870,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   String _getVitaminUnit(String key) {
     if (key.contains('vitamin_a')) return 'IU';
     return 'mg';
+  }
+}
+
+/// Delegate for sticky TabBar in NestedScrollView
+class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar tabBar;
+
+  _StickyTabBarDelegate(this.tabBar);
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
+    return false;
   }
 }
