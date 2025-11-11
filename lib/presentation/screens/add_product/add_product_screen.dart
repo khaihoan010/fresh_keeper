@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
+import '../../../services/nutrition_api_service.dart';
+import '../../../data/repositories/product_repository.dart';
+import '../../../data/data_sources/local/product_local_data_source.dart';
 
 /// Add Product Screen
 /// Form to add new products with smart search
@@ -22,6 +26,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _nameController = TextEditingController();
   final _quantityController = TextEditingController(text: '1');
   final _searchController = TextEditingController();
+  final _nutritionApiService = NutritionApiService();
 
   String _selectedCategory = 'vegetables';
   String _selectedUnit = 'kg';
@@ -29,6 +34,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   DateTime? _expiryDate;
   List<ProductTemplate> _searchResults = [];
   bool _isSearching = false;
+  bool _isSearchingApi = false;
   ProductTemplate? _selectedTemplate;
 
   @override
@@ -44,19 +50,149 @@ class _AddProductScreenState extends State<AddProductScreen> {
       setState(() {
         _searchResults = [];
         _isSearching = false;
+        _isSearchingApi = false;
       });
       return;
     }
 
-    setState(() => _isSearching = true);
+    // Step 1: Search local database first
+    setState(() {
+      _isSearching = true;
+      _isSearchingApi = false;
+    });
 
     final provider = context.read<ProductProvider>();
-    final results = await provider.searchTemplates(query);
+    List<ProductTemplate> localResults = await provider.searchTemplates(query);
 
     setState(() {
-      _searchResults = results;
+      _searchResults = localResults;
       _isSearching = false;
     });
+
+    // Step 2: If local results < 3, search API for more
+    if (localResults.length < 3) {
+      setState(() => _isSearchingApi = true);
+
+      try {
+        final apiResults = await _nutritionApiService.searchProducts(query);
+
+        if (mounted && apiResults.isNotEmpty) {
+          // Merge results and remove duplicates
+          final allResults = [...localResults];
+          for (final apiResult in apiResults) {
+            // Check if already exists in local results
+            final exists = allResults.any((local) =>
+              local.nameVi.toLowerCase() == apiResult.nameVi.toLowerCase() ||
+              local.nameEn.toLowerCase() == apiResult.nameEn.toLowerCase()
+            );
+            if (!exists) {
+              allResults.add(apiResult);
+            }
+          }
+
+          // Cache API results to database for future use
+          await _cacheApiResults(apiResults);
+
+          setState(() {
+            _searchResults = allResults;
+          });
+        }
+      } catch (e) {
+        debugPrint('⚠️ API search error: $e');
+        // Continue with local results only
+      } finally {
+        if (mounted) {
+          setState(() => _isSearchingApi = false);
+        }
+      }
+    }
+  }
+
+  /// Cache API results to local database for offline use
+  Future<void> _cacheApiResults(List<ProductTemplate> templates) async {
+    if (templates.isEmpty) return;
+
+    try {
+      final dataSource = await ProductLocalDataSource.create();
+      int cachedCount = 0;
+
+      for (final template in templates) {
+        // Check if template already exists in database
+        final existing = await dataSource.getTemplateById(template.id);
+
+        if (existing == null) {
+          // Template doesn't exist, insert it
+          await dataSource.insertTemplate(template);
+          cachedCount++;
+          debugPrint('✅ Cached: ${template.nameVi} (${template.id})');
+        }
+      }
+
+      if (cachedCount > 0) {
+        debugPrint('📦 Cached $cachedCount new product(s) from API');
+      }
+    } catch (e) {
+      debugPrint('⚠️ Caching error: $e');
+      // Don't throw error - caching is not critical
+    }
+  }
+
+  /// Open barcode scanner and fetch product by barcode
+  Future<void> _scanBarcode() async {
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const BarcodeScannerScreen(),
+      ),
+    );
+
+    if (result != null && mounted) {
+      // Show loading indicator
+      setState(() => _isSearchingApi = true);
+
+      try {
+        debugPrint('📷 Scanning barcode: $result');
+
+        // Fetch product from API using barcode
+        final product = await _nutritionApiService.getProductByBarcode(result);
+
+        if (product != null && mounted) {
+          // Cache the product
+          await _cacheApiResults([product]);
+
+          // Auto-fill form with product data
+          _selectTemplate(product);
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('✅ Đã tìm thấy: ${product.nameVi}'),
+              backgroundColor: AppTheme.successColor,
+            ),
+          );
+        } else if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('⚠️ Không tìm thấy sản phẩm với mã vạch này'),
+              backgroundColor: AppTheme.warningColor,
+            ),
+          );
+        }
+      } catch (e) {
+        debugPrint('❌ Barcode scan error: $e');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('❌ Lỗi khi quét mã vạch'),
+              backgroundColor: AppTheme.errorColor,
+            ),
+          );
+        }
+      } finally {
+        if (mounted) {
+          setState(() => _isSearchingApi = false);
+        }
+      }
+    }
   }
 
   void _selectTemplate(ProductTemplate template) {
@@ -183,6 +319,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
       appBar: AppBar(
         title: const Text('Thêm Sản Phẩm'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.qr_code_scanner),
+            tooltip: 'Quét mã vạch',
+            onPressed: _scanBarcode,
+          ),
           TextButton(
             onPressed: _saveProduct,
             child: const Text(
@@ -304,15 +445,50 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Tìm kiếm nhanh',
-          style: AppTheme.h3,
+        Row(
+          children: [
+            Text(
+              'Tìm kiếm nhanh',
+              style: AppTheme.h3,
+            ),
+            const SizedBox(width: 8),
+            if (_isSearchingApi)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.blue[50],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 12,
+                      height: 12,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[700]!),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Searching online...',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.blue[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
         ),
         const SizedBox(height: 8),
         TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Tìm sản phẩm...',
+            hintText: 'Tìm sản phẩm... (local + online)',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: _isSearching
                 ? const Padding(
@@ -351,16 +527,42 @@ class _AddProductScreenState extends State<AddProductScreen> {
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final template = _searchResults[index];
+                final isFromApi = template.id.startsWith('api_');
+
                 return ListTile(
                   leading: Text(
                     AppConstants.categoryIcons[template.category] ?? '📦',
                     style: const TextStyle(fontSize: 28),
                   ),
-                  title: Text(template.nameVi),
+                  title: Row(
+                    children: [
+                      Expanded(child: Text(template.nameVi)),
+                      if (isFromApi)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.green[50],
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.green[200]!),
+                          ),
+                          child: Text(
+                            'ONLINE',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                   subtitle: Text(
                     '${template.nameEn} • ${template.shelfLifeDays} ngày',
                     style: AppTheme.body2,
                   ),
+                  trailing: template.hasNutrition
+                      ? Icon(Icons.restaurant, size: 16, color: Colors.orange[700])
+                      : null,
                   onTap: () => _selectTemplate(template),
                 );
               },
@@ -544,6 +746,119 @@ class _AddProductScreenState extends State<AddProductScreen> {
             child: Text(
               value,
               style: AppTheme.body2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Barcode Scanner Screen
+/// Full-screen barcode scanner with camera preview
+class BarcodeScannerScreen extends StatefulWidget {
+  const BarcodeScannerScreen({super.key});
+
+  @override
+  State<BarcodeScannerScreen> createState() => _BarcodeScannerScreenState();
+}
+
+class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
+  MobileScannerController cameraController = MobileScannerController();
+  bool _isProcessing = false;
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
+  void _onBarcodeDetect(BarcodeCapture capture) {
+    if (_isProcessing) return;
+
+    final List<Barcode> barcodes = capture.barcodes;
+    if (barcodes.isEmpty) return;
+
+    final barcode = barcodes.first;
+    final String? code = barcode.rawValue;
+
+    if (code != null && code.isNotEmpty) {
+      setState(() => _isProcessing = true);
+      Navigator.pop(context, code);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Quét Mã Vạch'),
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            icon: ValueListenableBuilder(
+              valueListenable: cameraController.torchState,
+              builder: (context, state, child) {
+                switch (state) {
+                  case TorchState.off:
+                    return const Icon(Icons.flash_off, color: Colors.grey);
+                  case TorchState.on:
+                    return const Icon(Icons.flash_on, color: Colors.yellow);
+                }
+              },
+            ),
+            onPressed: () => cameraController.toggleTorch(),
+          ),
+          IconButton(
+            icon: const Icon(Icons.cameraswitch),
+            onPressed: () => cameraController.switchCamera(),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          MobileScanner(
+            controller: cameraController,
+            onDetect: _onBarcodeDetect,
+          ),
+          // Scanning overlay
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 300,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: const Text(
+                      'Đưa mã vạch vào khung hình',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

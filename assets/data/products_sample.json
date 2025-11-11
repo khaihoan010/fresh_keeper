@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "last_updated": "2025-01-11",
-  "total_products": 50,
+  "total_products": 110,
   "products": [
     {
       "id": "apple_fuji",
@@ -1752,6 +1752,1685 @@
         "Không uống quá 3-4 tách/ngày"
       ],
       "storage_tips": "Bảo quản trong hộp kín, nơi khô ráo, tránh ánh sáng."
+    },
+    {
+      "id": "duck_meat",
+      "name_vi": "Thịt vịt",
+      "name_en": "Duck Meat",
+      "aliases": ["thịt vịt", "thit vit", "duck", "vịt"],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 337,
+        "protein": 19,
+        "carbohydrates": 0,
+        "fat": 28,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 0.4,
+          "niacin": 5.1
+        },
+        "minerals": {
+          "iron": 2.7,
+          "zinc": 1.9,
+          "selenium": 14
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Nguồn sắt tốt",
+        "Chứa vitamin B",
+        "Tốt cho hệ miễn dịch"
+      ],
+      "health_warnings": [
+        "Cao chất béo",
+        "Phải nấu chín kỹ"
+      ],
+      "storage_tips": "Bảo quản lạnh ngay. Dùng trong 2 ngày hoặc đông lạnh."
+    },
+    {
+      "id": "squid",
+      "name_vi": "Mực",
+      "name_en": "Squid",
+      "aliases": ["mực", "muc", "squid"],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 92,
+        "protein": 15.6,
+        "carbohydrates": 3.1,
+        "fat": 1.4,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 1.3
+        },
+        "minerals": {
+          "selenium": 44.8,
+          "phosphorus": 221,
+          "zinc": 1.5
+        }
+      },
+      "health_benefits": [
+        "Cao protein, ít chất béo",
+        "Giàu selenium",
+        "Tốt cho tim mạch",
+        "Cung cấp vitamin B12"
+      ],
+      "health_warnings": [
+        "Dễ hư hỏng",
+        "Phải bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Sử dụng ngay trong ngày hoặc đông lạnh."
+    },
+    {
+      "id": "clams",
+      "name_vi": "Nghêu",
+      "name_en": "Clams",
+      "aliases": ["nghêu", "ngheu", "clams", "sò"],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 90,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 74,
+        "protein": 12.8,
+        "carbohydrates": 2.6,
+        "fat": 1,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 49.4
+        },
+        "minerals": {
+          "iron": 13.9,
+          "selenium": 24.3,
+          "zinc": 1.4
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu vitamin B12",
+        "Giàu sắt",
+        "Ít calories",
+        "Tốt cho máu"
+      ],
+      "health_warnings": [
+        "Phải nấu chín",
+        "Dễ gây dị ứng"
+      ],
+      "storage_tips": "Giữ sống trong nước muối hoặc đông lạnh."
+    },
+    {
+      "id": "crab",
+      "name_vi": "Cua",
+      "name_en": "Crab",
+      "aliases": ["cua", "crab", "ghẹ"],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 90,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 97,
+        "protein": 19,
+        "carbohydrates": 0,
+        "fat": 1.3,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 10
+        },
+        "minerals": {
+          "selenium": 37.4,
+          "zinc": 3.8,
+          "phosphorus": 229
+        }
+      },
+      "health_benefits": [
+        "Cao protein, ít béo",
+        "Giàu selenium và kẽm",
+        "Tốt cho hệ miễn dịch",
+        "Omega-3 tốt cho tim"
+      ],
+      "health_warnings": [
+        "Dễ gây dị ứng",
+        "Cao cholesterol"
+      ],
+      "storage_tips": "Sống phải giữ lạnh, nấu chín trong vòng 24h."
+    },
+    {
+      "id": "catfish",
+      "name_vi": "Cá tra",
+      "name_en": "Catfish",
+      "aliases": ["cá tra", "ca tra", "catfish", "cá"],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 105,
+        "protein": 18,
+        "carbohydrates": 0,
+        "fat": 2.9,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_d": 12.5,
+          "vitamin_b12": 2.2
+        },
+        "minerals": {
+          "selenium": 12.6,
+          "phosphorus": 209
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Ít chất béo",
+        "Nguồn vitamin D tốt",
+        "Dễ tiêu hóa"
+      ],
+      "health_warnings": [
+        "Chọn nguồn gốc rõ ràng"
+      ],
+      "storage_tips": "Bảo quản lạnh ngay. Dùng trong 2 ngày."
+    },
+    {
+      "id": "tilapia",
+      "name_vi": "Cá rô phi",
+      "name_en": "Tilapia",
+      "aliases": ["cá rô phi", "ca ro phi", "tilapia"],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 96,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 1.7,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 1.6
+        },
+        "minerals": {
+          "selenium": 41.8,
+          "phosphorus": 170
+        }
+      },
+      "health_benefits": [
+        "Cao protein, ít béo",
+        "Giá thành phải chăng",
+        "Dễ chế biến",
+        "Thịt trắng mềm"
+      ],
+      "health_warnings": [
+        "Omega-6 cao hơn omega-3"
+      ],
+      "storage_tips": "Bảo quản lạnh ngay sau khi mua."
+    },
+    {
+      "id": "mackerel",
+      "name_vi": "Cá thu",
+      "name_en": "Mackerel",
+      "aliases": ["cá thu", "ca thu", "mackerel"],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 205,
+        "protein": 19,
+        "carbohydrates": 0,
+        "fat": 14,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_d": 16.1,
+          "vitamin_b12": 8.7
+        },
+        "minerals": {
+          "selenium": 44.1,
+          "iron": 1.6
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu Omega-3",
+        "Tốt cho tim mạch",
+        "Giàu vitamin D",
+        "Chống viêm"
+      ],
+      "health_warnings": [
+        "Hàm lượng thủy ngân vừa phải"
+      ],
+      "storage_tips": "Bảo quản lạnh ngay. Dùng trong 1-2 ngày."
+    },
+    {
+      "id": "watercress",
+      "name_vi": "Rau cải xoong",
+      "name_en": "Watercress",
+      "aliases": ["rau cải xoong", "cải xoong", "watercress"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 3,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 11,
+        "protein": 2.3,
+        "carbohydrates": 1.3,
+        "fat": 0.1,
+        "fiber": 0.5,
+        "sugar": 0.2,
+        "vitamins": {
+          "vitamin_k": 250,
+          "vitamin_c": 43,
+          "vitamin_a": 3191
+        },
+        "minerals": {
+          "calcium": 120,
+          "iron": 0.2
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu vitamin K",
+        "Chống oxy hóa mạnh",
+        "Tốt cho xương",
+        "Ít calories"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn"
+      ],
+      "storage_tips": "Ngâm chân trong nước, bảo quản tủ lạnh."
+    },
+    {
+      "id": "morning_glory",
+      "name_vi": "Rau muống",
+      "name_en": "Water Spinach",
+      "aliases": ["rau muống", "rau muong", "morning glory"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 3,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 19,
+        "protein": 2.6,
+        "carbohydrates": 3.1,
+        "fat": 0.2,
+        "fiber": 2.1,
+        "sugar": 0.5,
+        "vitamins": {
+          "vitamin_a": 6300,
+          "vitamin_c": 55,
+          "vitamin_k": 108
+        },
+        "minerals": {
+          "iron": 2.5,
+          "calcium": 77
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin A",
+        "Tốt cho mắt",
+        "Giàu sắt",
+        "Giá rẻ, phổ biến"
+      ],
+      "health_warnings": [
+        "Nấu chín trước khi ăn"
+      ],
+      "storage_tips": "Bảo quản trong túi nilon có lỗ thở."
+    },
+    {
+      "id": "bok_choy",
+      "name_vi": "Cải thìa",
+      "name_en": "Bok Choy",
+      "aliases": ["cải thìa", "cai thia", "bok choy", "bạch cải"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 5,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 13,
+        "protein": 1.5,
+        "carbohydrates": 2.2,
+        "fat": 0.2,
+        "fiber": 1,
+        "sugar": 1.2,
+        "vitamins": {
+          "vitamin_c": 45,
+          "vitamin_a": 4468,
+          "vitamin_k": 45.5
+        },
+        "minerals": {
+          "calcium": 105,
+          "iron": 0.8
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin C và A",
+        "Tốt cho xương",
+        "Ít calories",
+        "Dễ tiêu hóa"
+      ],
+      "health_warnings": [
+        "Không ăn sống"
+      ],
+      "storage_tips": "Bảo quản trong túi nilon ở tủ lạnh."
+    },
+    {
+      "id": "chinese_cabbage",
+      "name_vi": "Cải bắp Trung Quốc",
+      "name_en": "Napa Cabbage",
+      "aliases": ["cải bắp TQ", "cai thao", "napa cabbage"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 10,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 16,
+        "protein": 1.2,
+        "carbohydrates": 3.2,
+        "fat": 0.2,
+        "fiber": 1.2,
+        "sugar": 1.4,
+        "vitamins": {
+          "vitamin_c": 27,
+          "vitamin_k": 42.9,
+          "folate": 79
+        },
+        "minerals": {
+          "calcium": 77,
+          "potassium": 252
+        }
+      },
+      "health_benefits": [
+        "Giàu folate",
+        "Tốt cho tiêu hóa",
+        "Ít calories",
+        "Giữ lâu"
+      ],
+      "health_warnings": [
+        "Có thể gây đầy hơi"
+      ],
+      "storage_tips": "Bọc kín, bảo quản tủ lạnh lâu dài."
+    },
+    {
+      "id": "bitter_melon",
+      "name_vi": "Khổ qua (Mướp đắng)",
+      "name_en": "Bitter Melon",
+      "aliases": ["khổ qua", "kho qua", "mướp đắng", "bitter melon"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 17,
+        "protein": 1,
+        "carbohydrates": 3.7,
+        "fat": 0.2,
+        "fiber": 2.8,
+        "sugar": 1.95,
+        "vitamins": {
+          "vitamin_c": 84,
+          "folate": 72
+        },
+        "minerals": {
+          "potassium": 296,
+          "iron": 0.4
+        }
+      },
+      "health_benefits": [
+        "Tốt cho người tiểu đường",
+        "Giảm đường huyết",
+        "Giàu vitamin C",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Phụ nữ mang thai nên hạn chế"
+      ],
+      "storage_tips": "Bảo quản trong túi giấy ở tủ lạnh."
+    },
+    {
+      "id": "chayote",
+      "name_vi": "Su su",
+      "name_en": "Chayote",
+      "aliases": ["su su", "chayote"],
+      "category": "vegetables",
+      "shelf_life_refrigerated": 14,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 19,
+        "protein": 0.8,
+        "carbohydrates": 4.5,
+        "fat": 0.1,
+        "fiber": 1.7,
+        "sugar": 1.7,
+        "vitamins": {
+          "vitamin_c": 7.7,
+          "folate": 93
+        },
+        "minerals": {
+          "potassium": 125,
+          "magnesium": 12
+        }
+      },
+      "health_benefits": [
+        "Giàu folate",
+        "Ít calories",
+        "Tốt cho tiêu hóa",
+        "Giữ lâu"
+      ],
+      "health_warnings": [],
+      "storage_tips": "Có thể để ngoài hoặc trong tủ lạnh."
+    },
+    {
+      "id": "durian",
+      "name_vi": "Sầu riêng",
+      "name_en": "Durian",
+      "aliases": ["sầu riêng", "sau rieng", "durian"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 90,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 147,
+        "protein": 1.5,
+        "carbohydrates": 27,
+        "fat": 5.3,
+        "fiber": 3.8,
+        "sugar": 20,
+        "vitamins": {
+          "vitamin_c": 19.7,
+          "thiamin": 0.4
+        },
+        "minerals": {
+          "potassium": 436,
+          "iron": 0.4
+        }
+      },
+      "health_benefits": [
+        "Giàu potassium",
+        "Cung cấp năng lượng",
+        "Giàu chất xơ",
+        "Tốt cho tiêu hóa"
+      ],
+      "health_warnings": [
+        "Cao calories và đường",
+        "Không ăn cùng rượu",
+        "Mùi đặc trưng"
+      ],
+      "storage_tips": "Ăn ngay sau khi chín. Có thể đông lạnh."
+    },
+    {
+      "id": "mangosteen",
+      "name_vi": "Măng cụt",
+      "name_en": "Mangosteen",
+      "aliases": ["măng cụt", "mang cut", "mangosteen"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 73,
+        "protein": 0.4,
+        "carbohydrates": 18,
+        "fat": 0.6,
+        "fiber": 1.8,
+        "sugar": 16.5,
+        "vitamins": {
+          "vitamin_c": 2.9,
+          "folate": 31
+        },
+        "minerals": {
+          "potassium": 48,
+          "magnesium": 13
+        }
+      },
+      "health_benefits": [
+        "Chống oxy hóa mạnh (xanthones)",
+        "Chống viêm",
+        "Tốt cho da",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Có đường cao"
+      ],
+      "storage_tips": "Bảo quản ở nhiệt độ mát. Tủ lạnh nếu muốn giữ lâu."
+    },
+    {
+      "id": "longan",
+      "name_vi": "Nhãn",
+      "name_en": "Longan",
+      "aliases": ["nhãn", "nhan", "longan"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 60,
+        "protein": 1.3,
+        "carbohydrates": 15,
+        "fat": 0.1,
+        "fiber": 1.1,
+        "sugar": 14,
+        "vitamins": {
+          "vitamin_c": 84
+        },
+        "minerals": {
+          "potassium": 266,
+          "iron": 0.1
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin C",
+        "Tốt cho giấc ngủ (theo Đông y)",
+        "Bổ máu",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Có đường cao"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh khi đã bóc vỏ."
+    },
+    {
+      "id": "lychee",
+      "name_vi": "Vải",
+      "name_en": "Lychee",
+      "aliases": ["vải", "vai", "lychee"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 66,
+        "protein": 0.8,
+        "carbohydrates": 17,
+        "fat": 0.4,
+        "fiber": 1.3,
+        "sugar": 15,
+        "vitamins": {
+          "vitamin_c": 71.5
+        },
+        "minerals": {
+          "potassium": 171,
+          "copper": 0.1
+        }
+      },
+      "health_benefits": [
+        "Rất giàu vitamin C",
+        "Chống oxy hóa",
+        "Tốt cho da",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Trẻ em đói không nên ăn nhiều"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh với vỏ."
+    },
+    {
+      "id": "rambutan",
+      "name_vi": "Chôm chôm",
+      "name_en": "Rambutan",
+      "aliases": ["chôm chôm", "chom chom", "rambutan"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 68,
+        "protein": 0.9,
+        "carbohydrates": 16,
+        "fat": 0.2,
+        "fiber": 0.9,
+        "sugar": 15,
+        "vitamins": {
+          "vitamin_c": 4.9
+        },
+        "minerals": {
+          "iron": 0.4,
+          "calcium": 22
+        }
+      },
+      "health_benefits": [
+        "Giàu chất xơ",
+        "Tăng cường năng lượng",
+        "Tốt cho tiêu hóa",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Hạt không ăn được"
+      ],
+      "storage_tips": "Ăn sớm khi tươi. Có thể bảo quản tủ lạnh 3-5 ngày."
+    },
+    {
+      "id": "dragon_fruit",
+      "name_vi": "Thanh long",
+      "name_en": "Dragon Fruit",
+      "aliases": ["thanh long", "dragon fruit", "pitaya"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 60,
+        "protein": 1.2,
+        "carbohydrates": 13,
+        "fat": 0.4,
+        "fiber": 3,
+        "sugar": 8,
+        "vitamins": {
+          "vitamin_c": 20.5
+        },
+        "minerals": {
+          "iron": 1.9,
+          "calcium": 8
+        }
+      },
+      "health_benefits": [
+        "Giàu chất xơ",
+        "Giàu sắt (loại ruột đỏ)",
+        "Prebiotics tốt cho đường ruột",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Ăn nhiều có thể làm phân đỏ (bình thường)"
+      ],
+      "storage_tips": "Bảo quản ở nhiệt độ phòng. Tủ lạnh khi đã chín."
+    },
+    {
+      "id": "jackfruit",
+      "name_vi": "Mít",
+      "name_en": "Jackfruit",
+      "aliases": ["mít", "mit", "jackfruit"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 60,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 95,
+        "protein": 1.7,
+        "carbohydrates": 23,
+        "fat": 0.6,
+        "fiber": 1.5,
+        "sugar": 19,
+        "vitamins": {
+          "vitamin_c": 13.7,
+          "vitamin_a": 110
+        },
+        "minerals": {
+          "potassium": 448,
+          "magnesium": 29
+        }
+      },
+      "health_benefits": [
+        "Giàu potassium",
+        "Cung cấp năng lượng",
+        "Giàu chất xơ",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Có đường cao"
+      ],
+      "storage_tips": "Quả chín ăn ngay. Múi bóc có thể đông lạnh."
+    },
+    {
+      "id": "guava",
+      "name_vi": "Ổi",
+      "name_en": "Guava",
+      "aliases": ["ổi", "oi", "guava"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 68,
+        "protein": 2.6,
+        "carbohydrates": 14,
+        "fat": 1,
+        "fiber": 5.4,
+        "sugar": 9,
+        "vitamins": {
+          "vitamin_c": 228.3,
+          "folate": 49
+        },
+        "minerals": {
+          "potassium": 417,
+          "magnesium": 22
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu vitamin C",
+        "Rất giàu chất xơ",
+        "Tốt cho tiêu hóa",
+        "Hạ đường huyết"
+      ],
+      "health_warnings": [
+        "Ăn quá nhiều có thể táo bón"
+      ],
+      "storage_tips": "Để chín ở nhiệt độ phòng. Bảo quản tủ lạnh khi đã chín."
+    },
+    {
+      "id": "pomelo",
+      "name_vi": "Bưởi",
+      "name_en": "Pomelo",
+      "aliases": ["bưởi", "buoi", "pomelo"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 38,
+        "protein": 0.8,
+        "carbohydrates": 10,
+        "fat": 0,
+        "fiber": 1,
+        "sugar": 8.5,
+        "vitamins": {
+          "vitamin_c": 61
+        },
+        "minerals": {
+          "potassium": 216
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin C",
+        "Ít calories",
+        "Giàu chất chống oxy hóa",
+        "Tốt cho giảm cân"
+      ],
+      "health_warnings": [
+        "Tương tác với một số thuốc"
+      ],
+      "storage_tips": "Có thể để ngoài hoặc tủ lạnh. Giữ lâu."
+    },
+    {
+      "id": "coconut",
+      "name_vi": "Dừa",
+      "name_en": "Coconut",
+      "aliases": ["dừa", "dua", "coconut"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 354,
+        "protein": 3.3,
+        "carbohydrates": 15,
+        "fat": 33,
+        "fiber": 9,
+        "sugar": 6,
+        "vitamins": {},
+        "minerals": {
+          "iron": 2.4,
+          "potassium": 356
+        }
+      },
+      "health_benefits": [
+        "Giàu chất béo lành mạnh (MCT)",
+        "Cung cấp năng lượng nhanh",
+        "Giàu chất xơ",
+        "Khoáng chất tốt"
+      ],
+      "health_warnings": [
+        "Cao calories và chất béo"
+      ],
+      "storage_tips": "Quả nguyên giữ lâu. Nước dừa uống trong ngày."
+    },
+    {
+      "id": "passion_fruit",
+      "name_vi": "Chanh dây",
+      "name_en": "Passion Fruit",
+      "aliases": ["chanh dây", "chanh day", "passion fruit"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 97,
+        "protein": 2.2,
+        "carbohydrates": 23,
+        "fat": 0.7,
+        "fiber": 10.4,
+        "sugar": 11,
+        "vitamins": {
+          "vitamin_c": 30,
+          "vitamin_a": 1274
+        },
+        "minerals": {
+          "iron": 1.6,
+          "potassium": 348
+        }
+      },
+      "health_benefits": [
+        "Rất giàu chất xơ",
+        "Giàu vitamin C và A",
+        "Giúp ngủ ngon",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Hạt ăn được nhưng cứng"
+      ],
+      "storage_tips": "Để chín ở nhiệt độ phòng. Tủ lạnh khi nhăn vỏ."
+    },
+    {
+      "id": "kiwi",
+      "name_vi": "Kiwi",
+      "name_en": "Kiwi",
+      "aliases": ["kiwi"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 61,
+        "protein": 1.1,
+        "carbohydrates": 15,
+        "fat": 0.5,
+        "fiber": 3,
+        "sugar": 9,
+        "vitamins": {
+          "vitamin_c": 92.7,
+          "vitamin_k": 40.3
+        },
+        "minerals": {
+          "potassium": 312
+        }
+      },
+      "health_benefits": [
+        "Rất giàu vitamin C",
+        "Giàu chất xơ",
+        "Giúp tiêu hóa (enzyme actinidin)",
+        "Tốt cho giấc ngủ"
+      ],
+      "health_warnings": [
+        "Có thể gây dị ứng"
+      ],
+      "storage_tips": "Để chín ở nhiệt độ phòng. Tủ lạnh khi đã chín."
+    },
+    {
+      "id": "persimmon",
+      "name_vi": "Hồng",
+      "name_en": "Persimmon",
+      "aliases": ["hồng", "hong", "persimmon"],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 70,
+        "protein": 0.6,
+        "carbohydrates": 19,
+        "fat": 0.2,
+        "fiber": 3.6,
+        "sugar": 13,
+        "vitamins": {
+          "vitamin_a": 1627,
+          "vitamin_c": 7.5
+        },
+        "minerals": {
+          "potassium": 161
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin A",
+        "Chống oxy hóa cao",
+        "Giàu chất xơ",
+        "Tốt cho mắt"
+      ],
+      "health_warnings": [
+        "Hồng chát không nên ăn"
+      ],
+      "storage_tips": "Để chín mềm ở nhiệt độ phòng."
+    },
+    {
+      "id": "butter",
+      "name_vi": "Bơ động vật",
+      "name_en": "Butter",
+      "aliases": ["bơ", "butter", "bơ lạt"],
+      "category": "dairy",
+      "shelf_life_refrigerated": 90,
+      "shelf_life_frozen": 365,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 717,
+        "protein": 0.9,
+        "carbohydrates": 0.1,
+        "fat": 81,
+        "fiber": 0,
+        "sugar": 0.1,
+        "vitamins": {
+          "vitamin_a": 2499,
+          "vitamin_d": 1.5
+        },
+        "minerals": {
+          "calcium": 24
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin A",
+        "Cung cấp năng lượng",
+        "Chứa CLA",
+        "Tốt cho não"
+      ],
+      "health_warnings": [
+        "Rất cao calories và chất béo bão hòa",
+        "Dùng vừa phải"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh. Có thể đông lạnh."
+    },
+    {
+      "id": "cream",
+      "name_vi": "Kem tươi",
+      "name_en": "Heavy Cream",
+      "aliases": ["kem tươi", "kem tuoi", "cream", "whipping cream"],
+      "category": "dairy",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_opened": 3,
+      "nutrition_data": {
+        "serving_size": "100ml",
+        "calories": 345,
+        "protein": 2.1,
+        "carbohydrates": 2.8,
+        "fat": 36,
+        "fiber": 0,
+        "sugar": 2.8,
+        "vitamins": {
+          "vitamin_a": 1470
+        },
+        "minerals": {
+          "calcium": 65
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin A",
+        "Cung cấp năng lượng",
+        "Tốt cho da (dùng bên ngoài)"
+      ],
+      "health_warnings": [
+        "Rất cao calories",
+        "Cao chất béo bão hòa"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Đóng nắp kín sau khi mở."
+    },
+    {
+      "id": "ice_cream",
+      "name_vi": "Kem",
+      "name_en": "Ice Cream",
+      "aliases": ["kem", "ice cream"],
+      "category": "frozen",
+      "shelf_life_frozen": 60,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 207,
+        "protein": 3.5,
+        "carbohydrates": 24,
+        "fat": 11,
+        "fiber": 0.7,
+        "sugar": 21,
+        "vitamins": {
+          "vitamin_a": 409
+        },
+        "minerals": {
+          "calcium": 128
+        }
+      },
+      "health_benefits": [
+        "Cung cấp canxi",
+        "Nguồn năng lượng nhanh"
+      ],
+      "health_warnings": [
+        "Cao đường và calories",
+        "Ăn vừa phải"
+      ],
+      "storage_tips": "Bảo quản ngăn đông. Không để tan rồi đông lại."
+    },
+    {
+      "id": "frozen_vegetables",
+      "name_vi": "Rau đông lạnh",
+      "name_en": "Frozen Vegetables",
+      "aliases": ["rau đông lạnh", "frozen vegetables"],
+      "category": "frozen",
+      "shelf_life_frozen": 270,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 65,
+        "protein": 3,
+        "carbohydrates": 12,
+        "fat": 0.5,
+        "fiber": 4,
+        "sugar": 3,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 800
+        },
+        "minerals": {
+          "iron": 1.5,
+          "calcium": 40
+        }
+      },
+      "health_benefits": [
+        "Giữ được vitamin",
+        "Tiện lợi",
+        "Giá hợp lý",
+        "Giảm lãng phí"
+      ],
+      "health_warnings": [
+        "Kiểm tra hạn sử dụng"
+      ],
+      "storage_tips": "Bảo quản ngăn đông. Dùng trong 6-9 tháng."
+    },
+    {
+      "id": "frozen_dumplings",
+      "name_vi": "Há cảo đông lạnh",
+      "name_en": "Frozen Dumplings",
+      "aliases": ["há cảo", "ha cao", "dumplings", "dimsum"],
+      "category": "frozen",
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 8,
+        "carbohydrates": 25,
+        "fat": 7,
+        "fiber": 1.5,
+        "sugar": 2,
+        "vitamins": {},
+        "minerals": {
+          "iron": 1.2,
+          "calcium": 30
+        }
+      },
+      "health_benefits": [
+        "Tiện lợi",
+        "Cân đối dinh dưỡng"
+      ],
+      "health_warnings": [
+        "Có thể cao natri",
+        "Kiểm tra thành phần"
+      ],
+      "storage_tips": "Bảo quản ngăn đông. Không rã đông trước khi nấu."
+    },
+    {
+      "id": "sausage",
+      "name_vi": "Xúc xích",
+      "name_en": "Sausage",
+      "aliases": ["xúc xích", "xuc xich", "sausage", "lạp xưởng"],
+      "category": "meat",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 60,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 301,
+        "protein": 12,
+        "carbohydrates": 1.9,
+        "fat": 27,
+        "fiber": 0,
+        "sugar": 1.2,
+        "vitamins": {
+          "vitamin_b12": 1.5
+        },
+        "minerals": {
+          "iron": 1.3,
+          "zinc": 2.4
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp vitamin B12"
+      ],
+      "health_warnings": [
+        "Cao chất béo và natri",
+        "Có chất bảo quản",
+        "Ăn vừa phải"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Đông lạnh nếu không dùng sớm."
+    },
+    {
+      "id": "bacon",
+      "name_vi": "Thịt hun khói",
+      "name_en": "Bacon",
+      "aliases": ["thịt hun khói", "bacon", "ba chỉ xông khói"],
+      "category": "meat",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 30,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 541,
+        "protein": 37,
+        "carbohydrates": 1.4,
+        "fat": 42,
+        "fiber": 0,
+        "sugar": 1.2,
+        "vitamins": {
+          "vitamin_b12": 1
+        },
+        "minerals": {
+          "sodium": 1717,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Cao protein",
+        "Giàu vitamin B"
+      ],
+      "health_warnings": [
+        "Rất cao chất béo bão hòa",
+        "Rất cao natri",
+        "Chứa nitrite",
+        "Ăn rất hạn chế"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Dùng trong hạn ghi trên bao bì."
+    },
+    {
+      "id": "ham",
+      "name_vi": "Giăm bông",
+      "name_en": "Ham",
+      "aliases": ["giăm bông", "giam bong", "ham"],
+      "category": "meat",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_opened": 3,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 145,
+        "protein": 21,
+        "carbohydrates": 1.5,
+        "fat": 5.5,
+        "fiber": 0,
+        "sugar": 1.3,
+        "vitamins": {
+          "vitamin_b12": 0.7
+        },
+        "minerals": {
+          "sodium": 1203,
+          "zinc": 2.3
+        }
+      },
+      "health_benefits": [
+        "Cao protein",
+        "Tương đối ít chất béo"
+      ],
+      "health_warnings": [
+        "Cao natri",
+        "Có chất bảo quản",
+        "Chọn loại ít natri"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Dùng sớm sau khi mở."
+    },
+    {
+      "id": "quail_eggs",
+      "name_vi": "Trứng cút",
+      "name_en": "Quail Eggs",
+      "aliases": ["trứng cút", "trung cut", "quail eggs"],
+      "category": "eggs",
+      "shelf_life_refrigerated": 30,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 158,
+        "protein": 13,
+        "carbohydrates": 0.4,
+        "fat": 11,
+        "fiber": 0,
+        "sugar": 0.4,
+        "vitamins": {
+          "vitamin_a": 543,
+          "vitamin_b12": 1.6
+        },
+        "minerals": {
+          "iron": 3.6,
+          "selenium": 32
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cao sắt",
+        "Giàu vitamin B12",
+        "Tốt cho não"
+      ],
+      "health_warnings": [
+        "Cao cholesterol",
+        "Phải nấu chín"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh như trứng gà."
+    },
+    {
+      "id": "duck_eggs",
+      "name_vi": "Trứng vịt",
+      "name_en": "Duck Eggs",
+      "aliases": ["trứng vịt", "trung vit", "duck eggs"],
+      "category": "eggs",
+      "shelf_life_refrigerated": 30,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 185,
+        "protein": 13,
+        "carbohydrates": 1.5,
+        "fat": 14,
+        "fiber": 0,
+        "sugar": 1.5,
+        "vitamins": {
+          "vitamin_b12": 3.8,
+          "vitamin_a": 674
+        },
+        "minerals": {
+          "iron": 3.9,
+          "selenium": 36
+        }
+      },
+      "health_benefits": [
+        "Giàu protein hơn trứng gà",
+        "Rất giàu vitamin B12",
+        "Cao sắt",
+        "Tốt cho bà bầu"
+      ],
+      "health_warnings": [
+        "Cao cholesterol và chất béo",
+        "Phải nấu chín kỹ"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Để riêng vì có mùi."
+    },
+    {
+      "id": "salted_egg",
+      "name_vi": "Trứng muối",
+      "name_en": "Salted Egg",
+      "aliases": ["trứng muối", "trung muoi", "salted egg"],
+      "category": "eggs",
+      "shelf_life_refrigerated": 60,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 195,
+        "protein": 13,
+        "carbohydrates": 1,
+        "fat": 15,
+        "fiber": 0,
+        "sugar": 1,
+        "vitamins": {
+          "vitamin_a": 520
+        },
+        "minerals": {
+          "sodium": 2800,
+          "iron": 2.5
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Giữ lâu"
+      ],
+      "health_warnings": [
+        "Rất cao natri",
+        "Người huyết áp cao nên tránh",
+        "Ăn rất hạn chế"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo hoặc tủ lạnh."
+    },
+    {
+      "id": "century_egg",
+      "name_vi": "Trứng bắc thảo (Trứng đen)",
+      "name_en": "Century Egg",
+      "aliases": ["trứng đen", "trung den", "century egg", "preserved egg"],
+      "category": "eggs",
+      "shelf_life_refrigerated": 90,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 171,
+        "protein": 13.5,
+        "carbohydrates": 1,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 1,
+        "vitamins": {},
+        "minerals": {
+          "iron": 2.5,
+          "sodium": 800
+        }
+      },
+      "health_benefits": [
+        "Cao protein",
+        "Giữ rất lâu",
+        "Hương vị đặc trưng"
+      ],
+      "health_warnings": [
+        "Cao natri",
+        "Mùi và vị đặc biệt",
+        "Không cho trẻ nhỏ"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo, mát mẻ."
+    },
+    {
+      "id": "condensed_milk",
+      "name_vi": "Sữa đặc",
+      "name_en": "Condensed Milk",
+      "aliases": ["sữa đặc", "sua dac", "condensed milk"],
+      "category": "dairy",
+      "shelf_life_refrigerated": 365,
+      "shelf_life_opened": 14,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 321,
+        "protein": 7.9,
+        "carbohydrates": 54,
+        "fat": 8.7,
+        "fiber": 0,
+        "sugar": 54,
+        "vitamins": {
+          "vitamin_a": 249
+        },
+        "minerals": {
+          "calcium": 284
+        }
+      },
+      "health_benefits": [
+        "Giàu canxi",
+        "Giữ lâu"
+      ],
+      "health_warnings": [
+        "Rất cao đường",
+        "Cao calories",
+        "Dùng rất hạn chế"
+      ],
+      "storage_tips": "Có thể để ngoài khi chưa mở. Tủ lạnh sau khi mở."
+    },
+    {
+      "id": "soy_milk",
+      "name_vi": "Sữa đậu nành",
+      "name_en": "Soy Milk",
+      "aliases": ["sữa đậu nành", "sua dau nanh", "soy milk"],
+      "category": "dairy",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_opened": 5,
+      "nutrition_data": {
+        "serving_size": "100ml",
+        "calories": 54,
+        "protein": 3.3,
+        "carbohydrates": 6.3,
+        "fat": 1.8,
+        "fiber": 0.6,
+        "sugar": 3,
+        "vitamins": {},
+        "minerals": {
+          "calcium": 25,
+          "iron": 0.6
+        }
+      },
+      "health_benefits": [
+        "Protein thực vật",
+        "Không lactose",
+        "Tốt cho người ăn chay",
+        "Ít chất béo bão hòa"
+      ],
+      "health_warnings": [
+        "Chọn loại ít đường",
+        "Người nhạy cảm đậu nành nên tránh"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh. Lắc kỹ trước khi dùng."
+    },
+    {
+      "id": "pasta",
+      "name_vi": "Mì Ý (Pasta)",
+      "name_en": "Pasta",
+      "aliases": ["mì ý", "mi y", "pasta"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 730,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 371,
+        "protein": 13,
+        "carbohydrates": 75,
+        "fat": 1.5,
+        "fiber": 3.2,
+        "sugar": 2.7,
+        "vitamins": {
+          "thiamin": 0.9
+        },
+        "minerals": {
+          "iron": 3.3,
+          "magnesium": 53
+        }
+      },
+      "health_benefits": [
+        "Cung cấp năng lượng lâu dài",
+        "Giàu chất xơ (loại whole wheat)",
+        "Versatile"
+      ],
+      "health_warnings": [
+        "Chứa gluten",
+        "Chỉ số đường huyết cao"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo, thoáng mát."
+    },
+    {
+      "id": "instant_noodles",
+      "name_vi": "Mì gói",
+      "name_en": "Instant Noodles",
+      "aliases": ["mì gói", "mi goi", "instant noodles", "mì tôm"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 436,
+        "protein": 9.4,
+        "carbohydrates": 62,
+        "fat": 16,
+        "fiber": 2.2,
+        "sugar": 2,
+        "vitamins": {},
+        "minerals": {
+          "sodium": 1820,
+          "iron": 3.6
+        }
+      },
+      "health_benefits": [
+        "Tiện lợi",
+        "Giá rẻ",
+        "Lâu hỏng"
+      ],
+      "health_warnings": [
+        "Rất cao natri",
+        "Ít dinh dưỡng",
+        "Chất bảo quản",
+        "Không nên ăn thường xuyên"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo. Kiểm tra hạn sử dụng."
+    },
+    {
+      "id": "quinoa",
+      "name_vi": "Quinoa (Diêm mạch)",
+      "name_en": "Quinoa",
+      "aliases": ["quinoa", "diêm mạch"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 365,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 368,
+        "protein": 14,
+        "carbohydrates": 64,
+        "fat": 6,
+        "fiber": 7,
+        "sugar": 0,
+        "vitamins": {
+          "thiamin": 0.4,
+          "folate": 184
+        },
+        "minerals": {
+          "iron": 4.6,
+          "magnesium": 197,
+          "zinc": 3.1
+        }
+      },
+      "health_benefits": [
+        "Protein hoàn chỉnh",
+        "Không chứa gluten",
+        "Giàu chất xơ",
+        "Siêu thực phẩm"
+      ],
+      "health_warnings": [
+        "Giá cao"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo, mát mẻ."
+    },
+    {
+      "id": "chia_seeds",
+      "name_vi": "Hạt chia",
+      "name_en": "Chia Seeds",
+      "aliases": ["hạt chia", "hat chia", "chia seeds"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 730,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 486,
+        "protein": 17,
+        "carbohydrates": 42,
+        "fat": 31,
+        "fiber": 34,
+        "sugar": 0,
+        "vitamins": {},
+        "minerals": {
+          "calcium": 631,
+          "iron": 7.7,
+          "magnesium": 335
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu Omega-3",
+        "Rất cao chất xơ",
+        "Giàu protein",
+        "Tốt cho tim"
+      ],
+      "health_warnings": [
+        "Uống nhiều nước khi ăn",
+        "Ăn từ từ nếu chưa quen"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo, mát mẻ."
+    },
+    {
+      "id": "sesame_seeds",
+      "name_vi": "Hạt mè",
+      "name_en": "Sesame Seeds",
+      "aliases": ["hạt mè", "hat me", "sesame seeds", "vừng"],
+      "category": "condiments",
+      "shelf_life_refrigerated": 365,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 573,
+        "protein": 18,
+        "carbohydrates": 23,
+        "fat": 50,
+        "fiber": 12,
+        "sugar": 0.3,
+        "vitamins": {
+          "thiamin": 0.8
+        },
+        "minerals": {
+          "calcium": 975,
+          "iron": 14.6,
+          "magnesium": 351
+        }
+      },
+      "health_benefits": [
+        "Cực kỳ giàu canxi",
+        "Giàu chất béo lành mạnh",
+        "Tốt cho xương",
+        "Chống oxy hóa"
+      ],
+      "health_warnings": [
+        "Cao calories",
+        "Dùng vừa phải"
+      ],
+      "storage_tips": "Bảo quản hộp kín. Tủ lạnh cho hạt đã rang."
+    },
+    {
+      "id": "peanuts",
+      "name_vi": "Đậu phộng",
+      "name_en": "Peanuts",
+      "aliases": ["đậu phộng", "dau phong", "peanuts", "lạc"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 567,
+        "protein": 26,
+        "carbohydrates": 16,
+        "fat": 49,
+        "fiber": 8.5,
+        "sugar": 4,
+        "vitamins": {
+          "niacin": 12.1,
+          "folate": 240
+        },
+        "minerals": {
+          "magnesium": 168,
+          "phosphorus": 376
+        }
+      },
+      "health_benefits": [
+        "Giàu protein thực vật",
+        "Giàu chất béo lành mạnh",
+        "Cao folate",
+        "Tốt cho tim"
+      ],
+      "health_warnings": [
+        "Cao calories",
+        "Dễ gây dị ứng",
+        "Dễ nấm mốc"
+      ],
+      "storage_tips": "Bảo quản nơi khô ráo. Tủ lạnh cho lạc sống."
+    },
+    {
+      "id": "cashews",
+      "name_vi": "Hạt điều",
+      "name_en": "Cashews",
+      "aliases": ["hạt điều", "hat dieu", "cashews"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 365,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 553,
+        "protein": 18,
+        "carbohydrates": 30,
+        "fat": 44,
+        "fiber": 3.3,
+        "sugar": 6,
+        "vitamins": {
+          "vitamin_k": 34.1
+        },
+        "minerals": {
+          "magnesium": 292,
+          "phosphorus": 593,
+          "zinc": 5.8
+        }
+      },
+      "health_benefits": [
+        "Giàu chất béo lành mạnh",
+        "Cao protein",
+        "Giàu khoáng chất",
+        "Tốt cho tim"
+      ],
+      "health_warnings": [
+        "Cao calories",
+        "Có thể gây dị ứng"
+      ],
+      "storage_tips": "Bảo quản hộp kín, nơi mát. Tủ lạnh cho lâu hơn."
+    },
+    {
+      "id": "walnuts",
+      "name_vi": "Óc chó",
+      "name_en": "Walnuts",
+      "aliases": ["óc chó", "oc cho", "walnuts"],
+      "category": "dry_food",
+      "shelf_life_refrigerated": 365,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 654,
+        "protein": 15,
+        "carbohydrates": 14,
+        "fat": 65,
+        "fiber": 6.7,
+        "sugar": 2.6,
+        "vitamins": {
+          "folate": 98
+        },
+        "minerals": {
+          "magnesium": 158,
+          "phosphorus": 346
+        }
+      },
+      "health_benefits": [
+        "Giàu Omega-3",
+        "Tốt cho não",
+        "Chống oxy hóa cao",
+        "Tốt cho tim"
+      ],
+      "health_warnings": [
+        "Rất cao calories",
+        "Dễ ôi"
+      ],
+      "storage_tips": "Bảo quản tủ lạnh hoặc đông lạnh."
     }
   ]
 }

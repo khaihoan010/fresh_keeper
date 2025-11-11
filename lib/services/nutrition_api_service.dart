@@ -6,20 +6,51 @@ import '../data/models/nutrition_data.dart';
 import '../data/models/product_template.dart';
 
 /// Nutrition API Service
-/// Fetches nutrition data from Open Food Facts API (free, no API key needed)
+/// Fetches nutrition data from multiple sources:
+/// - Open Food Facts API (free, no API key)
+/// - USDA FoodData Central API (with API key)
 class NutritionApiService {
-  static const String _baseUrl = 'https://world.openfoodfacts.net';
+  static const String _openFoodFactsUrl = 'https://world.openfoodfacts.net';
+  static const String _usdaApiUrl = 'https://api.nal.usda.gov/fdc/v1';
+  static const String _usdaApiKey = 'dI4H0IMZ4pZr5KJm31hgC3pF0Z0l86jRwPDHwCvN';
   static const String _userAgent = 'FreshKeeper/1.0.0 (fresh.keeper@example.com)';
 
-  /// Search products by name
-  /// Returns list of product suggestions with nutrition data
+  /// Search products from multiple sources
+  /// Returns combined results from OpenFoodFacts and USDA
   Future<List<ProductTemplate>> searchProducts(String query) async {
+    // Search both APIs in parallel for better performance
+    final results = await Future.wait([
+      _searchOpenFoodFacts(query),
+      _searchUSDA(query),
+    ]);
+
+    final openFoodFactsResults = results[0];
+    final usdaResults = results[1];
+
+    // Combine and deduplicate
+    final allResults = <ProductTemplate>[...openFoodFactsResults];
+    for (final usdaResult in usdaResults) {
+      final exists = allResults.any((existing) =>
+        existing.nameEn.toLowerCase() == usdaResult.nameEn.toLowerCase() ||
+        existing.nameVi.toLowerCase() == usdaResult.nameVi.toLowerCase()
+      );
+      if (!exists) {
+        allResults.add(usdaResult);
+      }
+    }
+
+    debugPrint('🔍 Total results: ${allResults.length} (OFF: ${openFoodFactsResults.length}, USDA: ${usdaResults.length})');
+    return allResults;
+  }
+
+  /// Search Open Food Facts API
+  Future<List<ProductTemplate>> _searchOpenFoodFacts(String query) async {
     try {
       final url = Uri.parse(
-        '$_baseUrl/cgi/search.pl?search_terms=$query&page_size=10&json=1',
+        '$_openFoodFactsUrl/cgi/search.pl?search_terms=$query&page_size=5&json=1',
       );
 
-      debugPrint('🔍 Searching products: $query');
+      debugPrint('🔍 [OpenFoodFacts] Searching: $query');
 
       final response = await http.get(
         url,
@@ -30,7 +61,7 @@ class NutritionApiService {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final products = data['products'] as List<dynamic>? ?? [];
 
-        debugPrint('✅ Found ${products.length} products');
+        debugPrint('✅ [OpenFoodFacts] Found ${products.length} products');
 
         return products
             .map((p) => _parseOpenFoodFactsProduct(p))
@@ -38,11 +69,43 @@ class NutritionApiService {
             .cast<ProductTemplate>()
             .toList();
       } else {
-        debugPrint('❌ API error: ${response.statusCode}');
+        debugPrint('❌ [OpenFoodFacts] API error: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      debugPrint('❌ Error searching products: $e');
+      debugPrint('❌ [OpenFoodFacts] Error: $e');
+      return [];
+    }
+  }
+
+  /// Search USDA FoodData Central API
+  Future<List<ProductTemplate>> _searchUSDA(String query) async {
+    try {
+      final url = Uri.parse(
+        '$_usdaApiUrl/foods/search?api_key=$_usdaApiKey&query=$query&pageSize=5&dataType=Foundation,SR%20Legacy',
+      );
+
+      debugPrint('🔍 [USDA] Searching: $query');
+
+      final response = await http.get(url).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body) as Map<String, dynamic>;
+        final foods = data['foods'] as List<dynamic>? ?? [];
+
+        debugPrint('✅ [USDA] Found ${foods.length} foods');
+
+        return foods
+            .map((f) => _parseUSDAFood(f))
+            .where((p) => p != null)
+            .cast<ProductTemplate>()
+            .toList();
+      } else {
+        debugPrint('❌ [USDA] API error: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      debugPrint('❌ [USDA] Error: $e');
       return [];
     }
   }
@@ -50,7 +113,7 @@ class NutritionApiService {
   /// Get product by barcode
   Future<ProductTemplate?> getProductByBarcode(String barcode) async {
     try {
-      final url = Uri.parse('$_baseUrl/api/v2/product/$barcode.json');
+      final url = Uri.parse('$_openFoodFactsUrl/api/v2/product/$barcode.json');
 
       debugPrint('📷 Fetching product by barcode: $barcode');
 
@@ -219,5 +282,138 @@ class NutritionApiService {
       return value.map((e) => e.toString()).toList();
     }
     return null;
+  }
+
+  /// Parse USDA FoodData Central food item to ProductTemplate
+  ProductTemplate? _parseUSDAFood(Map<String, dynamic> food) {
+    try {
+      final description = food['description'] as String?;
+      if (description == null || description.isEmpty) return null;
+
+      // Get food category
+      final foodCategory = food['foodCategory'] as String? ?? '';
+      final category = _mapUSDACategory(description, foodCategory);
+
+      // Parse nutrition data from foodNutrients
+      final foodNutrients = food['foodNutrients'] as List<dynamic>? ?? [];
+      NutritionData? nutritionData;
+
+      if (foodNutrients.isNotEmpty) {
+        final nutrients = <String, double>{};
+        for (final nutrient in foodNutrients) {
+          final nutrientName = nutrient['nutrientName'] as String?;
+          final value = nutrient['value'];
+          if (nutrientName != null && value != null) {
+            nutrients[nutrientName.toLowerCase()] = _parseNutrientValue(value);
+          }
+        }
+
+        nutritionData = NutritionData(
+          servingSize: '100g',
+          calories: nutrients['energy'] ?? _findNutrient(nutrients, ['energy', 'calories']),
+          protein: _findNutrient(nutrients, ['protein']),
+          carbohydrates: _findNutrient(nutrients, ['carbohydrate', 'carbohydrates']),
+          fat: _findNutrient(nutrients, ['total lipid (fat)', 'fat', 'total fat']),
+          fiber: _findNutrient(nutrients, ['fiber', 'dietary fiber']),
+          sugar: _findNutrient(nutrients, ['sugars', 'sugar']),
+          vitamins: {
+            if (_findNutrient(nutrients, ['vitamin c']) != null)
+              'vitamin_c': _findNutrient(nutrients, ['vitamin c'])!,
+            if (_findNutrient(nutrients, ['vitamin a']) != null)
+              'vitamin_a': _findNutrient(nutrients, ['vitamin a'])!,
+            if (_findNutrient(nutrients, ['vitamin d']) != null)
+              'vitamin_d': _findNutrient(nutrients, ['vitamin d'])!,
+            if (_findNutrient(nutrients, ['vitamin e']) != null)
+              'vitamin_e': _findNutrient(nutrients, ['vitamin e'])!,
+            if (_findNutrient(nutrients, ['vitamin k']) != null)
+              'vitamin_k': _findNutrient(nutrients, ['vitamin k'])!,
+          },
+          minerals: {
+            if (_findNutrient(nutrients, ['calcium']) != null)
+              'calcium': _findNutrient(nutrients, ['calcium'])!,
+            if (_findNutrient(nutrients, ['iron']) != null)
+              'iron': _findNutrient(nutrients, ['iron'])!,
+            if (_findNutrient(nutrients, ['potassium']) != null)
+              'potassium': _findNutrient(nutrients, ['potassium'])!,
+            if (_findNutrient(nutrients, ['sodium']) != null)
+              'sodium': _findNutrient(nutrients, ['sodium'])!,
+            if (_findNutrient(nutrients, ['magnesium']) != null)
+              'magnesium': _findNutrient(nutrients, ['magnesium'])!,
+            if (_findNutrient(nutrients, ['zinc']) != null)
+              'zinc': _findNutrient(nutrients, ['zinc'])!,
+          },
+        );
+      }
+
+      final fdcId = food['fdcId'];
+      final id = 'usda_${fdcId ?? description.toLowerCase().replaceAll(' ', '_')}';
+
+      return ProductTemplate(
+        id: id,
+        nameVi: description,
+        nameEn: description,
+        aliases: [description.toLowerCase()],
+        category: category,
+        shelfLifeRefrigerated: _getDefaultShelfLife(category),
+        nutritionData: nutritionData,
+        healthBenefits: null,
+        healthWarnings: null,
+        storageTips: null,
+        imageUrl: null,
+      );
+    } catch (e) {
+      debugPrint('⚠️ Error parsing USDA food: $e');
+      return null;
+    }
+  }
+
+  /// Map USDA category to our category
+  String _mapUSDACategory(String description, String foodCategory) {
+    final lower = description.toLowerCase();
+    final categoryLower = foodCategory.toLowerCase();
+
+    if (lower.contains('vegetable') || categoryLower.contains('vegetable')) {
+      return 'vegetables';
+    } else if (lower.contains('fruit') || categoryLower.contains('fruit')) {
+      return 'fruits';
+    } else if (lower.contains('meat') || lower.contains('beef') ||
+        lower.contains('pork') || lower.contains('chicken') ||
+        lower.contains('fish') || categoryLower.contains('protein')) {
+      return 'meat';
+    } else if (lower.contains('dairy') || lower.contains('milk') ||
+        lower.contains('cheese') || lower.contains('yogurt')) {
+      return 'dairy';
+    } else if (lower.contains('egg')) {
+      return 'eggs';
+    } else if (lower.contains('bread') || lower.contains('cereal') ||
+        lower.contains('grain') || lower.contains('rice')) {
+      return 'dry_food';
+    }
+
+    return 'other';
+  }
+
+  /// Find nutrient from map by multiple possible names
+  double? _findNutrient(Map<String, double> nutrients, List<String> possibleNames) {
+    for (final name in possibleNames) {
+      final value = nutrients[name.toLowerCase()];
+      if (value != null) return value;
+
+      // Try partial match
+      for (final key in nutrients.keys) {
+        if (key.contains(name.toLowerCase())) {
+          return nutrients[key];
+        }
+      }
+    }
+    return null;
+  }
+
+  /// Parse nutrient value to double
+  double _parseNutrientValue(dynamic value) {
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value) ?? 0.0;
+    return 0.0;
   }
 }
