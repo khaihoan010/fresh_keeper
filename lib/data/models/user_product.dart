@@ -42,7 +42,7 @@ class UserProduct {
 
   UserProduct({
     String? id,
-    this.productTemplateId,
+    String? productTemplateId,
     String? templateId, // Alias for productTemplateId
     required this.name,
     this.nameEn,
