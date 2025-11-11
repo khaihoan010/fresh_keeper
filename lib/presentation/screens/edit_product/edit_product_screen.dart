@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 
@@ -120,9 +121,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
     if (success) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ Đã cập nhật ${updatedProduct.name}'),
+            content: Text(l10n.productUpdated(updatedProduct.name)),
             backgroundColor: AppTheme.successColor,
           ),
         );
@@ -130,9 +132,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
       }
     } else {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(provider.error ?? 'Không thể cập nhật sản phẩm'),
+            content: Text(provider.error ?? l10n.cannotUpdateProduct),
             backgroundColor: AppTheme.errorColor,
           ),
         );
@@ -142,15 +145,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chỉnh Sửa Sản Phẩm'),
+        title: Text(l10n.editProduct),
         actions: [
           TextButton(
             onPressed: _saveProduct,
-            child: const Text(
-              'Lưu',
-              style: TextStyle(
+            child: Text(
+              l10n.save,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -166,12 +171,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
             // Product Name
             _buildTextField(
               controller: _nameController,
-              label: 'Tên sản phẩm *',
-              hint: 'Ví dụ: Cà chua',
+              label: '${l10n.productName} *',
+              hint: l10n.exampleTomato,
               icon: Icons.shopping_basket_outlined,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Vui lòng nhập tên sản phẩm';
+                  return l10n.pleaseEnterProductName;
                 }
                 return null;
               },
@@ -191,17 +196,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   flex: 2,
                   child: _buildTextField(
                     controller: _quantityController,
-                    label: 'Số lượng *',
+                    label: '${l10n.quantity} *',
                     hint: '1',
                     icon: Icons.production_quantity_limits,
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Nhập số lượng';
+                        return l10n.enterQuantity;
                       }
                       final number = double.tryParse(value);
                       if (number == null || number <= 0) {
-                        return 'Số không hợp lệ';
+                        return l10n.invalidNumber;
                       }
                       return null;
                     },
@@ -218,7 +223,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
             // Purchase Date
             _buildDateField(
-              label: 'Ngày mua',
+              label: l10n.purchaseDate,
               date: _purchaseDate,
               onTap: () => _selectDate(context, true),
             ),
@@ -227,7 +232,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
             // Expiry Date
             _buildDateField(
-              label: 'Ngày hết hạn *',
+              label: '${l10n.expiryDate} *',
               date: _expiryDate,
               onTap: () => _selectDate(context, false),
               isRequired: true,
@@ -238,8 +243,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
             // Location
             _buildTextField(
               controller: _locationController,
-              label: 'Vị trí lưu trữ',
-              hint: 'Ví dụ: Tủ lạnh, Kệ bếp',
+              label: l10n.storageLocation,
+              hint: l10n.storageLocationHint,
               icon: Icons.place_outlined,
             ),
 
@@ -248,8 +253,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
             // Notes
             _buildTextField(
               controller: _notesController,
-              label: 'Ghi chú',
-              hint: 'Thêm ghi chú...',
+              label: l10n.notes,
+              hint: l10n.addNotes,
               icon: Icons.note_outlined,
               maxLines: 3,
             ),
@@ -262,9 +267,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               child: ElevatedButton.icon(
                 onPressed: _saveProduct,
                 icon: const Icon(Icons.save, size: 24),
-                label: const Text(
-                  'Lưu Thay Đổi',
-                  style: TextStyle(fontSize: 18),
+                label: Text(
+                  l10n.saveChanges,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -300,10 +305,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Widget _buildCategorySelector() {
+    final l10n = AppLocalizations.of(context);
+
     return DropdownButtonFormField<String>(
       value: _selectedCategory,
       decoration: InputDecoration(
-        labelText: 'Danh mục',
+        labelText: l10n.category,
         prefixIcon: const Icon(Icons.category_outlined),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
@@ -319,7 +326,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(width: 12),
-              Text(category['name_vi'] as String),
+              Text(category[l10n.isVietnamese ? 'name_vi' : 'name_en'] as String),
             ],
           ),
         );
@@ -333,10 +340,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Widget _buildUnitSelector() {
+    final l10n = AppLocalizations.of(context);
+
     return DropdownButtonFormField<String>(
       value: _selectedUnit,
       decoration: InputDecoration(
-        labelText: 'Đơn vị',
+        labelText: l10n.unit,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         ),

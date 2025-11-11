@@ -163,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
                   settings.userName.isNotEmpty
                       ? settings.userName
                       : l10n.user,
-                  style: AppTheme.h3,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 4),
                 TextButton(
@@ -185,15 +185,19 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _buildSectionHeader(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Text(
-        title.toUpperCase(),
-        style: AppTheme.caption.copyWith(
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.2,
-        ),
-      ),
+    return Builder(
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Text(
+            title.toUpperCase(),
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -206,17 +210,26 @@ class SettingsScreen extends StatelessWidget {
     Color? iconColor,
     Color? titleColor,
   }) {
-    return ListTile(
-      leading: Icon(icon, color: iconColor),
-      title: Text(
-        title,
-        style: titleColor != null
-            ? AppTheme.body1.copyWith(color: titleColor)
-            : AppTheme.body1,
-      ),
-      subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: trailing ?? const Icon(Icons.chevron_right),
-      onTap: onTap,
+    return Builder(
+      builder: (context) {
+        return ListTile(
+          leading: Icon(icon, color: iconColor),
+          title: Text(
+            title,
+            style: titleColor != null
+                ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: titleColor)
+                : Theme.of(context).textTheme.bodyMedium,
+          ),
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              : null,
+          trailing: trailing ?? const Icon(Icons.chevron_right),
+          onTap: onTap,
+        );
+      },
     );
   }
 
@@ -305,17 +318,17 @@ class SettingsScreen extends StatelessWidget {
           children: [
             Text(
               l10n.appTagline,
-              style: AppTheme.body1,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
             Text(
               '${l10n.version}: ${AppConstants.appVersion}',
-              style: AppTheme.body2,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 8),
             Text(
               '© 2024 Fresh Keeper',
-              style: AppTheme.caption,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ],
         ),
@@ -354,7 +367,7 @@ class SettingsScreen extends StatelessWidget {
               }
             },
             style: TextButton.styleFrom(
-              foregroundColor: AppTheme.errorColor,
+              foregroundColor: Theme.of(context).colorScheme.error,
             ),
             child: Text(l10n.delete),
           ),

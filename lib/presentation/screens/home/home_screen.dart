@@ -320,6 +320,11 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         else
           ...provider.recentProducts.take(5).map((product) {
+            final l10n = AppLocalizations.of(context);
+            final daysText = product.isExpired
+                ? l10n.daysOverdue(-product.daysUntilExpiry)
+                : l10n.daysRemaining(product.daysUntilExpiry);
+
             return Card(
               margin: const EdgeInsets.only(bottom: 8),
               child: ListTile(
@@ -329,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 title: Text(product.name, style: Theme.of(context).textTheme.titleLarge),
                 subtitle: Text(
-                  '${product.daysRemainingText} • ${product.quantity} ${product.unit}',
+                  '$daysText • ${product.quantity} ${product.unit}',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 trailing: Container(
