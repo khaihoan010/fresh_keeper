@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../config/app_localizations.dart';
 import '../../data/models/user_product.dart';
 import '../../data/models/product_template.dart';
 import '../../data/repositories/product_repository.dart';
@@ -27,6 +28,23 @@ enum SortOption {
         return 'Mới thêm nhất';
       case SortOption.createdAsc:
         return 'Cũ nhất';
+    }
+  }
+
+  String getLocalizedName(AppLocalizations l10n) {
+    switch (this) {
+      case SortOption.expiryAsc:
+        return l10n.expiryDateSoon;
+      case SortOption.expiryDesc:
+        return l10n.expiryDateLate;
+      case SortOption.nameAsc:
+        return l10n.nameAZ;
+      case SortOption.nameDesc:
+        return l10n.nameZA;
+      case SortOption.createdDesc:
+        return l10n.addedNewest;
+      case SortOption.createdAsc:
+        return l10n.addedOldest;
     }
   }
 }

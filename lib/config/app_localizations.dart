@@ -208,14 +208,57 @@ class AppLocalizations {
   String get freezer => isVietnamese ? 'Tủ đông' : 'Freezer';
   String get pantry => isVietnamese ? 'Tủ đồ khô' : 'Pantry';
   String get units => isVietnamese ? 'cái' : 'pcs';
+  String get unit => isVietnamese ? 'Đơn vị' : 'Unit';
   String get nutritionInfo => isVietnamese ? 'Thông tin dinh dưỡng' : 'Nutrition Info';
   String get noNutritionInfoYet => isVietnamese
       ? 'Thông tin dinh dưỡng sẽ được cập nhật sau'
       : 'Nutrition information will be updated later';
+  String get quickSearch => isVietnamese ? 'Tìm kiếm nhanh' : 'Quick Search';
+  String get searchProductsLocalOnline => isVietnamese
+      ? 'Tìm sản phẩm... (local + online)'
+      : 'Search products... (local + online)';
+  String get searchingOnline => isVietnamese ? 'Đang tìm online...' : 'Searching online...';
+  String get online => isVietnamese ? 'TRỰC TUYẾN' : 'ONLINE';
+  String daysUnit(int days) => isVietnamese ? '$days ngày' : '$days days';
+  String get example => isVietnamese ? 'Ví dụ' : 'Example';
+  String get exampleTomato => isVietnamese ? 'Ví dụ: Cà chua' : 'e.g.: Tomato';
+  String get pleaseEnterProductName => isVietnamese
+      ? 'Vui lòng nhập tên sản phẩm'
+      : 'Please enter product name';
+  String get enterQuantityHint => isVietnamese ? 'Nhập số lượng' : 'Enter quantity';
+  String get invalidNumber => isVietnamese ? 'Số không hợp lệ' : 'Invalid number';
+  String get selectExpiryDate => isVietnamese
+      ? 'Vui lòng chọn ngày hết hạn'
+      : 'Please select expiry date';
+  String get none => isVietnamese ? 'Không có' : 'None';
+  String get productInformation => isVietnamese ? 'Thông tin sản phẩm' : 'Product Information';
+  String get shelfLife => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
+  String get storage => isVietnamese ? 'Bảo quản' : 'Storage';
+  String get benefits => isVietnamese ? 'Lợi ích' : 'Benefits';
+  String barcodeFound(String productName) => isVietnamese
+      ? '✅ Đã tìm thấy: $productName'
+      : '✅ Found: $productName';
+  String get barcodeNotFound => isVietnamese
+      ? '⚠️ Không tìm thấy sản phẩm với mã vạch này'
+      : '⚠️ No product found with this barcode';
+  String get barcodeScanError => isVietnamese
+      ? '❌ Lỗi khi quét mã vạch'
+      : '❌ Error scanning barcode';
+  String productAddedSuccess(String productName) => isVietnamese
+      ? '✅ Đã thêm $productName'
+      : '✅ Added $productName';
+  String get cannotAddProduct => isVietnamese
+      ? 'Không thể thêm sản phẩm'
+      : 'Cannot add product';
+  String get positionBarcodeInFrame => isVietnamese
+      ? 'Đưa mã vạch vào khung hình'
+      : 'Position barcode in frame';
 
   // ==================== ALL ITEMS SCREEN ====================
   String get sortBy => isVietnamese ? 'Sắp xếp theo' : 'Sort by';
   String get filterBy => isVietnamese ? 'Lọc theo' : 'Filter by';
+  String get filterByCategory => isVietnamese ? 'Lọc theo danh mục' : 'Filter by Category';
+  String get all => isVietnamese ? 'Tất cả' : 'All';
   String get expiryDateSoon => isVietnamese ? 'Hạn sử dụng (gần nhất)' : 'Expiry Date (Soonest)';
   String get expiryDateLate => isVietnamese ? 'Hạn sử dụng (xa nhất)' : 'Expiry Date (Latest)';
   String get nameAZ => isVietnamese ? 'Tên (A-Z)' : 'Name (A-Z)';
@@ -225,6 +268,8 @@ class AppLocalizations {
   String get allCategories => isVietnamese ? 'Tất cả danh mục' : 'All Categories';
   String get allLocations => isVietnamese ? 'Tất cả vị trí' : 'All Locations';
   String get noProducts => isVietnamese ? 'Chưa có sản phẩm nào' : 'No products yet';
+  String get noProductsFound => isVietnamese ? 'Không tìm thấy sản phẩm' : 'No products found';
+  String get tryDifferentKeyword => isVietnamese ? 'Thử từ khóa khác' : 'Try a different keyword';
   String get noProductsInCategory => isVietnamese
       ? 'Chưa có sản phẩm nào trong danh mục này'
       : 'No products in this category';
@@ -236,17 +281,28 @@ class AppLocalizations {
       : '$count product${count != 1 ? 's' : ''}';
 
   // ==================== EXPIRING SOON ====================
-  String get expiringSoon => isVietnamese ? 'Sắp Hết Hạn' : 'Expiring Soon';
+  String get expiringSoon => isVietnamese ? 'Gần Hết Hạn' : 'Expiring Soon';
   String get within3Days => isVietnamese ? 'Trong 3 ngày' : 'Within 3 days';
   String get within7Days => isVietnamese ? 'Trong 7 ngày' : 'Within 7 days';
   String get allExpiring => isVietnamese ? 'Tất cả sắp hết hạn' : 'All Expiring';
   String get noExpiringItems => isVietnamese
-      ? 'Không có sản phẩm nào sắp hết hạn!'
-      : 'No items expiring soon!';
-  String get greatNews => isVietnamese ? 'Tin tốt!' : 'Great news!';
+      ? 'Không có sản phẩm nào sắp hết hạn'
+      : 'No products expiring soon';
+  String get greatNews => isVietnamese ? 'Tuyệt vời!' : 'Great!';
   String get allFresh => isVietnamese
       ? 'Tất cả sản phẩm của bạn đều còn tươi ngon'
       : 'All your products are still fresh';
+  String get productsExpiringSoon => isVietnamese
+      ? 'Sản phẩm gần hết hạn'
+      : 'Products expiring soon';
+  String get useSoonToAvoidWaste => isVietnamese
+      ? 'Hãy sử dụng sớm để tránh lãng phí'
+      : 'Use soon to avoid waste';
+  String get expiredItems => isVietnamese ? '❌ Đã Hết Hạn' : '❌ Expired';
+  String get expiringToday2 => isVietnamese ? '⏰ Hết Hạn Hôm Nay' : '⏰ Expiring Today';
+  String get urgentDays => isVietnamese ? '🚨 Khẩn Cấp (1-2 ngày)' : '🚨 Urgent (1-2 days)';
+  String get useSoonDays => isVietnamese ? '⚠️ Sử Dụng Sớm (3-7 ngày)' : '⚠️ Use Soon (3-7 days)';
+  String get days => isVietnamese ? 'ngày' : 'days';
   String expiresIn(int days) {
     if (days == 0) {
       return isVietnamese ? 'Hết hạn hôm nay' : 'Expires today';
