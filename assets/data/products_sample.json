@@ -1,7 +1,7 @@
 {
-  "version": "2.3.0",
+  "version": "3.0.0",
   "last_updated": "2025-11-11",
-  "total_products": 122,
+  "total_products": 251,
   "products": [
     {
       "id": "beer_18",
@@ -4881,6 +4881,5037 @@
         "Bỏ da để giảm mỡ"
       ],
       "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "orange_sanh",
+      "name_vi": "Cam sành",
+      "name_en": "Sanh Orange",
+      "aliases": [
+        "cam sành",
+        "sanh orange"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "orange_canh",
+      "name_vi": "Cam canh",
+      "name_en": "Canh Orange",
+      "aliases": [
+        "cam canh",
+        "canh orange"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "tangerine",
+      "name_vi": "Quýt",
+      "name_en": "Tangerine",
+      "aliases": [
+        "quýt",
+        "tangerine"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 10,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+    },
+    {
+      "id": "tangerine_hong",
+      "name_vi": "Quýt hồng",
+      "name_en": "Red Tangerine",
+      "aliases": [
+        "quýt hồng",
+        "red tangerine"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 10,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+    },
+    {
+      "id": "pomelo_green",
+      "name_vi": "Bưởi da xanh",
+      "name_en": "Green Pomelo",
+      "aliases": [
+        "bưởi da xanh",
+        "green pomelo"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "pomelo_red",
+      "name_vi": "Bưởi đỏ",
+      "name_en": "Red Pomelo",
+      "aliases": [
+        "bưởi đỏ",
+        "red pomelo"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "lime",
+      "name_vi": "Chanh",
+      "name_en": "Lime",
+      "aliases": [
+        "chanh",
+        "lime"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "lemon",
+      "name_vi": "Chanh vàng",
+      "name_en": "Lemon",
+      "aliases": [
+        "chanh vàng",
+        "lemon"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "kumquat",
+      "name_vi": "Tắc",
+      "name_en": "Kumquat",
+      "aliases": [
+        "tắc",
+        "kumquat"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 10,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+    },
+    {
+      "id": "mango_cat",
+      "name_vi": "Xoài cát",
+      "name_en": "Cat Mango",
+      "aliases": [
+        "xoài cát",
+        "cat mango"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "mango_tuong",
+      "name_vi": "Xoài tượng",
+      "name_en": "Elephant Mango",
+      "aliases": [
+        "xoài tượng",
+        "elephant mango"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "mango_australia",
+      "name_vi": "Xoài Úc",
+      "name_en": "Australian Mango",
+      "aliases": [
+        "xoài úc",
+        "australian mango"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "mango_green",
+      "name_vi": "Xoài xanh",
+      "name_en": "Green Mango",
+      "aliases": [
+        "xoài xanh",
+        "green mango"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 10,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+    },
+    {
+      "id": "mango_hoa_loc",
+      "name_vi": "Xoài hoa lộc",
+      "name_en": "Hoa Loc Mango",
+      "aliases": [
+        "xoài hoa lộc",
+        "hoa loc mango"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "banana_tieu",
+      "name_vi": "Chuối tiêu",
+      "name_en": "Tieu Banana",
+      "aliases": [
+        "chuối tiêu",
+        "tieu banana"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "banana_ngu",
+      "name_vi": "Chuối ngự",
+      "name_en": "Royal Banana",
+      "aliases": [
+        "chuối ngự",
+        "royal banana"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "banana_su",
+      "name_vi": "Chuối sứ",
+      "name_en": "Su Banana",
+      "aliases": [
+        "chuối sứ",
+        "su banana"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "banana_cau",
+      "name_vi": "Chuối cau",
+      "name_en": "Cau Banana",
+      "aliases": [
+        "chuối cau",
+        "cau banana"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "banana_gia",
+      "name_vi": "Chuối già",
+      "name_en": "Old Banana",
+      "aliases": [
+        "chuối già",
+        "old banana"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "longan_hungyen",
+      "name_vi": "Nhãn Hưng Yên",
+      "name_en": "Hung Yen Longan",
+      "aliases": [
+        "nhãn hưng yên",
+        "hung yen longan"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "lychee_thieu",
+      "name_vi": "Vải thiều",
+      "name_en": "Thieu Lychee",
+      "aliases": [
+        "vải thiều",
+        "thieu lychee"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "lychee_early",
+      "name_vi": "Vải sớm",
+      "name_en": "Early Lychee",
+      "aliases": [
+        "vải sớm",
+        "early lychee"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "durian_monthong",
+      "name_vi": "Sầu riêng Monthong",
+      "name_en": "Monthong Durian",
+      "aliases": [
+        "sầu riêng monthong",
+        "monthong durian"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "durian_ri6",
+      "name_vi": "Sầu riêng Ri 6",
+      "name_en": "Ri 6 Durian",
+      "aliases": [
+        "sầu riêng ri 6",
+        "ri 6 durian"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "durian_musang",
+      "name_vi": "Sầu riêng cơm vàng",
+      "name_en": "Musang King",
+      "aliases": [
+        "sầu riêng cơm vàng",
+        "musang king"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "strawberry_dalat",
+      "name_vi": "Dâu tây Đà Lạt",
+      "name_en": "Dalat Strawberry",
+      "aliases": [
+        "dâu tây đà lạt",
+        "dalat strawberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "blueberry",
+      "name_vi": "Việt quất",
+      "name_en": "Blueberry",
+      "aliases": [
+        "việt quất",
+        "blueberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "raspberry",
+      "name_vi": "Mâm xôi",
+      "name_en": "Raspberry",
+      "aliases": [
+        "mâm xôi",
+        "raspberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "blackberry",
+      "name_vi": "Dâu đen",
+      "name_en": "Blackberry",
+      "aliases": [
+        "dâu đen",
+        "blackberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "cranberry",
+      "name_vi": "Nam việt quất",
+      "name_en": "Cranberry",
+      "aliases": [
+        "nam việt quất",
+        "cranberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "mulberry",
+      "name_vi": "Dâu tằm",
+      "name_en": "Mulberry",
+      "aliases": [
+        "dâu tằm",
+        "mulberry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "grape_black",
+      "name_vi": "Nho đen",
+      "name_en": "Black Grape",
+      "aliases": [
+        "nho đen",
+        "black grape"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "grape_green",
+      "name_vi": "Nho xanh",
+      "name_en": "Green Grape",
+      "aliases": [
+        "nho xanh",
+        "green grape"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "grape_red",
+      "name_vi": "Nho đỏ",
+      "name_en": "Red Grape",
+      "aliases": [
+        "nho đỏ",
+        "red grape"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "grape_ninh_thuan",
+      "name_vi": "Nho Ninh Thuận",
+      "name_en": "Ninh Thuan Grape",
+      "aliases": [
+        "nho ninh thuận",
+        "ninh thuan grape"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "apple_gala",
+      "name_vi": "Táo Gala",
+      "name_en": "Gala Apple",
+      "aliases": [
+        "táo gala",
+        "gala apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "apple_green",
+      "name_vi": "Táo xanh",
+      "name_en": "Green Apple",
+      "aliases": [
+        "táo xanh",
+        "green apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "apple_red",
+      "name_vi": "Táo đỏ",
+      "name_en": "Red Apple",
+      "aliases": [
+        "táo đỏ",
+        "red apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "apple_envy",
+      "name_vi": "Táo Envy",
+      "name_en": "Envy Apple",
+      "aliases": [
+        "táo envy",
+        "envy apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "apple_pink_lady",
+      "name_vi": "Táo Pink Lady",
+      "name_en": "Pink Lady Apple",
+      "aliases": [
+        "táo pink lady",
+        "pink lady apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "pear_asian",
+      "name_vi": "Lê",
+      "name_en": "Asian Pear",
+      "aliases": [
+        "lê",
+        "asian pear"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "pear_european",
+      "name_vi": "Lê Tây",
+      "name_en": "European Pear",
+      "aliases": [
+        "lê tây",
+        "european pear"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "pear_korean",
+      "name_vi": "Lê Hàn Quốc",
+      "name_en": "Korean Pear",
+      "aliases": [
+        "lê hàn quốc",
+        "korean pear"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "watermelon_red",
+      "name_vi": "Dưa hấu ruột đỏ",
+      "name_en": "Red Watermelon",
+      "aliases": [
+        "dưa hấu ruột đỏ",
+        "red watermelon"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "watermelon_yellow",
+      "name_vi": "Dưa hấu vàng",
+      "name_en": "Yellow Watermelon",
+      "aliases": [
+        "dưa hấu vàng",
+        "yellow watermelon"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "cantaloupe",
+      "name_vi": "Dưa vàng",
+      "name_en": "Cantaloupe",
+      "aliases": [
+        "dưa vàng",
+        "cantaloupe"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "honeydew",
+      "name_vi": "Dưa gang",
+      "name_en": "Honeydew",
+      "aliases": [
+        "dưa gang",
+        "honeydew"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 10,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+    },
+    {
+      "id": "melon_pepino",
+      "name_vi": "Dưa pepino",
+      "name_en": "Pepino Melon",
+      "aliases": [
+        "dưa pepino",
+        "pepino melon"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "mangosteen",
+      "name_vi": "Măng cụt",
+      "name_en": "Mangosteen",
+      "aliases": [
+        "măng cụt",
+        "mangosteen"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "passion_fruit_yellow",
+      "name_vi": "Chanh dây vàng",
+      "name_en": "Yellow Passion Fruit",
+      "aliases": [
+        "chanh dây vàng",
+        "yellow passion fruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "avocado_booth",
+      "name_vi": "Bơ Booth",
+      "name_en": "Booth Avocado",
+      "aliases": [
+        "bơ booth",
+        "booth avocado"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "avocado_hass",
+      "name_vi": "Bơ Hass",
+      "name_en": "Hass Avocado",
+      "aliases": [
+        "bơ hass",
+        "hass avocado"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "dragon_fruit_white",
+      "name_vi": "Thanh long trắng",
+      "name_en": "White Dragon Fruit",
+      "aliases": [
+        "thanh long trắng",
+        "white dragon fruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "dragon_fruit_red",
+      "name_vi": "Thanh long ruột đỏ",
+      "name_en": "Red Dragon Fruit",
+      "aliases": [
+        "thanh long ruột đỏ",
+        "red dragon fruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "pitaya",
+      "name_vi": "Thanh long vàng",
+      "name_en": "Yellow Pitaya",
+      "aliases": [
+        "thanh long vàng",
+        "yellow pitaya"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "milk_fruit",
+      "name_vi": "Vú sữa",
+      "name_en": "Milk Fruit",
+      "aliases": [
+        "vú sữa",
+        "milk fruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "sapoche",
+      "name_vi": "Sa kê",
+      "name_en": "Sapoche",
+      "aliases": [
+        "sa kê",
+        "sapoche"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "green_skin_grapefruit",
+      "name_vi": "Bưởi da xanh Bến Tre",
+      "name_en": "Ben Tre Pomelo",
+      "aliases": [
+        "bưởi da xanh bến tre",
+        "ben tre pomelo"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 21,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+    },
+    {
+      "id": "wax_apple",
+      "name_vi": "Roi",
+      "name_en": "Wax Apple",
+      "aliases": [
+        "roi",
+        "wax apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "water_apple",
+      "name_vi": "Mận nước",
+      "name_en": "Water Apple",
+      "aliases": [
+        "mận nước",
+        "water apple"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "guava_white",
+      "name_vi": "Ổi trắng",
+      "name_en": "White Guava",
+      "aliases": [
+        "ổi trắng",
+        "white guava"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "guava_pink",
+      "name_vi": "Ổi hồng",
+      "name_en": "Pink Guava",
+      "aliases": [
+        "ổi hồng",
+        "pink guava"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "papaya_red",
+      "name_vi": "Đu đủ ruột đỏ",
+      "name_en": "Red Papaya",
+      "aliases": [
+        "đu đủ ruột đỏ",
+        "red papaya"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "papaya_yellow",
+      "name_vi": "Đu đủ vàng",
+      "name_en": "Yellow Papaya",
+      "aliases": [
+        "đu đủ vàng",
+        "yellow papaya"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "jackfruit_mi",
+      "name_vi": "Mít mì",
+      "name_en": "Honey Jackfruit",
+      "aliases": [
+        "mít mì",
+        "honey jackfruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "jackfruit_tuoi",
+      "name_vi": "Mít tơ",
+      "name_en": "Soft Jackfruit",
+      "aliases": [
+        "mít tơ",
+        "soft jackfruit"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "peach",
+      "name_vi": "Đào",
+      "name_en": "Peach",
+      "aliases": [
+        "đào",
+        "peach"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "nectarine",
+      "name_vi": "Xuân đào",
+      "name_en": "Nectarine",
+      "aliases": [
+        "xuân đào",
+        "nectarine"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "apricot",
+      "name_vi": "Mơ",
+      "name_en": "Apricot",
+      "aliases": [
+        "mơ",
+        "apricot"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "cherry",
+      "name_vi": "Anh đào",
+      "name_en": "Cherry",
+      "aliases": [
+        "anh đào",
+        "cherry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "cherry_rainier",
+      "name_vi": "Anh đào vàng",
+      "name_en": "Rainier Cherry",
+      "aliases": [
+        "anh đào vàng",
+        "rainier cherry"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "date",
+      "name_vi": "Chà là",
+      "name_en": "Date",
+      "aliases": [
+        "chà là",
+        "date"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 30,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày."
+    },
+    {
+      "id": "fig",
+      "name_vi": "Sung",
+      "name_en": "Fig",
+      "aliases": [
+        "sung",
+        "fig"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "tamarind",
+      "name_vi": "Me",
+      "name_en": "Tamarind",
+      "aliases": [
+        "me",
+        "tamarind"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 14,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+    },
+    {
+      "id": "santol",
+      "name_vi": "Sơn trà",
+      "name_en": "Santol",
+      "aliases": [
+        "sơn trà",
+        "santol"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+    },
+    {
+      "id": "cempedak",
+      "name_vi": "Chôm chôm tía",
+      "name_en": "Cempedak",
+      "aliases": [
+        "chôm chôm tía",
+        "cempedak"
+      ],
+      "category": "fruits",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 50,
+        "protein": 0.5,
+        "carbohydrates": 13,
+        "fat": 0.2,
+        "fiber": 2,
+        "sugar": 10,
+        "vitamins": {
+          "vitamin_c": 15,
+          "vitamin_a": 200
+        },
+        "minerals": {
+          "potassium": 150,
+          "calcium": 20
+        }
+      },
+      "health_benefits": [
+        "Giàu vitamin",
+        "Tốt cho sức khỏe",
+        "Tăng cường miễn dịch"
+      ],
+      "health_warnings": [
+        "Rửa sạch trước khi ăn",
+        "Bảo quản tốt để tránh hỏng"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "pork_ham",
+      "name_vi": "Móng giò heo",
+      "name_en": "Pork Ham",
+      "aliases": [
+        "móng giò heo",
+        "pork ham"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "pork_ear",
+      "name_vi": "Tai heo",
+      "name_en": "Pork Ear",
+      "aliases": [
+        "tai heo",
+        "pork ear"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_snout",
+      "name_vi": "Mõm heo",
+      "name_en": "Pork Snout",
+      "aliases": [
+        "mõm heo",
+        "pork snout"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_tongue",
+      "name_vi": "Lưỡi heo",
+      "name_en": "Pork Tongue",
+      "aliases": [
+        "lưỡi heo",
+        "pork tongue"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_heart",
+      "name_vi": "Tim heo",
+      "name_en": "Pork Heart",
+      "aliases": [
+        "tim heo",
+        "pork heart"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_liver",
+      "name_vi": "Gan heo",
+      "name_en": "Pork Liver",
+      "aliases": [
+        "gan heo",
+        "pork liver"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_kidney",
+      "name_vi": "Thận heo",
+      "name_en": "Pork Kidney",
+      "aliases": [
+        "thận heo",
+        "pork kidney"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_intestine",
+      "name_vi": "Ruột heo",
+      "name_en": "Pork Intestine",
+      "aliases": [
+        "ruột heo",
+        "pork intestine"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_stomach",
+      "name_vi": "Dạ dày heo",
+      "name_en": "Pork Stomach",
+      "aliases": [
+        "dạ dày heo",
+        "pork stomach"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_feet",
+      "name_vi": "Chân giò heo",
+      "name_en": "Pork Feet",
+      "aliases": [
+        "chân giò heo",
+        "pork feet"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_tail",
+      "name_vi": "Đuôi heo",
+      "name_en": "Pork Tail",
+      "aliases": [
+        "đuôi heo",
+        "pork tail"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_skin",
+      "name_vi": "Da heo",
+      "name_en": "Pork Skin",
+      "aliases": [
+        "da heo",
+        "pork skin"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pork_blood",
+      "name_vi": "Huyết heo",
+      "name_en": "Pork Blood",
+      "aliases": [
+        "huyết heo",
+        "pork blood"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_cartilage",
+      "name_vi": "Sụn heo",
+      "name_en": "Pork Cartilage",
+      "aliases": [
+        "sụn heo",
+        "pork cartilage"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_tongue",
+      "name_vi": "Lưỡi bò",
+      "name_en": "Beef Tongue",
+      "aliases": [
+        "lưỡi bò",
+        "beef tongue"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_heart",
+      "name_vi": "Tim bò",
+      "name_en": "Beef Heart",
+      "aliases": [
+        "tim bò",
+        "beef heart"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_liver",
+      "name_vi": "Gan bò",
+      "name_en": "Beef Liver",
+      "aliases": [
+        "gan bò",
+        "beef liver"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "beef_kidney",
+      "name_vi": "Thận bò",
+      "name_en": "Beef Kidney",
+      "aliases": [
+        "thận bò",
+        "beef kidney"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "beef_tripe",
+      "name_vi": "Dạ dày bò",
+      "name_en": "Beef Tripe",
+      "aliases": [
+        "dạ dày bò",
+        "beef tripe"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_tail",
+      "name_vi": "Đuôi bò",
+      "name_en": "Oxtail",
+      "aliases": [
+        "đuôi bò",
+        "oxtail"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "beef_tendon",
+      "name_vi": "Gân bò",
+      "name_en": "Beef Tendon",
+      "aliases": [
+        "gân bò",
+        "beef tendon"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_bone_marrow",
+      "name_vi": "Tủy bò",
+      "name_en": "Beef Bone Marrow",
+      "aliases": [
+        "tủy bò",
+        "beef bone marrow"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "beef_chuck",
+      "name_vi": "Thịt bò vai",
+      "name_en": "Beef Chuck",
+      "aliases": [
+        "thịt bò vai",
+        "beef chuck"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "chicken_heart",
+      "name_vi": "Tim gà",
+      "name_en": "Chicken Heart",
+      "aliases": [
+        "tim gà",
+        "chicken heart"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "chicken_liver",
+      "name_vi": "Gan gà",
+      "name_en": "Chicken Liver",
+      "aliases": [
+        "gan gà",
+        "chicken liver"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "chicken_gizzard",
+      "name_vi": "Mề gà",
+      "name_en": "Chicken Gizzard",
+      "aliases": [
+        "mề gà",
+        "chicken gizzard"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_feet",
+      "name_vi": "Chân gà",
+      "name_en": "Chicken Feet",
+      "aliases": [
+        "chân gà",
+        "chicken feet"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_neck",
+      "name_vi": "Cổ gà",
+      "name_en": "Chicken Neck",
+      "aliases": [
+        "cổ gà",
+        "chicken neck"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_back",
+      "name_vi": "Xương gà",
+      "name_en": "Chicken Back",
+      "aliases": [
+        "xương gà",
+        "chicken back"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_whole",
+      "name_vi": "Gà nguyên con",
+      "name_en": "Whole Chicken",
+      "aliases": [
+        "gà nguyên con",
+        "whole chicken"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_breast_boneless",
+      "name_vi": "Ức gà không xương",
+      "name_en": "Boneless Chicken Breast",
+      "aliases": [
+        "ức gà không xương",
+        "boneless chicken breast"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "chicken_drumstick",
+      "name_vi": "Đùi tỏi gà",
+      "name_en": "Chicken Drumstick",
+      "aliases": [
+        "đùi tỏi gà",
+        "chicken drumstick"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "duck_breast",
+      "name_vi": "Ngực vịt",
+      "name_en": "Duck Breast",
+      "aliases": [
+        "ngực vịt",
+        "duck breast"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "duck_leg",
+      "name_vi": "Đùi vịt",
+      "name_en": "Duck Leg",
+      "aliases": [
+        "đùi vịt",
+        "duck leg"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "duck_liver",
+      "name_vi": "Gan vịt",
+      "name_en": "Duck Liver",
+      "aliases": [
+        "gan vịt",
+        "duck liver"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "duck_gizzard",
+      "name_vi": "Mề vịt",
+      "name_en": "Duck Gizzard",
+      "aliases": [
+        "mề vịt",
+        "duck gizzard"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "duck_tongue",
+      "name_vi": "Lưỡi vịt",
+      "name_en": "Duck Tongue",
+      "aliases": [
+        "lưỡi vịt",
+        "duck tongue"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "duck_whole",
+      "name_vi": "Vịt nguyên con",
+      "name_en": "Whole Duck",
+      "aliases": [
+        "vịt nguyên con",
+        "whole duck"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "quail_whole",
+      "name_vi": "Chim cút nguyên con",
+      "name_en": "Whole Quail",
+      "aliases": [
+        "chim cút nguyên con",
+        "whole quail"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "pigeon",
+      "name_vi": "Bồ câu",
+      "name_en": "Pigeon",
+      "aliases": [
+        "bồ câu",
+        "pigeon"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "turkey",
+      "name_vi": "Gà tây",
+      "name_en": "Turkey",
+      "aliases": [
+        "gà tây",
+        "turkey"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "goat",
+      "name_vi": "Thịt dê",
+      "name_en": "Goat Meat",
+      "aliases": [
+        "thịt dê",
+        "goat meat"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "rabbit",
+      "name_vi": "Thịt thỏ",
+      "name_en": "Rabbit Meat",
+      "aliases": [
+        "thịt thỏ",
+        "rabbit meat"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 2,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+    },
+    {
+      "id": "frog",
+      "name_vi": "Thịt ếch",
+      "name_en": "Frog Meat",
+      "aliases": [
+        "thịt ếch",
+        "frog meat"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "snail",
+      "name_vi": "Ốc",
+      "name_en": "Snail",
+      "aliases": [
+        "ốc",
+        "snail"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 1,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+    },
+    {
+      "id": "pork_sausage",
+      "name_vi": "Xúc xích heo",
+      "name_en": "Pork Sausage",
+      "aliases": [
+        "xúc xích heo",
+        "pork sausage"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "chinese_sausage",
+      "name_vi": "Lạp xưởng",
+      "name_en": "Chinese Sausage",
+      "aliases": [
+        "lạp xưởng",
+        "chinese sausage"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 30,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày."
+    },
+    {
+      "id": "pork_patty",
+      "name_vi": "Chả heo",
+      "name_en": "Pork Patty",
+      "aliases": [
+        "chả heo",
+        "pork patty"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "pork_meatball",
+      "name_vi": "Thịt viên heo",
+      "name_en": "Pork Meatball",
+      "aliases": [
+        "thịt viên heo",
+        "pork meatball"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "beef_meatball",
+      "name_vi": "Thịt viên bò",
+      "name_en": "Beef Meatball",
+      "aliases": [
+        "thịt viên bò",
+        "beef meatball"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "chicken_meatball",
+      "name_vi": "Thịt viên gà",
+      "name_en": "Chicken Meatball",
+      "aliases": [
+        "thịt viên gà",
+        "chicken meatball"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 3,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+    },
+    {
+      "id": "vietnamese_ham",
+      "name_vi": "Giò lụa",
+      "name_en": "Vietnamese Ham",
+      "aliases": [
+        "giò lụa",
+        "vietnamese ham"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 5,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+    },
+    {
+      "id": "bacon",
+      "name_vi": "Thịt xông khói",
+      "name_en": "Bacon",
+      "aliases": [
+        "thịt xông khói",
+        "bacon"
+      ],
+      "category": "meat",
+      "shelf_life_refrigerated": 7,
+      "shelf_life_frozen": 180,
+      "nutrition_data": {
+        "serving_size": "100g",
+        "calories": 200,
+        "protein": 20,
+        "carbohydrates": 0,
+        "fat": 12,
+        "fiber": 0,
+        "sugar": 0,
+        "vitamins": {
+          "vitamin_b12": 2,
+          "vitamin_b6": 0.4
+        },
+        "minerals": {
+          "iron": 2,
+          "zinc": 3
+        }
+      },
+      "health_benefits": [
+        "Giàu protein",
+        "Cung cấp sắt",
+        "Tốt cho cơ bắp"
+      ],
+      "health_warnings": [
+        "Nấu chín kỹ",
+        "Bảo quản lạnh ngay"
+      ],
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
     }
   ]
 }

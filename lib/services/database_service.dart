@@ -256,6 +256,21 @@ class DatabaseService {
       await _loadProductTemplates(db);
       debugPrint('✅ Product templates expanded: now 122 Vietnamese products');
     }
+
+    if (oldVersion < 7) {
+      // Massive expansion: 100+ fruits, complete Vietnamese meat cuts
+      debugPrint('🔄 Upgrading to v7: MASSIVE EXPANSION...');
+
+      // Clear existing templates
+      await db.delete(AppConstants.tableProductTemplates);
+      debugPrint('🗑️ Cleared old product templates');
+
+      // Reload from JSON file with massive expansion
+      await _loadProductTemplates(db);
+      debugPrint('✅ Massive expansion completed: 251 products total');
+      debugPrint('   - Fruits: 108+ products');
+      debugPrint('   - Meat: 70 complete Vietnamese cuts');
+    }
   }
 
   /// Load initial data
