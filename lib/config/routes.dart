@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../data/models/user_product.dart';
 import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/add_product/add_product_screen.dart';
 import '../presentation/screens/all_items/all_items_screen.dart';
 import '../presentation/screens/expiring_soon/expiring_soon_screen.dart';
+import '../presentation/screens/product_detail/product_detail_screen.dart';
+import '../presentation/screens/edit_product/edit_product_screen.dart';
+import '../presentation/screens/settings/settings_screen.dart';
 
 /// Application Routes
 class AppRoutes {
@@ -34,7 +39,7 @@ class AppRoutes {
 
       case onboarding:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with OnboardingScreen()
+          const OnboardingScreen(),
           routeSettings,
         );
 
@@ -64,23 +69,23 @@ class AppRoutes {
         );
 
       case productDetail:
-        // final product = routeSettings.arguments as UserProduct;
+        final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with ProductDetailScreen(product: product)
+          ProductDetailScreen(product: product),
           routeSettings,
         );
 
       case editProduct:
-        // final product = routeSettings.arguments as UserProduct;
+        final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with EditProductScreen(product: product)
+          EditProductScreen(product: product),
           routeSettings,
           fullscreenDialog: true,
         );
 
       case settings:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with SettingsScreen()
+          const SettingsScreen(),
           routeSettings,
         );
 
