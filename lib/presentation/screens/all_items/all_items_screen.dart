@@ -445,7 +445,7 @@ class _ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         product.name,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -463,12 +463,20 @@ class _ProductCard extends StatelessWidget {
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
-                          Text(
-                            product.daysRemainingText,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: product.getStatusColor(),
-                              fontWeight: FontWeight.w600,
-                            ),
+                          Builder(
+                            builder: (context) {
+                              final l10n = AppLocalizations.of(context);
+                              final daysText = product.isExpired
+                                  ? l10n.daysOverdue(-product.daysUntilExpiry)
+                                  : l10n.daysRemaining(product.daysUntilExpiry);
+                              return Text(
+                                daysText,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: product.getStatusColor(),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

@@ -316,12 +316,20 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                           color: accentColor,
                         ),
                         const SizedBox(width: 4),
-                        Text(
-                          product.daysRemainingText,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: accentColor,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Builder(
+                          builder: (context) {
+                            final l10n = AppLocalizations.of(context);
+                            final daysText = product.isExpired
+                                ? l10n.daysOverdue(-product.daysUntilExpiry)
+                                : l10n.daysRemaining(product.daysUntilExpiry);
+                            return Text(
+                              daysText,
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: accentColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
