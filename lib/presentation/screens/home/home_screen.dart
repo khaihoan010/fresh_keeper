@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../providers/product_provider.dart';
 
 /// Home Screen / Dashboard
@@ -29,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false, // Remove back button from home screen
@@ -38,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 8),
             Text(
               AppConstants.appName,
-              style: AppTheme.h2,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
@@ -66,21 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.error_outline,
                       size: 64,
-                      color: Colors.red,
+                      color: Theme.of(context).colorScheme.error,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       provider.error!,
-                      style: AppTheme.body1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () => provider.refresh(),
-                      child: const Text('Thử lại'),
+                      child: Text(l10n.retry),
                     ),
                   ],
                 ),
@@ -122,10 +125,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         type: BottomNavigationBarType.fixed,
         items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Trang chủ',
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: l10n.home,
           ),
           BottomNavigationBarItem(
             icon: Stack(
@@ -136,8 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: 0,
                     child: Container(
                       padding: const EdgeInsets.all(2),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.error,
                         shape: BoxShape.circle,
                       ),
                       constraints: const BoxConstraints(
@@ -158,17 +161,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             activeIcon: const Icon(Icons.warning_amber),
-            label: 'Gần hết hạn',
+            label: l10n.expiringSoon,
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_outlined),
-            activeIcon: Icon(Icons.list_alt),
-            label: 'Tất cả',
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.list_alt_outlined),
+            activeIcon: const Icon(Icons.list_alt),
+            label: l10n.allItems,
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            activeIcon: Icon(Icons.settings),
-            label: 'Cài đặt',
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings_outlined),
+            activeIcon: const Icon(Icons.settings),
+            label: l10n.settings,
           ),
         ],
       ),
@@ -176,12 +179,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildStatsSection(ProductProvider provider) {
+    final l10n = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Tổng quan',
-          style: AppTheme.h3,
+          l10n.quickStats,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 12),
         Row(
@@ -189,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: _buildStatCard(
                 icon: Icons.inventory_2_outlined,
-                title: 'Tổng sản phẩm',
+                title: l10n.totalProducts,
                 value: provider.totalCount.toString(),
                 color: AppTheme.primaryColor,
                 onTap: () => Navigator.pushNamed(context, AppRoutes.allItems),
@@ -199,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: _buildStatCard(
                 icon: Icons.warning_amber_outlined,
-                title: 'Gần hết hạn',
+                title: l10n.expiringItems,
                 value: provider.expiringSoonCount.toString(),
                 color: provider.expiringSoonCount > 0
                     ? AppTheme.errorColor
@@ -234,12 +239,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
               Text(
                 value,
-                style: AppTheme.h2.copyWith(color: color),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: color),
               ),
               const SizedBox(height: 4),
               Text(
                 title,
-                style: AppTheme.body2,
+                style: Theme.of(context).textTheme.bodyMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -251,6 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildAddProductButton() {
+    final l10n = AppLocalizations.of(context);
+
     return SizedBox(
       width: double.infinity,
       height: 56,
@@ -259,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.pushNamed(context, AppRoutes.addProduct);
         },
         icon: const Icon(Icons.add, size: 28),
-        label: const Text('Thêm Sản Phẩm', style: TextStyle(fontSize: 18)),
+        label: Text(l10n.addProduct, style: const TextStyle(fontSize: 18)),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
@@ -270,6 +277,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildQuickAccessSection(ProductProvider provider) {
+    final l10n = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -277,14 +286,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Thêm gần đây',
-              style: AppTheme.h3,
+              l10n.recentlyAdded,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.allItems);
               },
-              child: const Text('Xem tất cả →'),
+              child: Text('${l10n.viewAll} →'),
             ),
           ],
         ),
@@ -299,9 +308,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Text('📦', style: TextStyle(fontSize: 48)),
                     const SizedBox(height: 16),
                     Text(
-                      'Chưa có sản phẩm nào',
-                      style: AppTheme.body1.copyWith(
-                        color: AppTheme.textSecondary,
+                      l10n.noRecentProducts,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                       ),
                     ),
                   ],
@@ -318,10 +327,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   AppConstants.categoryIcons[product.category] ?? '📦',
                   style: const TextStyle(fontSize: 32),
                 ),
-                title: Text(product.name, style: AppTheme.h3),
+                title: Text(product.name, style: Theme.of(context).textTheme.titleLarge),
                 subtitle: Text(
                   '${product.daysRemainingText} • ${product.quantity} ${product.unit}',
-                  style: AppTheme.body2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 trailing: Container(
                   width: 12,
