@@ -5,6 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
@@ -152,6 +153,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
 
     if (result != null && mounted) {
+      final l10n = AppLocalizations.of(context);
+
       // Show loading indicator
       setState(() => _isSearchingApi = true);
 
@@ -170,14 +173,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('✅ Đã tìm thấy: ${product.nameVi}'),
+              content: Text(l10n.barcodeFound(product.nameVi)),
               backgroundColor: AppTheme.successColor,
             ),
           );
         } else if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('⚠️ Không tìm thấy sản phẩm với mã vạch này'),
+            SnackBar(
+              content: Text(l10n.barcodeNotFound),
               backgroundColor: AppTheme.warningColor,
             ),
           );
@@ -186,9 +189,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
         debugPrint('❌ Barcode scan error: $e');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('❌ Lỗi khi quét mã vạch'),
-              backgroundColor: AppTheme.errorColor,
+            SnackBar(
+              content: Text(l10n.barcodeScanError),
+              backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
         }
@@ -223,14 +226,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       lastDate: DateTime(2030),
       builder: (context, child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: AppTheme.primaryColor,
-              onPrimary: Colors.white,
-              surface: Colors.white,
-              onSurface: AppTheme.textPrimary,
-            ),
-          ),
+          data: Theme.of(context),
           child: child!,
         );
       },
@@ -254,13 +250,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Future<void> _saveProduct() async {
+    final l10n = AppLocalizations.of(context);
+
     if (!_formKey.currentState!.validate()) return;
 
     if (_expiryDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Vui lòng chọn ngày hết hạn'),
-          backgroundColor: AppTheme.errorColor,
+        SnackBar(
+          content: Text(l10n.selectExpiryDate),
+          backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
       return;
@@ -300,7 +298,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ Đã thêm ${product.name}'),
+            content: Text(l10n.productAddedSuccess(product.name)),
             backgroundColor: AppTheme.successColor,
           ),
         );
@@ -310,8 +308,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(provider.error ?? 'Không thể thêm sản phẩm'),
-            backgroundColor: AppTheme.errorColor,
+            content: Text(provider.error ?? l10n.cannotAddProduct),
+            backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
       }
@@ -320,20 +318,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thêm Sản Phẩm'),
+        title: Text(l10n.addProduct),
         actions: [
           IconButton(
             icon: const Icon(Icons.qr_code_scanner),
-            tooltip: 'Quét mã vạch',
+            tooltip: l10n.scanBarcode,
             onPressed: _scanBarcode,
           ),
           TextButton(
             onPressed: _saveProduct,
-            child: const Text(
-              'Lưu',
-              style: TextStyle(
+            child: Text(
+              l10n.save,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -354,12 +354,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
             // Product Name
             _buildTextField(
               controller: _nameController,
-              label: 'Tên sản phẩm *',
-              hint: 'Ví dụ: Cà chua',
+              label: '${l10n.productName} *',
+              hint: l10n.exampleTomato,
               icon: Icons.shopping_basket_outlined,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Vui lòng nhập tên sản phẩm';
+                  return l10n.pleaseEnterProductName;
                 }
                 return null;
               },
@@ -379,17 +379,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   flex: 2,
                   child: _buildTextField(
                     controller: _quantityController,
-                    label: 'Số lượng *',
+                    label: '${l10n.quantity} *',
                     hint: '1',
                     icon: Icons.production_quantity_limits,
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Nhập số lượng';
+                        return l10n.enterQuantityHint;
                       }
                       final number = double.tryParse(value);
                       if (number == null || number <= 0) {
-                        return 'Số không hợp lệ';
+                        return l10n.invalidNumber;
                       }
                       return null;
                     },
@@ -406,7 +406,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             // Purchase Date
             _buildDateField(
-              label: 'Ngày mua',
+              label: l10n.purchaseDate,
               date: _purchaseDate,
               onTap: () => _selectDate(context, true),
             ),
@@ -415,7 +415,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             // Expiry Date
             _buildDateField(
-              label: 'Ngày hết hạn *',
+              label: '${l10n.expiryDate} *',
               date: _expiryDate,
               onTap: () => _selectDate(context, false),
               isRequired: true,
@@ -434,9 +434,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: ElevatedButton.icon(
                 onPressed: _saveProduct,
                 icon: const Icon(Icons.check, size: 24),
-                label: const Text(
-                  'Thêm Sản Phẩm',
-                  style: TextStyle(fontSize: 18),
+                label: Text(
+                  l10n.addProduct,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -447,21 +447,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Widget _buildSearchSection() {
+    final l10n = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Text(
-              'Tìm kiếm nhanh',
-              style: AppTheme.h3,
+              l10n.quickSearch,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(width: 8),
             if (_isSearchingApi)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.blue[50],
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -472,15 +474,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       height: 12,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[700]!),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'Searching online...',
+                      l10n.searchingOnline,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.blue[700],
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -493,7 +497,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Tìm sản phẩm... (local + online)',
+            hintText: l10n.searchProductsLocalOnline,
             prefixIcon: const Icon(Icons.search),
             suffixIcon: _isSearching
                 ? const Padding(
@@ -519,11 +523,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Theme.of(context).shadowColor.withOpacity(0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -550,27 +554,33 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: Colors.green[50],
+                              color: Theme.of(context).colorScheme.tertiaryContainer,
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.green[200]!),
+                              border: Border.all(
+                                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
+                              ),
                             ),
                             child: Text(
-                              'ONLINE',
+                              l10n.online,
                               style: TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.green[700],
+                                color: Theme.of(context).colorScheme.onTertiaryContainer,
                               ),
                             ),
                           ),
                       ],
                     ),
                     subtitle: Text(
-                      '${template.nameEn} • ${template.shelfLifeDays} ngày',
-                      style: AppTheme.body2,
+                      '${template.nameEn} • ${l10n.daysUnit(template.shelfLifeDays ?? 0)}',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     trailing: template.hasNutrition
-                        ? Icon(Icons.restaurant, size: 16, color: Colors.orange[700])
+                        ? Icon(
+                            Icons.restaurant,
+                            size: 16,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          )
                         : null,
                     onTap: () => _selectTemplate(template),
                   );
@@ -607,10 +617,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Widget _buildCategorySelector() {
+    final l10n = AppLocalizations.of(context);
+
     return DropdownButtonFormField<String>(
       value: _selectedCategory,
       decoration: InputDecoration(
-        labelText: 'Danh mục',
+        labelText: l10n.category,
         prefixIcon: const Icon(Icons.category_outlined),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
@@ -626,7 +638,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(width: 12),
-              Text(category['name_vi'] as String),
+              Text(
+                l10n.isVietnamese
+                    ? (category['name_vi'] as String)
+                    : (category['name_en'] as String),
+              ),
             ],
           ),
         );
@@ -640,10 +656,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Widget _buildUnitSelector() {
+    final l10n = AppLocalizations.of(context);
+
     return DropdownButtonFormField<String>(
       value: _selectedUnit,
       decoration: InputDecoration(
-        labelText: 'Đơn vị',
+        labelText: l10n.unit,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         ),
@@ -668,6 +686,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     required VoidCallback onTap,
     bool isRequired = false,
   }) {
+    final l10n = AppLocalizations.of(context);
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
@@ -683,18 +703,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
           date != null
               ? DateFormat(AppConstants.dateFormat).format(date)
               : isRequired
-                  ? 'Chọn ngày'
-                  : 'Không có',
-          style: date != null ? AppTheme.body1 : AppTheme.body2,
+                  ? l10n.selectDate
+                  : l10n.none,
+          style: date != null
+              ? Theme.of(context).textTheme.bodyMedium
+              : Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );
   }
 
   Widget _buildTemplateInfo() {
+    final l10n = AppLocalizations.of(context);
     final template = _selectedTemplate!;
+
     return Card(
-      color: AppTheme.primaryColor.withOpacity(0.1),
+      color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -702,15 +726,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
           children: [
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.info_outline,
-                  color: AppTheme.primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Thông tin sản phẩm',
-                  style: AppTheme.h3.copyWith(
-                    color: AppTheme.primaryColor,
+                  l10n.productInformation,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],
@@ -718,17 +742,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
             const SizedBox(height: 12),
             if (template.shelfLifeDays != null)
               _buildInfoRow(
-                'Hạn sử dụng',
-                '${template.shelfLifeDays} ngày',
+                l10n.shelfLife,
+                l10n.daysUnit(template.shelfLifeDays!),
               ),
             if (template.storageInstructions != null)
               _buildInfoRow(
-                'Bảo quản',
+                l10n.storage,
                 template.storageInstructions!,
               ),
             if (template.healthInfo != null)
               _buildInfoRow(
-                'Lợi ích',
+                l10n.benefits,
                 template.healthInfo!,
               ),
           ],
@@ -747,7 +771,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             width: 100,
             child: Text(
               '$label:',
-              style: AppTheme.body2.copyWith(
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -755,7 +779,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           Expanded(
             child: Text(
               value,
-              style: AppTheme.body2,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],
@@ -808,9 +832,11 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quét Mã Vạch'),
+        title: Text(l10n.scanBarcode),
         backgroundColor: Colors.black,
         actions: [
           IconButton(
@@ -859,9 +885,9 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
                       color: Colors.black.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: const Text(
-                      'Đưa mã vạch vào khung hình',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.positionBarcodeInFrame,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

@@ -208,10 +208,51 @@ class AppLocalizations {
   String get freezer => isVietnamese ? 'Tủ đông' : 'Freezer';
   String get pantry => isVietnamese ? 'Tủ đồ khô' : 'Pantry';
   String get units => isVietnamese ? 'cái' : 'pcs';
+  String get unit => isVietnamese ? 'Đơn vị' : 'Unit';
   String get nutritionInfo => isVietnamese ? 'Thông tin dinh dưỡng' : 'Nutrition Info';
   String get noNutritionInfoYet => isVietnamese
       ? 'Thông tin dinh dưỡng sẽ được cập nhật sau'
       : 'Nutrition information will be updated later';
+  String get quickSearch => isVietnamese ? 'Tìm kiếm nhanh' : 'Quick Search';
+  String get searchProductsLocalOnline => isVietnamese
+      ? 'Tìm sản phẩm... (local + online)'
+      : 'Search products... (local + online)';
+  String get searchingOnline => isVietnamese ? 'Đang tìm online...' : 'Searching online...';
+  String get online => isVietnamese ? 'TRỰC TUYẾN' : 'ONLINE';
+  String daysUnit(int days) => isVietnamese ? '$days ngày' : '$days days';
+  String get example => isVietnamese ? 'Ví dụ' : 'Example';
+  String get exampleTomato => isVietnamese ? 'Ví dụ: Cà chua' : 'e.g.: Tomato';
+  String get pleaseEnterProductName => isVietnamese
+      ? 'Vui lòng nhập tên sản phẩm'
+      : 'Please enter product name';
+  String get enterQuantityHint => isVietnamese ? 'Nhập số lượng' : 'Enter quantity';
+  String get invalidNumber => isVietnamese ? 'Số không hợp lệ' : 'Invalid number';
+  String get selectExpiryDate => isVietnamese
+      ? 'Vui lòng chọn ngày hết hạn'
+      : 'Please select expiry date';
+  String get none => isVietnamese ? 'Không có' : 'None';
+  String get productInformation => isVietnamese ? 'Thông tin sản phẩm' : 'Product Information';
+  String get shelfLife => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
+  String get storage => isVietnamese ? 'Bảo quản' : 'Storage';
+  String get benefits => isVietnamese ? 'Lợi ích' : 'Benefits';
+  String barcodeFound(String productName) => isVietnamese
+      ? '✅ Đã tìm thấy: $productName'
+      : '✅ Found: $productName';
+  String get barcodeNotFound => isVietnamese
+      ? '⚠️ Không tìm thấy sản phẩm với mã vạch này'
+      : '⚠️ No product found with this barcode';
+  String get barcodeScanError => isVietnamese
+      ? '❌ Lỗi khi quét mã vạch'
+      : '❌ Error scanning barcode';
+  String productAddedSuccess(String productName) => isVietnamese
+      ? '✅ Đã thêm $productName'
+      : '✅ Added $productName';
+  String get cannotAddProduct => isVietnamese
+      ? 'Không thể thêm sản phẩm'
+      : 'Cannot add product';
+  String get positionBarcodeInFrame => isVietnamese
+      ? 'Đưa mã vạch vào khung hình'
+      : 'Position barcode in frame';
 
   // ==================== ALL ITEMS SCREEN ====================
   String get sortBy => isVietnamese ? 'Sắp xếp theo' : 'Sort by';
