@@ -243,6 +243,19 @@ class DatabaseService {
       await _loadProductTemplates(db);
       debugPrint('✅ Product templates reloaded with unique products only');
     }
+
+    if (oldVersion < 6) {
+      // Reload with expanded database (89 -> 122 products)
+      debugPrint('🔄 Upgrading to v6: Expanding database with Vietnamese staples...');
+
+      // Clear existing templates
+      await db.delete(AppConstants.tableProductTemplates);
+      debugPrint('🗑️ Cleared old product templates');
+
+      // Reload from JSON file with expanded data
+      await _loadProductTemplates(db);
+      debugPrint('✅ Product templates expanded: now 122 Vietnamese products');
+    }
   }
 
   /// Load initial data
