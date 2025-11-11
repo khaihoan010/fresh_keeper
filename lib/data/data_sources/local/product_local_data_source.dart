@@ -289,36 +289,22 @@ class ProductLocalDataSource {
     }
   }
 
-  /// Search product templates
+  /// Search product templates using LIKE search
   Future<List<ProductTemplate>> searchTemplates(String query) async {
     try {
       final db = await _databaseService.database;
+      final searchPattern = '%$query%';
 
-      // Try FTS5 search first (will fail gracefully if table doesn't exist)
-      try {
-        final results = await db.rawQuery('''
-          SELECT pt.* FROM ${AppConstants.tableProductTemplates} pt
-          INNER JOIN product_search ps ON pt.id = ps.product_id
-          WHERE product_search MATCH ?
-          ORDER BY rank
-          LIMIT ?
-        ''', ['$query*', AppConstants.searchSuggestionLimit]);
-
-        if (results.isNotEmpty) {
-          return results.map((json) => ProductTemplate.fromJson(json)).toList();
-        }
-      } catch (ftsError) {
-        debugPrint('⚠️ FTS5 search not available, using LIKE fallback');
-      }
-
-      // Fallback to LIKE search
-      final likeResults = await db.query(
+      // Use LIKE search with indexes for good performance
+      final results = await db.query(
         AppConstants.tableProductTemplates,
         where: 'name_vi LIKE ? OR name_en LIKE ? OR aliases LIKE ?',
-        whereArgs: ['%$query%', '%$query%', '%$query%'],
+        whereArgs: [searchPattern, searchPattern, searchPattern],
         limit: AppConstants.searchSuggestionLimit,
       );
-      return likeResults.map((json) => ProductTemplate.fromJson(json)).toList();
+
+      debugPrint('🔍 LIKE search found ${results.length} templates for: $query');
+      return results.map((json) => ProductTemplate.fromJson(json)).toList();
     } catch (e) {
       debugPrint('❌ Error searching templates: $e');
       rethrow;

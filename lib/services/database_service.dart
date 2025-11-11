@@ -107,23 +107,23 @@ class DatabaseService {
       )
     ''');
 
-    // Create FTS5 virtual table for product search (optional - fallback to LIKE search)
-    try {
-      await db.execute('''
-        CREATE VIRTUAL TABLE product_search USING fts5(
-          product_id UNINDEXED,
-          name_vi,
-          name_en,
-          aliases,
-          category UNINDEXED
-        )
-      ''');
-      debugPrint('✅ FTS5 search table created successfully');
-    } catch (e) {
-      debugPrint('⚠️ FTS5 not available on this device, will use LIKE search fallback: $e');
-      // FTS5 module not available, will use LIKE search in queries
-      // This is fine - the search functionality will still work
-    }
+    // Create indexes for faster LIKE search
+    await db.execute('''
+      CREATE INDEX idx_product_templates_name_vi
+      ON ${AppConstants.tableProductTemplates}(name_vi)
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_product_templates_name_en
+      ON ${AppConstants.tableProductTemplates}(name_en)
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_product_templates_category
+      ON ${AppConstants.tableProductTemplates}(category)
+    ''');
+
+    debugPrint('✅ Product templates table and indexes created successfully');
 
     // Create categories table
     await db.execute('''
@@ -194,6 +194,41 @@ class DatabaseService {
       // Reload from JSON file
       await _loadProductTemplates(db);
       debugPrint('✅ Product templates reloaded with 1000 items');
+    }
+
+    if (oldVersion < 4) {
+      // Remove FTS5 and add indexes for LIKE search optimization
+      debugPrint('🔄 Upgrading to v4: Removing FTS5, adding indexes...');
+
+      // Drop FTS5 table if it exists (ignore errors if doesn't exist)
+      try {
+        await db.execute('DROP TABLE IF EXISTS product_search');
+        debugPrint('🗑️ Removed FTS5 table');
+      } catch (e) {
+        debugPrint('⚠️ FTS5 table does not exist or already removed: $e');
+      }
+
+      // Create indexes for faster LIKE search (ignore if already exists)
+      try {
+        await db.execute('''
+          CREATE INDEX IF NOT EXISTS idx_product_templates_name_vi
+          ON ${AppConstants.tableProductTemplates}(name_vi)
+        ''');
+
+        await db.execute('''
+          CREATE INDEX IF NOT EXISTS idx_product_templates_name_en
+          ON ${AppConstants.tableProductTemplates}(name_en)
+        ''');
+
+        await db.execute('''
+          CREATE INDEX IF NOT EXISTS idx_product_templates_category
+          ON ${AppConstants.tableProductTemplates}(category)
+        ''');
+
+        debugPrint('✅ Search indexes created successfully');
+      } catch (e) {
+        debugPrint('⚠️ Error creating indexes (may already exist): $e');
+      }
     }
   }
 
