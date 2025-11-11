@@ -230,6 +230,19 @@ class DatabaseService {
         debugPrint('⚠️ Error creating indexes (may already exist): $e');
       }
     }
+
+    if (oldVersion < 5) {
+      // Reload product templates with deduplicated data (1000 -> 89 unique products)
+      debugPrint('🔄 Upgrading to v5: Reloading with deduplicated data...');
+
+      // Clear existing templates
+      await db.delete(AppConstants.tableProductTemplates);
+      debugPrint('🗑️ Cleared old product templates');
+
+      // Reload from JSON file with deduplicated data
+      await _loadProductTemplates(db);
+      debugPrint('✅ Product templates reloaded with unique products only');
+    }
   }
 
   /// Load initial data
