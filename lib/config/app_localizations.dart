@@ -41,7 +41,6 @@ class AppLocalizations {
       isVietnamese ? 'Tổng sản phẩm' : 'Total Products';
   String get expiringItems =>
       isVietnamese ? 'Sắp hết hạn' : 'Expiring Soon';
-  String get expiredItems => isVietnamese ? 'Đã hết hạn' : 'Expired';
 
   String get expiringToday => isVietnamese ? 'Hết Hạn Hôm Nay' : 'Expiring Today';
   String get noExpiringProducts => isVietnamese
@@ -217,7 +216,6 @@ class AppLocalizations {
   String get searchProductsLocalOnline => isVietnamese
       ? 'Tìm sản phẩm... (local + online)'
       : 'Search products... (local + online)';
-  String get searchingOnline => isVietnamese ? 'Đang tìm online...' : 'Searching online...';
   String get online => isVietnamese ? 'TRỰC TUYẾN' : 'ONLINE';
   String daysUnit(int days) => isVietnamese ? '$days ngày' : '$days days';
   String get example => isVietnamese ? 'Ví dụ' : 'Example';
