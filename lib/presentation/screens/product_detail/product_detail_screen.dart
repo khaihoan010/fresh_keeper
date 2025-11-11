@@ -356,7 +356,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.basicInfo, style: Theme.of(context).textTheme.headlineSmall),
+          Text(
+            l10n.basicInfo,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 16),
 
           // Quantity
@@ -392,7 +397,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Notes
           if (_product.notes != null) ...[
             const SizedBox(height: 24),
-            Text(l10n.notes, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.notes,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
               child: Padding(
@@ -419,10 +429,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Storage Tips
           if (_productTemplate?.storageTips != null) ...[
             const SizedBox(height: 24),
-            Text(l10n.storageTips, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.storageTips,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
@@ -517,7 +532,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         children: [
           Text(
             '🍎 ${l10n.nutritionValue} (${nutritionData.servingSize ?? l10n.servingSize})',
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -568,7 +585,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Vitamins
           if (nutritionData.vitamins != null && nutritionData.vitamins!.isNotEmpty) ...[
             const SizedBox(height: 24),
-            Text(l10n.vitamins, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.vitamins,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
               child: Padding(
@@ -602,7 +624,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Minerals
           if (nutritionData.minerals != null && nutritionData.minerals!.isNotEmpty) ...[
             const SizedBox(height: 24),
-            Text(l10n.minerals, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.minerals,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
               child: Padding(
@@ -770,7 +797,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
               ),
               child: Icon(
@@ -792,6 +819,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     value,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: valueColor,
                     ),
                   ),

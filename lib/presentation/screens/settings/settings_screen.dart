@@ -191,9 +191,10 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             title.toUpperCase(),
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         );
@@ -223,7 +224,9 @@ class SettingsScreen extends StatelessWidget {
           subtitle: subtitle != null
               ? Text(
                   subtitle,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  ),
                 )
               : null,
           trailing: trailing ?? const Icon(Icons.chevron_right),
