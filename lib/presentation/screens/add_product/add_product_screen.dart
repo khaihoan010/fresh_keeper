@@ -718,7 +718,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
     final template = _selectedTemplate!;
 
     return Card(
-      color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

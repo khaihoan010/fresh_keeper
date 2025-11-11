@@ -177,7 +177,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
     final l10n = AppLocalizations.of(context);
 
     return Card(
-      color: AppTheme.warningColor.withOpacity(0.1),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
@@ -186,7 +185,9 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                color: AppTheme.warningColor.withOpacity(0.2),
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppTheme.warningColor.withOpacity(0.2)
+                    : AppTheme.warningColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Center(
