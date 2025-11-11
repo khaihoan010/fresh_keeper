@@ -117,6 +117,30 @@ class ProductTemplate {
       (healthBenefits != null && healthBenefits!.isNotEmpty) ||
       (healthWarnings != null && healthWarnings!.isNotEmpty);
 
+  /// Get shelf life in days (defaults to refrigerated)
+  int? get shelfLifeDays => shelfLifeRefrigerated ?? shelfLifeFrozen;
+
+  /// Get storage instructions (alias for storageTips)
+  String? get storageInstructions => storageTips;
+
+  /// Get health info as a single string
+  String? get healthInfo {
+    if (!hasHealthInfo) return null;
+
+    final benefits = healthBenefits?.join(', ');
+    final warnings = healthWarnings?.join(', ');
+
+    if (benefits != null && warnings != null) {
+      return 'Lợi ích: $benefits. Lưu ý: $warnings';
+    } else if (benefits != null) {
+      return 'Lợi ích: $benefits';
+    } else if (warnings != null) {
+      return 'Lưu ý: $warnings';
+    }
+
+    return null;
+  }
+
   @override
   String toString() {
     return 'ProductTemplate(id: $id, nameVi: $nameVi, category: $category)';

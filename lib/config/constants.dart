@@ -8,7 +8,7 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fresh_keeper.db';
-  static const int databaseVersion = 1;
+  static const int databaseVersion = 2;
 
   // Table Names
   static const String tableUserProducts = 'user_products';
@@ -104,6 +104,18 @@ class AppConstants {
     'other': '📦',
   };
 
+  /// Get categories as a list of maps (for UI dropdowns)
+  static List<Map<String, String>> get categories {
+    return categoryIds.map((id) {
+      return {
+        'id': id,
+        'name_vi': categoryNamesVi[id] ?? '',
+        'name_en': categoryNamesEn[id] ?? '',
+        'icon': categoryIcons[id] ?? '📦',
+      };
+    }).toList();
+  }
+
   // Units
   static const List<String> quantityUnits = [
     'cái',
@@ -119,6 +131,9 @@ class AppConstants {
     'lon',
     'túi',
   ];
+
+  /// Alias for quantityUnits (for convenience)
+  static List<String> get units => quantityUnits;
 
   // Date Formats
   static const String dateFormat = 'dd/MM/yyyy';
