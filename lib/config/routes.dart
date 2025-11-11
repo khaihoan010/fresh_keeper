@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/add_product/add_product_screen.dart';
+import '../presentation/screens/all_items/all_items_screen.dart';
+import '../presentation/screens/expiring_soon/expiring_soon_screen.dart';
 
 /// Application Routes
 class AppRoutes {
@@ -43,20 +46,20 @@ class AppRoutes {
 
       case addProduct:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with AddProductScreen()
+          const AddProductScreen(),
           routeSettings,
           fullscreenDialog: true,
         );
 
       case allItems:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with AllItemsScreen()
+          const AllItemsScreen(),
           routeSettings,
         );
 
       case expiringSoon:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with ExpiringSoonScreen()
+          const ExpiringSoonScreen(),
           routeSettings,
         );
 

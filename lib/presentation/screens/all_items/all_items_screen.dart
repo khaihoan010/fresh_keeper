@@ -1,0 +1,642 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../config/theme.dart';
+import '../../../config/routes.dart';
+import '../../../config/constants.dart';
+import '../../../data/models/user_product.dart';
+import '../../providers/product_provider.dart';
+
+/// All Items Screen
+/// Displays all products with filter, sort, and search
+class AllItemsScreen extends StatefulWidget {
+  const AllItemsScreen({super.key});
+
+  @override
+  State<AllItemsScreen> createState() => _AllItemsScreenState();
+}
+
+class _AllItemsScreenState extends State<AllItemsScreen> {
+  final _searchController = TextEditingController();
+  List<UserProduct> _displayedProducts = [];
+  bool _isSearching = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = context.read<ProductProvider>();
+      _displayedProducts = provider.filteredProducts;
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleSearch(String query) async {
+    if (query.trim().length < 2) {
+      setState(() {
+        _isSearching = false;
+        final provider = context.read<ProductProvider>();
+        _displayedProducts = provider.filteredProducts;
+      });
+      return;
+    }
+
+    setState(() => _isSearching = true);
+
+    final provider = context.read<ProductProvider>();
+    final results = await provider.searchProducts(query);
+
+    setState(() {
+      _displayedProducts = results;
+      _isSearching = false;
+    });
+  }
+
+  Future<void> _handleRefresh() async {
+    final provider = context.read<ProductProvider>();
+    await provider.refresh();
+    setState(() {
+      _displayedProducts = provider.filteredProducts;
+      _searchController.clear();
+    });
+  }
+
+  void _showFilterSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppTheme.radiusLarge),
+        ),
+      ),
+      builder: (context) => const _FilterSheet(),
+    ).then((_) {
+      // Update displayed products after filter changes
+      if (_searchController.text.isEmpty) {
+        setState(() {
+          final provider = context.read<ProductProvider>();
+          _displayedProducts = provider.filteredProducts;
+        });
+      }
+    });
+  }
+
+  void _showSortSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppTheme.radiusLarge),
+        ),
+      ),
+      builder: (context) => const _SortSheet(),
+    ).then((_) {
+      // Update displayed products after sort changes
+      if (_searchController.text.isEmpty) {
+        setState(() {
+          final provider = context.read<ProductProvider>();
+          _displayedProducts = provider.filteredProducts;
+        });
+      }
+    });
+  }
+
+  Future<void> _deleteProduct(UserProduct product) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Xóa sản phẩm?'),
+        content: Text('Bạn có chắc muốn xóa "${product.name}"?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: TextButton.styleFrom(
+              foregroundColor: AppTheme.errorColor,
+            ),
+            child: const Text('Xóa'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      final provider = context.read<ProductProvider>();
+      final success = await provider.deleteProduct(product.id);
+
+      if (success && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('✅ Đã xóa ${product.name}'),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+        setState(() {
+          _displayedProducts = provider.filteredProducts;
+        });
+      }
+    }
+  }
+
+  Future<void> _markAsUsed(UserProduct product) async {
+    final provider = context.read<ProductProvider>();
+    final success = await provider.markAsUsed(product.id);
+
+    if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('✅ Đã đánh dấu "${product.name}" là đã dùng'),
+          backgroundColor: AppTheme.successColor,
+        ),
+      );
+      setState(() {
+        _displayedProducts = provider.filteredProducts;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tất Cả Sản Phẩm'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list),
+            onPressed: _showFilterSheet,
+          ),
+          IconButton(
+            icon: const Icon(Icons.sort),
+            onPressed: _showSortSheet,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Tìm kiếm sản phẩm...',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: _isSearching
+                    ? const Padding(
+                        padding: EdgeInsets.all(12),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      )
+                    : _searchController.text.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              _searchController.clear();
+                              _handleSearch('');
+                            },
+                          )
+                        : null,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                ),
+              ),
+              onChanged: _handleSearch,
+            ),
+          ),
+
+          // Filter/Sort Info
+          Consumer<ProductProvider>(
+            builder: (context, provider, _) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: Row(
+                  children: [
+                    if (provider.selectedCategory != 'all') ...[
+                      Chip(
+                        label: Text(
+                          AppConstants.categories.firstWhere(
+                            (c) => c['id'] == provider.selectedCategory,
+                            orElse: () => {'name_vi': 'Tất cả'},
+                          )['name_vi'] as String,
+                        ),
+                        onDeleted: () {
+                          provider.setCategory('all');
+                          if (_searchController.text.isEmpty) {
+                            setState(() {
+                              _displayedProducts = provider.filteredProducts;
+                            });
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                    Text(
+                      '${_displayedProducts.length} sản phẩm',
+                      style: AppTheme.body2,
+                    ),
+                    const Spacer(),
+                    Text(
+                      provider.sortBy.displayName,
+                      style: AppTheme.body2,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+
+          const Divider(height: 1),
+
+          // Products List
+          Expanded(
+            child: Consumer<ProductProvider>(
+              builder: (context, provider, _) {
+                if (provider.isLoading && _displayedProducts.isEmpty) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (_displayedProducts.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('📦', style: TextStyle(fontSize: 64)),
+                        const SizedBox(height: 16),
+                        Text(
+                          _searchController.text.isNotEmpty
+                              ? 'Không tìm thấy sản phẩm'
+                              : 'Chưa có sản phẩm nào',
+                          style: AppTheme.h3,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          _searchController.text.isNotEmpty
+                              ? 'Thử từ khóa khác'
+                              : 'Thêm sản phẩm đầu tiên của bạn',
+                          style: AppTheme.body2,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                return RefreshIndicator(
+                  onRefresh: _handleRefresh,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 80),
+                    itemCount: _displayedProducts.length,
+                    itemBuilder: (context, index) {
+                      final product = _displayedProducts[index];
+                      return _ProductCard(
+                        product: product,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.productDetail,
+                            arguments: product,
+                          );
+                        },
+                        onEdit: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.editProduct,
+                            arguments: product,
+                          ).then((edited) {
+                            if (edited == true) {
+                              _handleRefresh();
+                            }
+                          });
+                        },
+                        onDelete: () => _deleteProduct(product),
+                        onMarkUsed: () => _markAsUsed(product),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
+            if (added == true) {
+              _handleRefresh();
+            }
+          });
+        },
+        child: const Icon(Icons.add, size: 32),
+      ),
+    );
+  }
+}
+
+/// Product Card with swipe actions
+class _ProductCard extends StatelessWidget {
+  final UserProduct product;
+  final VoidCallback onTap;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final VoidCallback onMarkUsed;
+
+  const _ProductCard({
+    required this.product,
+    required this.onTap,
+    required this.onEdit,
+    required this.onDelete,
+    required this.onMarkUsed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key(product.id),
+      background: Container(
+        color: AppTheme.primaryColor,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 20),
+        child: const Icon(Icons.check, color: Colors.white, size: 32),
+      ),
+      secondaryBackground: Container(
+        color: AppTheme.errorColor,
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 20),
+        child: const Icon(Icons.delete, color: Colors.white, size: 32),
+      ),
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.startToEnd) {
+          // Mark as used
+          onMarkUsed();
+          return false;
+        } else {
+          // Delete
+          onDelete();
+          return false;
+        }
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                // Icon
+                Text(
+                  AppConstants.categoryIcons[product.category] ?? '📦',
+                  style: const TextStyle(fontSize: 40),
+                ),
+
+                const SizedBox(width: 16),
+
+                // Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name,
+                        style: AppTheme.h3,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${product.quantity} ${product.unit}',
+                        style: AppTheme.body2,
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_today,
+                            size: 14,
+                            color: AppTheme.textSecondary,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            product.daysRemainingText,
+                            style: AppTheme.body2.copyWith(
+                              color: product.getStatusColor(),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Status indicator
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: product.getStatusColor().withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${product.daysUntilExpiry}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: product.getStatusColor(),
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 8),
+
+                // More button
+                IconButton(
+                  icon: const Icon(Icons.more_vert),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => _ProductActionsSheet(
+                        product: product,
+                        onEdit: onEdit,
+                        onDelete: onDelete,
+                        onMarkUsed: onMarkUsed,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Filter Bottom Sheet
+class _FilterSheet extends StatelessWidget {
+  const _FilterSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ProductProvider>(
+      builder: (context, provider, _) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Lọc theo danh mục', style: AppTheme.h2),
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  // All categories
+                  FilterChip(
+                    label: const Text('Tất cả'),
+                    selected: provider.selectedCategory == 'all',
+                    onSelected: (_) {
+                      provider.setCategory('all');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  // Individual categories
+                  ...AppConstants.categories.map((category) {
+                    final id = category['id'] as String;
+                    final name = category['name_vi'] as String;
+                    final icon = category['icon'] as String;
+                    return FilterChip(
+                      label: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(icon, style: const TextStyle(fontSize: 16)),
+                          const SizedBox(width: 4),
+                          Text(name),
+                        ],
+                      ),
+                      selected: provider.selectedCategory == id,
+                      onSelected: (_) {
+                        provider.setCategory(id);
+                        Navigator.pop(context);
+                      },
+                    );
+                  }),
+                ],
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Sort Bottom Sheet
+class _SortSheet extends StatelessWidget {
+  const _SortSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ProductProvider>(
+      builder: (context, provider, _) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Sắp xếp theo', style: AppTheme.h2),
+              const SizedBox(height: 16),
+              ...SortOption.values.map((option) {
+                return RadioListTile<SortOption>(
+                  title: Text(option.displayName),
+                  value: option,
+                  groupValue: provider.sortBy,
+                  onChanged: (value) {
+                    if (value != null) {
+                      provider.setSortOption(value);
+                      Navigator.pop(context);
+                    }
+                  },
+                );
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Product Actions Bottom Sheet
+class _ProductActionsSheet extends StatelessWidget {
+  final UserProduct product;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final VoidCallback onMarkUsed;
+
+  const _ProductActionsSheet({
+    required this.product,
+    required this.onEdit,
+    required this.onDelete,
+    required this.onMarkUsed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.edit_outlined),
+            title: const Text('Chỉnh sửa'),
+            onTap: () {
+              Navigator.pop(context);
+              onEdit();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.check_circle_outline),
+            title: const Text('Đánh dấu đã dùng'),
+            onTap: () {
+              Navigator.pop(context);
+              onMarkUsed();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.delete_outline, color: AppTheme.errorColor),
+            title: const Text('Xóa', style: TextStyle(color: AppTheme.errorColor)),
+            onTap: () {
+              Navigator.pop(context);
+              onDelete();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
