@@ -186,7 +186,9 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           l10n.quickStats,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 12),
         Row(
@@ -287,7 +289,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               l10n.recentlyAdded,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             TextButton(
               onPressed: () {
