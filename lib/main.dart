@@ -50,6 +50,11 @@ class FreshKeeperApp extends StatelessWidget {
           value: settingsProvider,
         ),
 
+        // Product Repository (must be provided before ProductProvider)
+        Provider<ProductRepository>(
+          create: (_) => productRepository,
+        ),
+
         // Product Provider
         ChangeNotifierProvider<ProductProvider>(
           create: (_) => ProductProvider(productRepository),
