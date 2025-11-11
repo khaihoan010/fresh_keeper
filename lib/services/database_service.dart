@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -190,15 +192,65 @@ class DatabaseService {
       // Insert default categories
       await _insertDefaultCategories(db);
 
-      // TODO: Load product templates from JSON file
-      // final productsData = await rootBundle.loadString(
-      //   AppConstants.productsDataFile,
-      // );
-      // await _insertProductTemplates(db, productsData);
+      // Load product templates from JSON file
+      await _loadProductTemplates(db);
 
       debugPrint('✅ Initial data loaded successfully');
     } catch (e) {
       debugPrint('⚠️ Error loading initial data: $e');
+    }
+  }
+
+  /// Load product templates from JSON file
+  Future<void> _loadProductTemplates(Database db) async {
+    try {
+      debugPrint('📦 Loading product templates from JSON...');
+
+      // Load JSON file from assets
+      final jsonString = await rootBundle.loadString('assets/data/products_sample.json');
+      final jsonData = json.decode(jsonString) as Map<String, dynamic>;
+
+      final products = jsonData['products'] as List<dynamic>;
+      debugPrint('📊 Found ${products.length} product templates');
+
+      // Insert into database in batch for better performance
+      final batch = db.batch();
+
+      for (final productData in products) {
+        final Map<String, dynamic> data = {
+          'id': productData['id'],
+          'name_vi': productData['name_vi'],
+          'name_en': productData['name_en'],
+          'aliases': json.encode(productData['aliases']),
+          'category': productData['category'],
+          'shelf_life_refrigerated': productData['shelf_life_refrigerated'],
+          'shelf_life_frozen': productData['shelf_life_frozen'],
+          'shelf_life_opened': productData['shelf_life_opened'],
+          'nutrition_data': productData['nutrition_data'] != null
+              ? json.encode(productData['nutrition_data'])
+              : null,
+          'health_benefits': productData['health_benefits'] != null
+              ? json.encode(productData['health_benefits'])
+              : null,
+          'health_warnings': productData['health_warnings'] != null
+              ? json.encode(productData['health_warnings'])
+              : null,
+          'storage_tips': productData['storage_tips'],
+          'image_url': productData['image_url'],
+        };
+
+        batch.insert(
+          AppConstants.tableProductTemplates,
+          data,
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+
+      await batch.commit(noResult: true);
+      debugPrint('✅ Product templates loaded successfully');
+    } catch (e) {
+      debugPrint('⚠️ Error loading product templates: $e');
+      // Don't throw - app can still work without templates
     }
   }
 
