@@ -62,6 +62,7 @@ class DatabaseService {
         purchase_date TEXT NOT NULL,
         expiry_date TEXT NOT NULL,
         notes TEXT,
+        location TEXT,
         image_path TEXT,
         status TEXT NOT NULL DEFAULT 'active',
         created_at TEXT NOT NULL,
@@ -166,8 +167,11 @@ class DatabaseService {
 
     // Handle version upgrades here
     if (oldVersion < 2) {
-      // Example: Add new column
-      // await db.execute('ALTER TABLE user_products ADD COLUMN new_field TEXT');
+      // Add location column to user_products
+      await db.execute(
+        'ALTER TABLE ${AppConstants.tableUserProducts} ADD COLUMN location TEXT'
+      );
+      debugPrint('✅ Added location column to user_products');
     }
   }
 

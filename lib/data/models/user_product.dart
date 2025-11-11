@@ -34,6 +34,7 @@ class UserProduct {
   final DateTime purchaseDate;
   final DateTime expiryDate;
   final String? notes;
+  final String? location;
   final String? imagePath;
   final ProductStatus status;
   final DateTime createdAt;
@@ -42,6 +43,7 @@ class UserProduct {
   UserProduct({
     String? id,
     this.productTemplateId,
+    String? templateId, // Alias for productTemplateId
     required this.name,
     this.nameEn,
     required this.category,
@@ -50,11 +52,13 @@ class UserProduct {
     required this.purchaseDate,
     required this.expiryDate,
     this.notes,
+    this.location,
     this.imagePath,
     this.status = ProductStatus.active,
     DateTime? createdAt,
     DateTime? updatedAt,
-  })  : id = id ?? const Uuid().v4(),
+  })  : productTemplateId = productTemplateId ?? templateId,
+        id = id ?? const Uuid().v4(),
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
@@ -119,6 +123,7 @@ class UserProduct {
       'purchase_date': purchaseDate.toIso8601String(),
       'expiry_date': expiryDate.toIso8601String(),
       'notes': notes,
+      'location': location,
       'image_path': imagePath,
       'status': status.name,
       'created_at': createdAt.toIso8601String(),
@@ -139,6 +144,7 @@ class UserProduct {
       purchaseDate: DateTime.parse(json['purchase_date'] as String),
       expiryDate: DateTime.parse(json['expiry_date'] as String),
       notes: json['notes'] as String?,
+      location: json['location'] as String?,
       imagePath: json['image_path'] as String?,
       status: ProductStatus.values.firstWhere(
         (e) => e.name == json['status'],
@@ -161,6 +167,7 @@ class UserProduct {
     DateTime? purchaseDate,
     DateTime? expiryDate,
     String? notes,
+    String? location,
     String? imagePath,
     ProductStatus? status,
     DateTime? createdAt,
@@ -177,6 +184,7 @@ class UserProduct {
       purchaseDate: purchaseDate ?? this.purchaseDate,
       expiryDate: expiryDate ?? this.expiryDate,
       notes: notes ?? this.notes,
+      location: location ?? this.location,
       imagePath: imagePath ?? this.imagePath,
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,

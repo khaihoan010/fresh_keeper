@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
@@ -468,7 +469,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
         child: Text(
           date != null
-              ? AppConstants.dateFormat.format(date)
+              ? DateFormat(AppConstants.dateFormat).format(date)
               : isRequired
                   ? 'Chọn ngày'
                   : 'Không có',
