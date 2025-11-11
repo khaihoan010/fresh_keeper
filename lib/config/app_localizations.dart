@@ -216,6 +216,8 @@ class AppLocalizations {
   // ==================== ALL ITEMS SCREEN ====================
   String get sortBy => isVietnamese ? 'Sắp xếp theo' : 'Sort by';
   String get filterBy => isVietnamese ? 'Lọc theo' : 'Filter by';
+  String get filterByCategory => isVietnamese ? 'Lọc theo danh mục' : 'Filter by Category';
+  String get all => isVietnamese ? 'Tất cả' : 'All';
   String get expiryDateSoon => isVietnamese ? 'Hạn sử dụng (gần nhất)' : 'Expiry Date (Soonest)';
   String get expiryDateLate => isVietnamese ? 'Hạn sử dụng (xa nhất)' : 'Expiry Date (Latest)';
   String get nameAZ => isVietnamese ? 'Tên (A-Z)' : 'Name (A-Z)';
@@ -225,6 +227,8 @@ class AppLocalizations {
   String get allCategories => isVietnamese ? 'Tất cả danh mục' : 'All Categories';
   String get allLocations => isVietnamese ? 'Tất cả vị trí' : 'All Locations';
   String get noProducts => isVietnamese ? 'Chưa có sản phẩm nào' : 'No products yet';
+  String get noProductsFound => isVietnamese ? 'Không tìm thấy sản phẩm' : 'No products found';
+  String get tryDifferentKeyword => isVietnamese ? 'Thử từ khóa khác' : 'Try a different keyword';
   String get noProductsInCategory => isVietnamese
       ? 'Chưa có sản phẩm nào trong danh mục này'
       : 'No products in this category';

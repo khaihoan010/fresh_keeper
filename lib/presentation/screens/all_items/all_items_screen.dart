@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 
@@ -120,22 +121,24 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
   }
 
   Future<void> _deleteProduct(UserProduct product) async {
+    final l10n = AppLocalizations.of(context);
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Xóa sản phẩm?'),
-        content: Text('Bạn có chắc muốn xóa "${product.name}"?'),
+        title: Text(l10n.confirmDelete),
+        content: Text(l10n.confirmDeleteProduct(product.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Hủy'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: TextButton.styleFrom(
-              foregroundColor: AppTheme.errorColor,
+              foregroundColor: Theme.of(context).colorScheme.error,
             ),
-            child: const Text('Xóa'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -148,7 +151,7 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
       if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ Đã xóa ${product.name}'),
+            content: Text(l10n.productDeleted(product.name)),
             backgroundColor: AppTheme.successColor,
           ),
         );
@@ -162,13 +165,14 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
   }
 
   Future<void> _markAsUsed(UserProduct product) async {
+    final l10n = AppLocalizations.of(context);
     final provider = context.read<ProductProvider>();
     final success = await provider.markAsUsed(product.id);
 
     if (success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ Đã đánh dấu "${product.name}" là đã dùng'),
+          content: Text(l10n.productMarkedAsUsed(product.name)),
           backgroundColor: AppTheme.successColor,
         ),
       );
@@ -182,9 +186,11 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tất Cả Sản Phẩm'),
+        title: Text(l10n.allItems),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list),
@@ -204,7 +210,7 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Tìm kiếm sản phẩm...',
+                hintText: l10n.searchProduct,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _isSearching
                     ? const Padding(
@@ -245,10 +251,15 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
                     if (provider.selectedCategory != 'all') ...[
                       Chip(
                         label: Text(
-                          AppConstants.categories.firstWhere(
-                            (c) => c['id'] == provider.selectedCategory,
-                            orElse: () => {'name_vi': 'Tất cả'},
-                          )['name_vi'] as String,
+                          l10n.isVietnamese
+                              ? (AppConstants.categories.firstWhere(
+                                  (c) => c['id'] == provider.selectedCategory,
+                                  orElse: () => {'name_vi': 'Tất cả'},
+                                )['name_vi'] as String)
+                              : (AppConstants.categories.firstWhere(
+                                  (c) => c['id'] == provider.selectedCategory,
+                                  orElse: () => {'name_en': 'All'},
+                                )['name_en'] as String),
                         ),
                         onDeleted: () {
                           provider.setCategory('all');
@@ -264,13 +275,13 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
                       const SizedBox(width: 8),
                     ],
                     Text(
-                      '${_displayedProducts.length} sản phẩm',
-                      style: AppTheme.body2,
+                      l10n.productsCount(_displayedProducts.length),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const Spacer(),
                     Text(
-                      provider.sortBy.displayName,
-                      style: AppTheme.body2,
+                      provider.sortBy.getLocalizedName(l10n),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -299,16 +310,16 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
                         const SizedBox(height: 16),
                         Text(
                           _searchController.text.isNotEmpty
-                              ? 'Không tìm thấy sản phẩm'
-                              : 'Chưa có sản phẩm nào',
-                          style: AppTheme.h3,
+                              ? l10n.noProductsFound
+                              : l10n.noProducts,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 8),
                         Text(
                           _searchController.text.isNotEmpty
-                              ? 'Thử từ khóa khác'
-                              : 'Thêm sản phẩm đầu tiên của bạn',
-                          style: AppTheme.body2,
+                              ? l10n.tryDifferentKeyword
+                              : l10n.addFirstProduct,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
                     ),
@@ -434,14 +445,14 @@ class _ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         product.name,
-                        style: AppTheme.h3,
+                        style: Theme.of(context).textTheme.titleLarge,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
                       Text(
                         '${product.quantity} ${product.unit}',
-                        style: AppTheme.body2,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: 4),
                       Row(
@@ -449,12 +460,12 @@ class _ProductCard extends StatelessWidget {
                           Icon(
                             Icons.calendar_today,
                             size: 14,
-                            color: AppTheme.textSecondary,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             product.daysRemainingText,
-                            style: AppTheme.body2.copyWith(
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: product.getStatusColor(),
                               fontWeight: FontWeight.w600,
                             ),
@@ -517,6 +528,8 @@ class _FilterSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Consumer<ProductProvider>(
       builder: (context, provider, _) {
         return Container(
@@ -525,7 +538,7 @@ class _FilterSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Lọc theo danh mục', style: AppTheme.h2),
+              Text(l10n.filterByCategory, style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 16),
               Wrap(
                 spacing: 8,
@@ -533,7 +546,7 @@ class _FilterSheet extends StatelessWidget {
                 children: [
                   // All categories
                   FilterChip(
-                    label: const Text('Tất cả'),
+                    label: Text(l10n.all),
                     selected: provider.selectedCategory == 'all',
                     onSelected: (_) {
                       provider.setCategory('all');
@@ -543,7 +556,9 @@ class _FilterSheet extends StatelessWidget {
                   // Individual categories
                   ...AppConstants.categories.map((category) {
                     final id = category['id'] as String;
-                    final name = category['name_vi'] as String;
+                    final name = l10n.isVietnamese
+                        ? (category['name_vi'] as String)
+                        : (category['name_en'] as String);
                     final icon = category['icon'] as String;
                     return FilterChip(
                       label: Row(
@@ -578,6 +593,8 @@ class _SortSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Consumer<ProductProvider>(
       builder: (context, provider, _) {
         return Container(
@@ -586,11 +603,11 @@ class _SortSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Sắp xếp theo', style: AppTheme.h2),
+              Text(l10n.sortBy, style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 16),
               ...SortOption.values.map((option) {
                 return RadioListTile<SortOption>(
-                  title: Text(option.displayName),
+                  title: Text(option.getLocalizedName(l10n)),
                   value: option,
                   groupValue: provider.sortBy,
                   onChanged: (value) {
@@ -625,6 +642,8 @@ class _ProductActionsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Container(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -632,7 +651,7 @@ class _ProductActionsSheet extends StatelessWidget {
         children: [
           ListTile(
             leading: const Icon(Icons.edit_outlined),
-            title: const Text('Chỉnh sửa'),
+            title: Text(l10n.edit),
             onTap: () {
               Navigator.pop(context);
               onEdit();
@@ -640,15 +659,15 @@ class _ProductActionsSheet extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.check_circle_outline),
-            title: const Text('Đánh dấu đã dùng'),
+            title: Text(l10n.markAsUsed),
             onTap: () {
               Navigator.pop(context);
               onMarkUsed();
             },
           ),
           ListTile(
-            leading: const Icon(Icons.delete_outline, color: AppTheme.errorColor),
-            title: const Text('Xóa', style: TextStyle(color: AppTheme.errorColor)),
+            leading: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+            title: Text(l10n.delete, style: TextStyle(color: Theme.of(context).colorScheme.error)),
             onTap: () {
               Navigator.pop(context);
               onDelete();
