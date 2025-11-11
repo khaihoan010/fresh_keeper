@@ -36,7 +36,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     super.initState();
     _product = widget.product;
     _tabController = TabController(length: 3, vsync: this);
-    _loadProductTemplate();
+    // Don't call _loadProductTemplate here - context.read won't work in initState
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Load template after widget is fully initialized and has access to Provider tree
+    if (_productTemplate == null && _product.productTemplateId != null) {
+      _loadProductTemplate();
+    }
   }
 
   @override
@@ -47,13 +56,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   Future<void> _loadProductTemplate() async {
     if (_product.productTemplateId != null) {
+      debugPrint('🔍 Loading template for ID: ${_product.productTemplateId}');
       final repository = context.read<ProductRepository>();
       final template = await repository.getProductTemplate(_product.productTemplateId!);
+
+      if (template != null) {
+        debugPrint('✅ Template loaded: ${template.nameVi}');
+        debugPrint('📊 Has nutrition data: ${template.nutritionData != null}');
+        if (template.nutritionData != null) {
+          debugPrint('📊 Nutrition hasData: ${template.nutritionData!.hasData}');
+          debugPrint('📊 Nutrition details: ${template.nutritionData}');
+        } else {
+          debugPrint('⚠️ Nutrition data is NULL');
+        }
+      } else {
+        debugPrint('❌ Template not found for ID: ${_product.productTemplateId}');
+      }
+
       if (mounted) {
         setState(() {
           _productTemplate = template;
         });
       }
+    } else {
+      debugPrint('⚠️ Product has no templateId');
     }
   }
 
