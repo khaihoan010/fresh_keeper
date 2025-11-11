@@ -182,6 +182,19 @@ class DatabaseService {
       );
       debugPrint('✅ Added location column to user_products');
     }
+
+    if (oldVersion < 3) {
+      // Reload product templates with expanded database (110 -> 1000 products)
+      debugPrint('🔄 Reloading product templates for v3...');
+
+      // Clear existing templates
+      await db.delete(AppConstants.tableProductTemplates);
+      debugPrint('🗑️ Cleared old product templates');
+
+      // Reload from JSON file
+      await _loadProductTemplates(db);
+      debugPrint('✅ Product templates reloaded with 1000 items');
+    }
   }
 
   /// Load initial data
