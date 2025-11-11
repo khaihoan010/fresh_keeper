@@ -438,7 +438,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             const SizedBox(height: 12),
             Card(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3)
+                  ? Theme.of(context).colorScheme.primaryContainer
                   : Theme.of(context).colorScheme.primaryContainer.withOpacity(0.1),
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -723,7 +723,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             const SizedBox(height: 12),
             Card(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3)
+                  ? Theme.of(context).colorScheme.primaryContainer
                   : Theme.of(context).colorScheme.primaryContainer.withOpacity(0.1),
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -763,7 +763,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             const SizedBox(height: 12),
             Card(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.errorContainer.withOpacity(0.3)
+                  ? Theme.of(context).colorScheme.errorContainer
                   : Theme.of(context).colorScheme.errorContainer.withOpacity(0.1),
               child: Padding(
                 padding: const EdgeInsets.all(16),
