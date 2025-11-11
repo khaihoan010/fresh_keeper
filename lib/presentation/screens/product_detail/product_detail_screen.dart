@@ -83,22 +83,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   }
 
   Future<void> _deleteProduct() async {
+    final l10n = AppLocalizations.of(context);
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Xóa sản phẩm?'),
-        content: Text('Bạn có chắc muốn xóa "${_product.name}"?'),
+        title: Text(l10n.confirmDelete),
+        content: Text(l10n.confirmDeleteProduct(_product.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Hủy'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: TextButton.styleFrom(
-              foregroundColor: AppTheme.errorColor,
+              foregroundColor: Theme.of(context).colorScheme.error,
             ),
-            child: const Text('Xóa'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -112,7 +114,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         Navigator.of(context).pop(true);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ Đã xóa ${_product.name}'),
+            content: Text(l10n.productDeleted(_product.name)),
             backgroundColor: AppTheme.successColor,
           ),
         );
@@ -121,6 +123,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   }
 
   Future<void> _markAsUsed() async {
+    final l10n = AppLocalizations.of(context);
     final provider = context.read<ProductProvider>();
     final success = await provider.markAsUsed(_product.id);
 
@@ -128,7 +131,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
       Navigator.of(context).pop(true);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ Đã đánh dấu "${_product.name}" là đã dùng'),
+          content: Text(l10n.productMarkedAsUsed(_product.name)),
           backgroundColor: AppTheme.successColor,
         ),
       );
@@ -188,11 +191,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 value: 'delete',
                 child: Row(
                   children: [
-                    const Icon(Icons.delete_outline, color: AppTheme.errorColor),
+                    Icon(
+                      Icons.delete_outline,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                     const SizedBox(width: 12),
                     Text(
                       l10n.deleteProduct,
-                      style: const TextStyle(color: AppTheme.errorColor),
+                      style: TextStyle(color: Theme.of(context).colorScheme.error),
                     ),
                   ],
                 ),
@@ -256,7 +262,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     // Name
                     Text(
                       _product.name,
-                      style: AppTheme.h1.copyWith(fontSize: 24),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 24),
                       textAlign: TextAlign.center,
                     ),
 
@@ -284,8 +290,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         children: [
                           Text(
                             _product.isExpired
-                                ? 'ĐÃ HẾT HẠN'
-                                : '${_product.daysUntilExpiry} NGÀY',
+                                ? l10n.expired.toUpperCase()
+                                : '${_product.daysUntilExpiry} ${l10n.days.toUpperCase()}',
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -294,7 +300,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            _product.daysRemainingText,
+                            _product.isExpired
+                                ? l10n.daysOverdue(-_product.daysUntilExpiry)
+                                : l10n.daysRemaining(_product.daysUntilExpiry),
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -314,9 +322,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               delegate: _StickyTabBarDelegate(
                 TabBar(
                   controller: _tabController,
-                  labelColor: AppTheme.primaryColor,
-                  unselectedLabelColor: Colors.grey,
-                  indicatorColor: AppTheme.primaryColor,
+                  labelColor: Theme.of(context).colorScheme.primary,
+                  unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                  indicatorColor: Theme.of(context).colorScheme.primary,
                   tabs: [
                     Tab(text: l10n.information),
                     Tab(text: l10n.nutrition),
@@ -341,32 +349,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   // Tab 1: Information
   Widget _buildInfoTab() {
+    final l10n = AppLocalizations.of(context);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Thông tin cơ bản', style: AppTheme.h2),
+          Text(l10n.basicInfo, style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: 16),
 
           // Quantity
           _buildInfoCard(
             icon: Icons.production_quantity_limits,
-            label: 'Số lượng',
+            label: l10n.quantity,
             value: '${_product.quantity} ${_product.unit}',
           ),
 
           // Purchase Date
           _buildInfoCard(
             icon: Icons.shopping_cart_outlined,
-            label: 'Ngày mua',
+            label: l10n.purchaseDate,
             value: DateFormat(AppConstants.dateFormat).format(_product.purchaseDate),
           ),
 
           // Expiry Date
           _buildInfoCard(
             icon: Icons.event_busy,
-            label: 'Ngày hết hạn',
+            label: l10n.expiryDate,
             value: DateFormat(AppConstants.dateFormat).format(_product.expiryDate),
             valueColor: _product.getStatusColor(),
           ),
@@ -375,29 +385,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           if (_product.location != null)
             _buildInfoCard(
               icon: Icons.place_outlined,
-              label: 'Vị trí',
+              label: l10n.location,
               value: _product.location!,
             ),
 
           // Notes
           if (_product.notes != null) ...[
             const SizedBox(height: 24),
-            Text('Ghi chú', style: AppTheme.h2),
+            Text(l10n.notes, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.note_outlined,
-                      color: AppTheme.primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         _product.notes!,
-                        style: AppTheme.body1,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ],
@@ -409,15 +419,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Storage Tips
           if (_productTemplate?.storageTips != null) ...[
             const SizedBox(height: 24),
-            Text('💡 Mẹo bảo quản', style: AppTheme.h2),
+            Text(l10n.storageTips, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
-              color: AppTheme.primaryColor.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   _productTemplate!.storageTips!,
-                  style: AppTheme.body1,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ),
@@ -432,9 +442,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             child: ElevatedButton.icon(
               onPressed: _markAsUsed,
               icon: const Icon(Icons.check, size: 24),
-              label: const Text(
-                'Đánh Dấu Đã Dùng',
-                style: TextStyle(fontSize: 18),
+              label: Text(
+                l10n.markAsUsed,
+                style: const TextStyle(fontSize: 18),
               ),
             ),
           ),
@@ -447,13 +457,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             child: OutlinedButton.icon(
               onPressed: _deleteProduct,
               icon: const Icon(Icons.delete_outline, size: 24),
-              label: const Text(
-                'Xóa Sản Phẩm',
-                style: TextStyle(fontSize: 18),
+              label: Text(
+                l10n.deleteProduct,
+                style: const TextStyle(fontSize: 18),
               ),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppTheme.errorColor,
-                side: const BorderSide(color: AppTheme.errorColor),
+                foregroundColor: Theme.of(context).colorScheme.error,
+                side: BorderSide(color: Theme.of(context).colorScheme.error),
               ),
             ),
           ),
@@ -466,6 +476,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   // Tab 2: Nutrition
   Widget _buildNutritionTab() {
+    final l10n = AppLocalizations.of(context);
     final nutritionData = _productTemplate?.nutritionData;
 
     if (nutritionData == null || !nutritionData.hasData) {
@@ -478,17 +489,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               Icon(
                 Icons.info_outline,
                 size: 64,
-                color: Colors.grey[400],
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(height: 16),
               Text(
-                'Chưa có thông tin dinh dưỡng',
-                style: AppTheme.h2.copyWith(color: Colors.grey),
+                l10n.noNutritionData,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Thông tin dinh dưỡng sẽ được cập nhật sau',
-                style: AppTheme.body2,
+                l10n.noNutritionInfoYet,
+                style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -503,50 +516,50 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '🍎 Giá Trị Dinh Dưỡng (${nutritionData.servingSize})',
-            style: AppTheme.h2,
+            '🍎 ${l10n.nutritionValue} (${nutritionData.servingSize ?? l10n.servingSize})',
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 16),
 
           // Main Nutrients
           if (nutritionData.calories != null)
             _buildNutrientRow(
-              'Calories',
+              l10n.calories,
               '${nutritionData.calories!.toStringAsFixed(0)} kcal',
               nutritionData.calories! / 2000,
             ),
 
           if (nutritionData.protein != null)
             _buildNutrientRow(
-              'Protein',
+              l10n.protein,
               '${nutritionData.protein!.toStringAsFixed(1)}g',
               nutritionData.protein! / 50,
             ),
 
           if (nutritionData.carbohydrates != null)
             _buildNutrientRow(
-              'Carbohydrates',
+              l10n.carbohydrates,
               '${nutritionData.carbohydrates!.toStringAsFixed(1)}g',
               nutritionData.carbohydrates! / 300,
             ),
 
           if (nutritionData.fat != null)
             _buildNutrientRow(
-              'Fat',
+              l10n.fat,
               '${nutritionData.fat!.toStringAsFixed(1)}g',
               nutritionData.fat! / 70,
             ),
 
           if (nutritionData.fiber != null)
             _buildNutrientRow(
-              'Fiber',
+              l10n.fiber,
               '${nutritionData.fiber!.toStringAsFixed(1)}g',
               nutritionData.fiber! / 25,
             ),
 
           if (nutritionData.sugar != null)
             _buildNutrientRow(
-              'Sugar',
+              l10n.sugar,
               '${nutritionData.sugar!.toStringAsFixed(1)}g',
               nutritionData.sugar! / 50,
               isWarning: nutritionData.sugar! > 10,
@@ -555,7 +568,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Vitamins
           if (nutritionData.vitamins != null && nutritionData.vitamins!.isNotEmpty) ...[
             const SizedBox(height: 24),
-            Text('Vitamin', style: AppTheme.h3),
+            Text(l10n.vitamins, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
               child: Padding(
@@ -569,11 +582,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         children: [
                           Text(
                             _formatNutrientName(entry.key),
-                            style: AppTheme.body1,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Text(
                             '${entry.value.toStringAsFixed(1)} ${_getVitaminUnit(entry.key)}',
-                            style: AppTheme.body1.copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -589,7 +602,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Minerals
           if (nutritionData.minerals != null && nutritionData.minerals!.isNotEmpty) ...[
             const SizedBox(height: 24),
-            Text('Khoáng chất', style: AppTheme.h3),
+            Text(l10n.minerals, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
               child: Padding(
@@ -603,11 +616,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         children: [
                           Text(
                             _formatNutrientName(entry.key),
-                            style: AppTheme.body1,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Text(
                             '${entry.value.toStringAsFixed(1)} mg',
-                            style: AppTheme.body1.copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -628,6 +641,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   // Tab 3: Health Info
   Widget _buildHealthTab() {
+    final l10n = AppLocalizations.of(context);
     final hasHealthBenefits = _productTemplate?.healthBenefits != null &&
         _productTemplate!.healthBenefits!.isNotEmpty;
     final hasHealthWarnings = _productTemplate?.healthWarnings != null &&
@@ -643,17 +657,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               Icon(
                 Icons.health_and_safety_outlined,
                 size: 64,
-                color: Colors.grey[400],
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(height: 16),
               Text(
-                'Chưa có thông tin sức khỏe',
-                style: AppTheme.h2.copyWith(color: Colors.grey),
+                l10n.noHealthData,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Thông tin sức khỏe sẽ được cập nhật sau',
-                style: AppTheme.body2,
+                l10n.noNutritionInfoYet,
+                style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -669,10 +685,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         children: [
           // Health Benefits
           if (hasHealthBenefits) ...[
-            Text('✅ Lợi Ích Sức Khỏe', style: AppTheme.h2),
+            Text(l10n.healthBenefits, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
-              color: Colors.green[50],
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -687,7 +703,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           Expanded(
                             child: Text(
                               benefit,
-                              style: AppTheme.body1,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
                         ],
@@ -702,10 +718,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Health Warnings
           if (hasHealthWarnings) ...[
             const SizedBox(height: 24),
-            Text('⚠️ Lưu Ý', style: AppTheme.h2),
+            Text(l10n.healthWarnings, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             Card(
-              color: Colors.orange[50],
+              color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -720,7 +736,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           Expanded(
                             child: Text(
                               warning,
-                              style: AppTheme.body1,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
                         ],
@@ -754,12 +770,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppTheme.primaryColor.withOpacity(0.1),
+                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
               ),
               child: Icon(
                 icon,
-                color: AppTheme.primaryColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(width: 16),
@@ -769,12 +785,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 children: [
                   Text(
                     label,
-                    style: AppTheme.body2,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     value,
-                    style: AppTheme.h3.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontSize: 16,
                       color: valueColor,
                     ),
@@ -806,11 +822,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             children: [
               Text(
                 name,
-                style: AppTheme.body1.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Text(
                 value,
-                style: AppTheme.body1,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),
@@ -823,9 +841,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   child: LinearProgressIndicator(
                     value: percentage.clamp(0, 1),
                     minHeight: 8,
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      isWarning ? Colors.orange : AppTheme.primaryColor,
+                      isWarning
+                          ? Theme.of(context).colorScheme.error
+                          : Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
@@ -833,8 +853,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               const SizedBox(width: 8),
               Text(
                 '$percent%',
-                style: AppTheme.body2.copyWith(
-                  color: isWarning ? Colors.orange : null,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: isWarning ? Theme.of(context).colorScheme.error : null,
                 ),
               ),
             ],

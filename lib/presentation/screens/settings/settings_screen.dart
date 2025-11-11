@@ -89,10 +89,10 @@ class SettingsScreen extends StatelessWidget {
 
               _buildListTile(
                 icon: Icons.delete_outline,
-                iconColor: AppTheme.errorColor,
+                iconColor: Theme.of(context).colorScheme.error,
                 title: l10n.clearAllData,
                 subtitle: l10n.cannotUndo,
-                titleColor: AppTheme.errorColor,
+                titleColor: Theme.of(context).colorScheme.error,
                 onTap: () {
                   _showClearDataDialog(context, settings, l10n);
                 },
@@ -111,18 +111,18 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       AppConstants.appName,
-                      style: AppTheme.h3,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       AppConstants.appTagline,
-                      style: AppTheme.body2,
+                      style: Theme.of(context).textTheme.bodySmall,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Made with ❤️ in Vietnam',
-                      style: AppTheme.caption,
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ],
                 ),

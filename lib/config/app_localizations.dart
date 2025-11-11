@@ -301,6 +301,26 @@ class AppLocalizations {
   String get urgentDays => isVietnamese ? '🚨 Khẩn Cấp (1-2 ngày)' : '🚨 Urgent (1-2 days)';
   String get useSoonDays => isVietnamese ? '⚠️ Sử Dụng Sớm (3-7 ngày)' : '⚠️ Use Soon (3-7 days)';
   String get days => isVietnamese ? 'ngày' : 'days';
+
+  // Days remaining text helpers
+  String daysRemaining(int days) {
+    if (days == 0) {
+      return isVietnamese ? 'Hết hạn hôm nay' : 'Expires today';
+    } else if (days == 1) {
+      return isVietnamese ? 'Còn 1 ngày' : '1 day left';
+    } else {
+      return isVietnamese ? 'Còn $days ngày' : '$days days left';
+    }
+  }
+
+  String daysOverdue(int days) {
+    if (days == 0) {
+      return isVietnamese ? 'Hết hạn hôm nay' : 'Expired today';
+    } else {
+      return isVietnamese ? 'Quá hạn $days ngày' : '$days days overdue';
+    }
+  }
+
   String expiresIn(int days) {
     if (days == 0) {
       return isVietnamese ? 'Hết hạn hôm nay' : 'Expires today';
