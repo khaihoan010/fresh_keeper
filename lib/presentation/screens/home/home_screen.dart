@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // Remove back button from home screen
         title: Row(
           children: [
             const Text('🧊', style: TextStyle(fontSize: 24)),

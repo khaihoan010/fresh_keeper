@@ -55,7 +55,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       return;
     }
 
-    // Step 1: Search local database first
+    // Step 1: Search local database first (PRIORITY - local results come first)
     setState(() {
       _isSearching = true;
       _isSearchingApi = false;
@@ -65,20 +65,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     List<ProductTemplate> localResults = await provider.searchTemplates(query);
 
     setState(() {
-      _searchResults = localResults;
+      _searchResults = localResults.take(10).toList(); // Limit to 10
       _isSearching = false;
     });
 
-    // Step 2: If local results < 3, search API for more
-    if (localResults.length < 3) {
+    // Step 2: If local results < 5, search API for more
+    if (localResults.length < 5) {
       setState(() => _isSearchingApi = true);
 
       try {
         final apiResults = await _nutritionApiService.searchProducts(query);
 
         if (mounted && apiResults.isNotEmpty) {
-          // Merge results and remove duplicates
-          final allResults = [...localResults];
+          // Merge: LOCAL FIRST, then ONLINE (local items stay on top)
+          final allResults = [...localResults]; // Local results FIRST
           for (final apiResult in apiResults) {
             // Check if already exists in local results
             final exists = allResults.any((local) =>
@@ -86,15 +86,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
               local.nameEn.toLowerCase() == apiResult.nameEn.toLowerCase()
             );
             if (!exists) {
-              allResults.add(apiResult);
+              allResults.add(apiResult); // Online results AFTER local
             }
           }
+
+          // Limit to 10 results maximum
+          final limitedResults = allResults.take(10).toList();
 
           // Cache API results to database for future use
           await _cacheApiResults(apiResults);
 
           setState(() {
-            _searchResults = allResults;
+            _searchResults = limitedResults;
           });
         }
       } catch (e) {
@@ -508,64 +511,69 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
         if (_searchResults.isNotEmpty) ...[
           const SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+          ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxHeight: 400, // Maximum height for 10 results with scrolling
             ),
-            child: ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _searchResults.length,
-              separatorBuilder: (_, __) => const Divider(height: 1),
-              itemBuilder: (context, index) {
-                final template = _searchResults[index];
-                final isFromApi = template.id.startsWith('api_');
-
-                return ListTile(
-                  leading: Text(
-                    AppConstants.categoryIcons[template.category] ?? '📦',
-                    style: const TextStyle(fontSize: 28),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
                   ),
-                  title: Row(
-                    children: [
-                      Expanded(child: Text(template.nameVi)),
-                      if (isFromApi)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Colors.green[50],
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.green[200]!),
-                          ),
-                          child: Text(
-                            'ONLINE',
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[700],
+                ],
+              ),
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(), // Enable scrolling
+                itemCount: _searchResults.length,
+                separatorBuilder: (_, __) => const Divider(height: 1),
+                itemBuilder: (context, index) {
+                  final template = _searchResults[index];
+                  final isFromApi = template.id.startsWith('api_');
+
+                  return ListTile(
+                    leading: Text(
+                      AppConstants.categoryIcons[template.category] ?? '📦',
+                      style: const TextStyle(fontSize: 28),
+                    ),
+                    title: Row(
+                      children: [
+                        Expanded(child: Text(template.nameVi)),
+                        if (isFromApi)
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.green[50],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.green[200]!),
+                            ),
+                            child: Text(
+                              'ONLINE',
+                              style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green[700],
+                              ),
                             ),
                           ),
-                        ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    '${template.nameEn} • ${template.shelfLifeDays} ngày',
-                    style: AppTheme.body2,
-                  ),
-                  trailing: template.hasNutrition
-                      ? Icon(Icons.restaurant, size: 16, color: Colors.orange[700])
-                      : null,
-                  onTap: () => _selectTemplate(template),
-                );
-              },
+                      ],
+                    ),
+                    subtitle: Text(
+                      '${template.nameEn} • ${template.shelfLifeDays} ngày',
+                      style: AppTheme.body2,
+                    ),
+                    trailing: template.hasNutrition
+                        ? Icon(Icons.restaurant, size: 16, color: Colors.orange[700])
+                        : null,
+                    onTap: () => _selectTemplate(template),
+                  );
+                },
+              ),
             ),
           ),
         ],
