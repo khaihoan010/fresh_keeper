@@ -766,6 +766,7 @@ class BarcodeScannerScreen extends StatefulWidget {
 class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
   MobileScannerController cameraController = MobileScannerController();
   bool _isProcessing = false;
+  bool _isTorchOn = false;
 
   @override
   void dispose() {
@@ -788,6 +789,13 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
     }
   }
 
+  void _toggleTorch() {
+    setState(() {
+      _isTorchOn = !_isTorchOn;
+    });
+    cameraController.toggleTorch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -796,18 +804,11 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
         backgroundColor: Colors.black,
         actions: [
           IconButton(
-            icon: ValueListenableBuilder(
-              valueListenable: cameraController.torchState,
-              builder: (context, state, child) {
-                switch (state) {
-                  case TorchState.off:
-                    return const Icon(Icons.flash_off, color: Colors.grey);
-                  case TorchState.on:
-                    return const Icon(Icons.flash_on, color: Colors.yellow);
-                }
-              },
+            icon: Icon(
+              _isTorchOn ? Icons.flash_on : Icons.flash_off,
+              color: _isTorchOn ? Colors.yellow : Colors.grey,
             ),
-            onPressed: () => cameraController.toggleTorch(),
+            onPressed: _toggleTorch,
           ),
           IconButton(
             icon: const Icon(Icons.cameraswitch),
