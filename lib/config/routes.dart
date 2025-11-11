@@ -21,94 +21,94 @@ class AppRoutes {
   static const String about = '/about';
 
   /// Generate routes
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
+  static Route<dynamic> generateRoute(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
       case splash:
         return _buildRoute(
           const SplashScreen(),
-          settings,
+          routeSettings,
         );
 
       case onboarding:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with OnboardingScreen()
-          settings,
+          routeSettings,
         );
 
       case home:
         return _buildRoute(
           const HomeScreen(),
-          settings,
+          routeSettings,
         );
 
       case addProduct:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with AddProductScreen()
-          settings,
+          routeSettings,
           fullscreenDialog: true,
         );
 
       case allItems:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with AllItemsScreen()
-          settings,
+          routeSettings,
         );
 
       case expiringSoon:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with ExpiringSoonScreen()
-          settings,
+          routeSettings,
         );
 
       case productDetail:
-        // final product = settings.arguments as UserProduct;
+        // final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
           const Placeholder(), // TODO: Replace with ProductDetailScreen(product: product)
-          settings,
+          routeSettings,
         );
 
       case editProduct:
-        // final product = settings.arguments as UserProduct;
+        // final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
           const Placeholder(), // TODO: Replace with EditProductScreen(product: product)
-          settings,
+          routeSettings,
           fullscreenDialog: true,
         );
 
       case settings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with SettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case notificationSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with NotificationSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case themeSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with ThemeSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case languageSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with LanguageSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case about:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with AboutScreen()
-          settings,
+          routeSettings,
         );
 
       default:
         return _buildRoute(
-          _ErrorScreen(routeName: settings.name ?? 'unknown'),
-          settings,
+          _ErrorScreen(routeName: routeSettings.name ?? 'unknown'),
+          routeSettings,
         );
     }
   }
