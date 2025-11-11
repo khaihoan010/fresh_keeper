@@ -105,16 +105,23 @@ class DatabaseService {
       )
     ''');
 
-    // Create FTS5 virtual table for product search
-    await db.execute('''
-      CREATE VIRTUAL TABLE product_search USING fts5(
-        product_id UNINDEXED,
-        name_vi,
-        name_en,
-        aliases,
-        category UNINDEXED
-      )
-    ''');
+    // Create FTS5 virtual table for product search (optional - fallback to LIKE search)
+    try {
+      await db.execute('''
+        CREATE VIRTUAL TABLE product_search USING fts5(
+          product_id UNINDEXED,
+          name_vi,
+          name_en,
+          aliases,
+          category UNINDEXED
+        )
+      ''');
+      debugPrint('✅ FTS5 search table created successfully');
+    } catch (e) {
+      debugPrint('⚠️ FTS5 not available on this device, will use LIKE search fallback: $e');
+      // FTS5 module not available, will use LIKE search in queries
+      // This is fine - the search functionality will still work
+    }
 
     // Create categories table
     await db.execute('''

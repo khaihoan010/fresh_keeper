@@ -271,38 +271,34 @@ class ProductLocalDataSource {
     try {
       final db = await _databaseService.database;
 
-      // Use FTS5 for better search performance
-      final results = await db.rawQuery('''
-        SELECT pt.* FROM ${AppConstants.tableProductTemplates} pt
-        INNER JOIN product_search ps ON pt.id = ps.product_id
-        WHERE product_search MATCH ?
-        ORDER BY rank
-        LIMIT ?
-      ''', ['$query*', AppConstants.searchSuggestionLimit]);
+      // Try FTS5 search first (will fail gracefully if table doesn't exist)
+      try {
+        final results = await db.rawQuery('''
+          SELECT pt.* FROM ${AppConstants.tableProductTemplates} pt
+          INNER JOIN product_search ps ON pt.id = ps.product_id
+          WHERE product_search MATCH ?
+          ORDER BY rank
+          LIMIT ?
+        ''', ['$query*', AppConstants.searchSuggestionLimit]);
 
-      if (results.isEmpty) {
-        // Fallback to LIKE search if FTS5 returns nothing
-        final likeResults = await db.query(
-          AppConstants.tableProductTemplates,
-          where: 'name_vi LIKE ? OR name_en LIKE ? OR aliases LIKE ?',
-          whereArgs: ['%$query%', '%$query%', '%$query%'],
-          limit: AppConstants.searchSuggestionLimit,
-        );
-        return likeResults.map((json) => ProductTemplate.fromJson(json)).toList();
+        if (results.isNotEmpty) {
+          return results.map((json) => ProductTemplate.fromJson(json)).toList();
+        }
+      } catch (ftsError) {
+        debugPrint('⚠️ FTS5 search not available, using LIKE fallback');
       }
 
-      return results.map((json) => ProductTemplate.fromJson(json)).toList();
-    } catch (e) {
-      debugPrint('❌ Error searching templates: $e');
-      // Fallback to simple search on error
-      final db = await _databaseService.database;
-      final results = await db.query(
+      // Fallback to LIKE search
+      final likeResults = await db.query(
         AppConstants.tableProductTemplates,
-        where: 'name_vi LIKE ? OR name_en LIKE ?',
-        whereArgs: ['%$query%', '%$query%'],
+        where: 'name_vi LIKE ? OR name_en LIKE ? OR aliases LIKE ?',
+        whereArgs: ['%$query%', '%$query%', '%$query%'],
         limit: AppConstants.searchSuggestionLimit,
       );
-      return results.map((json) => ProductTemplate.fromJson(json)).toList();
+      return likeResults.map((json) => ProductTemplate.fromJson(json)).toList();
+    } catch (e) {
+      debugPrint('❌ Error searching templates: $e');
+      rethrow;
     }
   }
 
