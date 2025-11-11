@@ -269,6 +269,194 @@ class AppTheme {
     );
   }
 
+  // Dark Theme Colors
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
+  static const Color darkSurfaceVariant = Color(0xFF2C2C2C);
+  static const Color darkTextPrimary = Color(0xFFE0E0E0);
+  static const Color darkTextSecondary = Color(0xFFB0B0B0);
+  static const Color darkBorder = Color(0xFF3C3C3C);
+
+  // Dark Theme
+  static ThemeData get darkTheme {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+
+      // Color Scheme
+      colorScheme: ColorScheme.dark(
+        primary: primaryColor,
+        secondary: secondaryColor,
+        error: errorColor,
+        surface: darkSurface,
+        onPrimary: Colors.black,
+        onSecondary: Colors.black,
+        onSurface: darkTextPrimary,
+        onError: Colors.white,
+      ),
+
+      // Scaffold Background
+      scaffoldBackgroundColor: darkBackground,
+
+      // App Bar Theme
+      appBarTheme: AppBarTheme(
+        backgroundColor: darkSurface,
+        foregroundColor: darkTextPrimary,
+        elevation: 0,
+        centerTitle: false,
+        titleTextStyle: h2.copyWith(color: darkTextPrimary),
+        iconTheme: IconThemeData(color: darkTextPrimary),
+      ),
+
+      // Text Theme
+      textTheme: TextTheme(
+        displayLarge: h1.copyWith(color: darkTextPrimary),
+        displayMedium: h2.copyWith(color: darkTextPrimary),
+        displaySmall: h3.copyWith(color: darkTextPrimary),
+        bodyLarge: body1.copyWith(color: darkTextPrimary),
+        bodyMedium: body2.copyWith(color: darkTextSecondary),
+        bodySmall: caption.copyWith(color: darkTextSecondary),
+        labelLarge: button,
+      ),
+
+      // Card Theme
+      cardTheme: CardThemeData(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+        ),
+        color: darkSurface,
+        margin: EdgeInsets.symmetric(
+          horizontal: spacing16,
+          vertical: spacing12,
+        ),
+      ),
+
+      // Button Themes
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.black,
+          elevation: 2,
+          minimumSize: Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusSmall),
+          ),
+          textStyle: button,
+          padding: EdgeInsets.symmetric(
+            horizontal: spacing16,
+            vertical: spacing12,
+          ),
+        ),
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: primaryColor,
+          side: BorderSide(color: primaryColor, width: 1),
+          minimumSize: Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusSmall),
+          ),
+          textStyle: button,
+          padding: EdgeInsets.symmetric(
+            horizontal: spacing16,
+            vertical: spacing12,
+          ),
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: primaryColor,
+          textStyle: body2.copyWith(fontWeight: FontWeight.w600),
+          padding: EdgeInsets.all(spacing8),
+        ),
+      ),
+
+      // Input Decoration Theme
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: darkSurfaceVariant,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusSmall),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusSmall),
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusSmall),
+          borderSide: BorderSide(color: primaryColor, width: 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusSmall),
+          borderSide: BorderSide(color: errorColor, width: 1),
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: spacing16,
+          vertical: spacing12,
+        ),
+        hintStyle: body1.copyWith(color: darkTextSecondary),
+      ),
+
+      // Floating Action Button Theme
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: primaryColor,
+        foregroundColor: Colors.black,
+        elevation: 6,
+        shape: CircleBorder(),
+      ),
+
+      // Bottom Navigation Bar Theme
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: darkSurface,
+        selectedItemColor: primaryColor,
+        unselectedItemColor: darkTextSecondary,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        elevation: 8,
+      ),
+
+      // Chip Theme
+      chipTheme: ChipThemeData(
+        backgroundColor: darkSurfaceVariant,
+        selectedColor: primaryColor,
+        labelStyle: body2.copyWith(color: darkTextPrimary),
+        padding: EdgeInsets.symmetric(
+          horizontal: spacing12,
+          vertical: spacing8,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusLarge),
+        ),
+      ),
+
+      // Dialog Theme
+      dialogTheme: DialogThemeData(
+        backgroundColor: darkSurface,
+        elevation: 8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+        ),
+      ),
+
+      // Divider Theme
+      dividerTheme: DividerThemeData(
+        color: darkBorder,
+        thickness: 1,
+        space: spacing16,
+      ),
+
+      // Icon Theme
+      iconTheme: IconThemeData(
+        color: darkTextPrimary,
+        size: 24,
+      ),
+    );
+  }
+
   // Helper method to get status color based on days until expiry
   static Color getExpiryStatusColor(int daysUntilExpiry) {
     if (daysUntilExpiry > 7) {

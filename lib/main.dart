@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'config/theme.dart';
 import 'config/routes.dart';
 import 'config/constants.dart';
+import 'config/app_localizations.dart';
 import 'services/database_service.dart';
 import 'data/data_sources/local/product_local_data_source.dart';
 import 'data/repositories/product_repository.dart';
@@ -73,7 +75,7 @@ class FreshKeeperApp extends StatelessWidget {
 
             // Theme
             theme: AppTheme.lightTheme,
-            // darkTheme: AppTheme.darkTheme, // TODO: Implement dark theme
+            darkTheme: AppTheme.darkTheme,
             themeMode: settings.themeMode,
 
             // Routes
@@ -82,17 +84,15 @@ class FreshKeeperApp extends StatelessWidget {
                 : AppRoutes.splash,
             onGenerateRoute: AppRoutes.generateRoute,
 
-            // Localization (TODO: Implement later)
-            // locale: Locale(settings.language, ''),
-            // localizationsDelegates: [
-            //   AppLocalizations.delegate,
-            //   GlobalMaterialLocalizations.delegate,
-            //   GlobalWidgetsLocalizations.delegate,
-            // ],
-            // supportedLocales: [
-            //   Locale('vi', ''),
-            //   Locale('en', ''),
-            // ],
+            // Localization
+            locale: Locale(settings.language, ''),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
           );
         },
       ),
