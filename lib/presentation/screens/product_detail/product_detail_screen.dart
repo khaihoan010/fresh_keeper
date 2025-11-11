@@ -437,9 +437,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: const Color(0xFFE3F2FD), // Light blue color
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
@@ -722,9 +720,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: const Color(0xFFE8F5E9), // Light green color
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -762,9 +758,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.errorContainer
-                  : Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: const Color(0xFFFCE4EC), // Light pink color
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
