@@ -53,10 +53,6 @@ class AppLocalizations {
   String get urgent => isVietnamese ? 'Gấp' : 'Urgent';
   String get expired => isVietnamese ? 'Đã hết hạn' : 'Expired';
 
-  String daysRemaining(int days) => isVietnamese
-      ? '$days ngày còn lại'
-      : '$days days remaining';
-
   String daysText(int days) {
     if (days > 1) {
       return isVietnamese ? '$days ngày' : '$days days';
