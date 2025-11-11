@@ -14,6 +14,12 @@ class ProductLocalDataSource {
 
   ProductLocalDataSource(this._databaseService);
 
+  /// Factory method to create instance
+  static Future<ProductLocalDataSource> create() async {
+    final databaseService = DatabaseService();
+    return ProductLocalDataSource(databaseService);
+  }
+
   // ==================== USER PRODUCTS ====================
 
   /// Insert a user product
@@ -265,6 +271,23 @@ class ProductLocalDataSource {
   }
 
   // ==================== PRODUCT TEMPLATES ====================
+
+  /// Insert a product template
+  Future<int> insertTemplate(ProductTemplate template) async {
+    try {
+      final db = await _databaseService.database;
+      final result = await db.insert(
+        AppConstants.tableProductTemplates,
+        template.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      debugPrint('✅ Inserted template: ${template.nameVi}');
+      return result;
+    } catch (e) {
+      debugPrint('❌ Error inserting template: $e');
+      rethrow;
+    }
+  }
 
   /// Search product templates
   Future<List<ProductTemplate>> searchTemplates(String query) async {
