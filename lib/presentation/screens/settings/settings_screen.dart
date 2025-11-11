@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../providers/settings_provider.dart';
 
 /// Settings Screen
@@ -12,96 +15,86 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cài Đặt'),
+        title: Text(l10n.settings),
       ),
       body: Consumer<SettingsProvider>(
         builder: (context, settings, _) {
           return ListView(
             children: [
               // User Profile Section
-              _buildProfileSection(context, settings),
+              _buildProfileSection(context, settings, l10n),
 
               const Divider(height: 32),
 
               // Preferences Section
-              _buildSectionHeader('Tùy chỉnh'),
+              _buildSectionHeader(l10n.preferences),
 
               _buildListTile(
                 icon: Icons.language_outlined,
-                title: 'Ngôn ngữ',
-                subtitle: settings.language == 'vi' ? 'Tiếng Việt' : 'English',
+                title: l10n.language,
+                subtitle: settings.language == 'vi' ? l10n.vietnamese : l10n.english,
                 onTap: () {
-                  _showLanguageDialog(context, settings);
+                  _showLanguageDialog(context, settings, l10n);
                 },
               ),
 
               _buildListTile(
                 icon: Icons.dark_mode_outlined,
-                title: 'Chế độ tối',
-                subtitle: 'Đang phát triển',
+                title: l10n.darkMode,
+                subtitle: settings.themeMode == ThemeMode.dark ? l10n.on : l10n.off,
                 trailing: Switch(
                   value: settings.themeMode == ThemeMode.dark,
-                  onChanged: null, // Disabled for now
+                  onChanged: (value) {
+                    settings.toggleTheme();
+                  },
                 ),
               ),
 
               const Divider(height: 32),
 
               // App Info Section
-              _buildSectionHeader('Ứng dụng'),
+              _buildSectionHeader(l10n.application),
 
               _buildListTile(
                 icon: Icons.info_outline,
-                title: 'Về ${AppConstants.appName}',
-                subtitle: 'Phiên bản ${AppConstants.appVersion}',
+                title: '${l10n.about} ${AppConstants.appName}',
+                subtitle: '${l10n.version} ${AppConstants.appVersion}',
                 onTap: () {
-                  _showAboutDialog(context);
+                  _showAboutDialog(context, l10n);
                 },
               ),
 
               _buildListTile(
                 icon: Icons.star_outline,
-                title: 'Đánh giá ứng dụng',
-                subtitle: 'Hỗ trợ chúng tôi phát triển',
-                onTap: () {
-                  // TODO: Open store rating
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Cảm ơn bạn đã quan tâm!'),
-                    ),
-                  );
-                },
+                title: l10n.rateApp,
+                subtitle: l10n.rateAppSubtitle,
+                onTap: () => _rateApp(context, l10n),
               ),
 
               _buildListTile(
                 icon: Icons.share_outlined,
-                title: 'Chia sẻ ứng dụng',
-                subtitle: 'Giới thiệu cho bạn bè',
-                onTap: () {
-                  // TODO: Implement share
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Chức năng đang phát triển'),
-                    ),
-                  );
-                },
+                title: l10n.shareApp,
+                subtitle: l10n.shareAppSubtitle,
+                onTap: () => _shareApp(context, l10n),
               ),
 
               const Divider(height: 32),
 
               // Data Section
-              _buildSectionHeader('Dữ liệu'),
+              _buildSectionHeader(l10n.data),
 
               _buildListTile(
                 icon: Icons.delete_outline,
                 iconColor: AppTheme.errorColor,
-                title: 'Xóa tất cả dữ liệu',
-                subtitle: 'Không thể hoàn tác',
+                title: l10n.clearAllData,
+                subtitle: l10n.cannotUndo,
                 titleColor: AppTheme.errorColor,
                 onTap: () {
-                  _showClearDataDialog(context, settings);
+                  _showClearDataDialog(context, settings, l10n);
                 },
               ),
 
@@ -143,7 +136,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileSection(BuildContext context, SettingsProvider settings) {
+  Widget _buildProfileSection(BuildContext context, SettingsProvider settings, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(24),
       child: Row(
@@ -169,19 +162,19 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   settings.userName.isNotEmpty
                       ? settings.userName
-                      : 'Người dùng',
+                      : l10n.user,
                   style: AppTheme.h3,
                 ),
                 const SizedBox(height: 4),
                 TextButton(
                   onPressed: () {
-                    _showEditNameDialog(context, settings);
+                    _showEditNameDialog(context, settings, l10n);
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(0, 0),
                   ),
-                  child: const Text('Chỉnh sửa tên'),
+                  child: Text(l10n.editName),
                 ),
               ],
             ),
@@ -227,48 +220,48 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showEditNameDialog(BuildContext context, SettingsProvider settings) {
+  void _showEditNameDialog(BuildContext context, SettingsProvider settings, AppLocalizations l10n) {
     final controller = TextEditingController(text: settings.userName);
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Chỉnh sửa tên'),
+        title: Text(l10n.editName),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(
-            hintText: 'Nhập tên của bạn',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            hintText: l10n.enterYourName,
+            border: const OutlineInputBorder(),
           ),
           autofocus: true,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Hủy'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               settings.updateUserProfile(name: controller.text.trim());
               Navigator.pop(context);
             },
-            child: const Text('Lưu'),
+            child: Text(l10n.save),
           ),
         ],
       ),
     );
   }
 
-  void _showLanguageDialog(BuildContext context, SettingsProvider settings) {
+  void _showLanguageDialog(BuildContext context, SettingsProvider settings, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Chọn ngôn ngữ'),
+        title: Text(l10n.selectLanguage),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
-              title: const Text('Tiếng Việt'),
+              title: Text(l10n.vietnamese),
               value: 'vi',
               groupValue: settings.language,
               onChanged: (value) {
@@ -279,7 +272,7 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             RadioListTile<String>(
-              title: const Text('English'),
+              title: Text(l10n.english),
               value: 'en',
               groupValue: settings.language,
               onChanged: (value) {
@@ -295,7 +288,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showAboutDialog(BuildContext context) {
+  void _showAboutDialog(BuildContext context, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -311,12 +304,12 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppConstants.appTagline,
+              l10n.appTagline,
               style: AppTheme.body1,
             ),
             const SizedBox(height: 16),
             Text(
-              'Phiên bản: ${AppConstants.appVersion}',
+              '${l10n.version}: ${AppConstants.appVersion}',
               style: AppTheme.body2,
             ),
             const SizedBox(height: 8),
@@ -329,25 +322,23 @@ class SettingsScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Đóng'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _showClearDataDialog(BuildContext context, SettingsProvider settings) {
+  void _showClearDataDialog(BuildContext context, SettingsProvider settings, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Xóa tất cả dữ liệu?'),
-        content: const Text(
-          'Hành động này sẽ xóa toàn bộ dữ liệu ứng dụng và không thể hoàn tác.',
-        ),
+        title: Text(l10n.clearDataConfirm),
+        content: Text(l10n.clearDataWarning),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Hủy'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -355,8 +346,8 @@ class SettingsScreen extends StatelessWidget {
               if (context.mounted) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('✅ Đã xóa tất cả dữ liệu'),
+                  SnackBar(
+                    content: Text(l10n.allDataCleared),
                     backgroundColor: AppTheme.successColor,
                   ),
                 );
@@ -365,10 +356,131 @@ class SettingsScreen extends StatelessWidget {
             style: TextButton.styleFrom(
               foregroundColor: AppTheme.errorColor,
             ),
-            child: const Text('Xóa'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
     );
+  }
+
+  /// Share app with friends
+  Future<void> _shareApp(BuildContext context, AppLocalizations l10n) async {
+    try {
+      const String appName = AppConstants.appName;
+      final String appTagline = l10n.appTagline;
+      const String playStoreUrl = 'https://play.google.com/store/apps/details?id=com.freshkeeper.app';
+      const String appStoreUrl = 'https://apps.apple.com/app/fresh-keeper/id123456789';
+
+      final String shareText = l10n.isVietnamese
+          ? '''
+🧊 $appName
+
+$appTagline
+
+📱 Tải ngay tại:
+Android: $playStoreUrl
+iOS: $appStoreUrl
+
+Cùng quản lý tủ lạnh thông minh và giảm lãng phí thực phẩm! 🌱
+'''
+          : '''
+🧊 $appName
+
+$appTagline
+
+📱 Download now:
+Android: $playStoreUrl
+iOS: $appStoreUrl
+
+Manage your fridge smartly and reduce food waste! 🌱
+''';
+
+      await Share.share(
+        shareText,
+        subject: appName,
+      );
+
+      debugPrint('✅ App shared successfully');
+    } catch (e) {
+      debugPrint('⚠️ Error sharing app: $e');
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.isVietnamese
+                ? '⚠️ Không thể chia sẻ ứng dụng'
+                : '⚠️ Cannot share app'),
+            backgroundColor: AppTheme.errorColor,
+          ),
+        );
+      }
+    }
+  }
+
+  /// Open app store to rate the app
+  Future<void> _rateApp(BuildContext context, AppLocalizations l10n) async {
+    try {
+      // For Android - Google Play Store
+      const String playStoreUrl = 'https://play.google.com/store/apps/details?id=com.freshkeeper.app';
+
+      // For iOS - App Store
+      const String appStoreUrl = 'https://apps.apple.com/app/fresh-keeper/id123456789';
+
+      // Try to launch the store URL
+      final Uri playStoreUri = Uri.parse(playStoreUrl);
+      final Uri appStoreUri = Uri.parse(appStoreUrl);
+
+      // Check platform and launch appropriate store
+      if (Theme.of(context).platform == TargetPlatform.android) {
+        if (await canLaunchUrl(playStoreUri)) {
+          await launchUrl(playStoreUri, mode: LaunchMode.externalApplication);
+          debugPrint('✅ Opened Play Store for rating');
+        } else {
+          throw Exception('Could not launch Play Store');
+        }
+      } else if (Theme.of(context).platform == TargetPlatform.iOS) {
+        if (await canLaunchUrl(appStoreUri)) {
+          await launchUrl(appStoreUri, mode: LaunchMode.externalApplication);
+          debugPrint('✅ Opened App Store for rating');
+        } else {
+          throw Exception('Could not launch App Store');
+        }
+      } else {
+        // For other platforms, show a thank you message
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(l10n.isVietnamese
+                  ? 'Cảm ơn bạn đã quan tâm! 💚'
+                  : 'Thank you for your interest! 💚'),
+              backgroundColor: AppTheme.successColor,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('⚠️ Error opening store: $e');
+      if (context.mounted) {
+        // Show thank you message as fallback
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Row(
+              children: [
+                const Text('⭐', style: TextStyle(fontSize: 32)),
+                const SizedBox(width: 12),
+                Text(l10n.thankYou),
+              ],
+            ),
+            content: Text(l10n.developmentPhase),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(l10n.close),
+              ),
+            ],
+          ),
+        );
+      }
+    }
   }
 }
