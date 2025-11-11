@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -36,16 +37,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     super.initState();
     _product = widget.product;
     _tabController = TabController(length: 3, vsync: this);
-    // Don't call _loadProductTemplate here - context.read won't work in initState
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Load template after widget is fully initialized and has access to Provider tree
-    if (_productTemplate == null && _product.productTemplateId != null) {
-      _loadProductTemplate();
-    }
+    // Load template after first frame is rendered and Provider tree is ready
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _product.productTemplateId != null) {
+        _loadProductTemplate();
+      }
+    });
   }
 
   @override
