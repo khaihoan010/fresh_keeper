@@ -189,7 +189,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
               height: 64,
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? AppTheme.warningColor.withOpacity(0.3)
+                    ? AppTheme.warningColor
                     : AppTheme.warningColor.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
