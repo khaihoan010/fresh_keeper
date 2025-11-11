@@ -7,6 +7,8 @@ import '../../../config/constants.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
+import '../../../services/nutrition_api_service.dart';
+import '../../../data/repositories/product_repository.dart';
 
 /// Add Product Screen
 /// Form to add new products with smart search
@@ -22,6 +24,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _nameController = TextEditingController();
   final _quantityController = TextEditingController(text: '1');
   final _searchController = TextEditingController();
+  final _nutritionApiService = NutritionApiService();
 
   String _selectedCategory = 'vegetables';
   String _selectedUnit = 'kg';
@@ -29,6 +32,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   DateTime? _expiryDate;
   List<ProductTemplate> _searchResults = [];
   bool _isSearching = false;
+  bool _isSearchingApi = false;
   ProductTemplate? _selectedTemplate;
 
   @override
@@ -44,19 +48,63 @@ class _AddProductScreenState extends State<AddProductScreen> {
       setState(() {
         _searchResults = [];
         _isSearching = false;
+        _isSearchingApi = false;
       });
       return;
     }
 
-    setState(() => _isSearching = true);
+    // Step 1: Search local database first
+    setState(() {
+      _isSearching = true;
+      _isSearchingApi = false;
+    });
 
     final provider = context.read<ProductProvider>();
-    final results = await provider.searchTemplates(query);
+    List<ProductTemplate> localResults = await provider.searchTemplates(query);
 
     setState(() {
-      _searchResults = results;
+      _searchResults = localResults;
       _isSearching = false;
     });
+
+    // Step 2: If local results < 3, search API for more
+    if (localResults.length < 3) {
+      setState(() => _isSearchingApi = true);
+
+      try {
+        final apiResults = await _nutritionApiService.searchProducts(query);
+
+        if (mounted && apiResults.isNotEmpty) {
+          // Merge results and remove duplicates
+          final allResults = [...localResults];
+          for (final apiResult in apiResults) {
+            // Check if already exists in local results
+            final exists = allResults.any((local) =>
+              local.nameVi.toLowerCase() == apiResult.nameVi.toLowerCase() ||
+              local.nameEn.toLowerCase() == apiResult.nameEn.toLowerCase()
+            );
+            if (!exists) {
+              allResults.add(apiResult);
+            }
+          }
+
+          // Note: API results are not cached to database
+          // They are used temporarily for this session only
+          // The local database already has 110 comprehensive items
+
+          setState(() {
+            _searchResults = allResults;
+          });
+        }
+      } catch (e) {
+        debugPrint('⚠️ API search error: $e');
+        // Continue with local results only
+      } finally {
+        if (mounted) {
+          setState(() => _isSearchingApi = false);
+        }
+      }
+    }
   }
 
   void _selectTemplate(ProductTemplate template) {
@@ -304,15 +352,50 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Tìm kiếm nhanh',
-          style: AppTheme.h3,
+        Row(
+          children: [
+            Text(
+              'Tìm kiếm nhanh',
+              style: AppTheme.h3,
+            ),
+            const SizedBox(width: 8),
+            if (_isSearchingApi)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.blue[50],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 12,
+                      height: 12,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[700]!),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Searching online...',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.blue[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
         ),
         const SizedBox(height: 8),
         TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Tìm sản phẩm...',
+            hintText: 'Tìm sản phẩm... (local + online)',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: _isSearching
                 ? const Padding(
@@ -351,16 +434,42 @@ class _AddProductScreenState extends State<AddProductScreen> {
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final template = _searchResults[index];
+                final isFromApi = template.id.startsWith('api_');
+
                 return ListTile(
                   leading: Text(
                     AppConstants.categoryIcons[template.category] ?? '📦',
                     style: const TextStyle(fontSize: 28),
                   ),
-                  title: Text(template.nameVi),
+                  title: Row(
+                    children: [
+                      Expanded(child: Text(template.nameVi)),
+                      if (isFromApi)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.green[50],
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.green[200]!),
+                          ),
+                          child: Text(
+                            'ONLINE',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                   subtitle: Text(
                     '${template.nameEn} • ${template.shelfLifeDays} ngày',
                     style: AppTheme.body2,
                   ),
+                  trailing: template.hasNutrition
+                      ? Icon(Icons.restaurant, size: 16, color: Colors.orange[700])
+                      : null,
                   onTap: () => _selectTemplate(template),
                 );
               },
