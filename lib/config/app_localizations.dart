@@ -281,17 +281,28 @@ class AppLocalizations {
       : '$count product${count != 1 ? 's' : ''}';
 
   // ==================== EXPIRING SOON ====================
-  String get expiringSoon => isVietnamese ? 'Sắp Hết Hạn' : 'Expiring Soon';
+  String get expiringSoon => isVietnamese ? 'Gần Hết Hạn' : 'Expiring Soon';
   String get within3Days => isVietnamese ? 'Trong 3 ngày' : 'Within 3 days';
   String get within7Days => isVietnamese ? 'Trong 7 ngày' : 'Within 7 days';
   String get allExpiring => isVietnamese ? 'Tất cả sắp hết hạn' : 'All Expiring';
   String get noExpiringItems => isVietnamese
-      ? 'Không có sản phẩm nào sắp hết hạn!'
-      : 'No items expiring soon!';
-  String get greatNews => isVietnamese ? 'Tin tốt!' : 'Great news!';
+      ? 'Không có sản phẩm nào sắp hết hạn'
+      : 'No products expiring soon';
+  String get greatNews => isVietnamese ? 'Tuyệt vời!' : 'Great!';
   String get allFresh => isVietnamese
       ? 'Tất cả sản phẩm của bạn đều còn tươi ngon'
       : 'All your products are still fresh';
+  String get productsExpiringSoon => isVietnamese
+      ? 'Sản phẩm gần hết hạn'
+      : 'Products expiring soon';
+  String get useSoonToAvoidWaste => isVietnamese
+      ? 'Hãy sử dụng sớm để tránh lãng phí'
+      : 'Use soon to avoid waste';
+  String get expiredItems => isVietnamese ? '❌ Đã Hết Hạn' : '❌ Expired';
+  String get expiringToday2 => isVietnamese ? '⏰ Hết Hạn Hôm Nay' : '⏰ Expiring Today';
+  String get urgentDays => isVietnamese ? '🚨 Khẩn Cấp (1-2 ngày)' : '🚨 Urgent (1-2 days)';
+  String get useSoonDays => isVietnamese ? '⚠️ Sử Dụng Sớm (3-7 ngày)' : '⚠️ Use Soon (3-7 days)';
+  String get days => isVietnamese ? 'ngày' : 'days';
   String expiresIn(int days) {
     if (days == 0) {
       return isVietnamese ? 'Hết hạn hôm nay' : 'Expires today';

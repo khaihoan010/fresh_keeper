@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 
@@ -56,9 +57,11 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gần Hết Hạn'),
+        title: Text(l10n.expiringSoon),
       ),
       body: Consumer<ProductProvider>(
         builder: (context, provider, _) {
@@ -76,15 +79,15 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                   const Text('✅', style: TextStyle(fontSize: 64)),
                   const SizedBox(height: 16),
                   Text(
-                    'Tuyệt vời!',
-                    style: AppTheme.h2.copyWith(
+                    l10n.greatNews,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: AppTheme.successColor,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Không có sản phẩm nào sắp hết hạn',
-                    style: AppTheme.body1,
+                    l10n.noExpiringItems,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -107,7 +110,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 // Expired
                 if (grouped['expired']!.isNotEmpty) ...[
                   _buildSectionHeader(
-                    '❌ Đã Hết Hạn',
+                    l10n.expiredItems,
                     grouped['expired']!.length,
                     AppTheme.errorColor,
                   ),
@@ -122,7 +125,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 // Today
                 if (grouped['today']!.isNotEmpty) ...[
                   _buildSectionHeader(
-                    '⏰ Hết Hạn Hôm Nay',
+                    l10n.expiringToday2,
                     grouped['today']!.length,
                     AppTheme.errorColor,
                   ),
@@ -137,7 +140,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 // Urgent (1-2 days)
                 if (grouped['urgent']!.isNotEmpty) ...[
                   _buildSectionHeader(
-                    '🚨 Khẩn Cấp (1-2 ngày)',
+                    l10n.urgentDays,
                     grouped['urgent']!.length,
                     AppTheme.errorColor,
                   ),
@@ -152,7 +155,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 // Soon (3-7 days)
                 if (grouped['soon']!.isNotEmpty) ...[
                   _buildSectionHeader(
-                    '⚠️ Sử Dụng Sớm (3-7 ngày)',
+                    l10n.useSoonDays,
                     grouped['soon']!.length,
                     AppTheme.warningColor,
                   ),
@@ -171,6 +174,8 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
   }
 
   Widget _buildSummaryCard(int count) {
+    final l10n = AppLocalizations.of(context);
+
     return Card(
       color: AppTheme.warningColor.withOpacity(0.1),
       child: Padding(
@@ -187,7 +192,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
               child: Center(
                 child: Text(
                   '$count',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppTheme.warningColor,
@@ -201,13 +206,13 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Sản phẩm gần hết hạn',
-                    style: AppTheme.h3,
+                    l10n.productsExpiringSoon,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Hãy sử dụng sớm để tránh lãng phí',
-                    style: AppTheme.body2,
+                    l10n.useSoonToAvoidWaste,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -225,7 +230,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
         children: [
           Text(
             title,
-            style: AppTheme.h3.copyWith(color: color),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: color),
           ),
           const SizedBox(width: 8),
           Container(
@@ -293,14 +298,14 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                   children: [
                     Text(
                       product.name,
-                      style: AppTheme.h3.copyWith(fontSize: 16),
+                      style: Theme.of(context).textTheme.titleMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '${product.quantity} ${product.unit}',
-                      style: AppTheme.body2,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: 4),
                     Row(
@@ -313,7 +318,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                         const SizedBox(width: 4),
                         Text(
                           product.daysRemainingText,
-                          style: AppTheme.body2.copyWith(
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: accentColor,
                             fontWeight: FontWeight.w600,
                           ),
@@ -325,47 +330,53 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
               ),
 
               // Days badge
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: accentColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        product.isExpired ? '!' : '${product.daysUntilExpiry}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      if (!product.isExpired)
-                        const Text(
-                          'ngày',
-                          style: TextStyle(
-                            fontSize: 8,
-                            color: Colors.white,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
+              _buildDaysBadge(product, accentColor),
 
               const SizedBox(width: 4),
 
               // Arrow
-              const Icon(
+              Icon(
                 Icons.chevron_right,
-                color: AppTheme.textSecondary,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDaysBadge(UserProduct product, Color accentColor) {
+    final l10n = AppLocalizations.of(context);
+
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: accentColor,
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              product.isExpired ? '!' : '${product.daysUntilExpiry}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            if (!product.isExpired)
+              Text(
+                l10n.days,
+                style: const TextStyle(
+                  fontSize: 8,
+                  color: Colors.white,
+                ),
+              ),
+          ],
         ),
       ),
     );
