@@ -229,6 +229,16 @@ class ProductRepository {
     }
   }
 
+  /// Get product template directly (for UI use)
+  Future<ProductTemplate?> getProductTemplate(String id) async {
+    try {
+      return await _localDataSource.getTemplateById(id);
+    } catch (e) {
+      debugPrint('❌ Repository: Error getting product template - $e');
+      return null;
+    }
+  }
+
   /// Get templates by category
   Future<Result<List<ProductTemplate>>> getTemplatesByCategory(
     String category,
