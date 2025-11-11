@@ -332,10 +332,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   AppConstants.categoryIcons[product.category] ?? '📦',
                   style: const TextStyle(fontSize: 32),
                 ),
-                title: Text(product.name, style: Theme.of(context).textTheme.titleLarge),
+                title: Text(product.name, style: Theme.of(context).textTheme.titleMedium),
                 subtitle: Text(
                   '$daysText • ${product.quantity} ${product.unit}',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 trailing: Container(
                   width: 12,
