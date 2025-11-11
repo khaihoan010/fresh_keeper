@@ -174,25 +174,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           ),
           PopupMenuButton(
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'mark_used',
                 child: Row(
                   children: [
-                    Icon(Icons.check_circle_outline),
-                    SizedBox(width: 12),
-                    Text('Đánh dấu đã dùng'),
+                    const Icon(Icons.check_circle_outline),
+                    const SizedBox(width: 12),
+                    Text(l10n.markUsed),
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'delete',
                 child: Row(
                   children: [
-                    Icon(Icons.delete_outline, color: AppTheme.errorColor),
-                    SizedBox(width: 12),
+                    const Icon(Icons.delete_outline, color: AppTheme.errorColor),
+                    const SizedBox(width: 12),
                     Text(
-                      'Xóa sản phẩm',
-                      style: TextStyle(color: AppTheme.errorColor),
+                      l10n.deleteProduct,
+                      style: const TextStyle(color: AppTheme.errorColor),
                     ),
                   ],
                 ),
