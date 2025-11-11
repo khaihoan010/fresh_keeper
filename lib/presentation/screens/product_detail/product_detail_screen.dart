@@ -47,13 +47,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   Future<void> _loadProductTemplate() async {
     if (_product.productTemplateId != null) {
+      debugPrint('🔍 Loading template for ID: ${_product.productTemplateId}');
       final repository = context.read<ProductRepository>();
       final template = await repository.getProductTemplate(_product.productTemplateId!);
+
+      if (template != null) {
+        debugPrint('✅ Template loaded: ${template.nameVi}');
+        debugPrint('📊 Has nutrition data: ${template.nutritionData != null}');
+        if (template.nutritionData != null) {
+          debugPrint('📊 Nutrition hasData: ${template.nutritionData!.hasData}');
+          debugPrint('📊 Nutrition details: ${template.nutritionData}');
+        } else {
+          debugPrint('⚠️ Nutrition data is NULL');
+        }
+      } else {
+        debugPrint('❌ Template not found for ID: ${_product.productTemplateId}');
+      }
+
       if (mounted) {
         setState(() {
           _productTemplate = template;
         });
       }
+    } else {
+      debugPrint('⚠️ Product has no templateId');
     }
   }
 
