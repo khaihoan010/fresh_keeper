@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
+import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../../data/models/nutrition_data.dart';
@@ -154,6 +155,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final categoryData = AppConstants.categories.firstWhere(
       (c) => c['id'] == _product.category,
       orElse: () => {
@@ -164,7 +166,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chi Tiết Sản Phẩm'),
+        title: Text(l10n.productDetail),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit_outlined),
@@ -219,7 +221,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     end: Alignment.bottomCenter,
                     colors: [
                       _product.getStatusColor().withOpacity(0.2),
-                      Colors.white,
+                      Theme.of(context).colorScheme.surface,
                     ],
                   ),
                 ),
@@ -231,7 +233,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -315,10 +317,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   labelColor: AppTheme.primaryColor,
                   unselectedLabelColor: Colors.grey,
                   indicatorColor: AppTheme.primaryColor,
-                  tabs: const [
-                    Tab(text: 'Thông Tin'),
-                    Tab(text: 'Dinh Dưỡng'),
-                    Tab(text: 'Sức Khỏe'),
+                  tabs: [
+                    Tab(text: l10n.information),
+                    Tab(text: l10n.nutrition),
+                    Tab(text: l10n.health),
                   ],
                 ),
               ),
@@ -889,7 +891,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),

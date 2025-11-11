@@ -192,7 +192,114 @@ class AppLocalizations {
   String get category => isVietnamese ? 'Danh mục' : 'Category';
   String get selectCategory =>
       isVietnamese ? 'Chọn danh mục' : 'Select Category';
+  String get enterProductName =>
+      isVietnamese ? 'Nhập tên sản phẩm' : 'Enter product name';
+  String get enterQuantity =>
+      isVietnamese ? 'Nhập số lượng' : 'Enter quantity';
+  String get selectDate => isVietnamese ? 'Chọn ngày' : 'Select date';
+  String get selectLocation => isVietnamese ? 'Chọn vị trí' : 'Select location';
+  String get addNotes => isVietnamese ? 'Thêm ghi chú (tùy chọn)' : 'Add notes (optional)';
+  String get productAdded => isVietnamese ? 'Đã thêm sản phẩm' : 'Product added';
+  String get searching => isVietnamese ? 'Đang tìm kiếm...' : 'Searching...';
+  String get searchingOnline => isVietnamese ? 'Đang tìm online...' : 'Searching online...';
+  String get noResults => isVietnamese ? 'Không tìm thấy kết quả' : 'No results found';
+  String get typeToSearch => isVietnamese ? 'Nhập để tìm kiếm' : 'Type to search';
+  String get fridge => isVietnamese ? 'Tủ lạnh' : 'Fridge';
+  String get freezer => isVietnamese ? 'Tủ đông' : 'Freezer';
+  String get pantry => isVietnamese ? 'Tủ đồ khô' : 'Pantry';
+  String get units => isVietnamese ? 'cái' : 'pcs';
+  String get nutritionInfo => isVietnamese ? 'Thông tin dinh dưỡng' : 'Nutrition Info';
+  String get noNutritionInfoYet => isVietnamese
+      ? 'Thông tin dinh dưỡng sẽ được cập nhật sau'
+      : 'Nutrition information will be updated later';
+
+  // ==================== ALL ITEMS SCREEN ====================
+  String get sortBy => isVietnamese ? 'Sắp xếp theo' : 'Sort by';
+  String get filterBy => isVietnamese ? 'Lọc theo' : 'Filter by';
+  String get expiryDateSoon => isVietnamese ? 'Hạn sử dụng (gần nhất)' : 'Expiry Date (Soonest)';
+  String get expiryDateLate => isVietnamese ? 'Hạn sử dụng (xa nhất)' : 'Expiry Date (Latest)';
+  String get nameAZ => isVietnamese ? 'Tên (A-Z)' : 'Name (A-Z)';
+  String get nameZA => isVietnamese ? 'Tên (Z-A)' : 'Name (Z-A)';
+  String get addedNewest => isVietnamese ? 'Mới thêm nhất' : 'Recently Added';
+  String get addedOldest => isVietnamese ? 'Cũ nhất' : 'Oldest';
+  String get allCategories => isVietnamese ? 'Tất cả danh mục' : 'All Categories';
+  String get allLocations => isVietnamese ? 'Tất cả vị trí' : 'All Locations';
+  String get noProducts => isVietnamese ? 'Chưa có sản phẩm nào' : 'No products yet';
+  String get noProductsInCategory => isVietnamese
+      ? 'Chưa có sản phẩm nào trong danh mục này'
+      : 'No products in this category';
+  String get addFirstProduct => isVietnamese
+      ? 'Thêm sản phẩm đầu tiên của bạn!'
+      : 'Add your first product!';
+  String productsCount(int count) => isVietnamese
+      ? '$count sản phẩm'
+      : '$count product${count != 1 ? 's' : ''}';
+
+  // ==================== EXPIRING SOON ====================
+  String get expiringSoon => isVietnamese ? 'Sắp Hết Hạn' : 'Expiring Soon';
+  String get within3Days => isVietnamese ? 'Trong 3 ngày' : 'Within 3 days';
+  String get within7Days => isVietnamese ? 'Trong 7 ngày' : 'Within 7 days';
+  String get allExpiring => isVietnamese ? 'Tất cả sắp hết hạn' : 'All Expiring';
+  String get noExpiringItems => isVietnamese
+      ? 'Không có sản phẩm nào sắp hết hạn!'
+      : 'No items expiring soon!';
+  String get greatNews => isVietnamese ? 'Tin tốt!' : 'Great news!';
+  String get allFresh => isVietnamese
+      ? 'Tất cả sản phẩm của bạn đều còn tươi ngon'
+      : 'All your products are still fresh';
+  String expiresIn(int days) {
+    if (days == 0) {
+      return isVietnamese ? 'Hết hạn hôm nay' : 'Expires today';
+    } else if (days == 1) {
+      return isVietnamese ? 'Hết hạn ngày mai' : 'Expires tomorrow';
+    } else {
+      return isVietnamese ? 'Hết hạn sau $days ngày' : 'Expires in $days days';
+    }
+  }
+
+  // ==================== PRODUCT DETAIL - EXTENDED ====================
+  String get basicInfo => isVietnamese ? 'Thông tin cơ bản' : 'Basic Information';
+  String get nutritionValue => isVietnamese ? 'Giá Trị Dinh Dưỡng' : 'Nutrition Value';
+  String get servingSize => isVietnamese ? 'Khẩu phần ăn' : 'Serving Size';
+  String get calories => isVietnamese ? 'Calo' : 'Calories';
+  String get protein => isVietnamese ? 'Protein' : 'Protein';
+  String get carbohydrates => isVietnamese ? 'Carbohydrate' : 'Carbohydrates';
+  String get fat => isVietnamese ? 'Chất béo' : 'Fat';
+  String get fiber => isVietnamese ? 'Chất xơ' : 'Fiber';
+  String get sugar => isVietnamese ? 'Đường' : 'Sugar';
+  String get vitamins => isVietnamese ? 'Vitamin' : 'Vitamins';
+  String get minerals => isVietnamese ? 'Khoáng chất' : 'Minerals';
+  String get markUsed => isVietnamese ? 'Đánh dấu đã dùng' : 'Mark as used';
+
+  // ==================== HOME SCREEN - EXTENDED ====================
+  String get welcomeBack => isVietnamese ? 'Chào mừng trở lại!' : 'Welcome back!';
+  String get yourFridge => isVietnamese ? 'Tủ lạnh của bạn' : 'Your Fridge';
+  String get itemsTotal => isVietnamese ? 'tổng cộng' : 'total';
+  String get items => isVietnamese ? 'sản phẩm' : 'items';
+  String get needAttention => isVietnamese ? 'cần chú ý' : 'need attention';
+  String get viewAll => isVietnamese ? 'Xem tất cả' : 'View All';
+  String get recentlyAdded => isVietnamese ? 'Mới thêm gần đây' : 'Recently Added';
+  String get noRecentProducts => isVietnamese
+      ? 'Chưa có sản phẩm nào'
+      : 'No recent products';
+
+  // ==================== BUTTONS & ACTIONS ====================
+  String get add => isVietnamese ? 'Thêm' : 'Add';
+  String get edit => isVietnamese ? 'Sửa' : 'Edit';
+  String get update => isVietnamese ? 'Cập nhật' : 'Update';
+  String get remove => isVietnamese ? 'Xóa' : 'Remove';
+  String get confirm => isVietnamese ? 'Xác nhận' : 'Confirm';
+  String get done => isVietnamese ? 'Xong' : 'Done';
+  String get back => isVietnamese ? 'Quay lại' : 'Back';
+  String get next => isVietnamese ? 'Tiếp theo' : 'Next';
+  String get skip => isVietnamese ? 'Bỏ qua' : 'Skip';
+  String get retry => isVietnamese ? 'Thử lại' : 'Retry';
+  String get refresh => isVietnamese ? 'Làm mới' : 'Refresh';
+  String get clear => isVietnamese ? 'Xóa' : 'Clear';
+  String get apply => isVietnamese ? 'Áp dụng' : 'Apply';
+  String get reset => isVietnamese ? 'Đặt lại' : 'Reset';
 }
+
 
 class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {
