@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../data_sources/local/product_local_data_source.dart';
 import '../models/user_product.dart';
 import '../models/product_template.dart';
-import '../models/category.dart';
+import '../models/category.dart' as models;
 
 /// Result wrapper for repository operations
 class Result<T> {
@@ -245,7 +245,7 @@ class ProductRepository {
   // ==================== CATEGORIES ====================
 
   /// Get all categories
-  Future<Result<List<Category>>> getAllCategories() async {
+  Future<Result<List<models.Category>>> getAllCategories() async {
     try {
       final categories = await _localDataSource.getAllCategories();
       return Result.success(categories);
@@ -256,7 +256,7 @@ class ProductRepository {
   }
 
   /// Get category by ID
-  Future<Result<Category>> getCategory(String id) async {
+  Future<Result<models.Category>> getCategory(String id) async {
     try {
       final category = await _localDataSource.getCategoryById(id);
       if (category == null) {

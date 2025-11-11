@@ -5,7 +5,7 @@ import '../../../services/database_service.dart';
 import '../../../config/constants.dart';
 import '../../models/user_product.dart';
 import '../../models/product_template.dart';
-import '../../models/category.dart';
+import '../../models/category.dart' as models;
 
 /// Product Local Data Source
 /// Handles all database operations for products
@@ -345,7 +345,7 @@ class ProductLocalDataSource {
   // ==================== CATEGORIES ====================
 
   /// Get all categories
-  Future<List<Category>> getAllCategories() async {
+  Future<List<models.Category>> getAllCategories() async {
     try {
       final db = await _databaseService.database;
       final results = await db.query(
@@ -353,7 +353,7 @@ class ProductLocalDataSource {
         orderBy: 'sort_order ASC',
       );
 
-      return results.map((json) => Category.fromJson(json)).toList();
+      return results.map((json) => models.Category.fromJson(json)).toList();
     } catch (e) {
       debugPrint('❌ Error getting all categories: $e');
       rethrow;
@@ -361,7 +361,7 @@ class ProductLocalDataSource {
   }
 
   /// Get category by ID
-  Future<Category?> getCategoryById(String id) async {
+  Future<models.Category?> getCategoryById(String id) async {
     try {
       final db = await _databaseService.database;
       final results = await db.query(
@@ -372,7 +372,7 @@ class ProductLocalDataSource {
       );
 
       if (results.isEmpty) return null;
-      return Category.fromJson(results.first);
+      return models.Category.fromJson(results.first);
     } catch (e) {
       debugPrint('❌ Error getting category by ID: $e');
       rethrow;

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../data/models/user_product.dart';
 import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/add_product/add_product_screen.dart';
+import '../presentation/screens/all_items/all_items_screen.dart';
+import '../presentation/screens/expiring_soon/expiring_soon_screen.dart';
+import '../presentation/screens/product_detail/product_detail_screen.dart';
+import '../presentation/screens/edit_product/edit_product_screen.dart';
+import '../presentation/screens/settings/settings_screen.dart';
 
 /// Application Routes
 class AppRoutes {
@@ -21,94 +29,94 @@ class AppRoutes {
   static const String about = '/about';
 
   /// Generate routes
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
+  static Route<dynamic> generateRoute(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
       case splash:
         return _buildRoute(
           const SplashScreen(),
-          settings,
+          routeSettings,
         );
 
       case onboarding:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with OnboardingScreen()
-          settings,
+          const OnboardingScreen(),
+          routeSettings,
         );
 
       case home:
         return _buildRoute(
           const HomeScreen(),
-          settings,
+          routeSettings,
         );
 
       case addProduct:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with AddProductScreen()
-          settings,
+          const AddProductScreen(),
+          routeSettings,
           fullscreenDialog: true,
         );
 
       case allItems:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with AllItemsScreen()
-          settings,
+          const AllItemsScreen(),
+          routeSettings,
         );
 
       case expiringSoon:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with ExpiringSoonScreen()
-          settings,
+          const ExpiringSoonScreen(),
+          routeSettings,
         );
 
       case productDetail:
-        // final product = settings.arguments as UserProduct;
+        final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with ProductDetailScreen(product: product)
-          settings,
+          ProductDetailScreen(product: product),
+          routeSettings,
         );
 
       case editProduct:
-        // final product = settings.arguments as UserProduct;
+        final product = routeSettings.arguments as UserProduct;
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with EditProductScreen(product: product)
-          settings,
+          EditProductScreen(product: product),
+          routeSettings,
           fullscreenDialog: true,
         );
 
       case settings:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with SettingsScreen()
-          settings,
+          const SettingsScreen(),
+          routeSettings,
         );
 
       case notificationSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with NotificationSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case themeSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with ThemeSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case languageSettings:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with LanguageSettingsScreen()
-          settings,
+          routeSettings,
         );
 
       case about:
         return _buildRoute(
           const Placeholder(), // TODO: Replace with AboutScreen()
-          settings,
+          routeSettings,
         );
 
       default:
         return _buildRoute(
-          _ErrorScreen(routeName: settings.name ?? 'unknown'),
-          settings,
+          _ErrorScreen(routeName: routeSettings.name ?? 'unknown'),
+          routeSettings,
         );
     }
   }
