@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/home/home_screen.dart';
+
 /// Application Routes
 class AppRoutes {
   // Route Names
@@ -22,7 +25,7 @@ class AppRoutes {
     switch (settings.name) {
       case splash:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with SplashScreen()
+          const SplashScreen(),
           settings,
         );
 
@@ -34,7 +37,7 @@ class AppRoutes {
 
       case home:
         return _buildRoute(
-          const Placeholder(), // TODO: Replace with HomeScreen()
+          const HomeScreen(),
           settings,
         );
 
