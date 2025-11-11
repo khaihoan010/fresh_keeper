@@ -4,53 +4,92 @@ import 'package:provider/provider.dart';
 import 'config/theme.dart';
 import 'config/routes.dart';
 import 'config/constants.dart';
+import 'services/database_service.dart';
+import 'data/data_sources/local/product_local_data_source.dart';
+import 'data/repositories/product_repository.dart';
+import 'presentation/providers/product_provider.dart';
+import 'presentation/providers/settings_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: Initialize services
-  // - Database
-  // - Notifications
-  // - SharedPreferences
+  // Initialize services
+  final databaseService = DatabaseService();
+  await databaseService.database; // Initialize database
 
-  runApp(const FreshKeeperApp());
+  // Initialize settings
+  final settingsProvider = SettingsProvider();
+  await settingsProvider.initialize();
+
+  runApp(FreshKeeperApp(
+    databaseService: databaseService,
+    settingsProvider: settingsProvider,
+  ));
 }
 
 class FreshKeeperApp extends StatelessWidget {
-  const FreshKeeperApp({super.key});
+  final DatabaseService databaseService;
+  final SettingsProvider settingsProvider;
+
+  const FreshKeeperApp({
+    super.key,
+    required this.databaseService,
+    required this.settingsProvider,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Create data source and repository
+    final productDataSource = ProductLocalDataSource(databaseService);
+    final productRepository = ProductRepository(productDataSource);
+
     return MultiProvider(
       providers: [
-        // TODO: Add providers here
-        // ChangeNotifierProvider(create: (_) => ProductProvider()),
-        // ChangeNotifierProvider(create: (_) => NotificationProvider()),
-        // ChangeNotifierProvider(create: (_) => SettingsProvider()),
+        // Settings Provider
+        ChangeNotifierProvider<SettingsProvider>.value(
+          value: settingsProvider,
+        ),
+
+        // Product Provider
+        ChangeNotifierProvider<ProductProvider>(
+          create: (_) => ProductProvider(productRepository),
+        ),
+
+        // TODO: Notification Provider
+        // ChangeNotifierProvider<NotificationProvider>(
+        //   create: (_) => NotificationProvider(),
+        // ),
       ],
-      child: MaterialApp(
-        title: AppConstants.appName,
-        debugShowCheckedModeBanner: false,
+      child: Consumer<SettingsProvider>(
+        builder: (context, settings, _) {
+          return MaterialApp(
+            title: AppConstants.appName,
+            debugShowCheckedModeBanner: false,
 
-        // Theme
-        theme: AppTheme.lightTheme,
-        // darkTheme: AppTheme.darkTheme, // TODO: Implement dark theme
-        themeMode: ThemeMode.light,
+            // Theme
+            theme: AppTheme.lightTheme,
+            // darkTheme: AppTheme.darkTheme, // TODO: Implement dark theme
+            themeMode: settings.themeMode,
 
-        // Routes
-        initialRoute: AppRoutes.splash,
-        onGenerateRoute: AppRoutes.generateRoute,
+            // Routes
+            initialRoute: settings.onboardingCompleted
+                ? AppRoutes.home
+                : AppRoutes.splash,
+            onGenerateRoute: AppRoutes.generateRoute,
 
-        // Localization (TODO: Implement later)
-        // localizationsDelegates: [
-        //   AppLocalizations.delegate,
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        // ],
-        // supportedLocales: [
-        //   Locale('vi', ''),
-        //   Locale('en', ''),
-        // ],
+            // Localization (TODO: Implement later)
+            // locale: Locale(settings.language, ''),
+            // localizationsDelegates: [
+            //   AppLocalizations.delegate,
+            //   GlobalMaterialLocalizations.delegate,
+            //   GlobalWidgetsLocalizations.delegate,
+            // ],
+            // supportedLocales: [
+            //   Locale('vi', ''),
+            //   Locale('en', ''),
+            // ],
+          );
+        },
       ),
     );
   }
