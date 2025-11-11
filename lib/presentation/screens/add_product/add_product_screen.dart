@@ -77,13 +77,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
         final apiResults = await _nutritionApiService.searchProducts(query);
 
         if (mounted && apiResults.isNotEmpty) {
-          // Merge: LOCAL FIRST, then ONLINE (local items stay on top)
-          final allResults = [...localResults]; // Local results FIRST
+          // Merge: LOCAL FIRST (current _searchResults), then ONLINE
+          // Use _searchResults instead of localResults to preserve what's currently displayed
+          final allResults = [..._searchResults]; // Current displayed results FIRST
+
           for (final apiResult in apiResults) {
-            // Check if already exists in local results
-            final exists = allResults.any((local) =>
-              local.nameVi.toLowerCase() == apiResult.nameVi.toLowerCase() ||
-              local.nameEn.toLowerCase() == apiResult.nameEn.toLowerCase()
+            // Check if already exists in current results
+            final exists = allResults.any((existing) =>
+              existing.nameVi.toLowerCase() == apiResult.nameVi.toLowerCase() ||
+              existing.nameEn.toLowerCase() == apiResult.nameEn.toLowerCase()
             );
             if (!exists) {
               allResults.add(apiResult); // Online results AFTER local
