@@ -437,7 +437,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
@@ -712,10 +711,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         children: [
           // Health Benefits
           if (hasHealthBenefits) ...[
-            Text(l10n.healthBenefits, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.healthBenefits,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -745,10 +748,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           // Health Warnings
           if (hasHealthWarnings) ...[
             const SizedBox(height: 24),
-            Text(l10n.healthWarnings, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              l10n.healthWarnings,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 12),
             Card(
-              color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -869,7 +876,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   child: LinearProgressIndicator(
                     value: percentage.clamp(0, 1),
                     minHeight: 8,
-                    backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark
+                        ? Theme.of(context).colorScheme.surfaceContainerHighest
+                        : Colors.grey[300],
                     valueColor: AlwaysStoppedAnimation<Color>(
                       isWarning
                           ? Theme.of(context).colorScheme.error
