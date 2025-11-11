@@ -23,7 +23,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _quantityController = TextEditingController(text: '1');
   final _searchController = TextEditingController();
 
-  String _selectedCategory = 'produce';
+  String _selectedCategory = 'vegetables';
   String _selectedUnit = 'kg';
   DateTime _purchaseDate = DateTime.now();
   DateTime? _expiryDate;
