@@ -227,6 +227,15 @@ class AppLocalizations {
   String get none => isVietnamese ? 'Không có' : 'None';
   String get productInformation => isVietnamese ? 'Thông tin sản phẩm' : 'Product Information';
   String get shelfLife => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
+  String get saveChanges => isVietnamese ? 'Lưu Thay Đổi' : 'Save Changes';
+  String get storageLocation => isVietnamese ? 'Vị trí lưu trữ' : 'Storage Location';
+  String get storageLocationHint => isVietnamese ? 'Ví dụ: Tủ lạnh, Kệ bếp' : 'e.g.: Fridge, Kitchen shelf';
+  String productUpdated(String name) => isVietnamese
+      ? '✅ Đã cập nhật $name'
+      : '✅ Updated $name';
+  String get cannotUpdateProduct => isVietnamese
+      ? 'Không thể cập nhật sản phẩm'
+      : 'Cannot update product';
   String get storage => isVietnamese ? 'Bảo quản' : 'Storage';
   String get benefits => isVietnamese ? 'Lợi ích' : 'Benefits';
   String barcodeFound(String productName) => isVietnamese

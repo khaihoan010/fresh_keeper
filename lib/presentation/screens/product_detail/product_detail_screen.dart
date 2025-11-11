@@ -271,7 +271,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                     // Category
                     Chip(
                       label: Text(
-                        categoryData['name_vi'] as String,
+                        categoryData[l10n.isVietnamese ? 'name_vi' : 'name_en'] as String,
                         style: const TextStyle(fontSize: 12),
                       ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
