@@ -47,5 +47,38 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Ứng dụng cần quyền truy cập camera để quét mã vạch sản phẩm</string>
+
+	<!-- Unity Ads: App Tracking Transparency (Required for iOS 14+) -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Ứng dụng sử dụng dữ liệu để hiển thị quảng cáo phù hợp với bạn</string>
+
+	<!-- Unity Ads: SKAdNetwork IDs for ad attribution -->
+	<key>SKAdNetworkItems</key>
+	<array>
+		<!-- Unity Ads -->
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>4dzt52r2t5.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>bvpn9ufa9b.skadnetwork</string>
+		</dict>
+		<!-- Google AdMob (Unity Ads mediation partner) -->
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+		<!-- IronSource (Unity Ads mediation partner) -->
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>su67r6k2v3.skadnetwork</string>
+		</dict>
+		<!-- AppLovin (Unity Ads mediation partner) -->
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>ludvb6z3bs.skadnetwork</string>
+		</dict>
+	</array>
 </dict>
 </plist>
