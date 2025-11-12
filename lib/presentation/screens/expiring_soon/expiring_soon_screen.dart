@@ -80,7 +80,11 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('✅', style: TextStyle(fontSize: 64)),
+                        Icon(
+                          Icons.check_circle_outline,
+                          size: 80,
+                          color: AppTheme.successColor,
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           l10n.greatNews,
