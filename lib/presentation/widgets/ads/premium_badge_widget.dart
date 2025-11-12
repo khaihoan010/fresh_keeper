@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../config/app_localizations.dart';
 import '../../../config/theme.dart';
 import '../../providers/subscription_provider.dart';
 
@@ -18,6 +19,8 @@ class PremiumBadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Consumer<SubscriptionProvider>(
       builder: (context, subscriptionProvider, child) {
         if (!subscriptionProvider.isPremium) {
@@ -57,9 +60,9 @@ class PremiumBadgeWidget extends StatelessWidget {
               ),
               if (showText) ...[
                 const SizedBox(width: 6),
-                const Text(
-                  'Premium',
-                  style: TextStyle(
+                Text(
+                  l10n.premium,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -88,6 +91,8 @@ class PremiumUpgradeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Consumer<SubscriptionProvider>(
       builder: (context, subscriptionProvider, child) {
         // Don't show if already premium
@@ -99,7 +104,7 @@ class PremiumUpgradeButton extends StatelessWidget {
           return TextButton.icon(
             onPressed: onPressed,
             icon: const Icon(Icons.workspace_premium, size: 20),
-            label: const Text('Nâng cấp Premium'),
+            label: Text(l10n.upgradeToPremium),
             style: TextButton.styleFrom(
               foregroundColor: const Color(0xFFFFD700),
               backgroundColor: const Color(0xFFFFD700).withOpacity(0.1),
@@ -128,9 +133,9 @@ class PremiumUpgradeButton extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: onPressed,
             icon: const Icon(Icons.workspace_premium, size: 24),
-            label: const Text(
-              'Nâng cấp lên Premium',
-              style: TextStyle(
+            label: Text(
+              l10n.upgradeToPremium,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
