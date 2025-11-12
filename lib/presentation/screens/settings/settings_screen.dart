@@ -481,8 +481,8 @@ Manage your fridge smartly and reduce food waste! 🌱
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(l10n.isVietnamese
-                ? '⚠️ Không thể chia sẻ ứng dụng'
-                : '⚠️ Cannot share app'),
+                ? 'Không thể chia sẻ ứng dụng'
+                : 'Cannot share app'),
             backgroundColor: AppTheme.errorColor,
           ),
         );
@@ -524,8 +524,8 @@ Manage your fridge smartly and reduce food waste! 🌱
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(l10n.isVietnamese
-                  ? 'Cảm ơn bạn đã quan tâm! 💚'
-                  : 'Thank you for your interest! 💚'),
+                  ? 'Cảm ơn bạn đã quan tâm!'
+                  : 'Thank you for your interest!'),
               backgroundColor: AppTheme.successColor,
             ),
           );

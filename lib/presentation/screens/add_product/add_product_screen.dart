@@ -192,7 +192,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(l10n.barcodeScanError),
-              backgroundColor: Theme.of(context).colorScheme.error,
+              backgroundColor: AppTheme.errorColor,
             ),
           );
         }
@@ -259,7 +259,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(l10n.selectExpiryDate),
-          backgroundColor: Theme.of(context).colorScheme.error,
+          backgroundColor: AppTheme.errorColor,
         ),
       );
       return;

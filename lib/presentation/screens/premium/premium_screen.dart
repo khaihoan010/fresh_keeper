@@ -219,6 +219,9 @@ class PremiumScreen extends StatelessWidget {
                                 ? l10n.purchaseRestored
                                 : l10n.noPurchasesFound,
                           ),
+                          backgroundColor: subscriptionProvider.isPremium
+                              ? AppTheme.successColor
+                              : AppTheme.warningColor,
                         ),
                       );
                     }

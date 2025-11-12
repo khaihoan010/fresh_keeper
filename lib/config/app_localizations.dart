@@ -151,15 +151,15 @@ class AppLocalizations {
 
   // ==================== MESSAGES ====================
   String productDeleted(String name) => isVietnamese
-      ? '✅ Đã xóa $name'
-      : '✅ Deleted $name';
+      ? 'Đã xóa $name'
+      : 'Deleted $name';
 
   String productMarkedAsUsed(String name) => isVietnamese
-      ? '✅ Đã đánh dấu "$name" là đã dùng'
-      : '✅ Marked "$name" as used';
+      ? 'Đã đánh dấu "$name" là đã dùng'
+      : 'Marked "$name" as used';
 
   String get allDataCleared =>
-      isVietnamese ? '✅ Đã xóa tất cả dữ liệu' : '✅ All data cleared';
+      isVietnamese ? 'Đã xóa tất cả dữ liệu' : 'All data cleared';
 
   String get thankYou => isVietnamese ? 'Cảm ơn bạn!' : 'Thank You!';
   String get developmentPhase => isVietnamese
@@ -231,25 +231,25 @@ class AppLocalizations {
   String get storageLocation => isVietnamese ? 'Vị trí lưu trữ' : 'Storage Location';
   String get storageLocationHint => isVietnamese ? 'Ví dụ: Tủ lạnh, Kệ bếp' : 'e.g.: Fridge, Kitchen shelf';
   String productUpdated(String name) => isVietnamese
-      ? '✅ Đã cập nhật $name'
-      : '✅ Updated $name';
+      ? 'Đã cập nhật $name'
+      : 'Updated $name';
   String get cannotUpdateProduct => isVietnamese
       ? 'Không thể cập nhật sản phẩm'
       : 'Cannot update product';
   String get storage => isVietnamese ? 'Bảo quản' : 'Storage';
   String get benefits => isVietnamese ? 'Lợi ích' : 'Benefits';
   String barcodeFound(String productName) => isVietnamese
-      ? '✅ Đã tìm thấy: $productName'
-      : '✅ Found: $productName';
+      ? 'Đã tìm thấy: $productName'
+      : 'Found: $productName';
   String get barcodeNotFound => isVietnamese
-      ? '⚠️ Không tìm thấy sản phẩm với mã vạch này'
-      : '⚠️ No product found with this barcode';
+      ? 'Không tìm thấy sản phẩm với mã vạch này'
+      : 'No product found with this barcode';
   String get barcodeScanError => isVietnamese
-      ? '❌ Lỗi khi quét mã vạch'
-      : '❌ Error scanning barcode';
+      ? 'Lỗi khi quét mã vạch'
+      : 'Error scanning barcode';
   String productAddedSuccess(String productName) => isVietnamese
-      ? '✅ Đã thêm $productName'
-      : '✅ Added $productName';
+      ? 'Đã thêm $productName'
+      : 'Added $productName';
   String get cannotAddProduct => isVietnamese
       ? 'Không thể thêm sản phẩm'
       : 'Cannot add product';
@@ -301,10 +301,10 @@ class AppLocalizations {
   String get useSoonToAvoidWaste => isVietnamese
       ? 'Hãy sử dụng sớm để tránh lãng phí'
       : 'Use soon to avoid waste';
-  String get expiredItems => isVietnamese ? '❌ Đã Hết Hạn' : '❌ Expired';
-  String get expiringToday2 => isVietnamese ? '⏰ Hết Hạn Hôm Nay' : '⏰ Expiring Today';
-  String get urgentDays => isVietnamese ? '🚨 Khẩn Cấp (1-2 ngày)' : '🚨 Urgent (1-2 days)';
-  String get useSoonDays => isVietnamese ? '⚠️ Sử Dụng Sớm (3-7 ngày)' : '⚠️ Use Soon (3-7 days)';
+  String get expiredItems => isVietnamese ? 'Đã Hết Hạn' : 'Expired';
+  String get expiringToday2 => isVietnamese ? 'Hết Hạn Hôm Nay' : 'Expiring Today';
+  String get urgentDays => isVietnamese ? 'Khẩn Cấp (1-2 ngày)' : 'Urgent (1-2 days)';
+  String get useSoonDays => isVietnamese ? 'Sử Dụng Sớm (3-7 ngày)' : 'Use Soon (3-7 days)';
   String get days => isVietnamese ? 'ngày' : 'days';
 
   // Days remaining text helpers
