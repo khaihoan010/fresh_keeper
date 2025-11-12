@@ -437,6 +437,17 @@ class AppLocalizations {
       ? 'Mua 1 lần, sử dụng mãi mãi'
       : 'One-time purchase, use forever';
 
+  // Plan descriptions
+  String get monthlyDescription => isVietnamese
+      ? 'Không quảng cáo, sao lưu đám mây, themes độc quyền'
+      : 'No ads, cloud backup, exclusive themes';
+  String get yearlyDescription => isVietnamese
+      ? 'Tiết kiệm 32% so với gói tháng. Tất cả tính năng premium.'
+      : 'Save 32% vs monthly. All premium features.';
+  String get lifetimeDescription => isVietnamese
+      ? 'Mua 1 lần, sử dụng mãi mãi. Không cần đăng ký hàng tháng.'
+      : 'One-time purchase, use forever. No monthly subscription.';
+
   // Purchase actions
   String get restorePurchases => isVietnamese
       ? 'Khôi phục gói đã mua'
@@ -461,9 +472,9 @@ class AppLocalizations {
   String confirmUpgradeMessage(String planName) => isVietnamese
       ? 'Bạn có chắc muốn nâng cấp lên Premium với gói $planName?'
       : 'Are you sure you want to upgrade to Premium with $planName plan?';
-  String get proceedToPurchase => isVietnamese
-      ? 'Tiến hành thanh toán'
-      : 'Proceed to Purchase';
+  String get purchase => isVietnamese
+      ? 'Mua'
+      : 'Purchase';
 }
 
 
