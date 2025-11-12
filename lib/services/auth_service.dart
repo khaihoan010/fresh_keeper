@@ -1,16 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
 /// Firebase Authentication Service
 /// Handles user authentication for VIP membership
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth? _auth;
+
+  // Lazy initialization of FirebaseAuth
+  FirebaseAuth? get _authInstance {
+    try {
+      if (Firebase.apps.isEmpty) {
+        debugPrint('⚠️ Firebase not initialized - AuthService unavailable');
+        return null;
+      }
+      _auth ??= FirebaseAuth.instance;
+      return _auth;
+    } catch (e) {
+      debugPrint('⚠️ Firebase Auth not available: $e');
+      return null;
+    }
+  }
 
   // Get current user
-  User? get currentUser => _auth.currentUser;
+  User? get currentUser => _authInstance?.currentUser;
 
   // Auth state changes stream
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
+  Stream<User?> get authStateChanges =>
+      _authInstance?.authStateChanges() ?? Stream.value(null);
 
   // Check if user is signed in
   bool get isSignedIn => currentUser != null;
@@ -22,7 +39,10 @@ class AuthService {
   /// This allows them to use the app and potentially upgrade to premium
   Future<UserCredential?> signInAnonymously() async {
     try {
-      final result = await _auth.signInAnonymously();
+      final auth = _authInstance;
+      if (auth == null) return null;
+
+      final result = await auth.signInAnonymously();
       debugPrint('✅ Signed in anonymously: ${result.user?.uid}');
       return result;
     } catch (e) {
@@ -37,7 +57,10 @@ class AuthService {
     String password,
   ) async {
     try {
-      final result = await _auth.signInWithEmailAndPassword(
+      final auth = _authInstance;
+      if (auth == null) return null;
+
+      final result = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -55,7 +78,10 @@ class AuthService {
     String password,
   ) async {
     try {
-      final result = await _auth.createUserWithEmailAndPassword(
+      final auth = _authInstance;
+      if (auth == null) return null;
+
+      final result = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -70,7 +96,10 @@ class AuthService {
   /// Sign out
   Future<void> signOut() async {
     try {
-      await _auth.signOut();
+      final auth = _authInstance;
+      if (auth == null) return;
+
+      await auth.signOut();
       debugPrint('✅ Signed out');
     } catch (e) {
       debugPrint('❌ Error signing out: $e');
@@ -80,7 +109,10 @@ class AuthService {
   /// Send password reset email
   Future<void> sendPasswordResetEmail(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      final auth = _authInstance;
+      if (auth == null) return;
+
+      await auth.sendPasswordResetEmail(email: email);
       debugPrint('✅ Password reset email sent to: $email');
     } catch (e) {
       debugPrint('❌ Error sending password reset email: $e');
