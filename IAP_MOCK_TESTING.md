@@ -103,10 +103,124 @@ static const bool _debugForcePremium = false; // ← MUST set to false!
 - Tạo fake IAP products
 - Mock purchase process
 - Test full premium flow including UI
+- Simulate 90% success rate, 10% failure for realistic testing
 
-### Implementation:
+### Implementation: ✅ COMPLETE
 
-Tôi sẽ implement đầy đủ cho bạn. Let me create the files:
+**File created:** `lib/services/mock_iap_service.dart`
+
+Tôi đã implement đầy đủ Mock IAP service với các tính năng:
+- 3 fake products (Monthly, Yearly, Lifetime)
+- Mock purchase với delay 2 giây
+- Mock restore purchases với delay 1 giây
+- 90% success rate, 10% failure cho realistic testing
+- Chi tiết logs để debug
+
+### Cách dùng:
+
+#### Bước 1: Enable Mock IAP
+```dart
+// lib/services/mock_iap_service.dart
+static const bool useMockIAP = true; // ← Set to true
+```
+
+#### Bước 2: Run app
+```bash
+flutter run
+```
+
+#### Bước 3: Test Purchase Flow
+1. Mở app → Settings → Premium
+2. Sẽ thấy 3 products:
+   - **Monthly**: 49.000₫
+   - **Yearly**: 399.000₫ (Tiết kiệm 32%)
+   - **Lifetime**: 999.000₫ (Tốt nhất)
+3. Chọn gói → Click "Xác nhận"
+4. Loading 2 giây (simulated payment)
+5. Kết quả:
+   - **90% trường hợp**: "Thanh toán thành công!" → Premium activated
+   - **10% trường hợp**: "Thanh toán bị hủy" → Thử lại
+
+#### Bước 4: Verify Premium Active
+Sau khi purchase thành công:
+- ✅ Premium screen hiện: "Bạn là thành viên Premium!"
+- ✅ Settings có Premium badge
+- ✅ Banner ads biến mất
+- ✅ Add 3+ products → KHÔNG có interstitial ads
+
+#### Bước 5: Test Restore Purchases
+1. Settings → Premium → "Khôi phục gói đã mua"
+2. Loading 1 giây
+3. Kết quả:
+   - **50% trường hợp**: "Đã tìm thấy và khôi phục Premium" → Restored
+   - **50% trường hợp**: "Không tìm thấy gói đăng ký nào" → No purchases
+
+#### Bước 6: Trước khi Production Release
+```dart
+// lib/services/mock_iap_service.dart
+static const bool useMockIAP = false; // ← MUST set to false!
+```
+
+### Expected Console Logs:
+
+**On App Start:**
+```
+🧪 MOCK IAP: Loading mock products...
+✅ SubscriptionProvider initialized (MOCK MODE)
+   - Premium: false
+   - Products: 3 (MOCK)
+
+🧪 ════════════════════════════════════════
+🧪 MOCK IAP ENABLED
+🧪 You can test purchase flow without payment
+🧪 Click "Mua" to simulate purchase
+🧪 ════════════════════════════════════════
+```
+
+**On Purchase (Success):**
+```
+🧪 MOCK IAP: Starting purchase for fresh_keeper_premium_monthly...
+🧪 MOCK IAP: User clicked CONFIRM
+🧪 MOCK IAP: Processing payment...
+🧪 MOCK IAP: Payment successful!
+💎 MOCK: User is now Premium!
+✅ Thanh toán thành công!
+```
+
+**On Purchase (Failure):**
+```
+🧪 MOCK IAP: Starting purchase for fresh_keeper_premium_yearly...
+🧪 MOCK IAP: User clicked CANCEL
+🧪 MOCK IAP: Payment canceled
+❌ MOCK: Purchase failed - Thanh toán bị hủy
+```
+
+**On Restore (Success):**
+```
+🧪 MOCK IAP: Restoring purchases...
+🧪 MOCK IAP: Checking previous purchases...
+🧪 MOCK IAP: Found previous purchase
+💎 MOCK: Premium restored!
+✅ Đã tìm thấy và khôi phục Premium
+```
+
+### Pros & Cons:
+
+**✅ Pros:**
+- Test được FULL purchase flow
+- Test được UI transitions
+- Test được error handling
+- Test được restore purchases
+- Không cần Play Console/App Store setup
+- Không tốn tiền
+- 90% success rate → realistic testing
+- 10% failure → test error handling
+
+**❌ Cons:**
+- Không test được real payment integration
+- Không test được subscription renewal
+- Không test được platform-specific bugs
+- Phải nhớ disable trước release
 
 ---
 
