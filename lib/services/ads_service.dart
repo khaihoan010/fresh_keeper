@@ -12,15 +12,14 @@ class AdsService {
   static const String _androidGameId = '5983297'; // Google Play Store
   static const String _iosGameId = '5983296'; // Apple App Store
 
-  // Ad Unit IDs - Using Unity's default test placements temporarily
-  // TODO: After setting up custom placements in Unity Dashboard, change back to:
-  //   static String get _bannerAdUnitId =>
-  //       Platform.isAndroid ? 'Banner_Android' : 'Banner_iOS';
-  //   static String get _interstitialAdUnitId => Platform.isAndroid
-  //       ? 'Interstitial_Android'
-  //       : 'Interstitial_iOS';
-  static String get _bannerAdUnitId => 'banner'; // Unity's default test banner
-  static String get _interstitialAdUnitId => 'video'; // Unity's default test video
+  // Ad Unit IDs - Platform specific
+  // These placement IDs MUST be created in Unity Dashboard first!
+  // See UNITY_DASHBOARD_SETUP.md for detailed setup instructions
+  static String get _bannerAdUnitId =>
+      Platform.isAndroid ? 'Banner_Android' : 'Banner_iOS';
+  static String get _interstitialAdUnitId => Platform.isAndroid
+      ? 'Interstitial_Android'
+      : 'Interstitial_iOS';
 
   // Interstitial ad frequency control
   static const int _addProductCountThreshold = 3; // Show ad after 3 products added
@@ -127,7 +126,7 @@ class AdsService {
 
   /// Get banner ad unit ID
   String getBannerAdUnitId() {
-    return _bannerAdUnitId; // Using default test placement temporarily
+    return _bannerAdUnitId;
   }
 
   /// Load banner ad
