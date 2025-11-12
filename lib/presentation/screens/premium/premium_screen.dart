@@ -291,6 +291,36 @@ class PremiumScreen extends StatelessWidget {
     );
   }
 
+  String _getLocalizedPlanName(BuildContext context, ProductDetails product) {
+    final l10n = AppLocalizations.of(context);
+
+    if (product.id.contains('monthly')) {
+      return 'Fresh Keeper Premium - ${l10n.monthly}';
+    } else if (product.id.contains('yearly')) {
+      return 'Fresh Keeper Premium - ${l10n.yearly}';
+    } else if (product.id.contains('lifetime')) {
+      return 'Fresh Keeper Premium - ${l10n.lifetime}';
+    }
+
+    // Fallback to original title
+    return product.title.replaceAll('(Fresh Keeper)', '').trim();
+  }
+
+  String _getLocalizedPlanDescription(BuildContext context, ProductDetails product) {
+    final l10n = AppLocalizations.of(context);
+
+    if (product.id.contains('monthly')) {
+      return l10n.monthlyDescription;
+    } else if (product.id.contains('yearly')) {
+      return l10n.yearlyDescription;
+    } else if (product.id.contains('lifetime')) {
+      return l10n.lifetimeDescription;
+    }
+
+    // Fallback to original description
+    return product.description;
+  }
+
   Widget _buildProductCard(
     BuildContext context,
     ProductDetails product,
@@ -328,7 +358,7 @@ class PremiumScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product.title.replaceAll('(Fresh Keeper)', '').trim(),
+                          _getLocalizedPlanName(context, product),
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -367,13 +397,11 @@ class PremiumScreen extends StatelessWidget {
                     ),
                 ],
               ),
-              if (product.description.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Text(
-                  product.description,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+              const SizedBox(height: 8),
+              Text(
+                _getLocalizedPlanDescription(context, product),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
               if (isYearly) ...[
                 const SizedBox(height: 8),
                 Text(
@@ -452,7 +480,7 @@ class PremiumScreen extends StatelessWidget {
                 children: [
                   Text(
                     l10n.confirmUpgradeMessage(
-                      product.title.replaceAll('(Fresh Keeper)', '').trim(),
+                      _getLocalizedPlanName(context, product),
                     ),
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
@@ -530,7 +558,8 @@ class PremiumScreen extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        l10n.proceedToPurchase,
+                        l10n.purchase,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
