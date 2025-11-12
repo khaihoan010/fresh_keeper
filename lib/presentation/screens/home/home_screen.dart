@@ -6,6 +6,7 @@ import '../../../config/routes.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/ads/banner_ad_widget.dart';
 
 /// Home Screen / Dashboard
 /// Shows overview of products and quick stats
@@ -54,61 +55,68 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: () => context.read<ProductProvider>().refresh(),
-        child: Consumer<ProductProvider>(
-          builder: (context, provider, _) {
-            if (provider.isLoading && provider.products.isEmpty) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+      body: Column(
+        children: [
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () => context.read<ProductProvider>().refresh(),
+              child: Consumer<ProductProvider>(
+                builder: (context, provider, _) {
+                  if (provider.isLoading && provider.products.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-            if (provider.error != null) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error_outline,
-                      size: 64,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      provider.error!,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => provider.refresh(),
-                      child: Text(l10n.retry),
-                    ),
-                  ],
-                ),
-              );
-            }
+                  if (provider.error != null) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            provider.error!,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => provider.refresh(),
+                            child: Text(l10n.retry),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
 
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                // Stats Cards
-                _buildStatsSection(provider),
+                  return ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      // Stats Cards
+                      _buildStatsSection(provider),
 
-                const SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
-                // Primary CTA
-                _buildAddProductButton(),
+                      // Primary CTA
+                      _buildAddProductButton(),
 
-                const SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
-                // Quick Access
-                _buildQuickAccessSection(provider),
-              ],
-            );
-          },
-        ),
+                      // Quick Access
+                      _buildQuickAccessSection(provider),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+          const BannerAdWidget(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

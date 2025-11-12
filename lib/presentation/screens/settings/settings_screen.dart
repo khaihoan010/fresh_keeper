@@ -6,7 +6,11 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/routes.dart';
 import '../../providers/settings_provider.dart';
+import '../../providers/subscription_provider.dart';
+import '../../widgets/ads/banner_ad_widget.dart';
+import '../../widgets/ads/premium_badge_widget.dart';
 
 /// Settings Screen
 /// App settings and preferences
@@ -21,14 +25,64 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.settings),
       ),
-      body: Consumer<SettingsProvider>(
-        builder: (context, settings, _) {
-          return ListView(
-            children: [
-              // User Profile Section
-              _buildProfileSection(context, settings, l10n),
+      body: Column(
+        children: [
+          Expanded(
+            child: Consumer<SettingsProvider>(
+              builder: (context, settings, _) {
+                return ListView(
+                  children: [
+                    // Premium Section
+                    Consumer<SubscriptionProvider>(
+                      builder: (context, subscriptionProvider, _) {
+                        if (subscriptionProvider.isPremium) {
+                          return Card(
+                            margin: const EdgeInsets.all(16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
+                                children: [
+                                  const PremiumBadgeWidget(),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Thành viên Premium',
+                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          'Cảm ơn bạn đã ủng hộ!',
+                                          style: Theme.of(context).textTheme.bodySmall,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: PremiumUpgradeButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, AppRoutes.premium);
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
 
-              const Divider(height: 32),
+                    // User Profile Section
+                    _buildProfileSection(context, settings, l10n),
+
+                    const Divider(height: 32),
 
               // Preferences Section
               _buildSectionHeader(l10n.preferences),
@@ -128,10 +182,14 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 32),
-            ],
-          );
-        },
+                    const SizedBox(height: 32),
+                  ],
+                );
+              },
+            ),
+          ),
+          const BannerAdWidget(),
+        ],
       ),
     );
   }

@@ -7,6 +7,7 @@ import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/ads/banner_ad_widget.dart';
 
 /// All Items Screen
 /// Displays all products with filter, sort, and search
@@ -362,6 +363,7 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
               },
             ),
           ),
+          const BannerAdWidget(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

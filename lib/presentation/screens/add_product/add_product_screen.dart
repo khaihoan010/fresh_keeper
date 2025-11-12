@@ -9,6 +9,7 @@ import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
+import '../../providers/ads_provider.dart';
 import '../../../services/nutrition_api_service.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../../data/data_sources/local/product_local_data_source.dart';
@@ -296,6 +297,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     if (success) {
       if (mounted) {
+        // Show ads after adding product (respects 3-product + 3-minute rules)
+        final adsProvider = context.read<AdsProvider>();
+        await adsProvider.onProductAdded();
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(l10n.productAddedSuccess(product.name)),

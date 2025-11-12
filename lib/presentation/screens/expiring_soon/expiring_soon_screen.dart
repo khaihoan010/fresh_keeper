@@ -7,6 +7,7 @@ import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/ads/banner_ad_widget.dart';
 
 /// Expiring Soon Screen
 /// Displays products grouped by expiry urgency
@@ -63,112 +64,119 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
       appBar: AppBar(
         title: Text(l10n.expiringSoon),
       ),
-      body: Consumer<ProductProvider>(
-        builder: (context, provider, _) {
-          if (provider.isLoading && provider.expiringSoon.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: Column(
+        children: [
+          Expanded(
+            child: Consumer<ProductProvider>(
+              builder: (context, provider, _) {
+                if (provider.isLoading && provider.expiringSoon.isEmpty) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-          if (provider.expiringSoon.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('✅', style: TextStyle(fontSize: 64)),
-                  const SizedBox(height: 16),
-                  Text(
-                    l10n.greatNews,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.successColor,
+                if (provider.expiringSoon.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('✅', style: TextStyle(fontSize: 64)),
+                        const SizedBox(height: 16),
+                        Text(
+                          l10n.greatNews,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: AppTheme.successColor,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n.noExpiringItems,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
+                  );
+                }
+
+                final grouped = _groupProductsByUrgency(provider.expiringSoon);
+
+                return RefreshIndicator(
+                  onRefresh: _handleRefresh,
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      // Summary Card
+                      _buildSummaryCard(provider.expiringSoon.length),
+
+                      const SizedBox(height: 24),
+
+                      // Expired
+                      if (grouped['expired']!.isNotEmpty) ...[
+                        _buildSectionHeader(
+                          l10n.expiredItems,
+                          grouped['expired']!.length,
+                          AppTheme.errorColor,
+                        ),
+                        ...grouped['expired']!.map((product) => _buildProductCard(
+                              context,
+                              product,
+                              AppTheme.errorColor,
+                            )),
+                        const SizedBox(height: 16),
+                      ],
+
+                      // Today
+                      if (grouped['today']!.isNotEmpty) ...[
+                        _buildSectionHeader(
+                          l10n.expiringToday2,
+                          grouped['today']!.length,
+                          AppTheme.errorColor,
+                        ),
+                        ...grouped['today']!.map((product) => _buildProductCard(
+                              context,
+                              product,
+                              AppTheme.errorColor,
+                            )),
+                        const SizedBox(height: 16),
+                      ],
+
+                      // Urgent (1-2 days)
+                      if (grouped['urgent']!.isNotEmpty) ...[
+                        _buildSectionHeader(
+                          l10n.urgentDays,
+                          grouped['urgent']!.length,
+                          AppTheme.errorColor,
+                        ),
+                        ...grouped['urgent']!.map((product) => _buildProductCard(
+                              context,
+                              product,
+                              AppTheme.errorColor,
+                            )),
+                        const SizedBox(height: 16),
+                      ],
+
+                      // Soon (3-7 days)
+                      if (grouped['soon']!.isNotEmpty) ...[
+                        _buildSectionHeader(
+                          l10n.useSoonDays,
+                          grouped['soon']!.length,
+                          AppTheme.warningColor,
+                        ),
+                        ...grouped['soon']!.map((product) => _buildProductCard(
+                              context,
+                              product,
+                              AppTheme.warningColor,
+                            )),
+                      ],
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n.noExpiringItems,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            );
-          }
-
-          final grouped = _groupProductsByUrgency(provider.expiringSoon);
-
-          return RefreshIndicator(
-            onRefresh: _handleRefresh,
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                // Summary Card
-                _buildSummaryCard(provider.expiringSoon.length),
-
-                const SizedBox(height: 24),
-
-                // Expired
-                if (grouped['expired']!.isNotEmpty) ...[
-                  _buildSectionHeader(
-                    l10n.expiredItems,
-                    grouped['expired']!.length,
-                    AppTheme.errorColor,
-                  ),
-                  ...grouped['expired']!.map((product) => _buildProductCard(
-                        context,
-                        product,
-                        AppTheme.errorColor,
-                      )),
-                  const SizedBox(height: 16),
-                ],
-
-                // Today
-                if (grouped['today']!.isNotEmpty) ...[
-                  _buildSectionHeader(
-                    l10n.expiringToday2,
-                    grouped['today']!.length,
-                    AppTheme.errorColor,
-                  ),
-                  ...grouped['today']!.map((product) => _buildProductCard(
-                        context,
-                        product,
-                        AppTheme.errorColor,
-                      )),
-                  const SizedBox(height: 16),
-                ],
-
-                // Urgent (1-2 days)
-                if (grouped['urgent']!.isNotEmpty) ...[
-                  _buildSectionHeader(
-                    l10n.urgentDays,
-                    grouped['urgent']!.length,
-                    AppTheme.errorColor,
-                  ),
-                  ...grouped['urgent']!.map((product) => _buildProductCard(
-                        context,
-                        product,
-                        AppTheme.errorColor,
-                      )),
-                  const SizedBox(height: 16),
-                ],
-
-                // Soon (3-7 days)
-                if (grouped['soon']!.isNotEmpty) ...[
-                  _buildSectionHeader(
-                    l10n.useSoonDays,
-                    grouped['soon']!.length,
-                    AppTheme.warningColor,
-                  ),
-                  ...grouped['soon']!.map((product) => _buildProductCard(
-                        context,
-                        product,
-                        AppTheme.warningColor,
-                      )),
-                ],
-              ],
+                );
+              },
             ),
-          );
-        },
+          ),
+          const BannerAdWidget(),
+        ],
       ),
     );
   }
