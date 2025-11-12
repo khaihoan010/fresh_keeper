@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
@@ -15,6 +17,11 @@ class BannerAdWidget extends StatefulWidget {
 }
 
 class _BannerAdWidgetState extends State<BannerAdWidget> {
+  // Get correct placement ID based on platform
+  String get _placementId {
+    return Platform.isAndroid ? 'Banner_Android' : 'Banner_iOS';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AdsProvider>(
@@ -26,6 +33,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
 
         // Don't show if ads not initialized
         if (!adsProvider.isInitialized) {
+          debugPrint('⚠️ Banner Ad not shown - Unity Ads not initialized');
           return const SizedBox.shrink();
         }
 
@@ -36,9 +44,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
             child: SizedBox(
               height: 60,
               child: UnityBannerAd(
-                placementId: adsProvider.isInitialized
-                    ? 'Banner_Android' // Will auto-switch to Banner_iOS on iOS
-                    : '',
+                placementId: _placementId,
                 onLoad: (placementId) {
                   debugPrint('✅ Banner Ad loaded: $placementId');
                 },
@@ -47,6 +53,9 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
                 },
                 onFailed: (placementId, error, message) {
                   debugPrint('❌ Banner Ad failed: $error - $message');
+                  debugPrint('   Placement ID: $placementId');
+                  debugPrint('   Platform: ${Platform.isAndroid ? "Android" : "iOS"}');
+                  debugPrint('   Expected ID: $_placementId');
                 },
               ),
             ),
