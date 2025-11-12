@@ -28,13 +28,20 @@ class AdsProvider with ChangeNotifier {
 
   /// Initialize ads service
   Future<void> initialize() async {
-    if (_isInitialized) return;
+    debugPrint('🎯 AdsProvider.initialize() called');
+
+    if (_isInitialized) {
+      debugPrint('⚠️ Ads already initialized');
+      return;
+    }
 
     // Only initialize if user is not premium
     if (_subscriptionProvider.isPremium) {
       debugPrint('⚠️ User is premium, skipping ads initialization');
       return;
     }
+
+    debugPrint('📱 Initializing Unity Ads...');
 
     try {
       // Initialize Unity Ads with test mode for now
@@ -43,14 +50,20 @@ class AdsProvider with ChangeNotifier {
 
       _isInitialized = _adsService.isInitialized;
 
+      debugPrint('📊 Unity Ads initialized: $_isInitialized');
+
       if (_isInitialized) {
         // Load banner ad
+        debugPrint('📱 Loading banner ad...');
         await loadBannerAd();
+      } else {
+        debugPrint('❌ Unity Ads failed to initialize');
       }
 
-      debugPrint('✅ AdsProvider initialized');
+      debugPrint('✅ AdsProvider initialization complete');
     } catch (e) {
       debugPrint('❌ Error initializing AdsProvider: $e');
+      debugPrint('Stack trace: ${StackTrace.current}');
     }
 
     notifyListeners();

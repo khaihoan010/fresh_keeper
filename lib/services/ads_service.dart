@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -31,8 +32,18 @@ class AdsService {
 
   /// Initialize Unity Ads
   Future<void> initialize({bool testMode = true}) async {
+    debugPrint('🎯 AdsService.initialize() called');
+    debugPrint('📱 Platform: ${Platform.isAndroid ? "Android" : "iOS"}');
+    debugPrint('🧪 Test Mode: $testMode');
+
     try {
       final gameId = Platform.isAndroid ? _androidGameId : _iosGameId;
+      debugPrint('🎮 Game ID: $gameId');
+
+      // Use Completer to wait for initialization callback
+      final completer = Completer<void>();
+
+      debugPrint('📱 Calling UnityAds.init()...');
 
       await UnityAds.init(
         gameId: gameId,
@@ -41,14 +52,30 @@ class AdsService {
           debugPrint('✅ Unity Ads initialized successfully');
           _isInitialized = true;
           _loadPreferences();
+          if (!completer.isCompleted) completer.complete();
         },
         onFailed: (error, message) {
           debugPrint('❌ Unity Ads initialization failed: $error - $message');
+          debugPrint('   Error code: $error');
+          debugPrint('   Message: $message');
+          _isInitialized = false;
+          if (!completer.isCompleted) completer.complete();
+        },
+      );
+
+      // Wait for initialization to complete (with timeout)
+      await completer.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          debugPrint('⏱️ Unity Ads initialization timeout');
           _isInitialized = false;
         },
       );
+
+      debugPrint('📊 After UnityAds.init() - isInitialized: $_isInitialized');
     } catch (e) {
       debugPrint('❌ Error initializing Unity Ads: $e');
+      debugPrint('   Stack trace: ${StackTrace.current}');
       _isInitialized = false;
     }
   }
