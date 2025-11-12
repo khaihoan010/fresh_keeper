@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -11,8 +12,23 @@ import 'auth_service.dart';
 /// Handles in-app purchases and premium subscription management
 class SubscriptionService {
   final InAppPurchase _iap = InAppPurchase.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseFirestore? _firestore;
   final AuthService _authService;
+
+  // Lazy initialization of Firestore
+  FirebaseFirestore? get _firestoreInstance {
+    try {
+      if (Firebase.apps.isEmpty) {
+        debugPrint('⚠️ Firebase not initialized - Firestore unavailable');
+        return null;
+      }
+      _firestore ??= FirebaseFirestore.instance;
+      return _firestore;
+    } catch (e) {
+      debugPrint('⚠️ Firestore not available: $e');
+      return null;
+    }
+  }
 
   StreamSubscription<List<PurchaseDetails>>? _subscription;
 
@@ -96,13 +112,19 @@ class SubscriptionService {
   /// Load premium status from Firestore
   Future<void> loadPremiumStatus() async {
     try {
+      final firestore = _firestoreInstance;
+      if (firestore == null) {
+        _isPremium = false;
+        return;
+      }
+
       final userId = _authService.userId;
       if (userId == null) {
         _isPremium = false;
         return;
       }
 
-      final doc = await _firestore.collection('users').doc(userId).get();
+      final doc = await firestore.collection('users').doc(userId).get();
 
       if (!doc.exists) {
         _isPremium = false;
@@ -226,6 +248,12 @@ class SubscriptionService {
     DateTime? expiryDate,
   }) async {
     try {
+      final firestore = _firestoreInstance;
+      if (firestore == null) {
+        debugPrint('⚠️ Firestore not available - cannot update premium status');
+        return;
+      }
+
       final userId = _authService.userId;
       if (userId == null) return;
 
@@ -236,7 +264,7 @@ class SubscriptionService {
         'updatedAt': FieldValue.serverTimestamp(),
       };
 
-      await _firestore.collection('users').doc(userId).set(
+      await firestore.collection('users').doc(userId).set(
             data,
             SetOptions(merge: true),
           );
