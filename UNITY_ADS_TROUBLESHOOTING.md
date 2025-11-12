@@ -51,14 +51,16 @@ Follow the complete guide in `UNITY_DASHBOARD_SETUP.md`:
 4. Wait 2-5 minutes for changes to sync
 5. Restart your app completely
 
-### Issue #2: Missing Android Permissions (FIXED ✅)
+### Issue #2: Missing Platform Permissions (FIXED ✅)
+
+#### Android Permissions (FIXED ✅)
 
 **Evidence:**
 ```
 W/UnityAds: Unity Ads was not able to get current network type due to missing permission
 ```
 
-**Status:** ✅ **FIXED** - Added `INTERNET` and `ACCESS_NETWORK_STATE` permissions to AndroidManifest.xml
+**Status:** ✅ **FIXED** - Added required permissions to `AndroidManifest.xml`
 
 **Permissions Added:**
 ```xml
@@ -66,15 +68,42 @@ W/UnityAds: Unity Ads was not able to get current network type due to missing pe
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
+#### iOS Permissions (FIXED ✅)
+
+**Status:** ✅ **FIXED** - Added required configurations to `Info.plist`
+
+**Configurations Added:**
+
+1. **NSUserTrackingUsageDescription** - Required for iOS 14+ ATT (App Tracking Transparency)
+   ```xml
+   <key>NSUserTrackingUsageDescription</key>
+   <string>Ứng dụng sử dụng dữ liệu để hiển thị quảng cáo phù hợp với bạn</string>
+   ```
+
+2. **SKAdNetworkItems** - Array of SKAdNetwork IDs for ad attribution
+   - Unity Ads IDs: `4dzt52r2t5.skadnetwork`, `bvpn9ufa9b.skadnetwork`
+   - Mediation partner IDs: Google AdMob, IronSource, AppLovin
+
+**What this means:**
+- On iOS 14+, users will see a permission dialog asking to allow tracking
+- This is required by Apple's App Store guidelines
+- SKAdNetwork IDs enable proper ad attribution for iOS ads
+
 ---
 
 ## Step-by-Step Fix Instructions
 
 ### Step 1: Verify Permissions (Already Done ✅)
 
+#### Android Permissions
 The required Android permissions have been added to `AndroidManifest.xml`:
 - ✅ `android.permission.INTERNET`
 - ✅ `android.permission.ACCESS_NETWORK_STATE`
+
+#### iOS Permissions
+The required iOS configurations have been added to `Info.plist`:
+- ✅ `NSUserTrackingUsageDescription` - User tracking consent message
+- ✅ `SKAdNetworkItems` - Ad attribution network IDs (5 networks configured)
 
 ### Step 2: Create Placement IDs in Unity Dashboard (YOU MUST DO THIS)
 
@@ -189,8 +218,9 @@ Before asking for help, verify ALL of these:
 - [ ] Waited 2-5 minutes after creating placements
 
 ### App Configuration
-- [ ] Android permissions added to AndroidManifest.xml
-- [ ] App rebuilt with `flutter clean && flutter build apk`
+- [ ] Android permissions added to AndroidManifest.xml (`INTERNET`, `ACCESS_NETWORK_STATE`)
+- [ ] iOS permissions added to Info.plist (`NSUserTrackingUsageDescription`, `SKAdNetworkItems`)
+- [ ] App rebuilt with `flutter clean && flutter build apk` (or `flutter build ios` for iOS)
 - [ ] App completely stopped and restarted (not hot reload)
 - [ ] Test mode is enabled in code
 - [ ] Using correct placement IDs in code
