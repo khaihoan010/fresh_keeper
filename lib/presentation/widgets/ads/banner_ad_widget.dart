@@ -17,10 +17,11 @@ class BannerAdWidget extends StatefulWidget {
 }
 
 class _BannerAdWidgetState extends State<BannerAdWidget> {
-  // Using Unity's default test placement temporarily
-  // TODO: After Unity Dashboard setup, change back to platform-specific IDs
+  // Get correct placement ID based on platform
+  // These placement IDs MUST be created in Unity Dashboard first!
+  // See UNITY_DASHBOARD_SETUP.md for setup instructions
   String get _placementId {
-    return 'banner'; // Unity's default test banner placement
+    return Platform.isAndroid ? 'Banner_Android' : 'Banner_iOS';
   }
 
   @override
