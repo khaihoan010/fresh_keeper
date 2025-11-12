@@ -43,8 +43,7 @@ cloud_firestore: ^5.5.2
 
 # In-App Purchase
 in_app_purchase: ^3.2.0
-in_app_purchase_android: ^0.3.10+1
-in_app_purchase_storekit: ^0.3.20+1
+# Note: Platform implementations (android/storekit) are included automatically
 ```
 
 ---
