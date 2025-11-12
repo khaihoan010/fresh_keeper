@@ -67,8 +67,13 @@ class AdsService {
       await completer.future.timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          debugPrint('⏱️ Unity Ads initialization timeout');
-          _isInitialized = false;
+          // Only set to false if it hasn't already been initialized
+          if (!_isInitialized) {
+            debugPrint('⏱️ Unity Ads initialization timeout');
+            _isInitialized = false;
+          } else {
+            debugPrint('✅ Unity Ads already initialized, ignoring timeout');
+          }
         },
       );
 
