@@ -99,44 +99,58 @@ class PremiumScreen extends StatelessWidget {
       child: Column(
         children: [
           // Header
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: SafeArea(
-              bottom: false,
-              child: Column(
-                children: [
-                  const Icon(
-                    Icons.workspace_premium,
-                    size: 80,
-                    color: Colors.white,
+          Stack(
+            children: [
+              // Gradient background
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(24),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Fresh Keeper Premium',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                ),
+                child: SafeArea(
+                  bottom: false,
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.workspace_premium,
+                        size: 80,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Fresh Keeper Premium',
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        l10n.unlockAllFeatures,
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n.unlockAllFeatures,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                ),
+              ),
+              // Dark overlay for dark mode
+              if (Theme.of(context).brightness == Brightness.dark)
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.3),
                     ),
                   ),
-                ],
-              ),
-            ),
+                ),
+            ],
           ),
 
           // Benefits
@@ -375,25 +389,40 @@ class PremiumScreen extends StatelessWidget {
                     ),
                   ),
                   if (isBestValue)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                    Stack(
+                      children: [
+                        // Gradient background
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            l10n.bestValue,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        l10n.bestValue,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                        // Dark overlay for dark mode
+                        if (Theme.of(context).brightness == Brightness.dark)
+                          Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                 ],
               ),
@@ -438,39 +467,57 @@ class PremiumScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Header with gradient
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                children: [
-                  const Icon(
-                    Icons.workspace_premium,
-                    size: 48,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    l10n.confirmUpgrade,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            Stack(
+              children: [
+                // Gradient background
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    textAlign: TextAlign.center,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
                   ),
-                ],
-              ),
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.workspace_premium,
+                        size: 48,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        l10n.confirmUpgrade,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                // Dark overlay for dark mode
+                if (Theme.of(context).brightness == Brightness.dark)
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.3),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
 
             // Content
