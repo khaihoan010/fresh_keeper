@@ -27,50 +27,65 @@ class PremiumBadgeWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        return Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: showText ? 12 : 6,
-            vertical: 6,
-          ),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color(0xFFFFD700), // Gold
-                Color(0xFFFFA500), // Orange
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFFFD700).withOpacity(0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
+        return Stack(
+          children: [
+            // Gradient background
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: showText ? 12 : 6,
+                vertical: 6,
               ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.workspace_premium,
-                size: size,
-                color: Colors.white,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0xFFFFD700), // Gold
+                    Color(0xFFFFA500), // Orange
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFFFD700).withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              if (showText) ...[
-                const SizedBox(width: 6),
-                Text(
-                  l10n.premium,
-                  style: const TextStyle(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.workspace_premium,
+                    size: size,
                     color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+                  ),
+                  if (showText) ...[
+                    const SizedBox(width: 6),
+                    Text(
+                      l10n.premium,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            // Dark overlay for dark mode
+            if (Theme.of(context).brightness == Brightness.dark)
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-              ],
-            ],
-          ),
+              ),
+          ],
         );
       },
     );
@@ -113,43 +128,60 @@ class PremiumUpgradeButton extends StatelessWidget {
           );
         }
 
-        return Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color(0xFFFFD700), // Gold
-                Color(0xFFFFA500), // Orange
-              ],
-            ),
-            borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFFFD700).withOpacity(0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: ElevatedButton.icon(
-            onPressed: onPressed,
-            icon: const Icon(Icons.workspace_premium, size: 24),
-            label: Text(
-              l10n.upgradeToPremium,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              minimumSize: const Size(double.infinity, 56),
-              shape: RoundedRectangleBorder(
+        return Stack(
+          children: [
+            // Gradient background
+            Container(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0xFFFFD700), // Gold
+                    Color(0xFFFFA500), // Orange
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFFFD700).withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: ElevatedButton.icon(
+                onPressed: onPressed,
+                icon: const Icon(Icons.workspace_premium, size: 24),
+                label: Text(
+                  l10n.upgradeToPremium,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  minimumSize: const Size(double.infinity, 56),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                  ),
+                ),
               ),
             ),
-          ),
+            // Dark overlay for dark mode
+            if (Theme.of(context).brightness == Brightness.dark)
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         );
       },
     );
