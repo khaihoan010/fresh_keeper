@@ -4,8 +4,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 
 import 'auth_service.dart';
 
@@ -51,12 +49,8 @@ class SubscriptionService {
         return;
       }
 
-      // Enable pending purchases for Android
-      if (Platform.isAndroid) {
-        final InAppPurchaseAndroidPlatformAddition androidAddition =
-            _iap.getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
-        await androidAddition.enablePendingPurchases();
-      }
+      // Note: Pending purchases are enabled by default in newer versions
+      // No need to call enablePendingPurchases() anymore
 
       // Listen to purchase updates
       _subscription = _iap.purchaseStream.listen(
