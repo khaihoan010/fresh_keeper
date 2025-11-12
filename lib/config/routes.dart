@@ -10,6 +10,7 @@ import '../presentation/screens/expiring_soon/expiring_soon_screen.dart';
 import '../presentation/screens/product_detail/product_detail_screen.dart';
 import '../presentation/screens/edit_product/edit_product_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
+import '../presentation/screens/premium/premium_screen.dart';
 
 /// Application Routes
 class AppRoutes {
@@ -23,6 +24,7 @@ class AppRoutes {
   static const String productDetail = '/product_detail';
   static const String editProduct = '/edit_product';
   static const String settings = '/settings';
+  static const String premium = '/premium';
   static const String notificationSettings = '/notification_settings';
   static const String themeSettings = '/theme_settings';
   static const String languageSettings = '/language_settings';
@@ -86,6 +88,12 @@ class AppRoutes {
       case settings:
         return _buildRoute(
           const SettingsScreen(),
+          routeSettings,
+        );
+
+      case premium:
+        return _buildRoute(
+          const PremiumScreen(),
           routeSettings,
         );
 

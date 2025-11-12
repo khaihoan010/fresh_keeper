@@ -7,9 +7,9 @@ import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 /// Unity Ads Service
 /// Manages banner and interstitial ads with frequency control
 class AdsService {
-  // Test Game IDs - Replace with your actual Game IDs in production
-  static const String _androidGameId = '5736465'; // Test Android Game ID
-  static const String _iosGameId = '5736464'; // Test iOS Game ID
+  // Unity Ads Game IDs
+  static const String _androidGameId = '5983297'; // Google Play Store
+  static const String _iosGameId = '5983296'; // Apple App Store
 
   // Ad Unit IDs - Replace with your actual ad unit IDs in production
   static const String _bannerAdUnitId = 'Banner_Android'; // Or Banner_iOS
