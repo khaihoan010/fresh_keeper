@@ -377,6 +377,93 @@ class AppLocalizations {
   String get clear => isVietnamese ? 'Xóa' : 'Clear';
   String get apply => isVietnamese ? 'Áp dụng' : 'Apply';
   String get reset => isVietnamese ? 'Đặt lại' : 'Reset';
+
+  // ==================== PREMIUM SCREEN ====================
+  String get premium => isVietnamese ? 'Premium' : 'Premium';
+  String get upgradeToPremium => isVietnamese ? 'Nâng cấp lên Premium' : 'Upgrade to Premium';
+  String get unlockAllFeatures => isVietnamese
+      ? 'Mở khóa tất cả tính năng'
+      : 'Unlock all features';
+  String get premiumBenefits => isVietnamese
+      ? 'Lợi ích Premium'
+      : 'Premium Benefits';
+
+  // Premium benefits
+  String get noAds => isVietnamese ? 'Không quảng cáo' : 'No Ads';
+  String get noAdsDescription => isVietnamese
+      ? 'Tắt hoàn toàn banner và popup ads'
+      : 'Remove all banner and popup ads';
+  String get cloudBackup => isVietnamese ? 'Sao lưu đám mây' : 'Cloud Backup';
+  String get cloudBackupDescription => isVietnamese
+      ? 'Đồng bộ dữ liệu qua nhiều thiết bị'
+      : 'Sync data across multiple devices';
+  String get exclusiveThemes => isVietnamese ? 'Themes độc quyền' : 'Exclusive Themes';
+  String get exclusiveThemesDescription => isVietnamese
+      ? 'Truy cập các giao diện đặc biệt'
+      : 'Access special themes';
+  String get prioritySupport => isVietnamese ? 'Hỗ trợ ưu tiên' : 'Priority Support';
+  String get prioritySupportDescription => isVietnamese
+      ? 'Được hỗ trợ nhanh chóng'
+      : 'Get fast support';
+
+  // Premium status
+  String get youArePremium => isVietnamese
+      ? 'Bạn là thành viên Premium!'
+      : 'You are a Premium member!';
+  String get premiumMember => isVietnamese
+      ? 'Thành viên Premium'
+      : 'Premium Member';
+  String get thankYouForSupport => isVietnamese
+      ? 'Cảm ơn bạn đã ủng hộ Fresh Keeper'
+      : 'Thank you for supporting Fresh Keeper';
+  String get thankYou2 => isVietnamese
+      ? 'Cảm ơn bạn đã ủng hộ!'
+      : 'Thank you for your support!';
+  String get enjoyAllFeatures => isVietnamese
+      ? 'Tận hưởng tất cả các tính năng không giới hạn'
+      : 'Enjoy all features without limits';
+
+  // Premium plans
+  String get chooseYourPlan => isVietnamese
+      ? 'Chọn gói của bạn'
+      : 'Choose your plan';
+  String get monthly => isVietnamese ? 'Tháng' : 'Monthly';
+  String get yearly => isVietnamese ? 'Năm' : 'Yearly';
+  String get lifetime => isVietnamese ? 'Trọn đời' : 'Lifetime';
+  String get bestValue => isVietnamese ? 'Tốt nhất' : 'Best Value';
+  String get mostPopular => isVietnamese ? 'Phổ biến nhất' : 'Most Popular';
+  String get savePercent => isVietnamese ? 'Tiết kiệm 32%' : 'Save 32%';
+  String get oneTimePurchase => isVietnamese
+      ? 'Mua 1 lần, sử dụng mãi mãi'
+      : 'One-time purchase, use forever';
+
+  // Purchase actions
+  String get restorePurchases => isVietnamese
+      ? 'Khôi phục gói đã mua'
+      : 'Restore Purchases';
+  String get purchaseRestored => isVietnamese
+      ? 'Đã khôi phục gói Premium!'
+      : 'Premium restored!';
+  String get noPurchasesFound => isVietnamese
+      ? 'Không tìm thấy gói đăng ký nào'
+      : 'No purchases found';
+  String get purchaseSuccess => isVietnamese
+      ? 'Thanh toán thành công!'
+      : 'Purchase successful!';
+  String get purchaseFailed => isVietnamese
+      ? 'Thanh toán thất bại'
+      : 'Purchase failed';
+
+  // Confirmation dialog
+  String get confirmUpgrade => isVietnamese
+      ? 'Xác nhận nâng cấp'
+      : 'Confirm Upgrade';
+  String confirmUpgradeMessage(String planName) => isVietnamese
+      ? 'Bạn có chắc muốn nâng cấp lên Premium với gói $planName?'
+      : 'Are you sure you want to upgrade to Premium with $planName plan?';
+  String get proceedToPurchase => isVietnamese
+      ? 'Tiến hành thanh toán'
+      : 'Proceed to Purchase';
 }
 
 

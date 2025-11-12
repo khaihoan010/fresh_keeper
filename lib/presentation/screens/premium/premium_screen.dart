@@ -17,7 +17,7 @@ class PremiumScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Premium'),
+        title: Text(l10n.premium),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -70,7 +70,7 @@ class PremiumScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'Bạn là thành viên Premium!',
+              l10n.youArePremium,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -78,12 +78,12 @@ class PremiumScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'Cảm ơn bạn đã ủng hộ Fresh Keeper',
+              l10n.thankYouForSupport,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            _buildBenefitsList(context),
+            _buildBenefitsList(context, l10n),
           ],
         ),
       ),
@@ -127,9 +127,9 @@ class PremiumScreen extends StatelessWidget {
                         ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Trải nghiệm không giới hạn',
-                    style: TextStyle(
+                  Text(
+                    l10n.unlockAllFeatures,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                     ),
@@ -146,19 +146,19 @@ class PremiumScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Lợi ích của Premium:',
+                  l10n.premiumBenefits,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
                 const SizedBox(height: 16),
-                _buildBenefitsList(context),
+                _buildBenefitsList(context, l10n),
                 const SizedBox(height: 32),
 
                 // Plans
                 if (subscriptionProvider.products.isNotEmpty) ...[
                   Text(
-                    'Chọn gói phù hợp:',
+                    l10n.chooseYourPlan,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -202,15 +202,15 @@ class PremiumScreen extends StatelessWidget {
                         SnackBar(
                           content: Text(
                             subscriptionProvider.isPremium
-                                ? 'Đã khôi phục gói Premium!'
-                                : 'Không tìm thấy gói đăng ký nào',
+                                ? l10n.purchaseRestored
+                                : l10n.noPurchasesFound,
                           ),
                         ),
                       );
                     }
                   },
                   icon: const Icon(Icons.restore),
-                  label: const Text('Khôi phục gói đã mua'),
+                  label: Text(l10n.restorePurchases),
                 ),
 
                 const SizedBox(height: 32),
@@ -222,27 +222,27 @@ class PremiumScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBenefitsList(BuildContext context) {
+  Widget _buildBenefitsList(BuildContext context, AppLocalizations l10n) {
     final benefits = [
       {
         'icon': Icons.block,
-        'title': 'Không quảng cáo',
-        'subtitle': 'Tắt hoàn toàn banner và popup ads',
+        'title': l10n.noAds,
+        'subtitle': l10n.noAdsDescription,
       },
       {
         'icon': Icons.cloud_upload,
-        'title': 'Sao lưu đám mây',
-        'subtitle': 'Đồng bộ dữ liệu qua nhiều thiết bị',
+        'title': l10n.cloudBackup,
+        'subtitle': l10n.cloudBackupDescription,
       },
       {
         'icon': Icons.palette,
-        'title': 'Themes độc quyền',
-        'subtitle': 'Truy cập các giao diện đặc biệt',
+        'title': l10n.exclusiveThemes,
+        'subtitle': l10n.exclusiveThemesDescription,
       },
       {
         'icon': Icons.support_agent,
-        'title': 'Hỗ trợ ưu tiên',
-        'subtitle': 'Được hỗ trợ nhanh chóng',
+        'title': l10n.prioritySupport,
+        'subtitle': l10n.prioritySupportDescription,
       },
     ];
 
@@ -296,6 +296,7 @@ class PremiumScreen extends StatelessWidget {
     ProductDetails product,
     SubscriptionProvider subscriptionProvider,
   ) {
+    final l10n = AppLocalizations.of(context);
     // Determine if this is the best value plan
     final isYearly = product.id.contains('yearly');
     final isLifetime = product.id.contains('lifetime');
@@ -355,9 +356,9 @@ class PremiumScreen extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Text(
-                        'Tốt nhất',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.bestValue,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -376,7 +377,7 @@ class PremiumScreen extends StatelessWidget {
               if (isYearly) ...[
                 const SizedBox(height: 8),
                 Text(
-                  '🎉 Tiết kiệm 32% so với gói tháng',
+                  '🎉 ${l10n.savePercent}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppTheme.successColor,
                         fontWeight: FontWeight.w600,
@@ -395,24 +396,153 @@ class PremiumScreen extends StatelessWidget {
     ProductDetails product,
     SubscriptionProvider subscriptionProvider,
   ) async {
+    final l10n = AppLocalizations.of(context);
+
     // Show confirmation dialog
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Xác nhận nâng cấp'),
-        content: Text(
-          'Bạn có chắc muốn nâng cấp lên Premium với gói ${product.title}?',
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Hủy'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Xác nhận'),
-          ),
-        ],
+        contentPadding: EdgeInsets.zero,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Header with gradient
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.workspace_premium,
+                    size: 48,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.confirmUpgrade,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+
+            // Content
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  Text(
+                    l10n.confirmUpgradeMessage(
+                      product.title.replaceAll('(Fresh Keeper)', '').trim(),
+                    ),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.payments,
+                          color: AppTheme.primaryColor,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          product.price,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Actions
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        side: BorderSide(
+                          color: Colors.grey.shade300,
+                          width: 1.5,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        l10n.cancel,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        backgroundColor: AppTheme.primaryColor,
+                        foregroundColor: Colors.white,
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        l10n.proceedToPurchase,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
 

@@ -49,14 +49,14 @@ class SettingsScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Thành viên Premium',
+                                          l10n.premiumMember,
                                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          'Cảm ơn bạn đã ủng hộ!',
+                                          l10n.thankYou2,
                                           style: Theme.of(context).textTheme.bodySmall,
                                         ),
                                       ],
