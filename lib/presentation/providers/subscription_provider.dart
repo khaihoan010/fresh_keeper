@@ -3,6 +3,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../services/auth_service.dart';
 import '../../services/subscription_service.dart';
+import '../../services/mock_iap_service.dart';
 
 /// Subscription Provider
 /// Manages premium subscription state
@@ -61,20 +62,37 @@ class SubscriptionProvider with ChangeNotifier {
         await _authService.signInAnonymously();
       }
 
-      // Initialize subscription service
-      await _subscriptionService.initialize();
+      // 🧪 Debug mode: Use Mock IAP
+      if (kDebugMode && MockIAPService.useMockIAP) {
+        debugPrint('🧪 MOCK IAP: Loading mock products...');
+        _products = MockIAPService.getMockProducts();
+        _isPremium = false; // Start as non-premium
+        _isInitialized = true;
 
-      // Load products and premium status
-      await _subscriptionService.loadProducts();
-      await _subscriptionService.loadPremiumStatus();
+        debugPrint('✅ SubscriptionProvider initialized (MOCK MODE)');
+        debugPrint('   - Premium: $isPremium');
+        debugPrint('   - Products: ${_products.length} (MOCK)');
+        debugPrint('');
+        debugPrint('🧪 ════════════════════════════════════════');
+        debugPrint('🧪 MOCK IAP ENABLED');
+        debugPrint('🧪 You can test purchase flow without payment');
+        debugPrint('🧪 Click "Mua" to simulate purchase');
+        debugPrint('🧪 ════════════════════════════════════════');
+        debugPrint('');
+      } else {
+        // Production: Real IAP
+        await _subscriptionService.initialize();
+        await _subscriptionService.loadProducts();
+        await _subscriptionService.loadPremiumStatus();
 
-      _isPremium = _subscriptionService.isPremium;
-      _products = _subscriptionService.products;
-      _isInitialized = true;
+        _isPremium = _subscriptionService.isPremium;
+        _products = _subscriptionService.products;
+        _isInitialized = true;
 
-      debugPrint('✅ SubscriptionProvider initialized');
-      debugPrint('   - Premium: $isPremium'); // Uses getter (checks debug flag)
-      debugPrint('   - Products: ${_products.length}');
+        debugPrint('✅ SubscriptionProvider initialized');
+        debugPrint('   - Premium: $isPremium');
+        debugPrint('   - Products: ${_products.length}');
+      }
 
       // 🧪 Debug mode notification
       if (kDebugMode && _debugForcePremium) {
@@ -103,8 +121,24 @@ class SubscriptionProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      await _subscriptionService.purchaseProduct(product);
-      debugPrint('✅ Purchase initiated for: ${product.id}');
+      // 🧪 Debug mode: Mock purchase
+      if (kDebugMode && MockIAPService.useMockIAP) {
+        debugPrint('🧪 MOCK IAP: Starting purchase for ${product.id}...');
+        final result = await MockIAPService.mockPurchase(product.id);
+
+        if (result.success) {
+          _isPremium = true; // Update to premium!
+          debugPrint('💎 MOCK: User is now Premium!');
+          debugPrint('✅ ${result.message}');
+        } else {
+          _error = result.message;
+          debugPrint('❌ MOCK: Purchase failed - ${result.message}');
+        }
+      } else {
+        // Production: Real IAP
+        await _subscriptionService.purchaseProduct(product);
+        debugPrint('✅ Purchase initiated for: ${product.id}');
+      }
     } catch (e) {
       _error = e.toString();
       debugPrint('❌ Error purchasing product: $e');
@@ -121,11 +155,26 @@ class SubscriptionProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      await _subscriptionService.restorePurchases();
-      await _subscriptionService.loadPremiumStatus();
-      _isPremium = _subscriptionService.isPremium;
+      // 🧪 Debug mode: Mock restore
+      if (kDebugMode && MockIAPService.useMockIAP) {
+        debugPrint('🧪 MOCK IAP: Restoring purchases...');
+        final result = await MockIAPService.mockRestorePurchases();
 
-      debugPrint('✅ Purchases restored. Premium: $_isPremium');
+        if (result.found) {
+          _isPremium = true; // Restore premium!
+          debugPrint('💎 MOCK: Premium restored!');
+          debugPrint('✅ ${result.message}');
+        } else {
+          _error = result.message;
+          debugPrint('❌ MOCK: ${result.message}');
+        }
+      } else {
+        // Production: Real IAP
+        await _subscriptionService.restorePurchases();
+        await _subscriptionService.loadPremiumStatus();
+        _isPremium = _subscriptionService.isPremium;
+        debugPrint('✅ Purchases restored. Premium: $_isPremium');
+      }
     } catch (e) {
       _error = e.toString();
       debugPrint('❌ Error restoring purchases: $e');
