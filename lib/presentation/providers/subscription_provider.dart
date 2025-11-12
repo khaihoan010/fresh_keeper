@@ -10,6 +10,11 @@ class SubscriptionProvider with ChangeNotifier {
   final AuthService _authService;
   final SubscriptionService _subscriptionService;
 
+  // 🧪 DEBUG MODE - Test Premium Features MIỄN PHÍ
+  // Set true để test premium features mà không cần IAP
+  // ⚠️ PHẢI SET FALSE trước khi release production!
+  static const bool _debugForcePremium = false; // ← Change to true để test
+
   bool _isInitialized = false;
   bool _isPremium = false;
   bool _isLoading = false;
@@ -24,7 +29,18 @@ class SubscriptionProvider with ChangeNotifier {
 
   // Getters
   bool get isInitialized => _isInitialized;
-  bool get isPremium => _isPremium;
+
+  /// Check if user has premium status
+  /// In debug mode with _debugForcePremium=true, always returns true
+  bool get isPremium {
+    // 🧪 Debug mode: Force premium for testing
+    if (kDebugMode && _debugForcePremium) {
+      return true;
+    }
+
+    // Production: Return actual premium status
+    return _isPremium;
+  }
   bool get isLoading => _isLoading;
   List<ProductDetails> get products => _products;
   String? get error => _error;
@@ -57,8 +73,20 @@ class SubscriptionProvider with ChangeNotifier {
       _isInitialized = true;
 
       debugPrint('✅ SubscriptionProvider initialized');
-      debugPrint('   - Premium: $_isPremium');
+      debugPrint('   - Premium: $isPremium'); // Uses getter (checks debug flag)
       debugPrint('   - Products: ${_products.length}');
+
+      // 🧪 Debug mode notification
+      if (kDebugMode && _debugForcePremium) {
+        debugPrint('');
+        debugPrint('🧪 ════════════════════════════════════════');
+        debugPrint('🧪 DEBUG MODE: Premium FORCED ENABLED');
+        debugPrint('🧪 User will have premium features');
+        debugPrint('🧪 Ads will be HIDDEN');
+        debugPrint('🧪 No IAP required');
+        debugPrint('🧪 ════════════════════════════════════════');
+        debugPrint('');
+      }
     } catch (e) {
       _error = e.toString();
       debugPrint('❌ Error initializing SubscriptionProvider: $e');
