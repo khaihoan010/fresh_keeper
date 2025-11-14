@@ -219,10 +219,8 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       await productProvider.addProduct(product);
     }
 
-    // Delete items from shopping list
-    for (final id in selectedIds) {
-      await shoppingListProvider.deleteItem(int.parse(id));
-    }
+    // Delete items from shopping list (batch delete)
+    await shoppingListProvider.deleteItems(selectedIds.toList());
 
     // Exit multi-select mode
     multiSelectProvider.exitMultiSelectMode();
@@ -269,10 +267,8 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
     if (confirmed != true || !mounted) return;
 
-    // Delete selected items
-    for (final id in selectedIds) {
-      await shoppingListProvider.deleteItem(int.parse(id));
-    }
+    // Delete selected items (batch delete)
+    await shoppingListProvider.deleteItems(selectedIds.toList());
 
     // Exit multi-select mode
     multiSelectProvider.exitMultiSelectMode();
