@@ -32,6 +32,9 @@ class ExpiringSoonScreen extends StatefulWidget {
 class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _selectedLocation = 'fridge';
+  final _searchController = TextEditingController();
+  bool _isSearchExpanded = false;
+  List<UserProduct> _filteredProducts = [];
 
   @override
   void initState() {
@@ -47,6 +50,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
   void dispose() {
     _tabController.removeListener(_handleTabChange);
     _tabController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -70,6 +74,25 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
   Future<void> _handleRefresh() async {
     await context.read<ProductProvider>().refresh();
+    _handleSearch(_searchController.text);
+  }
+
+  void _handleSearch(String query) {
+    final provider = context.read<ProductProvider>();
+
+    if (query.trim().isEmpty) {
+      setState(() {
+        _filteredProducts = [];
+      });
+      return;
+    }
+
+    setState(() {
+      final searchLower = query.toLowerCase();
+      _filteredProducts = provider.expiringSoon
+          .where((p) => p.name.toLowerCase().contains(searchLower))
+          .toList();
+    });
   }
 
   List<UserProduct> _filterByLocation(List<UserProduct> products) {
@@ -113,7 +136,49 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(l10n.expiringSoon),
+        title: _isSearchExpanded
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: l10n.searchProduct,
+                  border: InputBorder.none,
+                  suffixIcon: _searchController.text.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                            _handleSearch('');
+                          },
+                        )
+                      : null,
+                ),
+                onChanged: _handleSearch,
+              )
+            : Text(l10n.expiringSoon),
+        actions: _isSearchExpanded
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    setState(() {
+                      _isSearchExpanded = false;
+                      _searchController.clear();
+                      _handleSearch('');
+                    });
+                  },
+                ),
+              ]
+            : [
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      _isSearchExpanded = true;
+                    });
+                  },
+                ),
+              ],
       ),
       body: Column(
         children: [
@@ -151,6 +216,32 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                   );
                 }
 
+                // Use filtered products if search is active
+                final productsToDisplay = _filteredProducts.isNotEmpty || _searchController.text.isNotEmpty
+                    ? _filteredProducts
+                    : provider.expiringSoon;
+
+                if (productsToDisplay.isEmpty && _searchController.text.isNotEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('🔍', style: TextStyle(fontSize: 64)),
+                        const SizedBox(height: 16),
+                        Text(
+                          l10n.noProductsFound,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n.tryDifferentKeyword,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
                 if (provider.expiringSoon.isEmpty) {
                   return Center(
                     child: Column(
@@ -179,8 +270,8 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                   );
                 }
 
-                final grouped = _groupProductsByUrgency(provider.expiringSoon);
-                final filteredProducts = _filterByLocation(provider.expiringSoon);
+                final grouped = _groupProductsByUrgency(productsToDisplay);
+                final filteredProducts = _filterByLocation(productsToDisplay);
 
                 return RefreshIndicator(
                   onRefresh: _handleRefresh,
