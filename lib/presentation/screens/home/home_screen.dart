@@ -391,13 +391,14 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
           // Location Tabs
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              border: Border(
-                bottom: BorderSide(
-                  color: Theme.of(context).dividerColor,
-                  width: 1,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
                 ),
-              ),
+              ],
             ),
             child: TabBar(
               controller: _tabController,
@@ -405,6 +406,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
               unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               indicatorColor: AppTheme.primaryColor,
               indicatorWeight: 3,
+              indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
                 Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
                 Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
@@ -423,12 +425,6 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                 ),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Theme.of(context).dividerColor,
-                      width: 1,
-                    ),
-                  ),
                 ),
                 child: Row(
                   children: [
