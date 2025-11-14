@@ -32,6 +32,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   String _selectedCategory = 'vegetables';
   String _selectedUnit = 'kg';
+  String _selectedLocation = 'fridge';
   DateTime _purchaseDate = DateTime.now();
   DateTime? _expiryDate;
   List<ProductTemplate> _searchResults = [];
@@ -274,6 +275,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       unit: _selectedUnit,
       purchaseDate: _purchaseDate,
       expiryDate: _expiryDate!,
+      location: _selectedLocation,
       status: ProductStatus.active,
       templateId: _selectedTemplate?.id,
       createdAt: DateTime.now(),
@@ -374,6 +376,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             // Category
             _buildCategorySelector(),
+
+            const SizedBox(height: 16),
+
+            // Location
+            _buildLocationSelector(),
 
             const SizedBox(height: 16),
 
@@ -680,6 +687,48 @@ class _AddProductScreenState extends State<AddProductScreen> {
       onChanged: (value) {
         if (value != null) {
           setState(() => _selectedUnit = value);
+        }
+      },
+    );
+  }
+
+  Widget _buildLocationSelector() {
+    final l10n = AppLocalizations.of(context);
+
+    final locations = [
+      {'value': 'fridge', 'label': l10n.fridge, 'icon': Icons.kitchen_outlined},
+      {'value': 'freezer', 'label': l10n.freezer, 'icon': Icons.ac_unit_outlined},
+      {'value': 'pantry', 'label': l10n.pantry, 'icon': Icons.inventory_2_outlined},
+    ];
+
+    return DropdownButtonFormField<String>(
+      value: _selectedLocation,
+      decoration: InputDecoration(
+        labelText: l10n.location,
+        prefixIcon: const Icon(Icons.location_on_outlined),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
+      ),
+      items: locations.map((location) {
+        return DropdownMenuItem(
+          value: location['value'] as String,
+          child: Row(
+            children: [
+              Icon(
+                location['icon'] as IconData,
+                size: 20,
+                color: AppTheme.primaryColor,
+              ),
+              const SizedBox(width: 12),
+              Text(location['label'] as String),
+            ],
+          ),
+        );
+      }).toList(),
+      onChanged: (value) {
+        if (value != null) {
+          setState(() => _selectedLocation = value);
         }
       },
     );
