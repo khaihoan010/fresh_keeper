@@ -408,12 +408,12 @@ class ProductProvider extends ChangeNotifier {
         return true;
       } else {
         debugPrint('❌ Error saving custom template: ${result.error}');
-        _setError(result.error!);
+        _error = result.error;
         return false;
       }
     } catch (e) {
       debugPrint('❌ Exception saving custom template: $e');
-      _setError('Không thể lưu mẫu tùy chỉnh.');
+      _error = 'Không thể lưu mẫu tùy chỉnh.';
       return false;
     }
   }

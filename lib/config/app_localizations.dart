@@ -206,9 +206,6 @@ class AppLocalizations {
   String get searchingOnline => isVietnamese ? 'Đang tìm online...' : 'Searching online...';
   String get noResults => isVietnamese ? 'Không tìm thấy kết quả' : 'No results found';
   String get typeToSearch => isVietnamese ? 'Nhập để tìm kiếm' : 'Type to search';
-  String get fridge => isVietnamese ? 'Tủ lạnh' : 'Fridge';
-  String get freezer => isVietnamese ? 'Tủ đông' : 'Freezer';
-  String get pantry => isVietnamese ? 'Tủ đồ khô' : 'Pantry';
   String get units => isVietnamese ? 'cái' : 'pcs';
   String get unit => isVietnamese ? 'Đơn vị' : 'Unit';
   String get nutritionInfo => isVietnamese ? 'Thông tin dinh dưỡng' : 'Nutrition Info';
@@ -289,7 +286,6 @@ class AppLocalizations {
   String get addedNewest => isVietnamese ? 'Mới thêm nhất' : 'Recently Added';
   String get addedOldest => isVietnamese ? 'Cũ nhất' : 'Oldest';
   String get allCategories => isVietnamese ? 'Tất cả danh mục' : 'All Categories';
-  String get allLocations => isVietnamese ? 'Tất cả vị trí' : 'All Locations';
   String get noProducts => isVietnamese ? 'Chưa có sản phẩm nào' : 'No products yet';
   String get noProductsFound => isVietnamese ? 'Không tìm thấy sản phẩm' : 'No products found';
   String get tryDifferentKeyword => isVietnamese ? 'Thử từ khóa khác' : 'Try a different keyword';
