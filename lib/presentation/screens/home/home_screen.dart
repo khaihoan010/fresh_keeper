@@ -570,39 +570,27 @@ class _ProductCardState extends State<_ProductCard> {
     }
   }
 
-  void _increaseQuantity() {
+  void _increaseQuantity() async {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
       _currentQuantity += step;
-      _updateProductQuantity();
     });
+    await _updateProductQuantity();
   }
 
-  void _decreaseQuantity() {
+  void _decreaseQuantity() async {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
       if (_currentQuantity > step) {
         _currentQuantity -= step;
-        _updateProductQuantity();
       }
     });
+    await _updateProductQuantity();
   }
 
   Future<void> _updateProductQuantity() async {
     final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
     await context.read<ProductProvider>().updateProduct(updatedProduct);
-  }
-
-  IconData _getStatusIcon() {
-    if (widget.product.isExpired) {
-      return Icons.cancel;
-    } else if (widget.product.daysUntilExpiry <= 2) {
-      return Icons.warning_amber_rounded;
-    } else if (widget.product.daysUntilExpiry <= 7) {
-      return Icons.watch_later;
-    } else {
-      return Icons.check_circle;
-    }
   }
 
   @override
@@ -744,14 +732,17 @@ class _ProductCardState extends State<_ProductCard> {
 
                 const SizedBox(width: 8),
 
-                // Status Icon
-                Icon(
-                  _getStatusIcon(),
-                  color: widget.product.getStatusColor(),
-                  size: 28,
+                // Status Dot
+                Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: widget.product.getStatusColor(),
+                    shape: BoxShape.circle,
+                  ),
                 ),
 
-                const SizedBox(width: 4),
+                const SizedBox(width: 8),
 
                 // More button
                 IconButton(
