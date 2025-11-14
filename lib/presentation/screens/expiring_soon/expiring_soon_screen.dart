@@ -347,99 +347,9 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     UserProduct product,
     Color accentColor,
   ) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            AppRoutes.productDetail,
-            arguments: product,
-          );
-        },
-        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              // Icon
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: accentColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
-                ),
-                child: Center(
-                  child: Text(
-                    AppConstants.categoryIcons[product.category] ?? '📦',
-                    style: const TextStyle(fontSize: 32),
-                  ),
-                ),
-              ),
-
-              const SizedBox(width: 12),
-
-              // Info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.name,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${product.quantity} ${product.unit}',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.event_busy,
-                          size: 14,
-                          color: accentColor,
-                        ),
-                        const SizedBox(width: 4),
-                        Builder(
-                          builder: (context) {
-                            final l10n = AppLocalizations.of(context);
-                            final daysText = product.isExpired
-                                ? l10n.daysOverdue(-product.daysUntilExpiry)
-                                : l10n.daysRemaining(product.daysUntilExpiry);
-                            return Text(
-                              daysText,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: accentColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Days badge
-              _buildDaysBadge(product, accentColor),
-
-              const SizedBox(width: 4),
-
-              // Arrow
-              Icon(
-                Icons.chevron_right,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ],
-          ),
-        ),
-      ),
+    return _ExpiringSoonProductCard(
+      product: product,
+      accentColor: accentColor,
     );
   }
 
@@ -474,6 +384,222 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                 ),
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Expiring Soon Product Card with Quantity Controls
+class _ExpiringSoonProductCard extends StatefulWidget {
+  final UserProduct product;
+  final Color accentColor;
+
+  const _ExpiringSoonProductCard({
+    required this.product,
+    required this.accentColor,
+  });
+
+  @override
+  State<_ExpiringSoonProductCard> createState() => _ExpiringSoonProductCardState();
+}
+
+class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
+  late double _currentQuantity;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentQuantity = widget.product.quantity;
+  }
+
+  double _getQuantityStep(String unit) {
+    switch (unit.toLowerCase()) {
+      case 'kg':
+      case 'lít':
+        return 0.1;
+      case 'g':
+        return 5.0;
+      case 'ml':
+        return 10.0;
+      case 'cái':
+      case 'quả':
+      case 'bó':
+      case 'gói':
+      case 'hộp':
+      case 'chai':
+      case 'lon':
+      case 'túi':
+      default:
+        return 1.0;
+    }
+  }
+
+  void _increaseQuantity() {
+    setState(() {
+      final step = _getQuantityStep(widget.product.unit);
+      _currentQuantity += step;
+      _updateProductQuantity();
+    });
+  }
+
+  void _decreaseQuantity() {
+    setState(() {
+      final step = _getQuantityStep(widget.product.unit);
+      if (_currentQuantity > step) {
+        _currentQuantity -= step;
+        _updateProductQuantity();
+      }
+    });
+  }
+
+  Future<void> _updateProductQuantity() async {
+    final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+    await context.read<ProductProvider>().updateProduct(updatedProduct);
+  }
+
+  IconData _getStatusIcon() {
+    if (widget.product.isExpired) {
+      return Icons.cancel;
+    } else if (widget.product.daysUntilExpiry <= 2) {
+      return Icons.warning_amber_rounded;
+    } else if (widget.product.daysUntilExpiry <= 7) {
+      return Icons.watch_later;
+    } else {
+      return Icons.check_circle;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final daysText = widget.product.isExpired
+        ? l10n.daysOverdue(-widget.product.daysUntilExpiry)
+        : l10n.daysRemaining(widget.product.daysUntilExpiry);
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            AppRoutes.productDetail,
+            arguments: widget.product,
+          );
+        },
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              // Icon
+              Text(
+                AppConstants.categoryIcons[widget.product.category] ?? '📦',
+                style: const TextStyle(fontSize: 36),
+              ),
+
+              const SizedBox(width: 12),
+
+              // Info (Name + Days)
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.product.name,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      daysText,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: widget.accentColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 8),
+
+              // Quantity Controls
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Decrease button
+                    InkWell(
+                      onTap: _decreaseQuantity,
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.remove,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 8),
+
+                    // Quantity display
+                    Text(
+                      '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    const SizedBox(width: 8),
+
+                    // Increase button
+                    InkWell(
+                      onTap: _increaseQuantity,
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 8),
+
+              // Status Icon
+              Icon(
+                _getStatusIcon(),
+                color: widget.accentColor,
+                size: 28,
+              ),
+            ],
+          ),
         ),
       ),
     );
