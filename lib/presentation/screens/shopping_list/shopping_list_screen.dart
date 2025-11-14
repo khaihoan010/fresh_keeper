@@ -182,7 +182,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     final shoppingListProvider = context.read<ShoppingListProvider>();
     final productProvider = context.read<ProductProvider>();
 
-    final selectedIds = multiSelectProvider.selectedIds;
+    final selectedIds = multiSelectProvider.selectedProductIds;
     if (selectedIds.isEmpty) return;
 
     // Show dialog to get location and expiry date
@@ -197,22 +197,20 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
     // Get selected items
     final selectedItems = shoppingListProvider.items
-        .where((item) => selectedIds.contains(item.id))
+        .where((item) => selectedIds.contains(item.id.toString()))
         .toList();
 
     // Create products from shopping list items
     final now = DateTime.now();
     final products = selectedItems.map((item) {
       return UserProduct(
-        id: DateTime.now().millisecondsSinceEpoch.toString() + item.id.toString(),
         name: item.name,
         category: 'other',
         quantity: 1,
+        unit: 'pcs',
         location: result.location,
         purchaseDate: now,
         expiryDate: result.expiryDate ?? now.add(const Duration(days: 7)),
-        addedDate: now,
-        lastModified: now,
       );
     }).toList();
 
@@ -223,11 +221,11 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
     // Delete items from shopping list
     for (final id in selectedIds) {
-      await shoppingListProvider.deleteItem(id);
+      await shoppingListProvider.deleteItem(int.parse(id));
     }
 
     // Exit multi-select mode
-    multiSelectProvider.clearSelection();
+    multiSelectProvider.exitMultiSelectMode();
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -244,7 +242,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     final multiSelectProvider = context.read<MultiSelectProvider>();
     final shoppingListProvider = context.read<ShoppingListProvider>();
 
-    final selectedIds = multiSelectProvider.selectedIds;
+    final selectedIds = multiSelectProvider.selectedProductIds;
     if (selectedIds.isEmpty) return;
 
     // Show confirmation dialog
@@ -273,11 +271,11 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
     // Delete selected items
     for (final id in selectedIds) {
-      await shoppingListProvider.deleteItem(id);
+      await shoppingListProvider.deleteItem(int.parse(id));
     }
 
     // Exit multi-select mode
-    multiSelectProvider.clearSelection();
+    multiSelectProvider.exitMultiSelectMode();
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -292,8 +290,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
   void _handleLongPress(String itemId) {
     final multiSelectProvider = context.read<MultiSelectProvider>();
     if (!multiSelectProvider.isMultiSelectMode) {
-      multiSelectProvider.enterMultiSelectMode();
-      multiSelectProvider.toggleSelection(itemId);
+      multiSelectProvider.enterMultiSelectMode(itemId);
     }
   }
 
@@ -315,14 +312,8 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
         return Scaffold(
           appBar: isMultiSelectMode
               ? MultiSelectAppBar(
-                  selectedCount: multiSelectProvider.selectedIds.length,
-                  onCancel: () => multiSelectProvider.clearSelection(),
-                  onSelectAll: () {
-                    final provider = context.read<ShoppingListProvider>();
-                    for (final item in provider.items) {
-                      multiSelectProvider.toggleSelection(item.id.toString());
-                    }
-                  },
+                  selectedCount: multiSelectProvider.selectedProductIds.length,
+                  onExit: () => multiSelectProvider.exitMultiSelectMode(),
                 )
               : AppBar(
                   automaticallyImplyLeading: false,
