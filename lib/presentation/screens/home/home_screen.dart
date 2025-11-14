@@ -31,12 +31,13 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    // Load products from database when screen initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = context.read<ProductProvider>();
-      // Load all products initially (filteredProducts returns empty if no filter/sort)
-      _displayedProducts = provider.filteredProducts.isEmpty
-          ? provider.products
-          : provider.filteredProducts;
+      await provider.loadProducts();
+
+      // Apply location filter after loading
       _applyLocationFilter();
       setState(() {}); // Trigger rebuild to show products
     });
