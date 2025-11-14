@@ -18,6 +18,7 @@ import 'presentation/providers/settings_provider.dart';
 import 'presentation/providers/subscription_provider.dart';
 import 'presentation/providers/ads_provider.dart';
 import 'presentation/providers/shopping_list_provider.dart';
+import 'presentation/providers/multi_select_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -85,6 +86,11 @@ class FreshKeeperApp extends StatelessWidget {
         // Shopping List Provider
         ChangeNotifierProvider<ShoppingListProvider>(
           create: (_) => ShoppingListProvider(),
+        ),
+
+        // Multi-Select Provider
+        ChangeNotifierProvider<MultiSelectProvider>(
+          create: (_) => MultiSelectProvider(),
         ),
 
         // Monetization Services (provided before their providers)

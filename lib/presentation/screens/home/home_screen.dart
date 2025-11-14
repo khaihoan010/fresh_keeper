@@ -8,7 +8,10 @@ import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/shopping_list_provider.dart';
+import '../../providers/multi_select_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
+import '../../widgets/multi_select/multi_select_app_bar.dart';
+import '../../widgets/multi_select/multi_select_bottom_bar.dart';
 import '../expiring_soon/expiring_soon_screen.dart';
 import '../settings/settings_screen.dart';
 import '../shopping_list/shopping_list_screen.dart';
@@ -28,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.watch<MultiSelectProvider>();
 
     return Scaffold(
       body: IndexedStack(
@@ -39,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SettingsView(),
         ],
       ),
-      floatingActionButton: (_currentIndex == 0 || _currentIndex == 2)
+      floatingActionButton: ((_currentIndex == 0 || _currentIndex == 2) && !multiSelectProvider.isMultiSelectMode)
           ? FloatingActionButton(
               onPressed: () {
                 if (_currentIndex == 0) {
@@ -58,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: multiSelectProvider.isMultiSelectMode
+          ? null
+          : BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() => _currentIndex = index);
@@ -334,9 +340,17 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
   Widget build(BuildContext context) {
     super.build(context); // Required for AutomaticKeepAliveClientMixin
     final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.watch<MultiSelectProvider>();
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: multiSelectProvider.isMultiSelectMode
+          ? MultiSelectAppBar(
+              selectedCount: multiSelectProvider.selectedCount,
+              onExit: () {
+                multiSelectProvider.exitMultiSelectMode();
+              },
+            )
+          : AppBar(
         automaticallyImplyLeading: false,
         title: _isSearchExpanded
             ? TextField(
@@ -400,9 +414,11 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                 ),
               ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // Location Tabs
+          Column(
+            children: [
+              // Location Tabs
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -552,6 +568,14 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                         },
                         onDelete: () => _deleteProduct(product),
                         onMarkUsed: () => _markAsUsed(product),
+                        isMultiSelectMode: multiSelectProvider.isMultiSelectMode,
+                        isSelected: multiSelectProvider.isSelected(product.id),
+                        onLongPress: () {
+                          multiSelectProvider.enterMultiSelectMode(product.id);
+                        },
+                        onSelectToggle: () {
+                          multiSelectProvider.toggleSelection(product.id);
+                        },
                       );
                     },
                   ),
@@ -560,6 +584,26 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
             ),
           ),
           const BannerAdWidget(),
+            ],
+          ),
+          // Multi-Select Bottom Bar
+          if (multiSelectProvider.isMultiSelectMode)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: MultiSelectBottomBar(
+                onMove: () {
+                  // TODO: Phase 3 - Handle Move
+                },
+                onCopy: () {
+                  // TODO: Phase 3 - Handle Copy
+                },
+                onDelete: () {
+                  // TODO: Phase 3 - Handle Delete
+                },
+              ),
+            ),
         ],
       ),
     );
@@ -573,6 +617,10 @@ class _ProductCard extends StatefulWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback onMarkUsed;
+  final bool isMultiSelectMode;
+  final bool isSelected;
+  final VoidCallback onLongPress;
+  final VoidCallback onSelectToggle;
 
   const _ProductCard({
     required this.product,
@@ -580,6 +628,10 @@ class _ProductCard extends StatefulWidget {
     required this.onEdit,
     required this.onDelete,
     required this.onMarkUsed,
+    required this.isMultiSelectMode,
+    required this.isSelected,
+    required this.onLongPress,
+    required this.onSelectToggle,
   });
 
   @override
@@ -659,6 +711,7 @@ class _ProductCardState extends State<_ProductCard> {
 
     return Dismissible(
       key: Key(widget.product.id),
+      direction: widget.isMultiSelectMode ? DismissDirection.none : DismissDirection.horizontal,
       background: Container(
         color: AppTheme.primaryColor,
         alignment: Alignment.centerLeft,
@@ -684,22 +737,42 @@ class _ProductCardState extends State<_ProductCard> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: InkWell(
           onTap: () {
-            // Create updated product with current quantity before navigating
-            final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
-            Navigator.pushNamed(
-              context,
-              AppRoutes.productDetail,
-              arguments: updatedProduct,
-            ).then((_) {
-              // Reload data when returning from details
-              widget.onTap();
-            });
+            if (widget.isMultiSelectMode) {
+              widget.onSelectToggle();
+            } else {
+              // Create updated product with current quantity before navigating
+              final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.productDetail,
+                arguments: updatedProduct,
+              ).then((_) {
+                // Reload data when returning from details
+                widget.onTap();
+              });
+            }
           },
+          onLongPress: widget.isMultiSelectMode ? null : widget.onLongPress,
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
+                // Checkbox for multi-select mode
+                if (widget.isMultiSelectMode)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Icon(
+                      widget.isSelected
+                          ? Icons.check_circle
+                          : Icons.circle_outlined,
+                      color: widget.isSelected
+                          ? AppTheme.primaryColor
+                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                      size: 24,
+                    ),
+                  ),
+
                 // Icon
                 Text(
                   AppConstants.categoryIcons[widget.product.category] ?? '📦',
@@ -733,10 +806,10 @@ class _ProductCardState extends State<_ProductCard> {
                   ),
                 ),
 
-                const SizedBox(width: 8),
-
-                // Quantity Controls
-                Container(
+                // Quantity Controls (hidden in multi-select mode)
+                if (!widget.isMultiSelectMode) ...[
+                  const SizedBox(width: 8),
+                  Container(
                   padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
@@ -796,7 +869,8 @@ class _ProductCardState extends State<_ProductCard> {
                       ),
                     ],
                   ),
-                ),
+                  ),
+                ],
               ],
             ),
           ),

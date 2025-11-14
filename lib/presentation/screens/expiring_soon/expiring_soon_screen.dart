@@ -7,7 +7,10 @@ import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
+import '../../providers/multi_select_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
+import '../../widgets/multi_select/multi_select_app_bar.dart';
+import '../../widgets/multi_select/multi_select_bottom_bar.dart';
 
 /// Expiring Soon View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -132,9 +135,17 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.watch<MultiSelectProvider>();
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: multiSelectProvider.isMultiSelectMode
+          ? MultiSelectAppBar(
+              selectedCount: multiSelectProvider.selectedCount,
+              onExit: () {
+                multiSelectProvider.exitMultiSelectMode();
+              },
+            )
+          : AppBar(
         automaticallyImplyLeading: false,
         title: _isSearchExpanded
             ? TextField(
@@ -179,10 +190,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                   },
                 ),
               ],
-      ),
-      body: Column(
+            ),
+      body: Stack(
         children: [
-          // Location Tabs
+          Column(
+            children: [
+              // Location Tabs
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -345,6 +358,26 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
             ),
           ),
           const BannerAdWidget(),
+            ],
+          ),
+          // Multi-Select Bottom Bar
+          if (multiSelectProvider.isMultiSelectMode)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: MultiSelectBottomBar(
+                onMove: () {
+                  // TODO: Phase 3 - Handle Move
+                },
+                onCopy: () {
+                  // TODO: Phase 3 - Handle Copy
+                },
+                onDelete: () {
+                  // TODO: Phase 3 - Handle Delete
+                },
+              ),
+            ),
         ],
       ),
     );
@@ -388,10 +421,19 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     UserProduct product,
     Color accentColor,
   ) {
+    final multiSelectProvider = context.watch<MultiSelectProvider>();
     return _ExpiringSoonProductCard(
       product: product,
       accentColor: accentColor,
       onRefresh: _handleRefresh,
+      isMultiSelectMode: multiSelectProvider.isMultiSelectMode,
+      isSelected: multiSelectProvider.isSelected(product.id),
+      onLongPress: () {
+        multiSelectProvider.enterMultiSelectMode(product.id);
+      },
+      onSelectToggle: () {
+        multiSelectProvider.toggleSelection(product.id);
+      },
     );
   }
 
@@ -437,11 +479,19 @@ class _ExpiringSoonProductCard extends StatefulWidget {
   final UserProduct product;
   final Color accentColor;
   final VoidCallback onRefresh;
+  final bool isMultiSelectMode;
+  final bool isSelected;
+  final VoidCallback onLongPress;
+  final VoidCallback onSelectToggle;
 
   const _ExpiringSoonProductCard({
     required this.product,
     required this.accentColor,
     required this.onRefresh,
+    required this.isMultiSelectMode,
+    required this.isSelected,
+    required this.onLongPress,
+    required this.onSelectToggle,
   });
 
   @override
@@ -523,22 +573,42 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
       margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () {
-          // Create updated product with current quantity before navigating
-          final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
-          Navigator.pushNamed(
-            context,
-            AppRoutes.productDetail,
-            arguments: updatedProduct,
-          ).then((_) {
-            // Reload data when returning from details
-            widget.onRefresh();
-          });
+          if (widget.isMultiSelectMode) {
+            widget.onSelectToggle();
+          } else {
+            // Create updated product with current quantity before navigating
+            final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+            Navigator.pushNamed(
+              context,
+              AppRoutes.productDetail,
+              arguments: updatedProduct,
+            ).then((_) {
+              // Reload data when returning from details
+              widget.onRefresh();
+            });
+          }
         },
+        onLongPress: widget.isMultiSelectMode ? null : widget.onLongPress,
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
+              // Checkbox for multi-select mode
+              if (widget.isMultiSelectMode)
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: Icon(
+                    widget.isSelected
+                        ? Icons.check_circle
+                        : Icons.circle_outlined,
+                    color: widget.isSelected
+                        ? AppTheme.primaryColor
+                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                    size: 24,
+                  ),
+                ),
+
               // Icon
               Text(
                 AppConstants.categoryIcons[widget.product.category] ?? '📦',
@@ -572,10 +642,10 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
                 ),
               ),
 
-              const SizedBox(width: 8),
-
-              // Quantity Controls
-              Container(
+              // Quantity Controls (hidden in multi-select mode)
+              if (!widget.isMultiSelectMode) ...[
+                const SizedBox(width: 8),
+                Container(
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
@@ -635,7 +705,8 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
                     ),
                   ],
                 ),
-              ),
+                ),
+              ],
             ],
           ),
         ),
