@@ -144,6 +144,9 @@ class AppLocalizations {
   String confirmDeleteProduct(String name) => isVietnamese
       ? 'Bạn có chắc muốn xóa "$name"?'
       : 'Are you sure you want to delete "$name"?';
+  String confirmDeleteMultiple(int count) => isVietnamese
+      ? 'Bạn có chắc muốn xóa $count sản phẩm đã chọn?'
+      : 'Are you sure you want to delete $count selected products?';
 
   String get clearDataConfirm =>
       isVietnamese ? 'Xóa tất cả dữ liệu?' : 'Clear all data?';
@@ -160,6 +163,9 @@ class AppLocalizations {
   String productDeleted(String name) => isVietnamese
       ? 'Đã xóa $name'
       : 'Deleted $name';
+  String productsDeleted(int count) => isVietnamese
+      ? 'Đã xóa $count sản phẩm'
+      : 'Deleted $count products';
 
   String productMarkedAsUsed(String name) => isVietnamese
       ? 'Đã đánh dấu "$name" là đã dùng'
@@ -491,6 +497,117 @@ class AppLocalizations {
   String get purchase => isVietnamese
       ? 'Mua'
       : 'Purchase';
+
+  // ==================== SHOPPING LIST ====================
+  String get shoppingList => isVietnamese ? 'Danh sách mua sắm' : 'Shopping List';
+  String get addItem => isVietnamese ? 'Thêm món' : 'Add Item';
+  String get addToShoppingList => isVietnamese ? 'Thêm vào danh sách' : 'Add to List';
+  String get emptyShoppingList => isVietnamese
+      ? 'Danh sách mua sắm trống'
+      : 'Shopping list is empty';
+  String get startAddingItems => isVietnamese
+      ? 'Bắt đầu thêm món vào danh sách'
+      : 'Start adding items to your list';
+  String get enterItemName => isVietnamese ? 'Nhập tên món' : 'Enter item name';
+  String get itemAdded => isVietnamese ? 'Đã thêm món' : 'Item added';
+  String get itemDeleted => isVietnamese ? 'Đã xóa món' : 'Item deleted';
+  String get itemAlreadyExists => isVietnamese
+      ? 'Món này đã có trong danh sách'
+      : 'Item already exists';
+  String get clearList => isVietnamese ? 'Xóa danh sách' : 'Clear List';
+  String get confirmClearList => isVietnamese
+      ? 'Xác nhận xóa danh sách'
+      : 'Confirm Clear List';
+  String get confirmClearListMessage => isVietnamese
+      ? 'Bạn có chắc muốn xóa toàn bộ danh sách?'
+      : 'Are you sure you want to clear the entire list?';
+  String get listCleared => isVietnamese
+      ? 'Đã xóa danh sách'
+      : 'List cleared';
+  String itemsCount(int count) => isVietnamese
+      ? '$count món'
+      : '$count items';
+
+  // ==================== MULTI-SELECT ====================
+  String get selectItems => isVietnamese ? 'Chọn món' : 'Select Items';
+  String selectedCount(int count) => isVietnamese
+      ? '$count đã chọn'
+      : '$count selected';
+  String get selectAll => isVietnamese ? 'Chọn tất cả' : 'Select All';
+  String get deselectAll => isVietnamese ? 'Bỏ chọn tất cả' : 'Deselect All';
+  String get move => isVietnamese ? 'Di chuyển' : 'Move';
+  String get copy => isVietnamese ? 'Sao chép' : 'Copy';
+  String get deleteSelected => isVietnamese ? 'Xóa đã chọn' : 'Delete Selected';
+  String get confirmDeleteItems => isVietnamese
+      ? 'Xác nhận xóa các món'
+      : 'Confirm Delete Items';
+  String confirmDeleteItemsMessage(int count) => isVietnamese
+      ? 'Bạn có chắc muốn xóa $count món đã chọn?'
+      : 'Are you sure you want to delete $count selected items?';
+  String itemsDeleted(int count) => isVietnamese
+      ? 'Đã xóa $count món'
+      : '$count items deleted';
+
+  // ==================== MOVE/COPY ====================
+  String get moveTo => isVietnamese ? 'Di chuyển đến' : 'Move To';
+  String get moveToLocation => isVietnamese ? 'Di chuyển đến' : 'Move To Location';
+  String get copyTo => isVietnamese ? 'Sao chép đến' : 'Copy To';
+  String get copyToLocation => isVietnamese ? 'Sao chép đến' : 'Copy To Location';
+  String get selectDestination => isVietnamese
+      ? 'Chọn vị trí đích'
+      : 'Select Destination';
+  String itemsMoved(int count) => isVietnamese
+      ? 'Đã di chuyển $count món'
+      : '$count items moved';
+  String productsMoved(int count, String location) => isVietnamese
+      ? 'Đã di chuyển $count sản phẩm đến $location'
+      : 'Moved $count products to $location';
+  String productsAddedToShoppingList(int count) => isVietnamese
+      ? 'Đã thêm $count sản phẩm vào danh sách mua sắm'
+      : 'Added $count products to shopping list';
+  String productsCopied(int count, String location) => isVietnamese
+      ? 'Đã sao chép $count sản phẩm đến $location'
+      : 'Copied $count products to $location';
+  String itemsCopied(int count) => isVietnamese
+      ? 'Đã sao chép $count món'
+      : '$count items copied';
+
+  // ==================== STORE FEATURE ====================
+  String get store => isVietnamese ? 'Lưu trữ' : 'Store';
+  String get storeItems => isVietnamese ? 'Lưu các món' : 'Store Items';
+  String storeItemsMessage(int count) => isVietnamese
+      ? 'Lưu $count món vào kho. Chọn vị trí lưu trữ và ngày hết hạn (tùy chọn).'
+      : 'Store $count items to inventory. Select storage location and expiry date (optional).';
+  String get optional => isVietnamese ? 'tùy chọn' : 'optional';
+  String itemsStored(int count) => isVietnamese
+      ? 'Đã lưu $count món vào kho'
+      : '$count items stored to inventory';
+  String get addToInventory => isVietnamese
+      ? 'Thêm vào kho'
+      : 'Add to Inventory';
+  String get quickAdd => isVietnamese ? 'Thêm nhanh' : 'Quick Add';
+  String get quickAddZeroQuantity => isVietnamese
+      ? 'Thêm nhanh sản phẩm hết'
+      : 'Quick Add Zero Quantity';
+  String get quickAddMessage => isVietnamese
+      ? 'Thêm tất cả sản phẩm có số lượng = 0 vào danh sách mua sắm? Sản phẩm đã có trong danh sách sẽ không được thêm.'
+      : 'Add all 0 quantity foods to shopping list? Foods that are already in the list will not be added.';
+  String itemsAddedToList(int count) => isVietnamese
+      ? 'Đã thêm $count món vào danh sách'
+      : '$count items added to list';
+  String get noZeroQuantityItems => isVietnamese
+      ? 'Không có sản phẩm nào có số lượng = 0'
+      : 'No products with zero quantity';
+  String get noZeroQuantityProducts => isVietnamese
+      ? 'Không có sản phẩm nào có số lượng = 0'
+      : 'No products with zero quantity';
+  String confirmQuickAdd(int count) => isVietnamese
+      ? 'Thêm $count sản phẩm hết vào danh sách mua sắm?'
+      : 'Add $count zero quantity products to shopping list?';
+
+  // ==================== SEARCH PRODUCTS ====================
+  String get searchProducts => isVietnamese ? 'Tìm sản phẩm' : 'Search Products';
+  String get searchAndAdd => isVietnamese ? 'Tìm và thêm' : 'Search and Add';
 }
 
 
