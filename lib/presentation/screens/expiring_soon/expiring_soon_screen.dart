@@ -344,6 +344,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     return _ExpiringSoonProductCard(
       product: product,
       accentColor: accentColor,
+      onRefresh: _handleRefresh,
     );
   }
 
@@ -388,10 +389,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 class _ExpiringSoonProductCard extends StatefulWidget {
   final UserProduct product;
   final Color accentColor;
+  final VoidCallback onRefresh;
 
   const _ExpiringSoonProductCard({
     required this.product,
     required this.accentColor,
+    required this.onRefresh,
   });
 
   @override
@@ -405,6 +408,16 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
   void initState() {
     super.initState();
     _currentQuantity = widget.product.quantity;
+  }
+
+  @override
+  void didUpdateWidget(_ExpiringSoonProductCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Sync quantity when product data changes from provider
+    if (oldWidget.product.id == widget.product.id &&
+        oldWidget.product.quantity != widget.product.quantity) {
+      _currentQuantity = widget.product.quantity;
+    }
   }
 
   double _getQuantityStep(String unit) {
@@ -467,7 +480,10 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
             context,
             AppRoutes.productDetail,
             arguments: widget.product,
-          );
+          ).then((_) {
+            // Reload data when returning from details
+            widget.onRefresh();
+          });
         },
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         child: Padding(
@@ -571,20 +587,6 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
                   ],
                 ),
               ),
-
-              const SizedBox(width: 8),
-
-              // Status Dot
-              Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  color: widget.accentColor,
-                  shape: BoxShape.circle,
-                ),
-              ),
-
-              const SizedBox(width: 8),
             ],
           ),
         ),

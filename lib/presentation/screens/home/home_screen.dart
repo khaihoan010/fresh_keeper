@@ -422,7 +422,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             context,
                             AppRoutes.productDetail,
                             arguments: product,
-                          );
+                          ).then((_) {
+                            // Reload data when returning from details
+                            _handleRefresh();
+                          });
                         },
                         onEdit: () {
                           Navigator.pushNamed(
@@ -556,6 +559,16 @@ class _ProductCardState extends State<_ProductCard> {
   void initState() {
     super.initState();
     _currentQuantity = widget.product.quantity;
+  }
+
+  @override
+  void didUpdateWidget(_ProductCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Sync quantity when product data changes from provider
+    if (oldWidget.product.id == widget.product.id &&
+        oldWidget.product.quantity != widget.product.quantity) {
+      _currentQuantity = widget.product.quantity;
+    }
   }
 
   double _getQuantityStep(String unit) {
@@ -737,18 +750,6 @@ class _ProductCardState extends State<_ProductCard> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-
-                const SizedBox(width: 8),
-
-                // Status Dot
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    color: widget.product.getStatusColor(),
-                    shape: BoxShape.circle,
                   ),
                 ),
               ],
