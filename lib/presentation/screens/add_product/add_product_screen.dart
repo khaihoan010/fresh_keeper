@@ -213,10 +213,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       _searchResults = [];
       _searchController.clear();
 
-      // Auto-calculate expiry date
-      if (template.shelfLifeDays != null) {
-        _expiryDate = _purchaseDate.add(Duration(days: template.shelfLifeDays!));
-      }
+      // Auto-calculate expiry date based on location
+      _expiryDate = template.calculateExpiryDate(_purchaseDate, location: _selectedLocation);
     });
   }
 
@@ -239,9 +237,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
         if (isPurchaseDate) {
           _purchaseDate = picked;
           // Recalculate expiry if template is selected
-          if (_selectedTemplate?.shelfLifeDays != null) {
-            _expiryDate = _purchaseDate.add(
-              Duration(days: _selectedTemplate!.shelfLifeDays!),
+          if (_selectedTemplate != null) {
+            _expiryDate = _selectedTemplate!.calculateExpiryDate(
+              _purchaseDate,
+              location: _selectedLocation,
             );
           }
         } else {
@@ -527,11 +526,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
           ),
           onChanged: _searchProducts,
         ),
-        if (_searchResults.isNotEmpty) ...[
+        if (_searchResults.isNotEmpty || (_searchController.text.isNotEmpty && !_isSearching)) ...[
           const SizedBox(height: 8),
           ConstrainedBox(
             constraints: const BoxConstraints(
-              maxHeight: 400, // Maximum height for 10 results with scrolling
+              maxHeight: 450, // Increased height for create template option
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -548,9 +547,38 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: ListView.separated(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(), // Enable scrolling
-                itemCount: _searchResults.length,
+                itemCount: _searchResults.length + 1, // +1 for create template option
                 separatorBuilder: (_, __) => const Divider(height: 1),
                 itemBuilder: (context, index) {
+                  // Create template option at the end
+                  if (index == _searchResults.length) {
+                    return ListTile(
+                      leading: Icon(
+                        Icons.add_circle_outline,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 28,
+                      ),
+                      title: Text(
+                        l10n.createCustomTemplate,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        _searchController.text.isNotEmpty
+                            ? l10n.isVietnamese
+                                ? 'Tạo mẫu cho "${_searchController.text}"'
+                                : 'Create template for "${_searchController.text}"'
+                            : l10n.isVietnamese
+                                ? 'Tự tạo mẫu sản phẩm với thời hạn sử dụng tùy chỉnh'
+                                : 'Create custom product template with custom shelf life',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      onTap: () => _showCreateTemplateDialog(_searchController.text),
+                    );
+                  }
+
                   final template = _searchResults[index];
                   final isFromApi = template.id.startsWith('api_');
 
@@ -728,7 +756,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
       }).toList(),
       onChanged: (value) {
         if (value != null) {
-          setState(() => _selectedLocation = value);
+          setState(() {
+            _selectedLocation = value;
+            // Recalculate expiry date if template is selected
+            if (_selectedTemplate != null) {
+              _expiryDate = _selectedTemplate!.calculateExpiryDate(
+                _purchaseDate,
+                location: _selectedLocation,
+              );
+            }
+          });
         }
       },
     );
@@ -955,6 +992,197 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Show dialog to create custom product template
+  void _showCreateTemplateDialog(String initialName) {
+    final l10n = AppLocalizations.of(context);
+    final nameController = TextEditingController(text: initialName);
+    String selectedCategory = _selectedCategory;
+    final fridgeLifeController = TextEditingController();
+    final freezerLifeController = TextEditingController();
+    final pantryLifeController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Row(
+            children: [
+              Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
+              const SizedBox(width: 12),
+              Text(l10n.createCustomTemplate),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Template Name
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: l10n.templateName,
+                    hintText: l10n.enterTemplateName,
+                    prefixIcon: const Icon(Icons.label_outline),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                    ),
+                  ),
+                  autofocus: initialName.isEmpty,
+                ),
+                const SizedBox(height: 16),
+
+                // Category Selector
+                DropdownButtonFormField<String>(
+                  value: selectedCategory,
+                  decoration: InputDecoration(
+                    labelText: l10n.category,
+                    prefixIcon: const Icon(Icons.category_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                    ),
+                  ),
+                  items: AppConstants.categories.map((cat) {
+                    return DropdownMenuItem(
+                      value: cat['id'],
+                      child: Row(
+                        children: [
+                          Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
+                          const SizedBox(width: 12),
+                          Text(l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => selectedCategory = value);
+                    }
+                  },
+                ),
+                const SizedBox(height: 16),
+
+                // Shelf Life Section
+                Text(
+                  l10n.shelfLifeOptional,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                // Fridge Shelf Life
+                TextField(
+                  controller: fridgeLifeController,
+                  decoration: InputDecoration(
+                    labelText: l10n.fridgeShelfLife,
+                    hintText: '7',
+                    prefixIcon: const Icon(Icons.kitchen_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 12),
+
+                // Freezer Shelf Life
+                TextField(
+                  controller: freezerLifeController,
+                  decoration: InputDecoration(
+                    labelText: l10n.freezerShelfLife,
+                    hintText: '30',
+                    prefixIcon: const Icon(Icons.ac_unit_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 12),
+
+                // Pantry Shelf Life
+                TextField(
+                  controller: pantryLifeController,
+                  decoration: InputDecoration(
+                    labelText: l10n.pantryShelfLife,
+                    hintText: '14',
+                    prefixIcon: const Icon(Icons.inventory_2_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.cancel),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final name = nameController.text.trim();
+                if (name.isEmpty) {
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    SnackBar(
+                      content: Text(l10n.pleaseEnterProductName),
+                      backgroundColor: AppTheme.errorColor,
+                    ),
+                  );
+                  return;
+                }
+
+                // Create custom template
+                final template = ProductTemplate(
+                  id: 'custom_${DateTime.now().millisecondsSinceEpoch}',
+                  nameVi: name,
+                  nameEn: name,
+                  aliases: [],
+                  category: selectedCategory,
+                  shelfLifeRefrigerated: int.tryParse(fridgeLifeController.text),
+                  shelfLifeFrozen: int.tryParse(freezerLifeController.text),
+                  shelfLifePantry: int.tryParse(pantryLifeController.text),
+                );
+
+                // Save to database
+                final provider = this.context.read<ProductProvider>();
+                final result = await provider.saveCustomTemplate(template);
+
+                if (mounted) {
+                  Navigator.pop(context);
+
+                  if (result) {
+                    ScaffoldMessenger.of(this.context).showSnackBar(
+                      SnackBar(
+                        content: Text(l10n.templateCreated),
+                        backgroundColor: AppTheme.successColor,
+                      ),
+                    );
+
+                    // Select the newly created template
+                    _selectTemplate(template);
+                  } else {
+                    ScaffoldMessenger.of(this.context).showSnackBar(
+                      SnackBar(
+                        content: Text(l10n.isVietnamese
+                            ? 'Không thể tạo mẫu'
+                            : 'Cannot create template'),
+                        backgroundColor: AppTheme.errorColor,
+                      ),
+                    );
+                  }
+                }
+              },
+              child: Text(l10n.save),
+            ),
+          ],
+        ),
       ),
     );
   }

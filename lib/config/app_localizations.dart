@@ -235,6 +235,19 @@ class AppLocalizations {
   String get productInformation => isVietnamese ? 'Thông tin sản phẩm' : 'Product Information';
   String get shelfLife => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
   String get saveChanges => isVietnamese ? 'Lưu Thay Đổi' : 'Save Changes';
+
+  // Custom Templates
+  String get createCustomTemplate => isVietnamese ? 'Tạo mẫu tùy chỉnh' : 'Create Custom Template';
+  String get customTemplate => isVietnamese ? 'Mẫu tùy chỉnh' : 'Custom Template';
+  String get saveAsTemplate => isVietnamese ? 'Lưu làm mẫu' : 'Save as Template';
+  String get templateName => isVietnamese ? 'Tên mẫu' : 'Template Name';
+  String get fridgeShelfLife => isVietnamese ? 'HSD ngăn mát (ngày)' : 'Fridge Shelf Life (days)';
+  String get freezerShelfLife => isVietnamese ? 'HSD ngăn đông (ngày)' : 'Freezer Shelf Life (days)';
+  String get pantryShelfLife => isVietnamese ? 'HSD bên ngoài (ngày)' : 'Pantry Shelf Life (days)';
+  String get templateCreated => isVietnamese ? 'Đã tạo mẫu' : 'Template created';
+  String get templateSaved => isVietnamese ? 'Đã lưu mẫu' : 'Template saved';
+  String get enterTemplateName => isVietnamese ? 'Nhập tên mẫu' : 'Enter template name';
+  String get shelfLifeOptional => isVietnamese ? 'HSD (tùy chọn)' : 'Shelf life (optional)';
   String get storageLocation => isVietnamese ? 'Vị trí lưu trữ' : 'Storage Location';
   String get storageLocationHint => isVietnamese ? 'Ví dụ: Tủ lạnh, Kệ bếp' : 'e.g.: Fridge, Kitchen shelf';
   String productUpdated(String name) => isVietnamese

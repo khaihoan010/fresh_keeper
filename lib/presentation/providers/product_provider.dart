@@ -350,14 +350,28 @@ class ProductProvider extends ChangeNotifier {
     }
 
     try {
-      final result = await _repository.searchTemplates(query);
-      if (result.isSuccess) {
-        debugPrint('🔍 Found ${result.data!.length} templates for: $query');
-        return result.data!;
-      } else {
-        debugPrint('❌ Error searching templates: ${result.error}');
-        return [];
+      // Search both system templates and custom templates
+      final results = await Future.wait([
+        _repository.searchTemplates(query),
+        _repository.searchCustomTemplates(query),
+      ]);
+
+      final systemTemplates = results[0];
+      final customTemplates = results[1];
+
+      // Merge results: custom templates first (higher priority), then system templates
+      final allTemplates = <ProductTemplate>[];
+
+      if (customTemplates.isSuccess) {
+        allTemplates.addAll(customTemplates.data!);
       }
+
+      if (systemTemplates.isSuccess) {
+        allTemplates.addAll(systemTemplates.data!);
+      }
+
+      debugPrint('🔍 Found ${allTemplates.length} templates (${customTemplates.data?.length ?? 0} custom + ${systemTemplates.data?.length ?? 0} system) for: $query');
+      return allTemplates;
     } catch (e) {
       debugPrint('❌ Exception searching templates: $e');
       return [];
@@ -382,6 +396,25 @@ class ProductProvider extends ChangeNotifier {
     } catch (e) {
       debugPrint('❌ Exception searching products: $e');
       return [];
+    }
+  }
+
+  /// Save custom product template
+  Future<bool> saveCustomTemplate(ProductTemplate template) async {
+    try {
+      final result = await _repository.saveCustomTemplate(template);
+      if (result.isSuccess) {
+        debugPrint('✅ Custom template saved: ${template.nameVi}');
+        return true;
+      } else {
+        debugPrint('❌ Error saving custom template: ${result.error}');
+        _setError(result.error!);
+        return false;
+      }
+    } catch (e) {
+      debugPrint('❌ Exception saving custom template: $e');
+      _setError('Không thể lưu mẫu tùy chỉnh.');
+      return false;
     }
   }
 
