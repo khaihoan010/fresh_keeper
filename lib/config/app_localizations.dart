@@ -144,6 +144,9 @@ class AppLocalizations {
   String confirmDeleteProduct(String name) => isVietnamese
       ? 'Bạn có chắc muốn xóa "$name"?'
       : 'Are you sure you want to delete "$name"?';
+  String confirmDeleteMultiple(int count) => isVietnamese
+      ? 'Bạn có chắc muốn xóa $count sản phẩm đã chọn?'
+      : 'Are you sure you want to delete $count selected products?';
 
   String get clearDataConfirm =>
       isVietnamese ? 'Xóa tất cả dữ liệu?' : 'Clear all data?';
@@ -160,6 +163,9 @@ class AppLocalizations {
   String productDeleted(String name) => isVietnamese
       ? 'Đã xóa $name'
       : 'Deleted $name';
+  String productsDeleted(int count) => isVietnamese
+      ? 'Đã xóa $count sản phẩm'
+      : 'Deleted $count products';
 
   String productMarkedAsUsed(String name) => isVietnamese
       ? 'Đã đánh dấu "$name" là đã dùng'
@@ -544,13 +550,24 @@ class AppLocalizations {
 
   // ==================== MOVE/COPY ====================
   String get moveTo => isVietnamese ? 'Di chuyển đến' : 'Move To';
+  String get moveToLocation => isVietnamese ? 'Di chuyển đến' : 'Move To Location';
   String get copyTo => isVietnamese ? 'Sao chép đến' : 'Copy To';
+  String get copyToLocation => isVietnamese ? 'Sao chép đến' : 'Copy To Location';
   String get selectDestination => isVietnamese
       ? 'Chọn vị trí đích'
       : 'Select Destination';
   String itemsMoved(int count) => isVietnamese
       ? 'Đã di chuyển $count món'
       : '$count items moved';
+  String productsMoved(int count, String location) => isVietnamese
+      ? 'Đã di chuyển $count sản phẩm đến $location'
+      : 'Moved $count products to $location';
+  String productsAddedToShoppingList(int count) => isVietnamese
+      ? 'Đã thêm $count sản phẩm vào danh sách mua sắm'
+      : 'Added $count products to shopping list';
+  String productsCopied(int count, String location) => isVietnamese
+      ? 'Đã sao chép $count sản phẩm đến $location'
+      : 'Copied $count products to $location';
   String itemsCopied(int count) => isVietnamese
       ? 'Đã sao chép $count món'
       : '$count items copied';

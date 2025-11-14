@@ -8,9 +8,11 @@ import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/multi_select_provider.dart';
+import '../../providers/shopping_list_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/multi_select/multi_select_app_bar.dart';
 import '../../widgets/multi_select/multi_select_bottom_bar.dart';
+import '../../widgets/multi_select/location_selector_dialog.dart';
 
 /// Expiring Soon View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -130,6 +132,214 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     }
 
     return grouped;
+  }
+
+  Future<void> _handleBulkDelete() async {
+    final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.read<MultiSelectProvider>();
+    final selectedCount = multiSelectProvider.selectedCount;
+
+    if (selectedCount == 0) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.confirmDelete),
+        content: Text(l10n.confirmDeleteMultiple(selectedCount)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+            ),
+            child: Text(l10n.delete),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      final productProvider = context.read<ProductProvider>();
+      final selectedIds = multiSelectProvider.selectedProductIds.toList();
+
+      int successCount = 0;
+      for (final id in selectedIds) {
+        final success = await productProvider.deleteProduct(id);
+        if (success) successCount++;
+      }
+
+      if (mounted) {
+        multiSelectProvider.exitMultiSelectMode();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsDeleted(successCount)),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+
+        // Reload expiring soon products
+        await productProvider.loadExpiringSoon();
+      }
+    }
+  }
+
+  Future<void> _handleBulkMove() async {
+    final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.read<MultiSelectProvider>();
+    final productProvider = context.read<ProductProvider>();
+    final shoppingListProvider = context.read<ShoppingListProvider>();
+
+    if (multiSelectProvider.selectedCount == 0) return;
+
+    // Get all expiring products to find selected ones
+    final allProducts = productProvider.expiringSoon;
+    final selectedProducts = multiSelectProvider.getSelectedProducts(allProducts);
+    if (selectedProducts.isEmpty) return;
+
+    // Determine which locations to exclude
+    final Set<String> currentLocations = selectedProducts
+        .map((p) => p.location?.toLowerCase() ?? '')
+        .where((loc) => loc.isNotEmpty)
+        .toSet();
+
+    // Show location selector
+    final destination = await showDialog<String>(
+      context: context,
+      builder: (context) => LocationSelectorDialog(
+        title: l10n.moveToLocation,
+        excludeLocations: currentLocations.length == 1 ? currentLocations : {},
+      ),
+    );
+
+    if (destination == null || !mounted) return;
+
+    // Handle move
+    if (destination == 'shopping_list') {
+      // Add product names to shopping list
+      final names = selectedProducts.map((p) => p.name).toList();
+      final addedCount = await shoppingListProvider.addItems(names);
+
+      if (mounted) {
+        multiSelectProvider.exitMultiSelectMode();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      }
+    } else {
+      // Move products to selected location
+      int movedCount = 0;
+      for (final product in selectedProducts) {
+        final updatedProduct = product.copyWith(location: destination);
+        final success = await productProvider.updateProduct(updatedProduct);
+        if (success) movedCount++;
+      }
+
+      if (mounted) {
+        multiSelectProvider.exitMultiSelectMode();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsMoved(movedCount, _getLocationName(l10n, destination))),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+
+        // Reload expiring soon products
+        await productProvider.loadExpiringSoon();
+      }
+    }
+  }
+
+  String _getLocationName(AppLocalizations l10n, String location) {
+    switch (location) {
+      case 'fridge':
+        return l10n.fridge;
+      case 'freezer':
+        return l10n.freezer;
+      case 'pantry':
+        return l10n.pantry;
+      default:
+        return location;
+    }
+  }
+
+  Future<void> _handleBulkCopy() async {
+    final l10n = AppLocalizations.of(context);
+    final multiSelectProvider = context.read<MultiSelectProvider>();
+    final productProvider = context.read<ProductProvider>();
+    final shoppingListProvider = context.read<ShoppingListProvider>();
+
+    if (multiSelectProvider.selectedCount == 0) return;
+
+    // Get all expiring products to find selected ones
+    final allProducts = productProvider.expiringSoon;
+    final selectedProducts = multiSelectProvider.getSelectedProducts(allProducts);
+    if (selectedProducts.isEmpty) return;
+
+    // Show location selector (no exclusions for copy)
+    final destination = await showDialog<String>(
+      context: context,
+      builder: (context) => LocationSelectorDialog(
+        title: l10n.copyToLocation,
+        excludeLocations: {},
+      ),
+    );
+
+    if (destination == null || !mounted) return;
+
+    // Handle copy
+    if (destination == 'shopping_list') {
+      // Add product names to shopping list
+      final names = selectedProducts.map((p) => p.name).toList();
+      final addedCount = await shoppingListProvider.addItems(names);
+
+      if (mounted) {
+        multiSelectProvider.exitMultiSelectMode();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      }
+    } else {
+      // Copy products to selected location (without expiration date)
+      int copiedCount = 0;
+      for (final product in selectedProducts) {
+        // Create copy without expiration date
+        final copiedProduct = product.copyWith(
+          id: null, // Will generate new ID
+          location: destination,
+          expiryDate: null, // No expiration date
+        );
+        final success = await productProvider.addProduct(copiedProduct);
+        if (success) copiedCount++;
+      }
+
+      if (mounted) {
+        multiSelectProvider.exitMultiSelectMode();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsCopied(copiedCount, _getLocationName(l10n, destination))),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+
+        // Reload expiring soon products
+        await productProvider.loadExpiringSoon();
+      }
+    }
   }
 
   @override
@@ -367,15 +577,9 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
               right: 0,
               bottom: 0,
               child: MultiSelectBottomBar(
-                onMove: () {
-                  // TODO: Phase 3 - Handle Move
-                },
-                onCopy: () {
-                  // TODO: Phase 3 - Handle Copy
-                },
-                onDelete: () {
-                  // TODO: Phase 3 - Handle Delete
-                },
+                onMove: _handleBulkMove,
+                onCopy: _handleBulkCopy,
+                onDelete: _handleBulkDelete,
               ),
             ),
         ],
