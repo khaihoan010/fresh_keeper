@@ -368,14 +368,16 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
         );
       }
     } else {
-      // Copy products to selected location (without expiration date)
+      // Copy products to selected location with new expiry date
       int copiedCount = 0;
+      final now = DateTime.now();
       for (final product in selectedProducts) {
-        // Create copy without expiration date
+        // Create copy with new expiry date (7 days from now)
         final copiedProduct = product.copyWith(
           id: null, // Will generate new ID
           location: destination,
-          expiryDate: null, // No expiration date
+          purchaseDate: now,
+          expiryDate: now.add(const Duration(days: 7)),
         );
         final success = await productProvider.addProduct(copiedProduct);
         if (success) copiedCount++;

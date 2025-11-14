@@ -11,7 +11,7 @@ import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/multi_select/multi_select_app_bar.dart';
 import '../../widgets/shopping_list/shopping_list_bottom_bar.dart';
-import '../../widgets/shopping_list/store_items_dialog.dart';
+import 'store_items_screen.dart';
 
 /// Shopping List View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -185,37 +185,33 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     final selectedIds = multiSelectProvider.selectedProductIds;
     if (selectedIds.isEmpty) return;
 
-    // Show dialog to get location and expiry date
-    final result = await showDialog<StoreItemsResult>(
-      context: context,
-      builder: (context) => StoreItemsDialog(
-        itemCount: selectedIds.length,
-      ),
-    );
-
-    if (result == null || !mounted) return;
-
     // Get selected items
     final selectedItems = shoppingListProvider.items
         .where((item) => selectedIds.contains(item.id.toString()))
         .toList();
 
-    // Create products from shopping list items
+    // Navigate to store items screen
+    final result = await Navigator.push<List<dynamic>>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StoreItemsScreen(items: selectedItems),
+      ),
+    );
+
+    if (result == null || !mounted) return;
+
+    // Create products from configured items
     final now = DateTime.now();
-    final products = selectedItems.map((item) {
-      return UserProduct(
-        name: item.name,
+    for (final config in result) {
+      final product = UserProduct(
+        name: config.item.name,
         category: 'other',
         quantity: 1,
         unit: 'pcs',
-        location: result.location,
+        location: config.location,
         purchaseDate: now,
-        expiryDate: result.expiryDate ?? now.add(const Duration(days: 7)),
+        expiryDate: config.expiryDate,
       );
-    }).toList();
-
-    // Add products to inventory
-    for (final product in products) {
       await productProvider.addProduct(product);
     }
 
@@ -404,7 +400,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                   onPressed: _showAddItemDialog,
                   child: const Icon(Icons.add, size: 32),
                 ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         );
       },
     );
@@ -462,7 +458,7 @@ class _ShoppingListItemTile extends StatelessWidget {
                     value: isSelected,
                     onChanged: (_) => onTap(),
                   )
-                : const Icon(Icons.drag_handle, color: Colors.grey),
+                : null,
             title: Text(
               item.name,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -473,11 +469,7 @@ class _ShoppingListItemTile extends StatelessWidget {
             ),
             trailing: isMultiSelectMode
                 ? null
-                : IconButton(
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: onDelete,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                : const Icon(Icons.drag_handle, color: Colors.grey),
           ),
         ),
       ),
