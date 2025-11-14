@@ -78,6 +78,12 @@ class AppLocalizations {
   String get notes => isVietnamese ? 'Ghi chú' : 'Notes';
   String get storageTips => isVietnamese ? '💡 Mẹo bảo quản' : '💡 Storage Tips';
 
+  // Location types
+  String get fridge => isVietnamese ? 'Ngăn mát' : 'Fridge';
+  String get freezer => isVietnamese ? 'Ngăn đông' : 'Freezer';
+  String get pantry => isVietnamese ? 'Bên ngoài' : 'Pantry';
+  String get allLocations => isVietnamese ? 'Tất cả' : 'All';
+
   String get markAsUsed =>
       isVietnamese ? 'Đánh Dấu Đã Dùng' : 'Mark as Used';
   String get deleteProduct => isVietnamese ? 'Xóa Sản Phẩm' : 'Delete Product';

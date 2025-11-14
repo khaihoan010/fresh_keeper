@@ -18,40 +18,80 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   final _searchController = TextEditingController();
   List<UserProduct> _displayedProducts = [];
   bool _isSearching = false;
   int _currentIndex = 0;
+  late TabController _tabController;
+  String _selectedLocation = 'all';
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.addListener(_handleTabChange);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = context.read<ProductProvider>();
       // Load all products initially (filteredProducts returns empty if no filter/sort)
       _displayedProducts = provider.filteredProducts.isEmpty
           ? provider.products
           : provider.filteredProducts;
+      _applyLocationFilter();
       setState(() {}); // Trigger rebuild to show products
     });
   }
 
   @override
   void dispose() {
+    _tabController.removeListener(_handleTabChange);
+    _tabController.dispose();
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _handleTabChange() {
+    if (_tabController.indexIsChanging) return;
+
+    setState(() {
+      switch (_tabController.index) {
+        case 0:
+          _selectedLocation = 'all';
+          break;
+        case 1:
+          _selectedLocation = 'fridge';
+          break;
+        case 2:
+          _selectedLocation = 'freezer';
+          break;
+        case 3:
+          _selectedLocation = 'pantry';
+          break;
+      }
+      _applyLocationFilter();
+    });
+  }
+
+  void _applyLocationFilter() {
+    final provider = context.read<ProductProvider>();
+    final allProducts = provider.filteredProducts.isEmpty
+        ? provider.products
+        : provider.filteredProducts;
+
+    if (_selectedLocation == 'all') {
+      _displayedProducts = allProducts;
+    } else {
+      _displayedProducts = allProducts
+          .where((p) => p.location?.toLowerCase() == _selectedLocation)
+          .toList();
+    }
   }
 
   Future<void> _handleSearch(String query) async {
     if (query.trim().length < 2) {
       setState(() {
         _isSearching = false;
-        final provider = context.read<ProductProvider>();
-        // Show all products or filtered products
-        _displayedProducts = provider.filteredProducts.isEmpty
-            ? provider.products
-            : provider.filteredProducts;
+        _applyLocationFilter();
       });
       return;
     }
@@ -62,7 +102,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final results = await provider.searchProducts(query);
 
     setState(() {
-      _displayedProducts = results;
+      // Apply location filter to search results
+      if (_selectedLocation == 'all') {
+        _displayedProducts = results;
+      } else {
+        _displayedProducts = results
+            .where((p) => p.location?.toLowerCase() == _selectedLocation)
+            .toList();
+      }
       _isSearching = false;
     });
   }
@@ -71,9 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = context.read<ProductProvider>();
     await provider.refresh();
     setState(() {
-      _displayedProducts = provider.filteredProducts.isEmpty
-          ? provider.products
-          : provider.filteredProducts;
+      _applyLocationFilter();
       _searchController.clear();
     });
   }
@@ -91,10 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Update displayed products after filter changes
       if (_searchController.text.isEmpty) {
         setState(() {
-          final provider = context.read<ProductProvider>();
-          _displayedProducts = provider.filteredProducts.isEmpty
-              ? provider.products
-              : provider.filteredProducts;
+          _applyLocationFilter();
         });
       }
     });
@@ -113,10 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Update displayed products after sort changes
       if (_searchController.text.isEmpty) {
         setState(() {
-          final provider = context.read<ProductProvider>();
-          _displayedProducts = provider.filteredProducts.isEmpty
-              ? provider.products
-              : provider.filteredProducts;
+          _applyLocationFilter();
         });
       }
     });
@@ -158,9 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
         setState(() {
-          _displayedProducts = provider.filteredProducts.isEmpty
-              ? provider.products
-              : provider.filteredProducts;
+          _applyLocationFilter();
         });
       }
     }
@@ -179,9 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
       setState(() {
-        _displayedProducts = provider.filteredProducts.isEmpty
-            ? provider.products
-            : provider.filteredProducts;
+        _applyLocationFilter();
       });
     }
   }
@@ -253,6 +288,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onChanged: _handleSearch,
+            ),
+          ),
+
+          // Location Tabs
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).dividerColor,
+                  width: 1,
+                ),
+              ),
+            ),
+            child: TabBar(
+              controller: _tabController,
+              labelColor: AppTheme.primaryColor,
+              unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              indicatorColor: AppTheme.primaryColor,
+              indicatorWeight: 3,
+              tabs: [
+                Tab(text: l10n.allLocations),
+                Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
+                Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
+                Tab(icon: const Icon(Icons.inventory_2_outlined), text: l10n.pantry),
+              ],
             ),
           ),
 
