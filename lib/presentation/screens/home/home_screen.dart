@@ -8,9 +8,11 @@ import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
+import '../expiring_soon/expiring_soon_screen.dart';
+import '../settings/settings_screen.dart';
 
-/// Home Screen / All Items
-/// Primary screen showing all products with filter, sort, and search
+/// Home Screen with Bottom Navigation
+/// Container for all main tabs: All Items, Expiring Soon, Settings
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -18,12 +20,108 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: const [
+          AllItemsView(),
+          ExpiringSoonView(),
+          SettingsView(),
+        ],
+      ),
+      floatingActionButton: _currentIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
+                  if (added == true) {
+                    context.read<ProductProvider>().refresh();
+                  }
+                });
+              },
+              child: const Icon(Icons.add, size: 32),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() => _currentIndex = index);
+        },
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: l10n.home,
+          ),
+          BottomNavigationBarItem(
+            icon: Stack(
+              children: [
+                const Icon(Icons.warning_amber_outlined),
+                if (context.watch<ProductProvider>().expiringSoonCount > 0)
+                  Positioned(
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.error,
+                        shape: BoxShape.circle,
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 16,
+                        minHeight: 16,
+                      ),
+                      child: Text(
+                        '${context.watch<ProductProvider>().expiringSoonCount}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            activeIcon: const Icon(Icons.warning_amber),
+            label: l10n.expiringSoon,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings_outlined),
+            activeIcon: const Icon(Icons.settings),
+            label: l10n.settings,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// All Items View
+/// Shows all products with filter, sort, and search
+class AllItemsView extends StatefulWidget {
+  const AllItemsView({super.key});
+
+  @override
+  State<AllItemsView> createState() => _AllItemsViewState();
+}
+
+class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final _searchController = TextEditingController();
   List<UserProduct> _displayedProducts = [];
   bool _isSearching = false;
   bool _isSearchExpanded = false;
-  int _currentIndex = 0;
   late TabController _tabController;
   String _selectedLocation = 'fridge';
 
@@ -40,7 +138,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
       // Apply location filter after loading
       _applyLocationFilter();
-      setState(() {}); // Trigger rebuild to show products
+      if (mounted) {
+        setState(() {}); // Trigger rebuild to show products
+      }
     });
   }
 
@@ -218,6 +318,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Required for AutomaticKeepAliveClientMixin
     final l10n = AppLocalizations.of(context);
 
     return Scaffold(
@@ -441,85 +542,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           const BannerAdWidget(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
-            if (added == true) {
-              _handleRefresh();
-            }
-          });
-        },
-        child: const Icon(Icons.add, size: 32),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() => _currentIndex = index);
-          _navigateToTab(index);
-        },
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home),
-            label: l10n.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Stack(
-              children: [
-                const Icon(Icons.warning_amber_outlined),
-                if (context.watch<ProductProvider>().expiringSoonCount > 0)
-                  Positioned(
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.error,
-                        shape: BoxShape.circle,
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 16,
-                        minHeight: 16,
-                      ),
-                      child: Text(
-                        '${context.watch<ProductProvider>().expiringSoonCount}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            activeIcon: const Icon(Icons.warning_amber),
-            label: l10n.expiringSoon,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings_outlined),
-            activeIcon: const Icon(Icons.settings),
-            label: l10n.settings,
-          ),
-        ],
-      ),
     );
-  }
-
-  void _navigateToTab(int index) {
-    switch (index) {
-      case 0:
-        // Already on home (all items)
-        break;
-      case 1:
-        Navigator.pushNamed(context, AppRoutes.expiringSoon);
-        break;
-      case 2:
-        Navigator.pushNamed(context, AppRoutes.settings);
-        break;
-    }
   }
 }
 

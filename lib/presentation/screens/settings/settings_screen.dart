@@ -12,6 +12,17 @@ import '../../providers/subscription_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/ads/premium_badge_widget.dart';
 
+/// Settings View for Bottom Navigation
+/// Wrapper without Scaffold for use in IndexedStack
+class SettingsView extends StatelessWidget {
+  const SettingsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SettingsScreen();
+  }
+}
+
 /// Settings Screen
 /// App settings and preferences
 class SettingsScreen extends StatelessWidget {
