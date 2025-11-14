@@ -24,12 +24,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   bool _isSearching = false;
   int _currentIndex = 0;
   late TabController _tabController;
-  String _selectedLocation = 'all';
+  String _selectedLocation = 'fridge';
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = context.read<ProductProvider>();
@@ -56,15 +56,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     setState(() {
       switch (_tabController.index) {
         case 0:
-          _selectedLocation = 'all';
-          break;
-        case 1:
           _selectedLocation = 'fridge';
           break;
-        case 2:
+        case 1:
           _selectedLocation = 'freezer';
           break;
-        case 3:
+        case 2:
           _selectedLocation = 'pantry';
           break;
       }
@@ -78,13 +75,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ? provider.products
         : provider.filteredProducts;
 
-    if (_selectedLocation == 'all') {
-      _displayedProducts = allProducts;
-    } else {
-      _displayedProducts = allProducts
-          .where((p) => p.location?.toLowerCase() == _selectedLocation)
-          .toList();
-    }
+    _displayedProducts = allProducts
+        .where((p) => p.location?.toLowerCase() == _selectedLocation)
+        .toList();
   }
 
   Future<void> _handleSearch(String query) async {
@@ -309,7 +302,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               indicatorColor: AppTheme.primaryColor,
               indicatorWeight: 3,
               tabs: [
-                Tab(text: l10n.allLocations),
                 Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
                 Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
                 Tab(icon: const Icon(Icons.inventory_2_outlined), text: l10n.pantry),
