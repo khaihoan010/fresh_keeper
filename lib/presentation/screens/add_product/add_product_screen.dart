@@ -879,122 +879,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
     );
   }
-}
-
-/// Barcode Scanner Screen
-/// Full-screen barcode scanner with camera preview
-class BarcodeScannerScreen extends StatefulWidget {
-  const BarcodeScannerScreen({super.key});
-
-  @override
-  State<BarcodeScannerScreen> createState() => _BarcodeScannerScreenState();
-}
-
-class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
-  MobileScannerController cameraController = MobileScannerController();
-  bool _isProcessing = false;
-  bool _isTorchOn = false;
-
-  @override
-  void dispose() {
-    cameraController.dispose();
-    super.dispose();
-  }
-
-  void _onBarcodeDetect(BarcodeCapture capture) {
-    if (_isProcessing) return;
-
-    final List<Barcode> barcodes = capture.barcodes;
-    if (barcodes.isEmpty) return;
-
-    final barcode = barcodes.first;
-    final String? code = barcode.rawValue;
-
-    if (code != null && code.isNotEmpty) {
-      setState(() => _isProcessing = true);
-      Navigator.pop(context, code);
-    }
-  }
-
-  void _toggleTorch() {
-    setState(() {
-      _isTorchOn = !_isTorchOn;
-    });
-    cameraController.toggleTorch();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.scanBarcode),
-        backgroundColor: Colors.black,
-        actions: [
-          IconButton(
-            icon: Icon(
-              _isTorchOn ? Icons.flash_on : Icons.flash_off,
-              color: _isTorchOn ? Colors.yellow : Colors.grey,
-            ),
-            onPressed: _toggleTorch,
-          ),
-          IconButton(
-            icon: const Icon(Icons.cameraswitch),
-            onPressed: () => cameraController.switchCamera(),
-          ),
-        ],
-      ),
-      body: Stack(
-        children: [
-          MobileScanner(
-            controller: cameraController,
-            onDetect: _onBarcodeDetect,
-          ),
-          // Scanning overlay
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 300,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Text(
-                      l10n.positionBarcodeInFrame,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   /// Show dialog to create custom product template
   void _showCreateTemplateDialog(String initialName) {
@@ -1183,6 +1067,122 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Barcode Scanner Screen
+/// Full-screen barcode scanner with camera preview
+class BarcodeScannerScreen extends StatefulWidget {
+  const BarcodeScannerScreen({super.key});
+
+  @override
+  State<BarcodeScannerScreen> createState() => _BarcodeScannerScreenState();
+}
+
+class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
+  MobileScannerController cameraController = MobileScannerController();
+  bool _isProcessing = false;
+  bool _isTorchOn = false;
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
+  void _onBarcodeDetect(BarcodeCapture capture) {
+    if (_isProcessing) return;
+
+    final List<Barcode> barcodes = capture.barcodes;
+    if (barcodes.isEmpty) return;
+
+    final barcode = barcodes.first;
+    final String? code = barcode.rawValue;
+
+    if (code != null && code.isNotEmpty) {
+      setState(() => _isProcessing = true);
+      Navigator.pop(context, code);
+    }
+  }
+
+  void _toggleTorch() {
+    setState(() {
+      _isTorchOn = !_isTorchOn;
+    });
+    cameraController.toggleTorch();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.scanBarcode),
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isTorchOn ? Icons.flash_on : Icons.flash_off,
+              color: _isTorchOn ? Colors.yellow : Colors.grey,
+            ),
+            onPressed: _toggleTorch,
+          ),
+          IconButton(
+            icon: const Icon(Icons.cameraswitch),
+            onPressed: () => cameraController.switchCamera(),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          MobileScanner(
+            controller: cameraController,
+            onDetect: _onBarcodeDetect,
+          ),
+          // Scanning overlay
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 300,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Text(
+                      l10n.positionBarcodeInFrame,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

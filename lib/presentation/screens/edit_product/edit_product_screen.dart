@@ -243,16 +243,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
             const SizedBox(height: 16),
 
-            // Location
-            _buildTextField(
-              controller: _locationController,
-              label: l10n.storageLocation,
-              hint: l10n.storageLocationHint,
-              icon: Icons.place_outlined,
-            ),
-
-            const SizedBox(height: 16),
-
             // Notes
             _buildTextField(
               controller: _notesController,
