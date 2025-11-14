@@ -520,7 +520,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 }
 
 /// Product Card with swipe actions
-class _ProductCard extends StatelessWidget {
+class _ProductCard extends StatefulWidget {
   final UserProduct product;
   final VoidCallback onTap;
   final VoidCallback onEdit;
@@ -536,9 +536,84 @@ class _ProductCard extends StatelessWidget {
   });
 
   @override
+  State<_ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<_ProductCard> {
+  late double _currentQuantity;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentQuantity = widget.product.quantity;
+  }
+
+  double _getQuantityStep(String unit) {
+    switch (unit.toLowerCase()) {
+      case 'kg':
+      case 'lít':
+        return 0.1;
+      case 'g':
+        return 5.0;
+      case 'ml':
+        return 10.0;
+      case 'cái':
+      case 'quả':
+      case 'bó':
+      case 'gói':
+      case 'hộp':
+      case 'chai':
+      case 'lon':
+      case 'túi':
+      default:
+        return 1.0;
+    }
+  }
+
+  void _increaseQuantity() {
+    setState(() {
+      final step = _getQuantityStep(widget.product.unit);
+      _currentQuantity += step;
+      _updateProductQuantity();
+    });
+  }
+
+  void _decreaseQuantity() {
+    setState(() {
+      final step = _getQuantityStep(widget.product.unit);
+      if (_currentQuantity > step) {
+        _currentQuantity -= step;
+        _updateProductQuantity();
+      }
+    });
+  }
+
+  Future<void> _updateProductQuantity() async {
+    final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+    await context.read<ProductProvider>().updateProduct(updatedProduct);
+  }
+
+  IconData _getStatusIcon() {
+    if (widget.product.isExpired) {
+      return Icons.cancel;
+    } else if (widget.product.daysUntilExpiry <= 2) {
+      return Icons.warning_amber_rounded;
+    } else if (widget.product.daysUntilExpiry <= 7) {
+      return Icons.watch_later;
+    } else {
+      return Icons.check_circle;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final daysText = widget.product.isExpired
+        ? l10n.daysOverdue(-widget.product.daysUntilExpiry)
+        : l10n.daysRemaining(widget.product.daysUntilExpiry);
+
     return Dismissible(
-      key: Key(product.id),
+      key: Key(widget.product.id),
       background: Container(
         color: AppTheme.primaryColor,
         alignment: Alignment.centerLeft,
@@ -553,111 +628,145 @@ class _ProductCard extends StatelessWidget {
       ),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          // Mark as used
-          onMarkUsed();
+          widget.onMarkUsed();
           return false;
         } else {
-          // Delete
-          onDelete();
+          widget.onDelete();
           return false;
         }
       },
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: InkWell(
-          onTap: onTap,
+          onTap: widget.onTap,
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             child: Row(
               children: [
                 // Icon
                 Text(
-                  AppConstants.categoryIcons[product.category] ?? '📦',
-                  style: const TextStyle(fontSize: 40),
+                  AppConstants.categoryIcons[widget.product.category] ?? '📦',
+                  style: const TextStyle(fontSize: 36),
                 ),
 
-                const SizedBox(width: 16),
+                const SizedBox(width: 12),
 
-                // Info
+                // Info (Name + Days)
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        product.name,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        widget.product.name,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '${product.quantity} ${product.unit}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: 14,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                          const SizedBox(width: 4),
-                          Builder(
-                            builder: (context) {
-                              final l10n = AppLocalizations.of(context);
-                              final daysText = product.isExpired
-                                  ? l10n.daysOverdue(-product.daysUntilExpiry)
-                                  : l10n.daysRemaining(product.daysUntilExpiry);
-                              return Text(
-                                daysText,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: product.getStatusColor(),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                        daysText,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: widget.product.getStatusColor(),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
                 ),
 
-                // Status indicator
+                const SizedBox(width: 8),
+
+                // Quantity Controls
                 Container(
-                  width: 48,
-                  height: 48,
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   decoration: BoxDecoration(
-                    color: product.getStatusColor().withOpacity(0.1),
-                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Center(
-                    child: Text(
-                      '${product.daysUntilExpiry}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: product.getStatusColor(),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Decrease button
+                      InkWell(
+                        onTap: _decreaseQuantity,
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.remove,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+
+                      const SizedBox(width: 8),
+
+                      // Quantity display
+                      Text(
+                        '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      const SizedBox(width: 8),
+
+                      // Increase button
+                      InkWell(
+                        onTap: _increaseQuantity,
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.add,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
                 const SizedBox(width: 8),
 
+                // Status Icon
+                Icon(
+                  _getStatusIcon(),
+                  color: widget.product.getStatusColor(),
+                  size: 28,
+                ),
+
+                const SizedBox(width: 4),
+
                 // More button
                 IconButton(
                   icon: const Icon(Icons.more_vert),
+                  iconSize: 20,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => _ProductActionsSheet(
-                        product: product,
-                        onEdit: onEdit,
-                        onDelete: onDelete,
-                        onMarkUsed: onMarkUsed,
+                        product: widget.product,
+                        onEdit: widget.onEdit,
+                        onDelete: widget.onDelete,
+                        onMarkUsed: widget.onMarkUsed,
                       ),
                     );
                   },
