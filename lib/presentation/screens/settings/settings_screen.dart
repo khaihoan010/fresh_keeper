@@ -84,6 +84,20 @@ class SettingsScreen extends StatelessWidget {
 
                     const Divider(height: 32),
 
+              // Overview Section
+              _buildSectionHeader(l10n.dashboard),
+
+              _buildListTile(
+                icon: Icons.dashboard_outlined,
+                title: l10n.dashboard,
+                subtitle: l10n.quickStats,
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.dashboard);
+                },
+              ),
+
+              const Divider(height: 32),
+
               // Preferences Section
               _buildSectionHeader(l10n.preferences),
 

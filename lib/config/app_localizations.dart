@@ -32,6 +32,7 @@ class AppLocalizations {
   String get allItems => isVietnamese ? 'Tất Cả' : 'All Items';
   String get analytics => isVietnamese ? 'Thống Kê' : 'Analytics';
   String get settings => isVietnamese ? 'Cài Đặt' : 'Settings';
+  String get dashboard => isVietnamese ? 'Tổng Quan' : 'Dashboard';
 
   String get greeting => isVietnamese ? 'Xin chào' : 'Hello';
   String get addProduct => isVietnamese ? 'Thêm Sản Phẩm' : 'Add Product';
