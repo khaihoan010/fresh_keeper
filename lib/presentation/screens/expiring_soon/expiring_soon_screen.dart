@@ -220,9 +220,14 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     // Handle move
     if (destination == 'shopping_list') {
-      // Add product names to shopping list
+      // Add product names to shopping list and delete original products
       final names = selectedProducts.map((p) => p.name).toList();
       final addedCount = await shoppingListProvider.addItems(names);
+
+      // Delete original products from inventory
+      for (final product in selectedProducts) {
+        await productProvider.deleteProduct(product.id);
+      }
 
       if (mounted) {
         multiSelectProvider.exitMultiSelectMode();
@@ -368,16 +373,20 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
         );
       }
     } else {
-      // Copy products to selected location with new expiry date
+      // Copy products to selected location (keep original)
       int copiedCount = 0;
       final now = DateTime.now();
       for (final product in selectedProducts) {
-        // Create copy with new expiry date (7 days from now)
-        final copiedProduct = product.copyWith(
-          id: null, // Will generate new ID
+        // Create new product (duplicate) - set far future expiry date
+        final copiedProduct = UserProduct(
+          name: product.name,
+          category: product.category,
+          quantity: product.quantity,
+          unit: product.unit,
           location: destination,
           purchaseDate: now,
-          expiryDate: now.add(const Duration(days: 7)),
+          expiryDate: DateTime(now.year + 10, now.month, now.day), // 10 years future
+          notes: product.notes,
         );
         final success = await productProvider.addProduct(copiedProduct);
         if (success) copiedCount++;
