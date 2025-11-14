@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   final _searchController = TextEditingController();
   List<UserProduct> _displayedProducts = [];
   bool _isSearching = false;
+  bool _isSearchExpanded = false;
   int _currentIndex = 0;
   late TabController _tabController;
   String _selectedLocation = 'fridge';
@@ -222,69 +223,78 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            const Text('🧊', style: TextStyle(fontSize: 24)),
-            const SizedBox(width: 8),
-            Text(
-              AppConstants.appName,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.filter_list),
-            onPressed: _showFilterSheet,
-          ),
-          IconButton(
-            icon: const Icon(Icons.sort),
-            onPressed: _showSortSheet,
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.settings);
-            },
-          ),
-        ],
+        title: _isSearchExpanded
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: l10n.searchProduct,
+                  border: InputBorder.none,
+                  suffixIcon: _isSearching
+                      ? const Padding(
+                          padding: EdgeInsets.all(12),
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        )
+                      : _searchController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _searchController.clear();
+                                _handleSearch('');
+                              },
+                            )
+                          : null,
+                ),
+                onChanged: _handleSearch,
+              )
+            : Row(
+                children: [
+                  const Text('🧊', style: TextStyle(fontSize: 24)),
+                  const SizedBox(width: 8),
+                  Text(
+                    AppConstants.appName,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ],
+              ),
+        actions: _isSearchExpanded
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    setState(() {
+                      _isSearchExpanded = false;
+                      _searchController.clear();
+                      _handleSearch('');
+                    });
+                  },
+                ),
+              ]
+            : [
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      _isSearchExpanded = true;
+                    });
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.filter_list),
+                  onPressed: _showFilterSheet,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.sort),
+                  onPressed: _showSortSheet,
+                ),
+              ],
       ),
       body: Column(
         children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: l10n.searchProduct,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: _isSearching
-                    ? const Padding(
-                        padding: EdgeInsets.all(12),
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : _searchController.text.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              _searchController.clear();
-                              _handleSearch('');
-                            },
-                          )
-                        : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                ),
-              ),
-              onChanged: _handleSearch,
-            ),
-          ),
-
           // Location Tabs
           Container(
             decoration: BoxDecoration(
@@ -680,48 +690,48 @@ class _ProductCardState extends State<_ProductCard> {
                       // Decrease button
                       InkWell(
                         onTap: _decreaseQuantity,
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(12),
                         child: Container(
-                          width: 28,
-                          height: 28,
+                          width: 20,
+                          height: 20,
                           decoration: BoxDecoration(
                             color: AppTheme.primaryColor,
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
                             Icons.remove,
-                            size: 16,
+                            size: 12,
                             color: Colors.white,
                           ),
                         ),
                       ),
 
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 6),
 
                       // Quantity display
                       Text(
                         '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
 
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 6),
 
                       // Increase button
                       InkWell(
                         onTap: _increaseQuantity,
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(12),
                         child: Container(
-                          width: 28,
-                          height: 28,
+                          width: 20,
+                          height: 20,
                           decoration: BoxDecoration(
                             color: AppTheme.primaryColor,
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
                             Icons.add,
-                            size: 16,
+                            size: 12,
                             color: Colors.white,
                           ),
                         ),
@@ -740,27 +750,6 @@ class _ProductCardState extends State<_ProductCard> {
                     color: widget.product.getStatusColor(),
                     shape: BoxShape.circle,
                   ),
-                ),
-
-                const SizedBox(width: 8),
-
-                // More button
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  iconSize: 20,
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) => _ProductActionsSheet(
-                        product: widget.product,
-                        onEdit: widget.onEdit,
-                        onDelete: widget.onDelete,
-                        onMarkUsed: widget.onMarkUsed,
-                      ),
-                    );
-                  },
                 ),
               ],
             ),

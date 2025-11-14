@@ -20,12 +20,12 @@ class ExpiringSoonScreen extends StatefulWidget {
 
 class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String _selectedLocation = 'all';
+  String _selectedLocation = 'fridge';
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductProvider>().loadExpiringSoon();
@@ -45,15 +45,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     setState(() {
       switch (_tabController.index) {
         case 0:
-          _selectedLocation = 'all';
-          break;
-        case 1:
           _selectedLocation = 'fridge';
           break;
-        case 2:
+        case 1:
           _selectedLocation = 'freezer';
           break;
-        case 3:
+        case 2:
           _selectedLocation = 'pantry';
           break;
       }
@@ -65,9 +62,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
   }
 
   List<UserProduct> _filterByLocation(List<UserProduct> products) {
-    if (_selectedLocation == 'all') {
-      return products;
-    }
     return products
         .where((p) => p.location?.toLowerCase() == _selectedLocation)
         .toList();
@@ -107,6 +101,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(l10n.expiringSoon),
       ),
       body: Column(
@@ -129,7 +124,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
               indicatorColor: AppTheme.primaryColor,
               indicatorWeight: 3,
               tabs: [
-                Tab(text: l10n.allLocations),
                 Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
                 Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
                 Tab(icon: const Icon(Icons.inventory_2_outlined), text: l10n.pantry),
@@ -528,48 +522,48 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
                     // Decrease button
                     InkWell(
                       onTap: _decreaseQuantity,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                       child: Container(
-                        width: 28,
-                        height: 28,
+                        width: 20,
+                        height: 20,
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor,
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
                           Icons.remove,
-                          size: 16,
+                          size: 12,
                           color: Colors.white,
                         ),
                       ),
                     ),
 
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
 
                     // Quantity display
                     Text(
                       '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
 
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
 
                     // Increase button
                     InkWell(
                       onTap: _increaseQuantity,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                       child: Container(
-                        width: 28,
-                        height: 28,
+                        width: 20,
+                        height: 20,
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor,
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
                           Icons.add,
-                          size: 16,
+                          size: 12,
                           color: Colors.white,
                         ),
                       ),
