@@ -8,7 +8,7 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fresh_keeper.db';
-  static const int databaseVersion = 8;
+  static const int databaseVersion = 9;
 
   // Table Names
   static const String tableUserProducts = 'user_products';
@@ -17,6 +17,7 @@ class AppConstants {
   static const String tableCategories = 'categories';
   static const String tableNotifications = 'notifications';
   static const String tableSettings = 'settings';
+  static const String tableShoppingList = 'shopping_list';
 
   // Notification Channels
   static const String notificationChannelId = 'fresh_keeper_channel';

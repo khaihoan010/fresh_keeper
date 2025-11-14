@@ -191,6 +191,22 @@ class DatabaseService {
       )
     ''');
 
+    // Create shopping_list table
+    await db.execute('''
+      CREATE TABLE ${AppConstants.tableShoppingList} (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        sort_order INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL
+      )
+    ''');
+
+    // Create index for shopping_list
+    await db.execute('''
+      CREATE INDEX idx_shopping_list_sort_order
+      ON ${AppConstants.tableShoppingList}(sort_order)
+    ''');
+
     debugPrint('✅ All tables created successfully');
 
     // Load initial data
@@ -353,6 +369,35 @@ class DatabaseService {
       }
 
       debugPrint('✅ v8 upgrade completed: Pantry support and custom templates ready');
+    }
+
+    if (oldVersion < 9) {
+      // Add shopping list feature
+      debugPrint('🔄 Upgrading to v9: Adding shopping list...');
+
+      // Create shopping_list table
+      try {
+        await db.execute('''
+          CREATE TABLE ${AppConstants.tableShoppingList} (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            sort_order INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL
+          )
+        ''');
+        debugPrint('✅ Created shopping_list table');
+
+        // Create index for shopping_list
+        await db.execute('''
+          CREATE INDEX idx_shopping_list_sort_order
+          ON ${AppConstants.tableShoppingList}(sort_order)
+        ''');
+        debugPrint('✅ Created index for shopping_list');
+      } catch (e) {
+        debugPrint('⚠️ Error creating shopping_list table: $e');
+      }
+
+      debugPrint('✅ v9 upgrade completed: Shopping list feature ready');
     }
   }
 
