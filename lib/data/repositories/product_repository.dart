@@ -252,6 +252,58 @@ class ProductRepository {
     }
   }
 
+  // ==================== CUSTOM TEMPLATES ====================
+
+  /// Save a custom product template
+  Future<Result<int>> saveCustomTemplate(ProductTemplate template) async {
+    try {
+      final result = await _localDataSource.insertCustomTemplate(template);
+      return Result.success(result);
+    } catch (e) {
+      debugPrint('❌ Repository: Error saving custom template - $e');
+      return Result.failure('Không thể lưu mẫu tùy chỉnh.');
+    }
+  }
+
+  /// Search custom templates
+  Future<Result<List<ProductTemplate>>> searchCustomTemplates(String query) async {
+    try {
+      if (query.trim().isEmpty) {
+        return Result.success([]);
+      }
+      final templates = await _localDataSource.searchCustomTemplates(query);
+      return Result.success(templates);
+    } catch (e) {
+      debugPrint('❌ Repository: Error searching custom templates - $e');
+      return Result.failure('Không thể tìm kiếm mẫu tùy chỉnh.');
+    }
+  }
+
+  /// Get all custom templates
+  Future<Result<List<ProductTemplate>>> getAllCustomTemplates() async {
+    try {
+      final templates = await _localDataSource.getAllCustomTemplates();
+      return Result.success(templates);
+    } catch (e) {
+      debugPrint('❌ Repository: Error getting custom templates - $e');
+      return Result.failure('Không thể tải mẫu tùy chỉnh.');
+    }
+  }
+
+  /// Delete custom template
+  Future<Result<int>> deleteCustomTemplate(String id) async {
+    try {
+      final result = await _localDataSource.deleteCustomTemplate(id);
+      if (result == 0) {
+        return Result.failure('Không tìm thấy mẫu để xóa.');
+      }
+      return Result.success(result);
+    } catch (e) {
+      debugPrint('❌ Repository: Error deleting custom template - $e');
+      return Result.failure('Không thể xóa mẫu tùy chỉnh.');
+    }
+  }
+
   // ==================== CATEGORIES ====================
 
   /// Get all categories

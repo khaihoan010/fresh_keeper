@@ -4,6 +4,7 @@ import '../data/models/user_product.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/dashboard/dashboard_screen.dart';
 import '../presentation/screens/add_product/add_product_screen.dart';
 import '../presentation/screens/all_items/all_items_screen.dart';
 import '../presentation/screens/expiring_soon/expiring_soon_screen.dart';
@@ -18,6 +19,7 @@ class AppRoutes {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String home = '/home';
+  static const String dashboard = '/dashboard';
   static const String addProduct = '/add_product';
   static const String allItems = '/all_items';
   static const String expiringSoon = '/expiring_soon';
@@ -48,6 +50,12 @@ class AppRoutes {
       case home:
         return _buildRoute(
           const HomeScreen(),
+          routeSettings,
+        );
+
+      case dashboard:
+        return _buildRoute(
+          const DashboardScreen(),
           routeSettings,
         );
 

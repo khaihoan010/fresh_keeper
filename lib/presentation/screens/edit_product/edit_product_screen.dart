@@ -27,10 +27,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late TextEditingController _nameController;
   late TextEditingController _quantityController;
   late TextEditingController _notesController;
-  late TextEditingController _locationController;
-
   late String _selectedCategory;
   late String _selectedUnit;
+  late String _selectedLocation;
   late DateTime _purchaseDate;
   late DateTime _expiryDate;
 
@@ -40,10 +39,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _nameController = TextEditingController(text: widget.product.name);
     _quantityController = TextEditingController(text: widget.product.quantity.toString());
     _notesController = TextEditingController(text: widget.product.notes ?? '');
-    _locationController = TextEditingController(text: widget.product.location ?? '');
 
     _selectedCategory = widget.product.category;
     _selectedUnit = widget.product.unit;
+    _selectedLocation = widget.product.location ?? 'fridge';
     _purchaseDate = widget.product.purchaseDate;
     _expiryDate = widget.product.expiryDate;
   }
@@ -53,7 +52,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _nameController.dispose();
     _quantityController.dispose();
     _notesController.dispose();
-    _locationController.dispose();
     super.dispose();
   }
 
@@ -100,7 +98,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       purchaseDate: _purchaseDate,
       expiryDate: _expiryDate,
       notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
-      location: _locationController.text.trim().isEmpty ? null : _locationController.text.trim(),
+      location: _selectedLocation,
       updatedAt: DateTime.now(),
     );
 
@@ -186,6 +184,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
             // Category
             _buildCategorySelector(),
+
+            const SizedBox(height: 16),
+
+            // Location
+            _buildLocationSelector(),
 
             const SizedBox(height: 16),
 
@@ -359,6 +362,48 @@ class _EditProductScreenState extends State<EditProductScreen> {
       onChanged: (value) {
         if (value != null) {
           setState(() => _selectedUnit = value);
+        }
+      },
+    );
+  }
+
+  Widget _buildLocationSelector() {
+    final l10n = AppLocalizations.of(context);
+
+    final locations = [
+      {'value': 'fridge', 'label': l10n.fridge, 'icon': Icons.kitchen_outlined},
+      {'value': 'freezer', 'label': l10n.freezer, 'icon': Icons.ac_unit_outlined},
+      {'value': 'pantry', 'label': l10n.pantry, 'icon': Icons.inventory_2_outlined},
+    ];
+
+    return DropdownButtonFormField<String>(
+      value: _selectedLocation,
+      decoration: InputDecoration(
+        labelText: l10n.location,
+        prefixIcon: const Icon(Icons.location_on_outlined),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
+      ),
+      items: locations.map((location) {
+        return DropdownMenuItem(
+          value: location['value'] as String,
+          child: Row(
+            children: [
+              Icon(
+                location['icon'] as IconData,
+                size: 20,
+                color: AppTheme.primaryColor,
+              ),
+              const SizedBox(width: 12),
+              Text(location['label'] as String),
+            ],
+          ),
+        );
+      }).toList(),
+      onChanged: (value) {
+        if (value != null) {
+          setState(() => _selectedLocation = value);
         }
       },
     );

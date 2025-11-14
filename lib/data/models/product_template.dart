@@ -11,6 +11,7 @@ class ProductTemplate {
   final String category;
   final int? shelfLifeRefrigerated; // days
   final int? shelfLifeFrozen; // days
+  final int? shelfLifePantry; // days
   final int? shelfLifeOpened; // days
   final NutritionData? nutritionData;
   final List<String>? healthBenefits;
@@ -26,6 +27,7 @@ class ProductTemplate {
     required this.category,
     this.shelfLifeRefrigerated,
     this.shelfLifeFrozen,
+    this.shelfLifePantry,
     this.shelfLifeOpened,
     this.nutritionData,
     this.healthBenefits,
@@ -34,14 +36,17 @@ class ProductTemplate {
     this.imageUrl,
   });
 
-  /// Calculate expiry date based on purchase date
+  /// Calculate expiry date based on purchase date and location
   DateTime calculateExpiryDate(
     DateTime purchaseDate, {
-    bool frozen = false,
+    String location = 'fridge',
   }) {
-    final days = frozen
-        ? (shelfLifeFrozen ?? 30)
-        : (shelfLifeRefrigerated ?? 7);
+    final days = switch (location) {
+      'freezer' => shelfLifeFrozen ?? 30,
+      'pantry' => shelfLifePantry ?? 14,
+      'fridge' => shelfLifeRefrigerated ?? 7,
+      _ => shelfLifeRefrigerated ?? 7,
+    };
     return purchaseDate.add(Duration(days: days));
   }
 
@@ -55,6 +60,7 @@ class ProductTemplate {
       'category': category,
       'shelf_life_refrigerated': shelfLifeRefrigerated,
       'shelf_life_frozen': shelfLifeFrozen,
+      'shelf_life_pantry': shelfLifePantry,
       'shelf_life_opened': shelfLifeOpened,
       'nutrition_data': nutritionData != null
           ? jsonEncode(nutritionData!.toJson())
@@ -82,6 +88,7 @@ class ProductTemplate {
       category: json['category'] as String,
       shelfLifeRefrigerated: json['shelf_life_refrigerated'] as int?,
       shelfLifeFrozen: json['shelf_life_frozen'] as int?,
+      shelfLifePantry: json['shelf_life_pantry'] as int?,
       shelfLifeOpened: json['shelf_life_opened'] as int?,
       nutritionData: json['nutrition_data'] != null
           ? NutritionData.fromJson(

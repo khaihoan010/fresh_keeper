@@ -18,17 +18,59 @@ class ExpiringSoonScreen extends StatefulWidget {
   State<ExpiringSoonScreen> createState() => _ExpiringSoonScreenState();
 }
 
-class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
+class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  String _selectedLocation = 'all';
+
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.addListener(_handleTabChange);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductProvider>().loadExpiringSoon();
     });
   }
 
+  @override
+  void dispose() {
+    _tabController.removeListener(_handleTabChange);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabChange() {
+    if (_tabController.indexIsChanging) return;
+
+    setState(() {
+      switch (_tabController.index) {
+        case 0:
+          _selectedLocation = 'all';
+          break;
+        case 1:
+          _selectedLocation = 'fridge';
+          break;
+        case 2:
+          _selectedLocation = 'freezer';
+          break;
+        case 3:
+          _selectedLocation = 'pantry';
+          break;
+      }
+    });
+  }
+
   Future<void> _handleRefresh() async {
     await context.read<ProductProvider>().refresh();
+  }
+
+  List<UserProduct> _filterByLocation(List<UserProduct> products) {
+    if (_selectedLocation == 'all') {
+      return products;
+    }
+    return products
+        .where((p) => p.location?.toLowerCase() == _selectedLocation)
+        .toList();
   }
 
   Map<String, List<UserProduct>> _groupProductsByUrgency(
@@ -41,7 +83,10 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
       'soon': [], // 3-7 days
     };
 
-    for (final product in products) {
+    // Filter by location first
+    final filteredProducts = _filterByLocation(products);
+
+    for (final product in filteredProducts) {
       if (product.isExpired) {
         grouped['expired']!.add(product);
       } else if (product.daysUntilExpiry == 0) {
@@ -66,6 +111,32 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
       ),
       body: Column(
         children: [
+          // Location Tabs
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).dividerColor,
+                  width: 1,
+                ),
+              ),
+            ),
+            child: TabBar(
+              controller: _tabController,
+              labelColor: AppTheme.primaryColor,
+              unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              indicatorColor: AppTheme.primaryColor,
+              indicatorWeight: 3,
+              tabs: [
+                Tab(text: l10n.allLocations),
+                Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
+                Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
+                Tab(icon: const Icon(Icons.inventory_2_outlined), text: l10n.pantry),
+              ],
+            ),
+          ),
+
           Expanded(
             child: Consumer<ProductProvider>(
               builder: (context, provider, _) {
@@ -104,6 +175,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                 }
 
                 final grouped = _groupProductsByUrgency(provider.expiringSoon);
+                final filteredProducts = _filterByLocation(provider.expiringSoon);
 
                 return RefreshIndicator(
                   onRefresh: _handleRefresh,
@@ -111,7 +183,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> {
                     padding: const EdgeInsets.all(16),
                     children: [
                       // Summary Card
-                      _buildSummaryCard(provider.expiringSoon.length),
+                      _buildSummaryCard(filteredProducts.length),
 
                       const SizedBox(height: 24),
 

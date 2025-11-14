@@ -347,6 +347,95 @@ class ProductLocalDataSource {
     }
   }
 
+  // ==================== CUSTOM TEMPLATES ====================
+
+  /// Insert a custom product template
+  Future<int> insertCustomTemplate(ProductTemplate template) async {
+    try {
+      final db = await _databaseService.database;
+      final now = DateTime.now().toIso8601String();
+
+      final data = {
+        'id': template.id,
+        'name_vi': template.nameVi,
+        'name_en': template.nameEn,
+        'aliases': template.aliases.isEmpty ? '[]' : '["${template.aliases.join('","')}"]',
+        'category': template.category,
+        'shelf_life_refrigerated': template.shelfLifeRefrigerated,
+        'shelf_life_frozen': template.shelfLifeFrozen,
+        'shelf_life_pantry': template.shelfLifePantry,
+        'shelf_life_opened': template.shelfLifeOpened,
+        'created_at': now,
+        'updated_at': now,
+      };
+
+      final result = await db.insert(
+        AppConstants.tableCustomTemplates,
+        data,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      debugPrint('✅ Inserted custom template: ${template.nameVi}');
+      return result;
+    } catch (e) {
+      debugPrint('❌ Error inserting custom template: $e');
+      rethrow;
+    }
+  }
+
+  /// Search custom templates
+  Future<List<ProductTemplate>> searchCustomTemplates(String query) async {
+    try {
+      final db = await _databaseService.database;
+      final searchPattern = '%$query%';
+
+      final results = await db.query(
+        AppConstants.tableCustomTemplates,
+        where: 'name_vi LIKE ? OR name_en LIKE ? OR aliases LIKE ?',
+        whereArgs: [searchPattern, searchPattern, searchPattern],
+        limit: AppConstants.searchSuggestionLimit,
+      );
+
+      debugPrint('🔍 Found ${results.length} custom templates for: $query');
+      return results.map((json) => ProductTemplate.fromJson(json)).toList();
+    } catch (e) {
+      debugPrint('❌ Error searching custom templates: $e');
+      rethrow;
+    }
+  }
+
+  /// Get all custom templates
+  Future<List<ProductTemplate>> getAllCustomTemplates() async {
+    try {
+      final db = await _databaseService.database;
+      final results = await db.query(
+        AppConstants.tableCustomTemplates,
+        orderBy: 'name_vi ASC',
+      );
+
+      return results.map((json) => ProductTemplate.fromJson(json)).toList();
+    } catch (e) {
+      debugPrint('❌ Error getting all custom templates: $e');
+      rethrow;
+    }
+  }
+
+  /// Delete custom template
+  Future<int> deleteCustomTemplate(String id) async {
+    try {
+      final db = await _databaseService.database;
+      final result = await db.delete(
+        AppConstants.tableCustomTemplates,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      debugPrint('✅ Deleted custom template: $id');
+      return result;
+    } catch (e) {
+      debugPrint('❌ Error deleting custom template: $e');
+      rethrow;
+    }
+  }
+
   // ==================== CATEGORIES ====================
 
   /// Get all categories

@@ -98,6 +98,7 @@ class DatabaseService {
         category TEXT NOT NULL,
         shelf_life_refrigerated INTEGER,
         shelf_life_frozen INTEGER,
+        shelf_life_pantry INTEGER,
         shelf_life_opened INTEGER,
         nutrition_data TEXT,
         health_benefits TEXT,
@@ -124,6 +125,36 @@ class DatabaseService {
     ''');
 
     debugPrint('✅ Product templates table and indexes created successfully');
+
+    // Create custom_product_templates table
+    await db.execute('''
+      CREATE TABLE ${AppConstants.tableCustomTemplates} (
+        id TEXT PRIMARY KEY,
+        name_vi TEXT NOT NULL,
+        name_en TEXT NOT NULL,
+        aliases TEXT,
+        category TEXT NOT NULL,
+        shelf_life_refrigerated INTEGER,
+        shelf_life_frozen INTEGER,
+        shelf_life_pantry INTEGER,
+        shelf_life_opened INTEGER,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )
+    ''');
+
+    // Create indexes for custom templates
+    await db.execute('''
+      CREATE INDEX idx_custom_templates_name_vi
+      ON ${AppConstants.tableCustomTemplates}(name_vi)
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_custom_templates_name_en
+      ON ${AppConstants.tableCustomTemplates}(name_en)
+    ''');
+
+    debugPrint('✅ Custom templates table and indexes created successfully');
 
     // Create categories table
     await db.execute('''
@@ -271,6 +302,58 @@ class DatabaseService {
       debugPrint('   - Fruits: 108+ products');
       debugPrint('   - Meat: 70 complete Vietnamese cuts');
     }
+
+    if (oldVersion < 8) {
+      // Add pantry shelf life support and custom templates
+      debugPrint('🔄 Upgrading to v8: Adding pantry support and custom templates...');
+
+      // Add pantry shelf life column to product_templates
+      try {
+        await db.execute(
+          'ALTER TABLE ${AppConstants.tableProductTemplates} ADD COLUMN shelf_life_pantry INTEGER'
+        );
+        debugPrint('✅ Added shelf_life_pantry column to product_templates');
+      } catch (e) {
+        debugPrint('⚠️ Error adding shelf_life_pantry column (may already exist): $e');
+      }
+
+      // Create custom_product_templates table
+      try {
+        await db.execute('''
+          CREATE TABLE ${AppConstants.tableCustomTemplates} (
+            id TEXT PRIMARY KEY,
+            name_vi TEXT NOT NULL,
+            name_en TEXT NOT NULL,
+            aliases TEXT,
+            category TEXT NOT NULL,
+            shelf_life_refrigerated INTEGER,
+            shelf_life_frozen INTEGER,
+            shelf_life_pantry INTEGER,
+            shelf_life_opened INTEGER,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+          )
+        ''');
+        debugPrint('✅ Created custom_product_templates table');
+
+        // Create indexes for custom templates
+        await db.execute('''
+          CREATE INDEX idx_custom_templates_name_vi
+          ON ${AppConstants.tableCustomTemplates}(name_vi)
+        ''');
+
+        await db.execute('''
+          CREATE INDEX idx_custom_templates_name_en
+          ON ${AppConstants.tableCustomTemplates}(name_en)
+        ''');
+
+        debugPrint('✅ Created indexes for custom templates');
+      } catch (e) {
+        debugPrint('⚠️ Error creating custom templates table: $e');
+      }
+
+      debugPrint('✅ v8 upgrade completed: Pantry support and custom templates ready');
+    }
   }
 
   /// Load initial data
@@ -314,6 +397,7 @@ class DatabaseService {
           'category': productData['category'],
           'shelf_life_refrigerated': productData['shelf_life_refrigerated'],
           'shelf_life_frozen': productData['shelf_life_frozen'],
+          'shelf_life_pantry': productData['shelf_life_pantry'],
           'shelf_life_opened': productData['shelf_life_opened'],
           'nutrition_data': productData['nutrition_data'] != null
               ? json.encode(productData['nutrition_data'])
