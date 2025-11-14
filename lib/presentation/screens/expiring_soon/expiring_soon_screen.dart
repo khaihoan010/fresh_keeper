@@ -9,6 +9,17 @@ import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 
+/// Expiring Soon View for Bottom Navigation
+/// Wrapper without Scaffold for use in IndexedStack
+class ExpiringSoonView extends StatelessWidget {
+  const ExpiringSoonView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ExpiringSoonScreen();
+  }
+}
+
 /// Expiring Soon Screen
 /// Displays products grouped by expiry urgency
 class ExpiringSoonScreen extends StatefulWidget {
