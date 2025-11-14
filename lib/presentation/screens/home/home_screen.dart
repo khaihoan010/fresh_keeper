@@ -417,16 +417,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       final product = _displayedProducts[index];
                       return _ProductCard(
                         product: product,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.productDetail,
-                            arguments: product,
-                          ).then((_) {
-                            // Reload data when returning from details
-                            _handleRefresh();
-                          });
-                        },
+                        onTap: _handleRefresh,
                         onEdit: () {
                           Navigator.pushNamed(
                             context,
@@ -649,7 +640,18 @@ class _ProductCardState extends State<_ProductCard> {
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: InkWell(
-          onTap: widget.onTap,
+          onTap: () {
+            // Create updated product with current quantity before navigating
+            final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+            Navigator.pushNamed(
+              context,
+              AppRoutes.productDetail,
+              arguments: updatedProduct,
+            ).then((_) {
+              // Reload data when returning from details
+              widget.onTap();
+            });
+          },
           borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           child: Padding(
             padding: const EdgeInsets.all(12),

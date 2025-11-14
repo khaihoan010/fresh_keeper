@@ -176,11 +176,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                   child: ListView(
                     padding: const EdgeInsets.all(16),
                     children: [
-                      // Summary Card
-                      _buildSummaryCard(filteredProducts.length),
-
-                      const SizedBox(height: 24),
-
                       // Expired
                       if (grouped['expired']!.isNotEmpty) ...[
                         _buildSectionHeader(
@@ -247,58 +242,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
           ),
           const BannerAdWidget(),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSummaryCard(int count) {
-    final l10n = AppLocalizations.of(context);
-
-    return Card(
-      color: Theme.of(context).brightness == Brightness.dark
-          ? Theme.of(context).colorScheme.surfaceContainerHigh
-          : Theme.of(context).colorScheme.surfaceContainerHighest,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: AppTheme.warningColor.withValues(alpha: 0.15),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: Text(
-                  '$count',
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.warningColor,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.productsExpiringSoon,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n.useSoonToAvoidWaste,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -476,10 +419,12 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
       margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () {
+          // Create updated product with current quantity before navigating
+          final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
           Navigator.pushNamed(
             context,
             AppRoutes.productDetail,
-            arguments: widget.product,
+            arguments: updatedProduct,
           ).then((_) {
             // Reload data when returning from details
             widget.onRefresh();
