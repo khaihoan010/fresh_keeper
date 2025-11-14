@@ -7,12 +7,14 @@ import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
+import '../../providers/shopping_list_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 import '../expiring_soon/expiring_soon_screen.dart';
 import '../settings/settings_screen.dart';
+import '../shopping_list/shopping_list_screen.dart';
 
 /// Home Screen with Bottom Navigation
-/// Container for all main tabs: All Items, Expiring Soon, Settings
+/// Container for all main tabs: All Items, Expiring Soon, Shopping List, Settings
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -33,17 +35,24 @@ class _HomeScreenState extends State<HomeScreen> {
         children: const [
           AllItemsView(),
           ExpiringSoonView(),
+          ShoppingListView(),
           SettingsView(),
         ],
       ),
-      floatingActionButton: _currentIndex == 0
+      floatingActionButton: (_currentIndex == 0 || _currentIndex == 2)
           ? FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
-                  if (added == true) {
-                    context.read<ProductProvider>().refresh();
-                  }
-                });
+                if (_currentIndex == 0) {
+                  // Add product for Home tab
+                  Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
+                    if (added == true) {
+                      context.read<ProductProvider>().refresh();
+                    }
+                  });
+                } else if (_currentIndex == 2) {
+                  // Add item for Shopping List tab
+                  // This will be handled by ShoppingListScreen's own FAB
+                }
               },
               child: const Icon(Icons.add, size: 32),
             )
@@ -93,6 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             activeIcon: const Icon(Icons.warning_amber),
             label: l10n.expiringSoon,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            activeIcon: const Icon(Icons.shopping_cart),
+            label: l10n.shoppingList,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings_outlined),
