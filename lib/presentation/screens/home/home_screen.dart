@@ -476,6 +476,61 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
     }
   }
 
+  Future<void> _handleQuickAdd() async {
+    final l10n = AppLocalizations.of(context);
+    final productProvider = context.read<ProductProvider>();
+    final shoppingListProvider = context.read<ShoppingListProvider>();
+
+    // Find all products with quantity = 0
+    final zeroQuantityProducts = productProvider.products
+        .where((p) => p.quantity == 0)
+        .toList();
+
+    if (zeroQuantityProducts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.noZeroQuantityProducts),
+          backgroundColor: AppTheme.warningColor,
+        ),
+      );
+      return;
+    }
+
+    // Show confirmation dialog
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.quickAdd),
+        content: Text(l10n.confirmQuickAdd(zeroQuantityProducts.length)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.add),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      // Add product names to shopping list
+      final names = zeroQuantityProducts.map((p) => p.name).toList();
+      final addedCount = await shoppingListProvider.addItems(names);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      }
+    }
+  }
+
   Future<void> _handleBulkCopy() async {
     final l10n = AppLocalizations.of(context);
     final multiSelectProvider = context.read<MultiSelectProvider>();
@@ -614,6 +669,12 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                 ),
               ]
             : [
+                // Quick add button (lightning icon)
+                IconButton(
+                  icon: const Icon(Icons.flash_on),
+                  onPressed: _handleQuickAdd,
+                  tooltip: l10n.quickAdd,
+                ),
                 IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {

@@ -591,6 +591,12 @@ class AppLocalizations {
   String get noZeroQuantityItems => isVietnamese
       ? 'Không có sản phẩm nào có số lượng = 0'
       : 'No products with zero quantity';
+  String get noZeroQuantityProducts => isVietnamese
+      ? 'Không có sản phẩm nào có số lượng = 0'
+      : 'No products with zero quantity';
+  String confirmQuickAdd(int count) => isVietnamese
+      ? 'Thêm $count sản phẩm hết vào danh sách mua sắm?'
+      : 'Add $count zero quantity products to shopping list?';
 
   // ==================== SEARCH PRODUCTS ====================
   String get searchProducts => isVietnamese ? 'Tìm sản phẩm' : 'Search Products';
