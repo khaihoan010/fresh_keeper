@@ -384,14 +384,6 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                     });
                   },
                 ),
-                IconButton(
-                  icon: const Icon(Icons.filter_list),
-                  onPressed: _showFilterSheet,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.sort),
-                  onPressed: _showSortSheet,
-                ),
               ],
       ),
       body: Column(
@@ -421,7 +413,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
             ),
           ),
 
-          // Filter/Sort Info
+          // Filter/Sort Toolbar
           Consumer<ProductProvider>(
             builder: (context, provider, _) {
               return Container(
@@ -429,50 +421,68 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                   horizontal: 16,
                   vertical: 8,
                 ),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).dividerColor,
+                      width: 1,
+                    ),
+                  ),
+                ),
                 child: Row(
                   children: [
-                    if (provider.selectedCategory != 'all') ...[
-                      Chip(
-                        label: Text(
-                          l10n.isVietnamese
-                              ? (AppConstants.categories.firstWhere(
-                                  (c) => c['id'] == provider.selectedCategory,
-                                  orElse: () => {'name_vi': 'Tất cả'},
-                                )['name_vi'] as String)
-                              : (AppConstants.categories.firstWhere(
-                                  (c) => c['id'] == provider.selectedCategory,
-                                  orElse: () => {'name_en': 'All'},
-                                )['name_en'] as String),
-                        ),
-                        onDeleted: () {
-                          provider.setCategory('all');
-                          if (_searchController.text.isEmpty) {
-                            setState(() {
-                              _displayedProducts = provider.filteredProducts.isEmpty
-                                  ? provider.products
-                                  : provider.filteredProducts;
-                            });
-                          }
-                        },
+                    // Filter Button
+                    OutlinedButton.icon(
+                      onPressed: _showFilterSheet,
+                      icon: const Icon(Icons.filter_list, size: 18),
+                      label: Text(
+                        provider.selectedCategory == 'all'
+                            ? l10n.all
+                            : (l10n.isVietnamese
+                                ? (AppConstants.categories.firstWhere(
+                                    (c) => c['id'] == provider.selectedCategory,
+                                    orElse: () => {'name_vi': 'Tất cả'},
+                                  )['name_vi'] as String)
+                                : (AppConstants.categories.firstWhere(
+                                    (c) => c['id'] == provider.selectedCategory,
+                                    orElse: () => {'name_en': 'All'},
+                                  )['name_en'] as String)),
                       ),
-                      const SizedBox(width: 8),
-                    ],
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+
+                    // Sort Button
+                    OutlinedButton.icon(
+                      onPressed: _showSortSheet,
+                      icon: const Icon(Icons.sort, size: 18),
+                      label: Text(provider.sortBy.getLocalizedName(l10n)),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ),
+
+                    const Spacer(),
+
+                    // Product Count
                     Text(
                       l10n.productsCount(_displayedProducts.length),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const Spacer(),
-                    Text(
-                      provider.sortBy.getLocalizedName(l10n),
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                      ),
                     ),
                   ],
                 ),
               );
             },
           ),
-
-          const Divider(height: 1),
 
           // Products List
           Expanded(
