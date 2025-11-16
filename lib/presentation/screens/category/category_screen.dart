@@ -521,12 +521,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ),
                       )
                     : GridView.builder(
-                        padding: const EdgeInsets.all(16).copyWith(bottom: 80),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12).copyWith(bottom: 80),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 6,
+                          childAspectRatio: 0.72,
                         ),
                         itemCount: _filteredTemplates.length,
                         itemBuilder: (context, index) {
@@ -566,62 +566,83 @@ class _TemplateGridTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Card(
-      elevation: 2,
+      elevation: 1,
+      shadowColor: Colors.black26,
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
       ),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).cardColor,
+                Theme.of(context).cardColor.withOpacity(0.95),
+              ],
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Category icon
+              // Category icon with circle background
               Container(
-                width: 44,
-                height: 44,
+                width: 48,
+                height: 48,
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                  color: AppTheme.primaryColor.withOpacity(0.12),
+                  shape: BoxShape.circle,
                 ),
                 child: Center(
                   child: Text(
                     AppConstants.categoryIcons[template.category] ?? '📦',
-                    style: const TextStyle(fontSize: 28),
+                    style: const TextStyle(fontSize: 26),
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               // Product name
               Flexible(
                 child: Text(
                   l10n.isVietnamese ? template.nameVi : template.nameEn,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
-                        fontSize: 13,
+                        fontSize: 12,
+                        height: 1.2,
                       ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(height: 2),
-              // Category name
-              Text(
-                l10n.isVietnamese
-                    ? AppConstants.categoryNamesVi[template.category] ?? template.category
-                    : AppConstants.categoryNamesEn[template.category] ?? template.category,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[600],
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
-                    ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              const SizedBox(height: 4),
+              // Category badge
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryColor.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  l10n.isVietnamese
+                      ? AppConstants.categoryNamesVi[template.category] ?? template.category
+                      : AppConstants.categoryNamesEn[template.category] ?? template.category,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppTheme.primaryColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
