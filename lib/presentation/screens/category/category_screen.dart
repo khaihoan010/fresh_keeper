@@ -79,11 +79,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+          ),
           title: Row(
             children: [
-              Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                ),
+                child: Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
+              ),
               const SizedBox(width: 12),
-              Text(l10n.createCustomTemplate),
+              Expanded(
+                child: Text(
+                  l10n.createCustomTemplate,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
             ],
           ),
           content: SingleChildScrollView(
@@ -101,6 +119,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   autofocus: true,
                 ),
@@ -115,6 +135,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   items: AppConstants.categories.map((cat) {
                     return DropdownMenuItem(
@@ -123,7 +145,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         children: [
                           Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
                           const SizedBox(width: 12),
-                          Text(l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!),
+                          Text(
+                            l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ],
                       ),
                     );
@@ -134,13 +159,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
 
                 // Shelf Life Section
                 Text(
                   l10n.shelfLifeOptional,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
+                        color: AppTheme.primaryColor,
                       ),
                 ),
                 const SizedBox(height: 12),
@@ -151,10 +177,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.fridgeShelfLife,
                     hintText: '7',
+                    suffixText: l10n.days,
                     prefixIcon: const Icon(Icons.kitchen_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   keyboardType: TextInputType.number,
                 ),
@@ -166,10 +195,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.freezerShelfLife,
                     hintText: '30',
+                    suffixText: l10n.days,
                     prefixIcon: const Icon(Icons.ac_unit_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   keyboardType: TextInputType.number,
                 ),
@@ -181,22 +213,37 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.pantryShelfLife,
                     hintText: '14',
+                    suffixText: l10n.days,
                     prefixIcon: const Icon(Icons.inventory_2_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   keyboardType: TextInputType.number,
                 ),
               ],
             ),
           ),
+          actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: Text(l10n.cancel),
+              child: Text(
+                l10n.cancel,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryColor,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                ),
+              ),
               onPressed: () async {
                 final name = nameController.text.trim();
                 if (name.isEmpty) {
@@ -249,7 +296,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   }
                 }
               },
-              child: Text(l10n.save),
+              child: Text(
+                l10n.save,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
             ),
           ],
         ),
@@ -474,9 +524,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         padding: const EdgeInsets.all(16).copyWith(bottom: 80),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: 0.85,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.75,
                         ),
                         itemCount: _filteredTemplates.length,
                         itemBuilder: (context, index) {
@@ -517,31 +567,48 @@ class _TemplateGridTile extends StatelessWidget {
 
     return Card(
       elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+      ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Category icon
-              Text(
-                AppConstants.categoryIcons[template.category] ?? '📦',
-                style: const TextStyle(fontSize: 32),
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                ),
+                child: Center(
+                  child: Text(
+                    AppConstants.categoryIcons[template.category] ?? '📦',
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               // Product name
-              Text(
-                l10n.isVietnamese ? template.nameVi : template.nameEn,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              Flexible(
+                child: Text(
+                  l10n.isVietnamese ? template.nameVi : template.nameEn,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               // Category name
               Text(
                 l10n.isVietnamese
@@ -549,7 +616,8 @@ class _TemplateGridTile extends StatelessWidget {
                     : AppConstants.categoryNamesEn[template.category] ?? template.category,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Colors.grey[600],
-                      fontSize: 10,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
                     ),
                 textAlign: TextAlign.center,
                 maxLines: 1,
