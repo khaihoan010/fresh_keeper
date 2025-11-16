@@ -234,8 +234,9 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            content: Text(l10n.productsMovedToShoppingList(addedCount)),
             backgroundColor: AppTheme.successColor,
+            duration: const Duration(seconds: 4),
           ),
         );
       }

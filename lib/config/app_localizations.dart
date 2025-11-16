@@ -565,6 +565,9 @@ class AppLocalizations {
   String productsAddedToShoppingList(int count) => isVietnamese
       ? 'Đã thêm $count sản phẩm vào danh sách mua sắm'
       : 'Added $count products to shopping list';
+  String productsMovedToShoppingList(int count) => isVietnamese
+      ? 'Đã di chuyển $count sản phẩm vào danh sách mua sắm. Mỗi sản phẩm được thêm với số lượng 1.'
+      : 'Moved $count products to shopping list. Each product added with quantity 1.';
   String productsCopied(int count, String location) => isVietnamese
       ? 'Đã sao chép $count sản phẩm đến $location'
       : 'Copied $count products to $location';

@@ -306,6 +306,14 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
               ? MultiSelectAppBar(
                   selectedCount: multiSelectProvider.selectedProductIds.length,
                   onExit: () => multiSelectProvider.exitMultiSelectMode(),
+                  onSelectAll: () {
+                    final provider = context.read<ShoppingListProvider>();
+                    for (final item in provider.items) {
+                      if (!multiSelectProvider.isSelected(item.id)) {
+                        multiSelectProvider.toggleSelection(item.id);
+                      }
+                    }
+                  },
                 )
               : AppBar(
                   automaticallyImplyLeading: false,
