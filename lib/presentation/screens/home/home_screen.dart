@@ -714,11 +714,13 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
             ),
             child: TabBar(
               controller: _tabController,
+              isScrollable: true,
               labelColor: AppTheme.primaryColor,
               unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               indicatorColor: AppTheme.primaryColor,
               indicatorWeight: 3,
               indicatorSize: TabBarIndicatorSize.tab,
+              tabAlignment: TabAlignment.start,
               tabs: [
                 Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
                 Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
@@ -738,55 +740,58 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                 ),
-                child: Row(
-                  children: [
-                    // Filter Button
-                    OutlinedButton.icon(
-                      onPressed: _showFilterSheet,
-                      icon: const Icon(Icons.filter_list, size: 18),
-                      label: Text(
-                        provider.selectedCategory == 'all'
-                            ? l10n.all
-                            : (l10n.isVietnamese
-                                ? (AppConstants.categories.firstWhere(
-                                    (c) => c['id'] == provider.selectedCategory,
-                                    orElse: () => {'name_vi': 'Tất cả'},
-                                  )['name_vi'] as String)
-                                : (AppConstants.categories.firstWhere(
-                                    (c) => c['id'] == provider.selectedCategory,
-                                    orElse: () => {'name_en': 'All'},
-                                  )['name_en'] as String)),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      // Filter Button
+                      OutlinedButton.icon(
+                        onPressed: _showFilterSheet,
+                        icon: const Icon(Icons.filter_list, size: 18),
+                        label: Text(
+                          provider.selectedCategory == 'all'
+                              ? l10n.all
+                              : (l10n.isVietnamese
+                                  ? (AppConstants.categories.firstWhere(
+                                      (c) => c['id'] == provider.selectedCategory,
+                                      orElse: () => {'name_vi': 'Tất cả'},
+                                    )['name_vi'] as String)
+                                  : (AppConstants.categories.firstWhere(
+                                      (c) => c['id'] == provider.selectedCategory,
+                                      orElse: () => {'name_en': 'All'},
+                                    )['name_en'] as String)),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
                       ),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
+                      const SizedBox(width: 8),
 
-                    // Sort Button
-                    OutlinedButton.icon(
-                      onPressed: _showSortSheet,
-                      icon: const Icon(Icons.sort, size: 18),
-                      label: Text(provider.sortBy.getLocalizedName(l10n)),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      // Sort Button
+                      OutlinedButton.icon(
+                        onPressed: _showSortSheet,
+                        icon: const Icon(Icons.sort, size: 18),
+                        label: Text(provider.sortBy.getLocalizedName(l10n)),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
                       ),
-                    ),
 
-                    const Spacer(),
+                      const SizedBox(width: 16),
 
-                    // Product Count
-                    Text(
-                      l10n.productsCount(_displayedProducts.length),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                      // Product Count
+                      Text(
+                        l10n.productsCount(_displayedProducts.length),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
