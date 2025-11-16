@@ -373,11 +373,14 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                           return _ShoppingListItemTile(
                             key: ValueKey(item.id),
                             item: item,
+                            index: index,
                             isSelected: isSelected,
                             isMultiSelectMode: isMultiSelectMode,
                             onDelete: () => _deleteItem(item),
                             onLongPress: () => _handleLongPress(item.id.toString()),
                             onTap: () => _handleTap(item.id.toString()),
+                            onTogglePurchased: () => provider.togglePurchased(item.id),
+                            onQuantityChanged: (qty) => provider.updateQuantity(item.id, qty),
                           );
                         },
                       ),
@@ -410,20 +413,26 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 /// Shopping List Item Tile
 class _ShoppingListItemTile extends StatelessWidget {
   final ShoppingListItem item;
+  final int index;
   final bool isSelected;
   final bool isMultiSelectMode;
   final VoidCallback onDelete;
   final VoidCallback onLongPress;
   final VoidCallback onTap;
+  final VoidCallback onTogglePurchased;
+  final Function(int) onQuantityChanged;
 
   const _ShoppingListItemTile({
     required super.key,
     required this.item,
+    required this.index,
     required this.isSelected,
     required this.isMultiSelectMode,
     required this.onDelete,
     required this.onLongPress,
     required this.onTap,
+    required this.onTogglePurchased,
+    required this.onQuantityChanged,
   });
 
   @override
@@ -445,31 +454,78 @@ class _ShoppingListItemTile extends StatelessWidget {
       },
       child: InkWell(
         onLongPress: onLongPress,
-        onTap: isMultiSelectMode ? onTap : null,
+        onTap: isMultiSelectMode ? onTap : onTogglePurchased,
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           elevation: isSelected ? 4 : 1,
           color: isSelected
               ? Theme.of(context).colorScheme.primaryContainer
               : null,
-          child: ListTile(
-            leading: isMultiSelectMode
-                ? Checkbox(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            child: Row(
+              children: [
+                // Checkbox for multi-select mode
+                if (isMultiSelectMode)
+                  Checkbox(
                     value: isSelected,
                     onChanged: (_) => onTap(),
-                  )
-                : null,
-            title: Text(
-              item.name,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: isSelected
-                        ? Theme.of(context).colorScheme.onPrimaryContainer
-                        : null,
                   ),
+                // Quantity controls
+                if (!isMultiSelectMode) ...[
+                  IconButton(
+                    icon: const Icon(Icons.remove_circle_outline),
+                    onPressed: item.quantity > 0
+                        ? () => onQuantityChanged(item.quantity - 1)
+                        : null,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    iconSize: 24,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      '${item.quantity}',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.add_circle_outline),
+                    onPressed: () => onQuantityChanged(item.quantity + 1),
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    iconSize: 24,
+                  ),
+                  const SizedBox(width: 12),
+                ],
+                // Item name
+                Expanded(
+                  child: Text(
+                    item.name,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.onPrimaryContainer
+                              : null,
+                          decoration: item.isPurchased
+                              ? TextDecoration.lineThrough
+                              : null,
+                          decorationThickness: 2,
+                        ),
+                  ),
+                ),
+                // Drag handle
+                if (!isMultiSelectMode)
+                  ReorderableDragStartListener(
+                    index: index,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Icon(Icons.drag_handle, color: Colors.grey),
+                    ),
+                  ),
+              ],
             ),
-            trailing: isMultiSelectMode
-                ? null
-                : const Icon(Icons.drag_handle, color: Colors.grey),
           ),
         ),
       ),

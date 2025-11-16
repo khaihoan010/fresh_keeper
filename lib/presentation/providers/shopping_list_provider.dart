@@ -256,6 +256,53 @@ class ShoppingListProvider with ChangeNotifier {
     }
   }
 
+  /// Update an item
+  Future<bool> updateItem(ShoppingListItem item) async {
+    try {
+      final db = await _databaseService.database;
+      await db.update(
+        AppConstants.tableShoppingList,
+        item.toMap(),
+        where: 'id = ?',
+        whereArgs: [item.id],
+      );
+
+      final index = _items.indexWhere((i) => i.id == item.id);
+      if (index != -1) {
+        _items[index] = item;
+      }
+
+      debugPrint('✅ Updated item: ${item.name}');
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _error = 'Failed to update item: $e';
+      debugPrint('❌ Error updating item: $e');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  /// Update item quantity
+  Future<bool> updateQuantity(String id, int quantity) async {
+    final index = _items.indexWhere((i) => i.id == id);
+    if (index == -1) return false;
+
+    final updatedItem = _items[index].copyWith(quantity: quantity);
+    return updateItem(updatedItem);
+  }
+
+  /// Toggle purchased state
+  Future<bool> togglePurchased(String id) async {
+    final index = _items.indexWhere((i) => i.id == id);
+    if (index == -1) return false;
+
+    final updatedItem = _items[index].copyWith(
+      isPurchased: !_items[index].isPurchased,
+    );
+    return updateItem(updatedItem);
+  }
+
   /// Refresh shopping list
   Future<void> refresh() async {
     await loadItems();
