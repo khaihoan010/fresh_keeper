@@ -83,17 +83,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
             borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
           ),
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                ),
-                child: Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
-              ),
-              const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   l10n.createCustomTemplate,
@@ -101,6 +92,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                 ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pop(dialogContext),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
               ),
             ],
           ),
@@ -228,22 +225,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
           actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(
-                l10n.cancel,
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.primaryColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primaryColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                  ),
                 ),
-              ),
+                icon: const Icon(Icons.save_outlined, size: 20),
+                label: Text(
+                  l10n.save,
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
               onPressed: () async {
                 final name = nameController.text.trim();
                 if (name.isEmpty) {
@@ -296,9 +293,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   }
                 }
               },
-              child: Text(
-                l10n.save,
-                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -566,8 +560,8 @@ class _TemplateGridTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Card(
-      elevation: 1,
-      shadowColor: Colors.black26,
+      elevation: 3,
+      shadowColor: Colors.black38,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
@@ -575,77 +569,67 @@ class _TemplateGridTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).cardColor,
-                Theme.of(context).cardColor.withOpacity(0.95),
-              ],
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Category icon with circle background
-              Container(
-                width: 48,
-                height: 48,
+        child: Column(
+          children: [
+            // Icon area - 2/3 of card height
+            Expanded(
+              flex: 2,
+              child: Container(
+                width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryColor.withOpacity(0.12),
-                  shape: BoxShape.circle,
+                  color: AppTheme.primaryColor.withOpacity(0.08),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(12),
+                  ),
                 ),
                 child: Center(
                   child: Text(
                     AppConstants.categoryIcons[template.category] ?? '📦',
-                    style: const TextStyle(fontSize: 26),
+                    style: const TextStyle(fontSize: 42),
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
-              // Product name
-              Flexible(
-                child: Text(
-                  l10n.isVietnamese ? template.nameVi : template.nameEn,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
-                        height: 1.2,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+            ),
+            // Text area - 1/3 of card height
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Product name
+                    Text(
+                      l10n.isVietnamese ? template.nameVi : template.nameEn,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 11,
+                            height: 1.1,
+                          ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    // Category name
+                    Text(
+                      l10n.isVietnamese
+                          ? AppConstants.categoryNamesVi[template.category] ?? template.category
+                          : AppConstants.categoryNamesEn[template.category] ?? template.category,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppTheme.primaryColor,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 4),
-              // Category badge
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryColor.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  l10n.isVietnamese
-                      ? AppConstants.categoryNamesVi[template.category] ?? template.category
-                      : AppConstants.categoryNamesEn[template.category] ?? template.category,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppTheme.primaryColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
