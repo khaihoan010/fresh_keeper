@@ -8,7 +8,7 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fresh_keeper.db';
-  static const int databaseVersion = 10;
+  static const int databaseVersion = 11;
 
   // Table Names
   static const String tableUserProducts = 'user_products';
@@ -132,10 +132,36 @@ class AppConstants {
     'chai',
     'lon',
     'túi',
+    'pcs', // For legacy/imported products
   ];
 
   /// Alias for quantityUnits (for convenience)
   static List<String> get units => quantityUnits;
+
+  /// Get quantity step for a specific unit
+  static double getQuantityStep(String unit) {
+    switch (unit.toLowerCase()) {
+      case 'cái':
+      case 'quả':
+      case 'bó':
+      case 'hộp':
+      case 'lon':
+      case 'túi':
+      case 'chai':
+      case 'gói':
+      case 'pcs':
+        return 1.0;
+      case 'kg':
+      case 'lít':
+        return 0.1;
+      case 'g':
+        return 5.0;
+      case 'ml':
+        return 10.0;
+      default:
+        return 1.0;
+    }
+  }
 
   // Date Formats
   static const String dateFormat = 'dd/MM/yyyy';

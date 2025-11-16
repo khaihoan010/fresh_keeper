@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/constants.dart';
 import '../../../data/models/shopping_list_item.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/shopping_list_provider.dart';
@@ -57,50 +58,77 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
   void _showAddItemDialog() {
     final l10n = AppLocalizations.of(context);
     _textController.clear();
+    String selectedUnit = 'cái';
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.addItem),
-        content: TextField(
-          controller: _textController,
-          autofocus: true,
-          decoration: InputDecoration(
-            hintText: l10n.enterItemName,
-            border: const OutlineInputBorder(),
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(l10n.addItem),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _textController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: l10n.enterItemName,
+                  border: const OutlineInputBorder(),
+                ),
+                textCapitalization: TextCapitalization.words,
+                onSubmitted: (value) {
+                  if (value.trim().isNotEmpty) {
+                    _addItem(value.trim(), selectedUnit);
+                    Navigator.pop(dialogContext);
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                value: selectedUnit,
+                decoration: InputDecoration(
+                  labelText: l10n.unit,
+                  border: const OutlineInputBorder(),
+                ),
+                items: AppConstants.units.map((unit) {
+                  return DropdownMenuItem(
+                    value: unit,
+                    child: Text(unit),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    setDialogState(() => selectedUnit = value);
+                  }
+                },
+              ),
+            ],
           ),
-          textCapitalization: TextCapitalization.words,
-          onSubmitted: (value) {
-            if (value.trim().isNotEmpty) {
-              _addItem(value.trim());
-              Navigator.pop(context);
-            }
-          },
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(l10n.cancel),
+            ),
+            TextButton(
+              onPressed: () {
+                if (_textController.text.trim().isNotEmpty) {
+                  _addItem(_textController.text.trim(), selectedUnit);
+                  Navigator.pop(dialogContext);
+                }
+              },
+              child: Text(l10n.add),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () {
-              if (_textController.text.trim().isNotEmpty) {
-                _addItem(_textController.text.trim());
-                Navigator.pop(context);
-              }
-            },
-            child: Text(l10n.add),
-          ),
-        ],
       ),
     );
   }
 
-  Future<void> _addItem(String name) async {
+  Future<void> _addItem(String name, String unit) async {
     final provider = context.read<ShoppingListProvider>();
     final l10n = AppLocalizations.of(context);
 
-    final success = await provider.addItem(name);
+    final success = await provider.addItem(name, unit: unit);
 
     if (mounted) {
       if (success) {
@@ -207,7 +235,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
         name: config.item.name,
         category: 'other',
         quantity: config.item.quantity.toDouble(),
-        unit: 'pcs',
+        unit: config.item.unit,
         location: config.location,
         purchaseDate: now,
         expiryDate: config.expiryDate,
@@ -309,14 +337,6 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
               ? MultiSelectAppBar(
                   selectedCount: multiSelectProvider.selectedProductIds.length,
                   onExit: () => multiSelectProvider.exitMultiSelectMode(),
-                  onSelectAll: () {
-                    final provider = context.read<ShoppingListProvider>();
-                    for (final item in provider.items) {
-                      if (!multiSelectProvider.isSelected(item.id)) {
-                        multiSelectProvider.toggleSelection(item.id);
-                      }
-                    }
-                  },
                 )
               : AppBar(
                   automaticallyImplyLeading: false,
@@ -392,6 +412,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                             onTap: () => _handleTap(item.id.toString()),
                             onTogglePurchased: () => provider.togglePurchased(item.id),
                             onQuantityChanged: (qty) => provider.updateQuantity(item.id, qty),
+                            onUnitChanged: (unit) => provider.updateUnit(item.id, unit),
                           );
                         },
                       ),
@@ -403,6 +424,14 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                 ShoppingListBottomBar(
                   onStore: _handleStore,
                   onDelete: _handleBulkDeleteItems,
+                  onSelectAll: () {
+                    final provider = context.read<ShoppingListProvider>();
+                    for (final item in provider.items) {
+                      if (!multiSelectProvider.isSelected(item.id)) {
+                        multiSelectProvider.toggleSelection(item.id);
+                      }
+                    }
+                  },
                 )
               else
                 const BannerAdWidget(),
@@ -432,6 +461,7 @@ class _ShoppingListItemTile extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback onTogglePurchased;
   final Function(int) onQuantityChanged;
+  final Function(String) onUnitChanged;
 
   const _ShoppingListItemTile({
     required super.key,
@@ -444,6 +474,7 @@ class _ShoppingListItemTile extends StatelessWidget {
     required this.onTap,
     required this.onTogglePurchased,
     required this.onQuantityChanged,
+    required this.onUnitChanged,
   });
 
   @override
@@ -509,7 +540,28 @@ class _ShoppingListItemTile extends StatelessWidget {
                     constraints: const BoxConstraints(),
                     iconSize: 24,
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 4),
+                  // Unit dropdown
+                  DropdownButton<String>(
+                    value: item.unit,
+                    underline: const SizedBox(),
+                    isDense: true,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                    items: AppConstants.units.map((unit) {
+                      return DropdownMenuItem(
+                        value: unit,
+                        child: Text(unit),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        onUnitChanged(value);
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 8),
                 ],
                 // Item name
                 Expanded(

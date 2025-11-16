@@ -147,6 +147,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
   bool _isSearchExpanded = false;
   late TabController _tabController;
   String _selectedLocation = 'fridge';
+  ProductProvider? _provider;
 
   @override
   void initState() {
@@ -156,8 +157,9 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
 
     // Load products from database when screen initializes
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final provider = context.read<ProductProvider>();
-      await provider.loadProducts();
+      _provider = context.read<ProductProvider>();
+      _provider!.addListener(_onProviderChanged);
+      await _provider!.loadProducts();
 
       // Apply location filter after loading
       _applyLocationFilter();
@@ -167,8 +169,16 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
     });
   }
 
+  void _onProviderChanged() {
+    if (mounted && _searchController.text.isEmpty) {
+      _applyLocationFilter();
+      setState(() {});
+    }
+  }
+
   @override
   void dispose() {
+    _provider?.removeListener(_onProviderChanged);
     _tabController.removeListener(_handleTabChange);
     _tabController.dispose();
     _searchController.dispose();
@@ -425,9 +435,12 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
 
     // Handle move
     if (destination == 'shopping_list') {
-      // Add product names to shopping list and delete original products
-      final names = selectedProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list and delete original products
+      final items = selectedProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       // Delete original products from inventory
       for (final product in selectedProducts) {
@@ -528,9 +541,12 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
     );
 
     if (confirmed == true && mounted) {
-      // Add product names to shopping list
-      final names = zeroQuantityProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list
+      final items = zeroQuantityProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -568,9 +584,12 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
 
     // Handle copy
     if (destination == 'shopping_list') {
-      // Add product names to shopping list
-      final names = selectedProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list
+      final items = selectedProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       if (mounted) {
         multiSelectProvider.exitMultiSelectMode();
@@ -721,13 +740,12 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
             ),
             child: TabBar(
               controller: _tabController,
-              isScrollable: true,
+              isScrollable: false,
               labelColor: AppTheme.primaryColor,
               unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               indicatorColor: AppTheme.primaryColor,
               indicatorWeight: 3,
               indicatorSize: TabBarIndicatorSize.tab,
-              tabAlignment: TabAlignment.start,
               tabs: [
                 Tab(icon: const Icon(Icons.kitchen_outlined), text: l10n.fridge),
                 Tab(icon: const Icon(Icons.ac_unit_outlined), text: l10n.freezer),
@@ -946,25 +964,7 @@ class _ProductCardState extends State<_ProductCard> {
   }
 
   double _getQuantityStep(String unit) {
-    switch (unit.toLowerCase()) {
-      case 'kg':
-      case 'lít':
-        return 0.1;
-      case 'g':
-        return 5.0;
-      case 'ml':
-        return 10.0;
-      case 'cái':
-      case 'quả':
-      case 'bó':
-      case 'gói':
-      case 'hộp':
-      case 'chai':
-      case 'lon':
-      case 'túi':
-      default:
-        return 1.0;
-    }
+    return AppConstants.getQuantityStep(unit);
   }
 
   void _increaseQuantity() async {

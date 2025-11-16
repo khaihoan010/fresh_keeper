@@ -220,9 +220,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     // Handle move
     if (destination == 'shopping_list') {
-      // Add product names to shopping list and delete original products
-      final names = selectedProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list and delete original products
+      final items = selectedProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       // Delete original products from inventory
       for (final product in selectedProducts) {
@@ -318,9 +321,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     );
 
     if (confirmed == true && mounted) {
-      // Add product names to shopping list
-      final names = zeroQuantityProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list
+      final items = zeroQuantityProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -359,9 +365,12 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     // Handle copy
     if (destination == 'shopping_list') {
-      // Add product names to shopping list
-      final names = selectedProducts.map((p) => p.name).toList();
-      final addedCount = await shoppingListProvider.addItems(names);
+      // Add product names with units to shopping list
+      final items = selectedProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
       if (mounted) {
         multiSelectProvider.exitMultiSelectMode();
@@ -795,25 +804,7 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
   }
 
   double _getQuantityStep(String unit) {
-    switch (unit.toLowerCase()) {
-      case 'kg':
-      case 'lít':
-        return 0.1;
-      case 'g':
-        return 5.0;
-      case 'ml':
-        return 10.0;
-      case 'cái':
-      case 'quả':
-      case 'bó':
-      case 'gói':
-      case 'hộp':
-      case 'chai':
-      case 'lon':
-      case 'túi':
-      default:
-        return 1.0;
-    }
+    return AppConstants.getQuantityStep(unit);
   }
 
   void _increaseQuantity() async {

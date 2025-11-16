@@ -7,11 +7,13 @@ import '../../../config/app_localizations.dart';
 class ShoppingListBottomBar extends StatelessWidget {
   final VoidCallback onStore;
   final VoidCallback onDelete;
+  final VoidCallback? onSelectAll;
 
   const ShoppingListBottomBar({
     super.key,
     required this.onStore,
     required this.onDelete,
+    this.onSelectAll,
   });
 
   @override
@@ -40,6 +42,12 @@ class ShoppingListBottomBar extends StatelessWidget {
                 label: l10n.store,
                 onPressed: onStore,
               ),
+              if (onSelectAll != null)
+                _ActionButton(
+                  icon: Icons.select_all,
+                  label: l10n.selectAll,
+                  onPressed: onSelectAll!,
+                ),
               _ActionButton(
                 icon: Icons.delete_outline,
                 label: l10n.delete,
