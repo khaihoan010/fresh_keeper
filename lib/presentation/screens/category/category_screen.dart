@@ -470,12 +470,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           ],
                         ),
                       )
-                    : ListView.builder(
-                        padding: const EdgeInsets.only(bottom: 80),
+                    : GridView.builder(
+                        padding: const EdgeInsets.all(16).copyWith(bottom: 80),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.85,
+                        ),
                         itemCount: _filteredTemplates.length,
                         itemBuilder: (context, index) {
                           final template = _filteredTemplates[index];
-                          return _TemplateListTile(
+                          return _TemplateGridTile(
                             template: template,
                             onTap: () => _showTemplateDetail(template),
                           );
@@ -495,12 +501,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 }
 
-/// Template List Tile Widget
-class _TemplateListTile extends StatelessWidget {
+/// Template Grid Tile Widget - Compact card for 3-column grid
+class _TemplateGridTile extends StatelessWidget {
   final ProductTemplate template;
   final VoidCallback onTap;
 
-  const _TemplateListTile({
+  const _TemplateGridTile({
     required this.template,
     required this.onTap,
   });
@@ -510,26 +516,48 @@ class _TemplateListTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: ListTile(
-        leading: Text(
-          AppConstants.categoryIcons[template.category] ?? '📦',
-          style: const TextStyle(fontSize: 28),
-        ),
-        title: Text(
-          l10n.isVietnamese ? template.nameVi : template.nameEn,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-        ),
-        subtitle: Text(
-          l10n.isVietnamese
-              ? AppConstants.categoryNamesVi[template.category] ?? template.category
-              : AppConstants.categoryNamesEn[template.category] ?? template.category,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        trailing: const Icon(Icons.chevron_right),
+      elevation: 2,
+      child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Category icon
+              Text(
+                AppConstants.categoryIcons[template.category] ?? '📦',
+                style: const TextStyle(fontSize: 32),
+              ),
+              const SizedBox(height: 8),
+              // Product name
+              Text(
+                l10n.isVietnamese ? template.nameVi : template.nameEn,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              // Category name
+              Text(
+                l10n.isVietnamese
+                    ? AppConstants.categoryNamesVi[template.category] ?? template.category
+                    : AppConstants.categoryNamesEn[template.category] ?? template.category,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[600],
+                      fontSize: 10,
+                    ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

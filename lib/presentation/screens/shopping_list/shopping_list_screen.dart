@@ -219,7 +219,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
         .toList();
 
     // Navigate to store items screen
-    final result = await Navigator.push<List<dynamic>>(
+    final result = await Navigator.push<List<StoreItemConfig>>(
       context,
       MaterialPageRoute(
         builder: (context) => StoreItemsScreen(items: selectedItems),
@@ -233,7 +233,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     for (final config in result) {
       final product = UserProduct(
         name: config.item.name,
-        category: 'other',
+        category: config.category,
         quantity: config.item.quantity.toDouble(),
         unit: config.item.unit,
         location: config.location,
