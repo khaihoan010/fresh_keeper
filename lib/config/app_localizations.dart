@@ -250,6 +250,13 @@ class AppLocalizations {
   String get templateCreated => isVietnamese ? 'Đã tạo mẫu' : 'Template created';
   String get templateSaved => isVietnamese ? 'Đã lưu mẫu' : 'Template saved';
   String get enterTemplateName => isVietnamese ? 'Nhập tên mẫu' : 'Enter template name';
+  String get createProductTemplate => isVietnamese ? 'Tạo mẫu sản phẩm' : 'Create Product Template';
+  String get nameVi => isVietnamese ? 'Tên tiếng Việt' : 'Vietnamese Name';
+  String get nameEn => isVietnamese ? 'Tên tiếng Anh' : 'English Name';
+  String get shelfLifeDays => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
+  String get allProducts => isVietnamese ? 'Tất cả sản phẩm' : 'All Products';
+  String get days => isVietnamese ? 'ngày' : 'days';
+  String get create => isVietnamese ? 'Tạo' : 'Create';
   String get shelfLifeOptional => isVietnamese ? 'HSD (tùy chọn)' : 'Shelf life (optional)';
   String get storageLocation => isVietnamese ? 'Vị trí lưu trữ' : 'Storage Location';
   String get storageLocationHint => isVietnamese ? 'Ví dụ: Tủ lạnh, Kệ bếp' : 'e.g.: Fridge, Kitchen shelf';
