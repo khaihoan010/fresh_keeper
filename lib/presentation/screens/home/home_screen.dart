@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: (_currentIndex == 0 && !multiSelectProvider.isMultiSelectMode)
           ? FloatingActionButton(
+              heroTag: 'home_fab',
               onPressed: () {
                 // Add product for Home tab
                 Navigator.pushNamed(context, AppRoutes.addProduct).then((added) {
@@ -971,6 +972,8 @@ class _ProductCardState extends State<_ProductCard> {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
       _currentQuantity += step;
+      // Round to avoid floating point precision issues
+      _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
     });
     await _updateProductQuantity();
   }
@@ -980,6 +983,8 @@ class _ProductCardState extends State<_ProductCard> {
       final step = _getQuantityStep(widget.product.unit);
       if (_currentQuantity > step) {
         _currentQuantity -= step;
+        // Round to avoid floating point precision issues
+        _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
       }
     });
     await _updateProductQuantity();

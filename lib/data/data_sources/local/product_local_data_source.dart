@@ -311,6 +311,23 @@ class ProductLocalDataSource {
     }
   }
 
+  /// Get all product templates
+  Future<List<ProductTemplate>> getAllTemplates() async {
+    try {
+      final db = await _databaseService.database;
+      final results = await db.query(
+        AppConstants.tableProductTemplates,
+        orderBy: 'name_vi ASC',
+      );
+
+      debugPrint('📦 Loaded ${results.length} templates');
+      return results.map((json) => ProductTemplate.fromJson(json)).toList();
+    } catch (e) {
+      debugPrint('❌ Error getting all templates: $e');
+      rethrow;
+    }
+  }
+
   /// Get template by ID
   Future<ProductTemplate?> getTemplateById(String id) async {
     try {
