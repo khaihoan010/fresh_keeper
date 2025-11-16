@@ -37,7 +37,18 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
 
   void _updateLocation(int index, String location) {
     setState(() {
-      _itemConfigs[index] = _itemConfigs[index].copyWith(location: location);
+      final config = _itemConfigs[index];
+      // Adjust default expiry date based on location
+      final newExpiryDate = switch (location) {
+        'fridge' => DateTime.now().add(const Duration(days: 7)),
+        'freezer' => DateTime.now().add(const Duration(days: 30)),
+        'pantry' => DateTime.now().add(const Duration(days: 14)),
+        _ => config.expiryDate,
+      };
+      _itemConfigs[index] = config.copyWith(
+        location: location,
+        expiryDate: newExpiryDate,
+      );
     });
   }
 
@@ -72,9 +83,13 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
       appBar: AppBar(
         title: Text(l10n.storeItems),
         actions: [
-          TextButton(
+          TextButton.icon(
             onPressed: _handleSave,
-            child: Text(
+            icon: Icon(
+              Icons.check,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            label: Text(
               l10n.save,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
@@ -84,17 +99,40 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
           ),
         ],
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: _itemConfigs.length,
-        itemBuilder: (context, index) {
-          final config = _itemConfigs[index];
-          return _StoreItemCard(
-            config: config,
-            onLocationChanged: (location) => _updateLocation(index, location),
-            onDateTap: () => _selectExpiryDate(index),
-          );
-        },
+      body: Column(
+        children: [
+          // Header info
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: AppTheme.primaryColor.withOpacity(0.1),
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, color: AppTheme.primaryColor),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    l10n.storeItemsInfo,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: _itemConfigs.length,
+              itemBuilder: (context, index) {
+                final config = _itemConfigs[index];
+                return _StoreItemCard(
+                  config: config,
+                  onLocationChanged: (location) => _updateLocation(index, location),
+                  onDateTap: () => _selectExpiryDate(index),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -144,82 +182,196 @@ class _StoreItemCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Item name
-            Text(
-              config.item.name,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+            // Item header with icon and quantity
+            Row(
+              children: [
+                // Icon placeholder (could be category-based in future)
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: AppTheme.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
                   ),
+                  child: const Center(
+                    child: Text('🛒', style: TextStyle(fontSize: 24)),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                // Name and quantity
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        config.item.name,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.accentColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '${config.item.quantity} ${config.item.unit}',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.accentColor,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
             // Location selection
             Text(
               l10n.location,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
             ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
+            const SizedBox(height: 12),
+            Row(
               children: [
-                ChoiceChip(
-                  label: Text(l10n.fridge),
-                  selected: config.location == 'fridge',
-                  onSelected: (selected) {
-                    if (selected) onLocationChanged('fridge');
-                  },
+                Expanded(
+                  child: _LocationButton(
+                    icon: Icons.kitchen_outlined,
+                    label: l10n.fridge,
+                    isSelected: config.location == 'fridge',
+                    onTap: () => onLocationChanged('fridge'),
+                  ),
                 ),
-                ChoiceChip(
-                  label: Text(l10n.freezer),
-                  selected: config.location == 'freezer',
-                  onSelected: (selected) {
-                    if (selected) onLocationChanged('freezer');
-                  },
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _LocationButton(
+                    icon: Icons.ac_unit_outlined,
+                    label: l10n.freezer,
+                    isSelected: config.location == 'freezer',
+                    onTap: () => onLocationChanged('freezer'),
+                  ),
                 ),
-                ChoiceChip(
-                  label: Text(l10n.pantry),
-                  selected: config.location == 'pantry',
-                  onSelected: (selected) {
-                    if (selected) onLocationChanged('pantry');
-                  },
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _LocationButton(
+                    icon: Icons.inventory_2_outlined,
+                    label: l10n.pantry,
+                    isSelected: config.location == 'pantry',
+                    onTap: () => onLocationChanged('pantry'),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
             // Expiry date
             Text(
               l10n.expiryDate,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             InkWell(
               onTap: onDateTap,
+              borderRadius: BorderRadius.circular(12),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[300]!),
-                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppTheme.primaryColor),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      dateFormat.format(config.expiryDate),
-                      style: Theme.of(context).textTheme.bodyLarge,
+                    Row(
+                      children: [
+                        Icon(Icons.calendar_today, color: AppTheme.primaryColor),
+                        const SizedBox(width: 12),
+                        Text(
+                          dateFormat.format(config.expiryDate),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
                     ),
-                    Icon(Icons.calendar_today, color: AppTheme.primaryColor),
+                    Text(
+                      _getDaysRemaining(config.expiryDate, l10n),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.grey[600],
+                          ),
+                    ),
                   ],
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _getDaysRemaining(DateTime expiryDate, AppLocalizations l10n) {
+    final days = expiryDate.difference(DateTime.now()).inDays;
+    return l10n.daysRemaining(days);
+  }
+}
+
+/// Location Button Widget
+class _LocationButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _LocationButton({
+    required this.icon,
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color: isSelected ? AppTheme.primaryColor : Colors.transparent,
+          border: Border.all(
+            color: isSelected ? AppTheme.primaryColor : Colors.grey[300]!,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.white : Colors.grey[600],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.grey[600],
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                fontSize: 12,
               ),
             ),
           ],

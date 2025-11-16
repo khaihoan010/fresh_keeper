@@ -585,6 +585,9 @@ class AppLocalizations {
   // ==================== STORE FEATURE ====================
   String get store => isVietnamese ? 'Lưu trữ' : 'Store';
   String get storeItems => isVietnamese ? 'Lưu các món' : 'Store Items';
+  String get storeItemsInfo => isVietnamese
+      ? 'Chọn vị trí lưu trữ và ngày hết hạn cho từng sản phẩm'
+      : 'Select storage location and expiry date for each product';
   String storeItemsMessage(int count) => isVietnamese
       ? 'Lưu $count món vào kho. Chọn vị trí lưu trữ và ngày hết hạn (tùy chọn).'
       : 'Store $count items to inventory. Select storage location and expiry date (optional).';
