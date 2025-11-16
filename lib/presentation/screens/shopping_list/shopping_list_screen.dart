@@ -206,7 +206,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       final product = UserProduct(
         name: config.item.name,
         category: 'other',
-        quantity: 1,
+        quantity: config.item.quantity.toDouble(),
         unit: 'pcs',
         location: config.location,
         purchaseDate: now,
@@ -214,6 +214,9 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       );
       await productProvider.addProduct(product);
     }
+
+    // Reload products to update home screen and badges
+    await productProvider.loadProducts();
 
     // Delete items from shopping list (batch delete)
     await shoppingListProvider.deleteItems(selectedIds.toList());

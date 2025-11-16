@@ -16,6 +16,7 @@ import '../../widgets/multi_select/location_selector_dialog.dart';
 import '../expiring_soon/expiring_soon_screen.dart';
 import '../settings/settings_screen.dart';
 import '../shopping_list/shopping_list_screen.dart';
+import '../category/category_screen.dart';
 
 /// Home Screen with Bottom Navigation
 /// Container for all main tabs: All Items, Expiring Soon, Shopping List, Settings
@@ -40,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: const [
           AllItemsView(),
           ExpiringSoonView(),
+          CategoryView(),
           ShoppingListView(),
           SettingsView(),
         ],
@@ -104,6 +106,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             activeIcon: const Icon(Icons.warning_amber),
             label: l10n.expiringSoon,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.category_outlined),
+            activeIcon: const Icon(Icons.category),
+            label: l10n.category,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.shopping_cart_outlined),
