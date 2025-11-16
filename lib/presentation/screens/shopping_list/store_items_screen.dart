@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../config/app_localizations.dart';
+import '../../../config/constants.dart';
 import '../../../config/theme.dart';
 import '../../../data/models/shopping_list_item.dart';
 
@@ -20,16 +21,17 @@ class StoreItemsScreen extends StatefulWidget {
 }
 
 class _StoreItemsScreenState extends State<StoreItemsScreen> {
-  late List<_StoreItemConfig> _itemConfigs;
+  late List<StoreItemConfig> _itemConfigs;
 
   @override
   void initState() {
     super.initState();
     // Initialize config for each item with default values
     _itemConfigs = widget.items
-        .map((item) => _StoreItemConfig(
+        .map((item) => StoreItemConfig(
               item: item,
               location: 'fridge',
+              category: 'other',
               expiryDate: DateTime.now().add(const Duration(days: 7)),
             ))
         .toList();
@@ -49,6 +51,12 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
         location: location,
         expiryDate: newExpiryDate,
       );
+    });
+  }
+
+  void _updateCategory(int index, String category) {
+    setState(() {
+      _itemConfigs[index] = _itemConfigs[index].copyWith(category: category);
     });
   }
 
@@ -127,6 +135,7 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
                 return _StoreItemCard(
                   config: config,
                   onLocationChanged: (location) => _updateLocation(index, location),
+                  onCategoryChanged: (category) => _updateCategory(index, category),
                   onDateTap: () => _selectExpiryDate(index),
                 );
               },
@@ -138,47 +147,61 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
   }
 }
 
-/// Store Item Configuration
-class _StoreItemConfig {
+/// Store Item Configuration - Made public for use in shopping_list_screen
+class StoreItemConfig {
   final ShoppingListItem item;
   final String location;
+  final String category;
   final DateTime expiryDate;
 
-  _StoreItemConfig({
+  StoreItemConfig({
     required this.item,
     required this.location,
+    required this.category,
     required this.expiryDate,
   });
 
-  _StoreItemConfig copyWith({
+  StoreItemConfig copyWith({
     ShoppingListItem? item,
     String? location,
+    String? category,
     DateTime? expiryDate,
   }) {
-    return _StoreItemConfig(
+    return StoreItemConfig(
       item: item ?? this.item,
       location: location ?? this.location,
+      category: category ?? this.category,
       expiryDate: expiryDate ?? this.expiryDate,
     );
   }
 }
 
 /// Store Item Card Widget
-class _StoreItemCard extends StatelessWidget {
-  final _StoreItemConfig config;
+class _StoreItemCard extends StatefulWidget {
+  final StoreItemConfig config;
   final Function(String) onLocationChanged;
+  final Function(String) onCategoryChanged;
   final VoidCallback onDateTap;
 
   const _StoreItemCard({
     required this.config,
     required this.onLocationChanged,
+    required this.onCategoryChanged,
     required this.onDateTap,
   });
 
   @override
+  State<_StoreItemCard> createState() => _StoreItemCardState();
+}
+
+class _StoreItemCardState extends State<_StoreItemCard> {
+  String _categorySearchQuery = '';
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final dateFormat = DateFormat('dd/MM/yyyy');
+    // Use device locale for date format
+    final dateFormat = DateFormat.yMMMd(Localizations.localeOf(context).toString());
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -191,7 +214,7 @@ class _StoreItemCard extends StatelessWidget {
             // Item header with icon and quantity
             Row(
               children: [
-                // Icon placeholder (could be category-based in future)
+                // Category icon
                 Container(
                   width: 48,
                   height: 48,
@@ -199,8 +222,11 @@ class _StoreItemCard extends StatelessWidget {
                     color: AppTheme.primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Center(
-                    child: Text('🛒', style: TextStyle(fontSize: 24)),
+                  child: Center(
+                    child: Text(
+                      AppConstants.categoryIcons[widget.config.category] ?? '🛒',
+                      style: const TextStyle(fontSize: 24),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -210,7 +236,7 @@ class _StoreItemCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        config.item.name,
+                        widget.config.item.name,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -223,7 +249,7 @@ class _StoreItemCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${config.item.quantity} ${config.item.unit}',
+                          '${widget.config.item.quantity} ${widget.config.item.unit}',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: AppTheme.accentColor,
@@ -235,6 +261,17 @@ class _StoreItemCard extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+
+            // Category selection
+            Text(
+              l10n.category,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            const SizedBox(height: 12),
+            _buildCategorySelector(context, l10n),
             const SizedBox(height: 20),
 
             // Location selection
@@ -251,8 +288,8 @@ class _StoreItemCard extends StatelessWidget {
                   child: _LocationButton(
                     icon: Icons.kitchen_outlined,
                     label: l10n.fridge,
-                    isSelected: config.location == 'fridge',
-                    onTap: () => onLocationChanged('fridge'),
+                    isSelected: widget.config.location == 'fridge',
+                    onTap: () => widget.onLocationChanged('fridge'),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -260,8 +297,8 @@ class _StoreItemCard extends StatelessWidget {
                   child: _LocationButton(
                     icon: Icons.ac_unit_outlined,
                     label: l10n.freezer,
-                    isSelected: config.location == 'freezer',
-                    onTap: () => onLocationChanged('freezer'),
+                    isSelected: widget.config.location == 'freezer',
+                    onTap: () => widget.onLocationChanged('freezer'),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -269,8 +306,8 @@ class _StoreItemCard extends StatelessWidget {
                   child: _LocationButton(
                     icon: Icons.inventory_2_outlined,
                     label: l10n.pantry,
-                    isSelected: config.location == 'pantry',
-                    onTap: () => onLocationChanged('pantry'),
+                    isSelected: widget.config.location == 'pantry',
+                    onTap: () => widget.onLocationChanged('pantry'),
                   ),
                 ),
               ],
@@ -286,7 +323,7 @@ class _StoreItemCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             InkWell(
-              onTap: onDateTap,
+              onTap: widget.onDateTap,
               borderRadius: BorderRadius.circular(12),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -302,7 +339,7 @@ class _StoreItemCard extends StatelessWidget {
                         Icon(Icons.calendar_today, color: AppTheme.primaryColor),
                         const SizedBox(width: 12),
                         Text(
-                          dateFormat.format(config.expiryDate),
+                          dateFormat.format(widget.config.expiryDate),
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -310,7 +347,7 @@ class _StoreItemCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      _getDaysRemaining(config.expiryDate, l10n),
+                      _getDaysRemaining(widget.config.expiryDate, l10n),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Colors.grey[600],
                           ),
@@ -321,6 +358,132 @@ class _StoreItemCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildCategorySelector(BuildContext context, AppLocalizations l10n) {
+    final selectedCat = AppConstants.categories.firstWhere(
+      (c) => c['id'] == widget.config.category,
+      orElse: () => AppConstants.categories.first,
+    );
+
+    return InkWell(
+      onTap: () => _showCategoryPicker(context, l10n),
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey[300]!),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Text(
+              selectedCat['icon']!,
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                l10n.isVietnamese ? selectedCat['name_vi']! : selectedCat['name_en']!,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            Icon(Icons.arrow_drop_down, color: Colors.grey[600]),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showCategoryPicker(BuildContext context, AppLocalizations l10n) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setModalState) {
+          final filteredCategories = AppConstants.categories.where((cat) {
+            if (_categorySearchQuery.isEmpty) return true;
+            final query = _categorySearchQuery.toLowerCase();
+            return cat['name_vi']!.toLowerCase().contains(query) ||
+                cat['name_en']!.toLowerCase().contains(query);
+          }).toList();
+
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      l10n.selectCategory,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Search field
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: l10n.searchProducts,
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  ),
+                  onChanged: (value) {
+                    setModalState(() => _categorySearchQuery = value);
+                  },
+                ),
+                const SizedBox(height: 12),
+                // Category list
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: filteredCategories.length,
+                    itemBuilder: (context, index) {
+                      final cat = filteredCategories[index];
+                      final isSelected = cat['id'] == widget.config.category;
+                      return ListTile(
+                        leading: Text(
+                          cat['icon']!,
+                          style: const TextStyle(fontSize: 28),
+                        ),
+                        title: Text(
+                          l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!,
+                          style: TextStyle(
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                        trailing: isSelected
+                            ? Icon(Icons.check_circle, color: AppTheme.primaryColor)
+                            : null,
+                        onTap: () {
+                          widget.onCategoryChanged(cat['id']!);
+                          Navigator.pop(context);
+                          setState(() => _categorySearchQuery = '');
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
