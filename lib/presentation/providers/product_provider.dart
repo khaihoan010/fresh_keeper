@@ -378,6 +378,20 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
+  /// Get all product templates
+  Future<List<ProductTemplate>> getAllTemplates() async {
+    try {
+      final result = await _repository.getAllTemplates();
+      if (result.isSuccess) {
+        return result.data!;
+      }
+      return [];
+    } catch (e) {
+      debugPrint('❌ Exception getting all templates: $e');
+      return [];
+    }
+  }
+
   /// Search user products
   Future<List<UserProduct>> searchProducts(String query) async {
     if (query.trim().length < 2) {

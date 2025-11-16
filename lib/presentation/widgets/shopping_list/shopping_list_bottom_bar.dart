@@ -8,12 +8,16 @@ class ShoppingListBottomBar extends StatelessWidget {
   final VoidCallback onStore;
   final VoidCallback onDelete;
   final VoidCallback? onSelectAll;
+  final VoidCallback? onDeselectAll;
+  final bool allSelected;
 
   const ShoppingListBottomBar({
     super.key,
     required this.onStore,
     required this.onDelete,
     this.onSelectAll,
+    this.onDeselectAll,
+    this.allSelected = false,
   });
 
   @override
@@ -42,11 +46,11 @@ class ShoppingListBottomBar extends StatelessWidget {
                 label: l10n.store,
                 onPressed: onStore,
               ),
-              if (onSelectAll != null)
+              if (onSelectAll != null || onDeselectAll != null)
                 _ActionButton(
-                  icon: Icons.select_all,
-                  label: l10n.selectAll,
-                  onPressed: onSelectAll!,
+                  icon: allSelected ? Icons.deselect : Icons.select_all,
+                  label: allSelected ? l10n.deselectAll : l10n.selectAll,
+                  onPressed: allSelected ? (onDeselectAll ?? () {}) : (onSelectAll ?? () {}),
                 ),
               _ActionButton(
                 icon: Icons.delete_outline,

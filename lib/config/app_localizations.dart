@@ -255,6 +255,7 @@ class AppLocalizations {
   String get nameEn => isVietnamese ? 'Tên tiếng Anh' : 'English Name';
   String get shelfLifeDays => isVietnamese ? 'Hạn sử dụng' : 'Shelf Life';
   String get allProducts => isVietnamese ? 'Tất cả sản phẩm' : 'All Products';
+  String get productTemplates => isVietnamese ? 'Mẫu sản phẩm' : 'Product Templates';
   String get create => isVietnamese ? 'Tạo' : 'Create';
   String get shelfLifeOptional => isVietnamese ? 'HSD (tùy chọn)' : 'Shelf life (optional)';
   String get storageLocation => isVietnamese ? 'Vị trí lưu trữ' : 'Storage Location';

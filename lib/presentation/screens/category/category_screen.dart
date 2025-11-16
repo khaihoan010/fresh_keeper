@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../config/app_localizations.dart';
 import '../../../config/constants.dart';
-import '../../../config/routes.dart';
-import '../../../data/models/user_product.dart';
+import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 
@@ -19,8 +18,8 @@ class CategoryView extends StatelessWidget {
   }
 }
 
-/// Category Screen
-/// Shows all products with search and FAB for creating templates
+/// Category Screen - Product Templates
+/// Shows all product templates with search and FAB for creating custom templates
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
 
@@ -31,11 +30,40 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   final _searchController = TextEditingController();
   String _searchQuery = '';
+  List<ProductTemplate> _templates = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTemplates();
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadTemplates() async {
+    setState(() => _isLoading = true);
+    final provider = context.read<ProductProvider>();
+    final templates = await provider.getAllTemplates();
+    if (mounted) {
+      setState(() {
+        _templates = templates;
+        _isLoading = false;
+      });
+    }
+  }
+
+  List<ProductTemplate> get _filteredTemplates {
+    if (_searchQuery.isEmpty) return _templates;
+    return _templates.where((t) {
+      final query = _searchQuery.toLowerCase();
+      return t.nameVi.toLowerCase().contains(query) ||
+          t.nameEn.toLowerCase().contains(query);
+    }).toList();
   }
 
   void _showCreateTemplateDialog() {
@@ -130,6 +158,162 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
+  void _showTemplateDetail(ProductTemplate template) {
+    final l10n = AppLocalizations.of(context);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.3,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) {
+          return Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.isVietnamese ? template.nameVi : template.nameEn,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          if (l10n.isVietnamese)
+                            Text(
+                              template.nameEn,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey,
+                                  ),
+                            )
+                          else
+                            Text(
+                              template.nameVi,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey,
+                                  ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(height: 1),
+              Expanded(
+                child: ListView(
+                  controller: scrollController,
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    _buildInfoRow(
+                      l10n.category,
+                      l10n.isVietnamese
+                          ? AppConstants.categoryNamesVi[template.category] ?? template.category
+                          : AppConstants.categoryNamesEn[template.category] ?? template.category,
+                      AppConstants.categoryIcons[template.category] ?? '📦',
+                    ),
+                    const SizedBox(height: 12),
+                    if (template.shelfLifeRefrigerated != null)
+                      _buildInfoRow(
+                        l10n.fridgeShelfLife,
+                        '${template.shelfLifeRefrigerated} ${l10n.days}',
+                        '❄️',
+                      ),
+                    if (template.shelfLifeFrozen != null)
+                      _buildInfoRow(
+                        l10n.freezerShelfLife,
+                        '${template.shelfLifeFrozen} ${l10n.days}',
+                        '🧊',
+                      ),
+                    if (template.shelfLifePantry != null)
+                      _buildInfoRow(
+                        l10n.pantryShelfLife,
+                        '${template.shelfLifePantry} ${l10n.days}',
+                        '🏠',
+                      ),
+                    if (template.storageTips != null) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.storage,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(template.storageTips!),
+                    ],
+                    if (template.healthBenefits != null && template.healthBenefits!.isNotEmpty) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.benefits,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+                      ...template.healthBenefits!.map((benefit) => Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Row(
+                              children: [
+                                const Text('✅ '),
+                                Expanded(child: Text(benefit)),
+                              ],
+                            ),
+                          )),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value, String icon) {
+    return Row(
+      children: [
+        Text(icon, style: const TextStyle(fontSize: 24)),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey,
+                    ),
+              ),
+              Text(
+                value,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -137,7 +321,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(l10n.allProducts),
+        title: Text(l10n.productTemplates),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
@@ -171,57 +355,39 @@ class _CategoryScreenState extends State<CategoryScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Consumer<ProductProvider>(
-              builder: (context, provider, _) {
-                var products = provider.products;
-
-                // Apply search filter
-                if (_searchQuery.isNotEmpty) {
-                  products = products.where((p) {
-                    return p.name.toLowerCase().contains(_searchQuery.toLowerCase());
-                  }).toList();
-                }
-
-                if (products.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('📦', style: TextStyle(fontSize: 80)),
-                        const SizedBox(height: 16),
-                        Text(
-                          _searchQuery.isNotEmpty ? l10n.noProductsFound : l10n.noProducts,
-                          style: Theme.of(context).textTheme.titleLarge,
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _filteredTemplates.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('📦', style: TextStyle(fontSize: 80)),
+                            const SizedBox(height: 16),
+                            Text(
+                              _searchQuery.isNotEmpty ? l10n.noProductsFound : l10n.noProducts,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 80),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    final product = products[index];
-                    return _ProductListTile(
-                      product: product,
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRoutes.productDetail,
-                          arguments: product,
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-            ),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 80),
+                        itemCount: _filteredTemplates.length,
+                        itemBuilder: (context, index) {
+                          final template = _filteredTemplates[index];
+                          return _TemplateListTile(
+                            template: template,
+                            onTap: () => _showTemplateDetail(template),
+                          );
+                        },
+                      ),
           ),
           const BannerAdWidget(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'category_fab',
         onPressed: _showCreateTemplateDialog,
         tooltip: l10n.createProductTemplate,
         child: const Icon(Icons.add_box_outlined, size: 28),
@@ -230,61 +396,40 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 }
 
-/// Product List Tile Widget
-class _ProductListTile extends StatelessWidget {
-  final UserProduct product;
+/// Template List Tile Widget
+class _TemplateListTile extends StatelessWidget {
+  final ProductTemplate template;
   final VoidCallback onTap;
 
-  const _ProductListTile({
-    required this.product,
+  const _TemplateListTile({
+    required this.template,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final daysText = product.isExpired
-        ? l10n.daysOverdue(-product.daysUntilExpiry)
-        : l10n.daysRemaining(product.daysUntilExpiry);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ListTile(
         leading: Text(
-          AppConstants.categoryIcons[product.category] ?? '📦',
+          AppConstants.categoryIcons[template.category] ?? '📦',
           style: const TextStyle(fontSize: 28),
         ),
         title: Text(
-          product.name,
+          l10n.isVietnamese ? template.nameVi : template.nameEn,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${product.quantity} ${product.unit} • ${product.location ?? 'fridge'}',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            const SizedBox(height: 2),
-            Text(
-              daysText,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: product.getStatusColor(),
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-          ],
+        subtitle: Text(
+          l10n.isVietnamese
+              ? AppConstants.categoryNamesVi[template.category] ?? template.category
+              : AppConstants.categoryNamesEn[template.category] ?? template.category,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
-        trailing: Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-            color: product.getStatusColor(),
-            shape: BoxShape.circle,
-          ),
-        ),
+        trailing: const Icon(Icons.chevron_right),
         onTap: onTap,
       ),
     );

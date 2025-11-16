@@ -239,6 +239,17 @@ class ProductRepository {
     }
   }
 
+  /// Get all product templates
+  Future<Result<List<ProductTemplate>>> getAllTemplates() async {
+    try {
+      final templates = await _localDataSource.getAllTemplates();
+      return Result.success(templates);
+    } catch (e) {
+      debugPrint('❌ Repository: Error getting all templates - $e');
+      return Result.failure('Không thể tải danh sách template.');
+    }
+  }
+
   /// Get templates by category
   Future<Result<List<ProductTemplate>>> getTemplatesByCategory(
     String category,

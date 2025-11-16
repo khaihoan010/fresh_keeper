@@ -811,6 +811,8 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
       _currentQuantity += step;
+      // Round to avoid floating point precision issues
+      _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
     });
     await _updateProductQuantity();
   }
@@ -820,6 +822,8 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
       final step = _getQuantityStep(widget.product.unit);
       if (_currentQuantity > step) {
         _currentQuantity -= step;
+        // Round to avoid floating point precision issues
+        _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
       }
     });
     await _updateProductQuantity();

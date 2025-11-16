@@ -424,6 +424,8 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                 ShoppingListBottomBar(
                   onStore: _handleStore,
                   onDelete: _handleBulkDeleteItems,
+                  allSelected: multiSelectProvider.selectedProductIds.length ==
+                      context.read<ShoppingListProvider>().items.length,
                   onSelectAll: () {
                     final provider = context.read<ShoppingListProvider>();
                     for (final item in provider.items) {
@@ -431,6 +433,9 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                         multiSelectProvider.toggleSelection(item.id);
                       }
                     }
+                  },
+                  onDeselectAll: () {
+                    multiSelectProvider.clearSelections();
                   },
                 )
               else
@@ -440,6 +445,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
           floatingActionButton: isMultiSelectMode
               ? null
               : FloatingActionButton(
+                  heroTag: 'shopping_list_fab',
                   onPressed: _showAddItemDialog,
                   child: const Icon(Icons.add, size: 32),
                 ),
