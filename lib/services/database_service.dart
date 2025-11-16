@@ -422,6 +422,23 @@ class DatabaseService {
 
       debugPrint('✅ v10 upgrade completed: Shopping list with quantity and purchased state');
     }
+
+    if (oldVersion < 11) {
+      // Add unit column to shopping_list
+      debugPrint('🔄 Upgrading to v11: Adding unit to shopping list...');
+
+      try {
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN unit TEXT NOT NULL DEFAULT 'cái'
+        ''');
+        debugPrint('✅ Added unit column');
+      } catch (e) {
+        debugPrint('⚠️ Error adding unit column to shopping_list: $e');
+      }
+
+      debugPrint('✅ v11 upgrade completed: Shopping list with unit support');
+    }
   }
 
   /// Load initial data

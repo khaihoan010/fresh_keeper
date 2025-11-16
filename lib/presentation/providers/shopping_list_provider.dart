@@ -48,7 +48,7 @@ class ShoppingListProvider with ChangeNotifier {
   }
 
   /// Add a new item to shopping list
-  Future<bool> addItem(String name) async {
+  Future<bool> addItem(String name, {String unit = 'cái'}) async {
     if (name.trim().isEmpty) return false;
 
     // Check for duplicates
@@ -63,6 +63,7 @@ class ShoppingListProvider with ChangeNotifier {
       final newItem = ShoppingListItem(
         id: _uuid.v4(),
         name: name.trim(),
+        unit: unit,
         sortOrder: _items.length,
         createdAt: DateTime.now(),
       );
@@ -74,7 +75,7 @@ class ShoppingListProvider with ChangeNotifier {
       );
 
       _items.add(newItem);
-      debugPrint('✅ Added item to shopping list: ${newItem.name}');
+      debugPrint('✅ Added item to shopping list: ${newItem.name} ($unit)');
       notifyListeners();
       return true;
     } catch (e) {
@@ -120,6 +121,54 @@ class ShoppingListProvider with ChangeNotifier {
 
       await batch.commit(noResult: true);
       debugPrint('✅ Added $addedCount items to shopping list');
+      notifyListeners();
+    } catch (e) {
+      _error = 'Failed to add items: $e';
+      debugPrint('❌ Error adding items: $e');
+    }
+
+    return addedCount;
+  }
+
+  /// Add multiple items with units to shopping list
+  Future<int> addItemsWithUnits(List<Map<String, String>> items) async {
+    int addedCount = 0;
+
+    try {
+      final db = await _databaseService.database;
+      final batch = db.batch();
+
+      for (final item in items) {
+        final name = item['name'] ?? '';
+        final unit = item['unit'] ?? 'cái';
+
+        if (name.trim().isEmpty) continue;
+
+        // Skip duplicates
+        if (_items.any((i) => i.name.toLowerCase() == name.trim().toLowerCase())) {
+          continue;
+        }
+
+        final newItem = ShoppingListItem(
+          id: _uuid.v4(),
+          name: name.trim(),
+          unit: unit,
+          sortOrder: _items.length + addedCount,
+          createdAt: DateTime.now(),
+        );
+
+        batch.insert(
+          AppConstants.tableShoppingList,
+          newItem.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+
+        _items.add(newItem);
+        addedCount++;
+      }
+
+      await batch.commit(noResult: true);
+      debugPrint('✅ Added $addedCount items with units to shopping list');
       notifyListeners();
     } catch (e) {
       _error = 'Failed to add items: $e';
@@ -289,6 +338,15 @@ class ShoppingListProvider with ChangeNotifier {
     if (index == -1) return false;
 
     final updatedItem = _items[index].copyWith(quantity: quantity);
+    return updateItem(updatedItem);
+  }
+
+  /// Update item unit
+  Future<bool> updateUnit(String id, String unit) async {
+    final index = _items.indexWhere((i) => i.id == id);
+    if (index == -1) return false;
+
+    final updatedItem = _items[index].copyWith(unit: unit);
     return updateItem(updatedItem);
   }
 
