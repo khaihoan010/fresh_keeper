@@ -7,11 +7,13 @@ import '../../../config/app_localizations.dart';
 class MultiSelectAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int selectedCount;
   final VoidCallback onExit;
+  final VoidCallback? onSelectAll;
 
   const MultiSelectAppBar({
     super.key,
     required this.selectedCount,
     required this.onExit,
+    this.onSelectAll,
   });
 
   @override
@@ -28,6 +30,15 @@ class MultiSelectAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(l10n.selectedCount(selectedCount)),
       automaticallyImplyLeading: false,
+      actions: onSelectAll != null
+          ? [
+              IconButton(
+                icon: const Icon(Icons.select_all),
+                onPressed: onSelectAll,
+                tooltip: l10n.selectAll,
+              ),
+            ]
+          : null,
     );
   }
 }

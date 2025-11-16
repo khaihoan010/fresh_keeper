@@ -8,7 +8,7 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fresh_keeper.db';
-  static const int databaseVersion = 9;
+  static const int databaseVersion = 10;
 
   // Table Names
   static const String tableUserProducts = 'user_products';

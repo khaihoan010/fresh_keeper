@@ -399,6 +399,29 @@ class DatabaseService {
 
       debugPrint('✅ v9 upgrade completed: Shopping list feature ready');
     }
+
+    if (oldVersion < 10) {
+      // Add quantity and is_purchased columns to shopping_list
+      debugPrint('🔄 Upgrading to v10: Adding quantity and is_purchased to shopping list...');
+
+      try {
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN quantity INTEGER NOT NULL DEFAULT 1
+        ''');
+        debugPrint('✅ Added quantity column');
+
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN is_purchased INTEGER NOT NULL DEFAULT 0
+        ''');
+        debugPrint('✅ Added is_purchased column');
+      } catch (e) {
+        debugPrint('⚠️ Error adding columns to shopping_list: $e');
+      }
+
+      debugPrint('✅ v10 upgrade completed: Shopping list with quantity and purchased state');
+    }
   }
 
   /// Load initial data
