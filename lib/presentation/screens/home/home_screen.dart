@@ -984,8 +984,9 @@ class _ProductCardState extends State<_ProductCard> {
   void _decreaseQuantity() async {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
-      if (_currentQuantity > step) {
-        _currentQuantity -= step;
+      if (_currentQuantity > 0) {
+        final newQty = _currentQuantity - step;
+        _currentQuantity = newQty < 0 ? 0 : newQty;
         // Round to avoid floating point precision issues
         _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
       }
@@ -1021,7 +1022,7 @@ class _ProductCardState extends State<_ProductCard> {
           ),
           onSubmitted: (value) {
             final qty = double.tryParse(value) ?? _currentQuantity;
-            if (qty > 0) {
+            if (qty >= 0) {
               setState(() {
                 _currentQuantity = qty;
               });
@@ -1038,7 +1039,7 @@ class _ProductCardState extends State<_ProductCard> {
           TextButton(
             onPressed: () {
               final qty = double.tryParse(controller.text) ?? _currentQuantity;
-              if (qty > 0) {
+              if (qty >= 0) {
                 setState(() {
                   _currentQuantity = qty;
                 });

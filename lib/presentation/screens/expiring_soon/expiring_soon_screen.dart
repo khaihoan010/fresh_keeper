@@ -822,8 +822,9 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
   void _decreaseQuantity() async {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
-      if (_currentQuantity > step) {
-        _currentQuantity -= step;
+      if (_currentQuantity > 0) {
+        final newQty = _currentQuantity - step;
+        _currentQuantity = newQty < 0 ? 0 : newQty;
         // Round to avoid floating point precision issues
         _currentQuantity = double.parse(_currentQuantity.toStringAsFixed(2));
       }
