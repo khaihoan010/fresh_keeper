@@ -160,46 +160,77 @@ class AdsService {
     }
 
     try {
-      // Load the ad first
-      bool isLoaded = false;
+      // Load the ad first using Completer to wait for callback
+      final loadCompleter = Completer<bool>();
 
       await UnityAds.load(
         placementId: _interstitialAdUnitId,
         onComplete: (placementId) {
           debugPrint('✅ Interstitial ad loaded: $placementId');
-          isLoaded = true;
+          if (!loadCompleter.isCompleted) {
+            loadCompleter.complete(true);
+          }
         },
         onFailed: (placementId, error, message) {
           debugPrint('❌ Interstitial ad failed to load: $error - $message');
+          if (!loadCompleter.isCompleted) {
+            loadCompleter.complete(false);
+          }
+        },
+      );
+
+      // Wait for ad to load with timeout
+      final isLoaded = await loadCompleter.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          debugPrint('⏱️ Interstitial ad load timeout');
+          return false;
         },
       );
 
       if (!isLoaded) {
+        debugPrint('⚠️ Interstitial ad not loaded, cannot show');
         return false;
       }
 
-      // Show the ad
-      bool wasShown = false;
+      // Show the ad using Completer to wait for result
+      final showCompleter = Completer<bool>();
 
       await UnityAds.showVideoAd(
         placementId: _interstitialAdUnitId,
         onComplete: (placementId) {
           debugPrint('✅ Interstitial ad completed: $placementId');
-          wasShown = true;
           _lastInterstitialShown = DateTime.now();
           _savePreferences();
+          if (!showCompleter.isCompleted) {
+            showCompleter.complete(true);
+          }
         },
         onFailed: (placementId, error, message) {
           debugPrint('❌ Interstitial ad failed to show: $error - $message');
+          if (!showCompleter.isCompleted) {
+            showCompleter.complete(false);
+          }
         },
         onStart: (placementId) {
           debugPrint('▶️ Interstitial ad started: $placementId');
         },
         onSkipped: (placementId) {
           debugPrint('⏭️ Interstitial ad skipped: $placementId');
-          wasShown = true; // Count as shown even if skipped
           _lastInterstitialShown = DateTime.now();
           _savePreferences();
+          if (!showCompleter.isCompleted) {
+            showCompleter.complete(true); // Count as shown even if skipped
+          }
+        },
+      );
+
+      // Wait for ad to finish with timeout
+      final wasShown = await showCompleter.future.timeout(
+        const Duration(seconds: 60),
+        onTimeout: () {
+          debugPrint('⏱️ Interstitial ad show timeout');
+          return false;
         },
       );
 
