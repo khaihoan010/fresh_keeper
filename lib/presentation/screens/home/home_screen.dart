@@ -998,6 +998,68 @@ class _ProductCardState extends State<_ProductCard> {
     await context.read<ProductProvider>().updateProduct(updatedProduct);
   }
 
+  Future<void> _updateProductUnit(String newUnit) async {
+    final updatedProduct = widget.product.copyWith(unit: newUnit);
+    await context.read<ProductProvider>().updateProduct(updatedProduct);
+  }
+
+  void _showQuantityEditDialog() {
+    final formattedQty = _currentQuantity == _currentQuantity.roundToDouble()
+        ? _currentQuantity.toInt().toString()
+        : _currentQuantity.toString();
+    final controller = TextEditingController(text: formattedQty);
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Số lượng'),
+        content: TextField(
+          controller: controller,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          autofocus: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+          onSubmitted: (value) {
+            final qty = double.tryParse(value) ?? _currentQuantity;
+            if (qty > 0) {
+              setState(() {
+                _currentQuantity = qty;
+              });
+              _updateProductQuantity();
+            }
+            Navigator.pop(dialogContext);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () {
+              final qty = double.tryParse(controller.text) ?? _currentQuantity;
+              if (qty > 0) {
+                setState(() {
+                  _currentQuantity = qty;
+                });
+                _updateProductQuantity();
+              }
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatQuantity(double qty) {
+    if (qty == qty.roundToDouble()) {
+      return qty.toInt().toString();
+    }
+    return qty.toStringAsFixed(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -1105,66 +1167,78 @@ class _ProductCardState extends State<_ProductCard> {
                 // Quantity Controls (hidden in multi-select mode)
                 if (!widget.isMultiSelectMode) ...[
                   const SizedBox(width: 8),
-                  Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
+                  Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // Decrease button
-                      InkWell(
-                        onTap: _decreaseQuantity,
-                        borderRadius: BorderRadius.circular(12),
+                      IconButton(
+                        onPressed: _decreaseQuantity,
+                        icon: Icon(
+                          Icons.remove_circle_outline,
+                          color: AppTheme.primaryColor,
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        iconSize: 24,
+                      ),
+
+                      const SizedBox(width: 4),
+
+                      // Quantity display (tappable)
+                      GestureDetector(
+                        onTap: _showQuantityEditDialog,
                         child: Container(
-                          width: 20,
-                          height: 20,
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppTheme.primaryColor,
-                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey[300]!),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(
-                            Icons.remove,
-                            size: 12,
-                            color: Colors.white,
+                          child: Text(
+                            _formatQuantity(_currentQuantity),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
 
-                      const SizedBox(width: 6),
-
-                      // Quantity display
-                      Text(
-                        '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 4),
 
                       // Increase button
-                      InkWell(
-                        onTap: _increaseQuantity,
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color: AppTheme.primaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            size: 12,
-                            color: Colors.white,
-                          ),
+                      IconButton(
+                        onPressed: _increaseQuantity,
+                        icon: Icon(
+                          Icons.add_circle_outline,
+                          color: AppTheme.primaryColor,
                         ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        iconSize: 24,
+                      ),
+
+                      const SizedBox(width: 4),
+
+                      // Unit dropdown
+                      DropdownButton<String>(
+                        value: widget.product.unit,
+                        underline: const SizedBox(),
+                        isDense: true,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.black,
+                        ),
+                        items: AppConstants.units.map((unit) {
+                          return DropdownMenuItem(
+                            value: unit,
+                            child: Text(unit),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            _updateProductUnit(value);
+                          }
+                        },
                       ),
                     ],
-                  ),
                   ),
                 ],
               ],

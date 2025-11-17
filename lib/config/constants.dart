@@ -155,7 +155,6 @@ class AppConstants {
       case 'lít':
         return 0.1;
       case 'g':
-        return 5.0;
       case 'ml':
         return 10.0;
       default:
