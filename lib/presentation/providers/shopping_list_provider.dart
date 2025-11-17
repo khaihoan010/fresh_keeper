@@ -142,6 +142,7 @@ class ShoppingListProvider with ChangeNotifier {
       for (final item in items) {
         final name = item['name'] ?? '';
         final unit = item['unit'] ?? 'cái';
+        final category = item['category'] ?? 'other';
 
         if (name.trim().isEmpty) continue;
 
@@ -154,6 +155,7 @@ class ShoppingListProvider with ChangeNotifier {
           id: _uuid.v4(),
           name: name.trim(),
           unit: unit,
+          category: category,
           sortOrder: _items.length + addedCount,
           createdAt: DateTime.now(),
         );
@@ -334,7 +336,7 @@ class ShoppingListProvider with ChangeNotifier {
   }
 
   /// Update item quantity
-  Future<bool> updateQuantity(String id, int quantity) async {
+  Future<bool> updateQuantity(String id, double quantity) async {
     final index = _items.indexWhere((i) => i.id == id);
     if (index == -1) return false;
 

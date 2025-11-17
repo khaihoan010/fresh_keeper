@@ -224,6 +224,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
       final items = selectedProducts.map((p) => {
         'name': p.name,
         'unit': p.unit,
+        'category': p.category,
       }).toList();
       final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
@@ -325,6 +326,7 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
       final items = zeroQuantityProducts.map((p) => {
         'name': p.name,
         'unit': p.unit,
+        'category': p.category,
       }).toList();
       final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 

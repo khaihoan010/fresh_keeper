@@ -3,7 +3,7 @@
 class ShoppingListItem {
   final String id;
   final String name;
-  final int quantity;
+  final double quantity;
   final String unit;
   final String category;
   final bool isPurchased;
@@ -13,7 +13,7 @@ class ShoppingListItem {
   ShoppingListItem({
     required this.id,
     required this.name,
-    this.quantity = 1,
+    this.quantity = 1.0,
     this.unit = 'cái',
     this.category = 'other',
     this.isPurchased = false,
@@ -26,7 +26,7 @@ class ShoppingListItem {
     return ShoppingListItem(
       id: map['id'] as String,
       name: map['name'] as String,
-      quantity: (map['quantity'] as int?) ?? 1,
+      quantity: (map['quantity'] as num?)?.toDouble() ?? 1.0,
       unit: (map['unit'] as String?) ?? 'cái',
       category: (map['category'] as String?) ?? 'other',
       isPurchased: (map['is_purchased'] as int?) == 1,
@@ -53,7 +53,7 @@ class ShoppingListItem {
   ShoppingListItem copyWith({
     String? id,
     String? name,
-    int? quantity,
+    double? quantity,
     String? unit,
     String? category,
     bool? isPurchased,
