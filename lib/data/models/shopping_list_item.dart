@@ -5,6 +5,7 @@ class ShoppingListItem {
   final String name;
   final int quantity;
   final String unit;
+  final String category;
   final bool isPurchased;
   final int sortOrder;
   final DateTime createdAt;
@@ -14,6 +15,7 @@ class ShoppingListItem {
     required this.name,
     this.quantity = 1,
     this.unit = 'cái',
+    this.category = 'other',
     this.isPurchased = false,
     required this.sortOrder,
     required this.createdAt,
@@ -26,6 +28,7 @@ class ShoppingListItem {
       name: map['name'] as String,
       quantity: (map['quantity'] as int?) ?? 1,
       unit: (map['unit'] as String?) ?? 'cái',
+      category: (map['category'] as String?) ?? 'other',
       isPurchased: (map['is_purchased'] as int?) == 1,
       sortOrder: map['sort_order'] as int,
       createdAt: DateTime.parse(map['created_at'] as String),
@@ -39,6 +42,7 @@ class ShoppingListItem {
       'name': name,
       'quantity': quantity,
       'unit': unit,
+      'category': category,
       'is_purchased': isPurchased ? 1 : 0,
       'sort_order': sortOrder,
       'created_at': createdAt.toIso8601String(),
@@ -51,6 +55,7 @@ class ShoppingListItem {
     String? name,
     int? quantity,
     String? unit,
+    String? category,
     bool? isPurchased,
     int? sortOrder,
     DateTime? createdAt,
@@ -60,6 +65,7 @@ class ShoppingListItem {
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
       unit: unit ?? this.unit,
+      category: category ?? this.category,
       isPurchased: isPurchased ?? this.isPurchased,
       sortOrder: sortOrder ?? this.sortOrder,
       createdAt: createdAt ?? this.createdAt,
@@ -68,7 +74,7 @@ class ShoppingListItem {
 
   @override
   String toString() {
-    return 'ShoppingListItem(id: $id, name: $name, quantity: $quantity, unit: $unit, isPurchased: $isPurchased, sortOrder: $sortOrder)';
+    return 'ShoppingListItem(id: $id, name: $name, quantity: $quantity, unit: $unit, category: $category, isPurchased: $isPurchased, sortOrder: $sortOrder)';
   }
 
   @override
@@ -80,6 +86,7 @@ class ShoppingListItem {
         other.name == name &&
         other.quantity == quantity &&
         other.unit == unit &&
+        other.category == category &&
         other.isPurchased == isPurchased &&
         other.sortOrder == sortOrder &&
         other.createdAt == createdAt;
@@ -91,6 +98,7 @@ class ShoppingListItem {
         name.hashCode ^
         quantity.hashCode ^
         unit.hashCode ^
+        category.hashCode ^
         isPurchased.hashCode ^
         sortOrder.hashCode ^
         createdAt.hashCode;
