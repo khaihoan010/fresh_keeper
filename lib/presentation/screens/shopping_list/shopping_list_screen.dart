@@ -494,7 +494,7 @@ class _ShoppingListItemTile extends StatelessWidget {
   final VoidCallback onLongPress;
   final VoidCallback onTap;
   final VoidCallback onTogglePurchased;
-  final Function(int) onQuantityChanged;
+  final Function(double) onQuantityChanged;
   final Function(String) onUnitChanged;
 
   const _ShoppingListItemTile({
@@ -512,20 +512,23 @@ class _ShoppingListItemTile extends StatelessWidget {
   });
 
   void _showQuantityEditDialog(BuildContext context) {
-    final controller = TextEditingController(text: '${item.quantity}');
+    final formattedQty = item.quantity == item.quantity.roundToDouble()
+        ? item.quantity.toInt().toString()
+        : item.quantity.toString();
+    final controller = TextEditingController(text: formattedQty);
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Số lượng'),
         content: TextField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           autofocus: true,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
           ),
           onSubmitted: (value) {
-            final qty = int.tryParse(value) ?? item.quantity;
+            final qty = double.tryParse(value) ?? item.quantity;
             if (qty >= 0) {
               onQuantityChanged(qty);
             }
@@ -539,7 +542,7 @@ class _ShoppingListItemTile extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              final qty = int.tryParse(controller.text) ?? item.quantity;
+              final qty = double.tryParse(controller.text) ?? item.quantity;
               if (qty >= 0) {
                 onQuantityChanged(qty);
               }
@@ -552,9 +555,16 @@ class _ShoppingListItemTile extends StatelessWidget {
     );
   }
 
+  String _formatQuantity(double qty) {
+    if (qty == qty.roundToDouble()) {
+      return qty.toInt().toString();
+    }
+    return qty.toStringAsFixed(1);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final step = AppConstants.getQuantityStepInt(item.unit);
+    final step = AppConstants.getQuantityStep(item.unit);
 
     return Dismissible(
       key: ValueKey(item.id),
@@ -598,10 +608,31 @@ class _ShoppingListItemTile extends StatelessWidget {
                     value: isSelected,
                     onChanged: (_) => onTap(),
                   ),
+                // Item name
+                Expanded(
+                  child: Text(
+                    item.name,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.onPrimaryContainer
+                              : null,
+                          decoration: item.isPurchased
+                              ? TextDecoration.lineThrough
+                              : null,
+                          decorationThickness: 2,
+                        ),
+                  ),
+                ),
                 // Quantity controls
                 if (!isMultiSelectMode) ...[
+                  const SizedBox(width: 8),
                   IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
+                    icon: Icon(
+                      Icons.remove_circle_outline,
+                      color: item.quantity >= step
+                          ? AppTheme.primaryColor
+                          : Colors.grey[400],
+                    ),
                     onPressed: item.quantity >= step
                         ? () => onQuantityChanged(item.quantity - step)
                         : null,
@@ -612,13 +643,13 @@ class _ShoppingListItemTile extends StatelessWidget {
                   GestureDetector(
                     onTap: () => _showQuantityEditDialog(context),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey[300]!),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        '${item.quantity}',
+                        _formatQuantity(item.quantity),
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -626,7 +657,10 @@ class _ShoppingListItemTile extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.add_circle_outline),
+                    icon: Icon(
+                      Icons.add_circle_outline,
+                      color: AppTheme.primaryColor,
+                    ),
                     onPressed: () => onQuantityChanged(item.quantity + step),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -653,23 +687,7 @@ class _ShoppingListItemTile extends StatelessWidget {
                       }
                     },
                   ),
-                  const SizedBox(width: 8),
                 ],
-                // Item name
-                Expanded(
-                  child: Text(
-                    item.name,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.onPrimaryContainer
-                              : null,
-                          decoration: item.isPurchased
-                              ? TextDecoration.lineThrough
-                              : null,
-                          decorationThickness: 2,
-                        ),
-                  ),
-                ),
                 // Drag handle
                 if (!isMultiSelectMode)
                   ReorderableDragStartListener(

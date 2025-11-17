@@ -440,6 +440,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
       final items = selectedProducts.map((p) => {
         'name': p.name,
         'unit': p.unit,
+        'category': p.category,
       }).toList();
       final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
@@ -546,6 +547,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
       final items = zeroQuantityProducts.map((p) => {
         'name': p.name,
         'unit': p.unit,
+        'category': p.category,
       }).toList();
       final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
@@ -589,6 +591,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
       final items = selectedProducts.map((p) => {
         'name': p.name,
         'unit': p.unit,
+        'category': p.category,
       }).toList();
       final addedCount = await shoppingListProvider.addItemsWithUnits(items);
 
