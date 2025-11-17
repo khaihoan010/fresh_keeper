@@ -385,8 +385,8 @@ class ProductRepository {
       return 'Tên sản phẩm không được để trống.';
     }
 
-    if (product.quantity <= 0) {
-      return 'Số lượng phải lớn hơn 0.';
+    if (product.quantity < 0) {
+      return 'Số lượng không được âm.';
     }
 
     if (product.expiryDate.isBefore(product.purchaseDate)) {
