@@ -629,12 +629,15 @@ class _ShoppingListItemTile extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       Icons.remove_circle_outline,
-                      color: item.quantity >= step
+                      color: item.quantity > 0
                           ? AppTheme.primaryColor
                           : Colors.grey[400],
                     ),
-                    onPressed: item.quantity >= step
-                        ? () => onQuantityChanged(item.quantity - step)
+                    onPressed: item.quantity > 0
+                        ? () {
+                            final newQty = item.quantity - step;
+                            onQuantityChanged(newQty < 0 ? 0 : newQty);
+                          }
                         : null,
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
