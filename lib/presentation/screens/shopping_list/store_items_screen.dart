@@ -27,11 +27,12 @@ class _StoreItemsScreenState extends State<StoreItemsScreen> {
   void initState() {
     super.initState();
     // Initialize config for each item with default values
+    // Use category from shopping list item to preserve user's selection
     _itemConfigs = widget.items
         .map((item) => StoreItemConfig(
               item: item,
               location: 'fridge',
-              category: 'other',
+              category: item.category,
               expiryDate: DateTime.now().add(const Duration(days: 7)),
             ))
         .toList();

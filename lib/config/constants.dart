@@ -163,6 +163,30 @@ class AppConstants {
     }
   }
 
+  /// Get integer quantity step for a specific unit (for int-based quantities)
+  static int getQuantityStepInt(String unit) {
+    switch (unit.toLowerCase()) {
+      case 'cái':
+      case 'quả':
+      case 'bó':
+      case 'hộp':
+      case 'lon':
+      case 'túi':
+      case 'chai':
+      case 'gói':
+      case 'pcs':
+      case 'kg':
+      case 'lít':
+        return 1;
+      case 'g':
+        return 50;
+      case 'ml':
+        return 100;
+      default:
+        return 1;
+    }
+  }
+
   // Date Formats
   static const String dateFormat = 'dd/MM/yyyy';
   static const String dateTimeFormat = 'dd/MM/yyyy HH:mm';
