@@ -196,6 +196,10 @@ class DatabaseService {
       CREATE TABLE ${AppConstants.tableShoppingList} (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
+        quantity INTEGER NOT NULL DEFAULT 1,
+        unit TEXT NOT NULL DEFAULT 'cái',
+        category TEXT NOT NULL DEFAULT 'other',
+        is_purchased INTEGER NOT NULL DEFAULT 0,
         sort_order INTEGER NOT NULL DEFAULT 0,
         created_at TEXT NOT NULL
       )
@@ -438,6 +442,23 @@ class DatabaseService {
       }
 
       debugPrint('✅ v11 upgrade completed: Shopping list with unit support');
+    }
+
+    if (oldVersion < 12) {
+      // Add category column to shopping_list
+      debugPrint('🔄 Upgrading to v12: Adding category to shopping list...');
+
+      try {
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN category TEXT NOT NULL DEFAULT 'other'
+        ''');
+        debugPrint('✅ Added category column to shopping_list');
+      } catch (e) {
+        debugPrint('⚠️ Error adding category column to shopping_list: $e');
+      }
+
+      debugPrint('✅ v12 upgrade completed: Shopping list with category support');
     }
   }
 

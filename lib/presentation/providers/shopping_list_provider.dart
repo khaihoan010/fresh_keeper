@@ -48,7 +48,7 @@ class ShoppingListProvider with ChangeNotifier {
   }
 
   /// Add a new item to shopping list
-  Future<bool> addItem(String name, {String unit = 'cái'}) async {
+  Future<bool> addItem(String name, {String unit = 'cái', String category = 'other'}) async {
     if (name.trim().isEmpty) return false;
 
     // Check for duplicates
@@ -64,6 +64,7 @@ class ShoppingListProvider with ChangeNotifier {
         id: _uuid.v4(),
         name: name.trim(),
         unit: unit,
+        category: category,
         sortOrder: _items.length,
         createdAt: DateTime.now(),
       );
@@ -75,7 +76,7 @@ class ShoppingListProvider with ChangeNotifier {
       );
 
       _items.add(newItem);
-      debugPrint('✅ Added item to shopping list: ${newItem.name} ($unit)');
+      debugPrint('✅ Added item to shopping list: ${newItem.name} ($unit, $category)');
       notifyListeners();
       return true;
     } catch (e) {
@@ -347,6 +348,15 @@ class ShoppingListProvider with ChangeNotifier {
     if (index == -1) return false;
 
     final updatedItem = _items[index].copyWith(unit: unit);
+    return updateItem(updatedItem);
+  }
+
+  /// Update item category
+  Future<bool> updateCategory(String id, String category) async {
+    final index = _items.indexWhere((i) => i.id == id);
+    if (index == -1) return false;
+
+    final updatedItem = _items[index].copyWith(category: category);
     return updateItem(updatedItem);
   }
 

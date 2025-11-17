@@ -59,50 +59,78 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     final l10n = AppLocalizations.of(context);
     _textController.clear();
     String selectedUnit = 'cái';
+    String selectedCategory = 'other';
 
     showDialog(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
           title: Text(l10n.addItem),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: _textController,
-                autofocus: true,
-                decoration: InputDecoration(
-                  hintText: l10n.enterItemName,
-                  border: const OutlineInputBorder(),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _textController,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    hintText: l10n.enterItemName,
+                    border: const OutlineInputBorder(),
+                  ),
+                  textCapitalization: TextCapitalization.words,
+                  onSubmitted: (value) {
+                    if (value.trim().isNotEmpty) {
+                      _addItem(value.trim(), selectedUnit, selectedCategory);
+                      Navigator.pop(dialogContext);
+                    }
+                  },
                 ),
-                textCapitalization: TextCapitalization.words,
-                onSubmitted: (value) {
-                  if (value.trim().isNotEmpty) {
-                    _addItem(value.trim(), selectedUnit);
-                    Navigator.pop(dialogContext);
-                  }
-                },
-              ),
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                value: selectedUnit,
-                decoration: InputDecoration(
-                  labelText: l10n.unit,
-                  border: const OutlineInputBorder(),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedCategory,
+                  decoration: InputDecoration(
+                    labelText: l10n.category,
+                    border: const OutlineInputBorder(),
+                  ),
+                  items: AppConstants.categories.map((cat) {
+                    return DropdownMenuItem(
+                      value: cat['id'],
+                      child: Row(
+                        children: [
+                          Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
+                          const SizedBox(width: 8),
+                          Text(l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      setDialogState(() => selectedCategory = value);
+                    }
+                  },
                 ),
-                items: AppConstants.units.map((unit) {
-                  return DropdownMenuItem(
-                    value: unit,
-                    child: Text(unit),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  if (value != null) {
-                    setDialogState(() => selectedUnit = value);
-                  }
-                },
-              ),
-            ],
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedUnit,
+                  decoration: InputDecoration(
+                    labelText: l10n.unit,
+                    border: const OutlineInputBorder(),
+                  ),
+                  items: AppConstants.units.map((unit) {
+                    return DropdownMenuItem(
+                      value: unit,
+                      child: Text(unit),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      setDialogState(() => selectedUnit = value);
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -112,7 +140,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
             TextButton(
               onPressed: () {
                 if (_textController.text.trim().isNotEmpty) {
-                  _addItem(_textController.text.trim(), selectedUnit);
+                  _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
                   Navigator.pop(dialogContext);
                 }
               },
@@ -124,11 +152,11 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     );
   }
 
-  Future<void> _addItem(String name, String unit) async {
+  Future<void> _addItem(String name, String unit, String category) async {
     final provider = context.read<ShoppingListProvider>();
     final l10n = AppLocalizations.of(context);
 
-    final success = await provider.addItem(name, unit: unit);
+    final success = await provider.addItem(name, unit: unit, category: category);
 
     if (mounted) {
       if (success) {
@@ -483,8 +511,51 @@ class _ShoppingListItemTile extends StatelessWidget {
     required this.onUnitChanged,
   });
 
+  void _showQuantityEditDialog(BuildContext context) {
+    final controller = TextEditingController(text: '${item.quantity}');
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Số lượng'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+          onSubmitted: (value) {
+            final qty = int.tryParse(value) ?? item.quantity;
+            if (qty >= 0) {
+              onQuantityChanged(qty);
+            }
+            Navigator.pop(dialogContext);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () {
+              final qty = int.tryParse(controller.text) ?? item.quantity;
+              if (qty >= 0) {
+                onQuantityChanged(qty);
+              }
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final step = AppConstants.getQuantityStepInt(item.unit);
+
     return Dismissible(
       key: ValueKey(item.id),
       background: Container(
@@ -513,6 +584,14 @@ class _ShoppingListItemTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             child: Row(
               children: [
+                // Category icon
+                if (!isMultiSelectMode) ...[
+                  Text(
+                    AppConstants.categoryIcons[item.category] ?? '📦',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 // Checkbox for multi-select mode
                 if (isMultiSelectMode)
                   Checkbox(
@@ -523,25 +602,32 @@ class _ShoppingListItemTile extends StatelessWidget {
                 if (!isMultiSelectMode) ...[
                   IconButton(
                     icon: const Icon(Icons.remove_circle_outline),
-                    onPressed: item.quantity > 0
-                        ? () => onQuantityChanged(item.quantity - 1)
+                    onPressed: item.quantity >= step
+                        ? () => onQuantityChanged(item.quantity - step)
                         : null,
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     iconSize: 24,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '${item.quantity}',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                  GestureDetector(
+                    onTap: () => _showQuantityEditDialog(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey[300]!),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${item.quantity}',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
                   ),
                   IconButton(
                     icon: const Icon(Icons.add_circle_outline),
-                    onPressed: () => onQuantityChanged(item.quantity + 1),
+                    onPressed: () => onQuantityChanged(item.quantity + step),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     iconSize: 24,

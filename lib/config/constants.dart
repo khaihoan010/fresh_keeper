@@ -8,7 +8,7 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fresh_keeper.db';
-  static const int databaseVersion = 11;
+  static const int databaseVersion = 12;
 
   // Table Names
   static const String tableUserProducts = 'user_products';
@@ -160,6 +160,30 @@ class AppConstants {
         return 10.0;
       default:
         return 1.0;
+    }
+  }
+
+  /// Get integer quantity step for a specific unit (for int-based quantities)
+  static int getQuantityStepInt(String unit) {
+    switch (unit.toLowerCase()) {
+      case 'cái':
+      case 'quả':
+      case 'bó':
+      case 'hộp':
+      case 'lon':
+      case 'túi':
+      case 'chai':
+      case 'gói':
+      case 'pcs':
+      case 'kg':
+      case 'lít':
+        return 1;
+      case 'g':
+        return 50;
+      case 'ml':
+        return 100;
+      default:
+        return 1;
     }
   }
 
