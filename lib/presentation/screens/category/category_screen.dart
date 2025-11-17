@@ -82,10 +82,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          titlePadding: const EdgeInsets.fromLTRB(24, 16, 8, 0),
+          title: Stack(
             children: [
-              Expanded(
+              Padding(
+                padding: const EdgeInsets.only(top: 8, right: 32),
                 child: Text(
                   l10n.createCustomTemplate,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -93,11 +94,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Navigator.pop(dialogContext),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(dialogContext),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  iconSize: 22,
+                ),
               ),
             ],
           ),
@@ -473,9 +479,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: l10n.searchProducts,
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: Icon(Icons.search, color: AppTheme.primaryColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(color: AppTheme.primaryColor, width: 1.5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(color: AppTheme.primaryColor, width: 2),
                 ),
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
@@ -603,7 +618,7 @@ class _TemplateGridTile extends StatelessWidget {
                       l10n.isVietnamese ? template.nameVi : template.nameEn,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             fontWeight: FontWeight.w600,
-                            fontSize: 11,
+                            fontSize: 13,
                             height: 1.1,
                           ),
                       textAlign: TextAlign.center,
@@ -618,7 +633,7 @@ class _TemplateGridTile extends StatelessWidget {
                           : AppConstants.categoryNamesEn[template.category] ?? template.category,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppTheme.primaryColor,
-                            fontSize: 9,
+                            fontSize: 11,
                             fontWeight: FontWeight.w500,
                           ),
                       textAlign: TextAlign.center,
