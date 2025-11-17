@@ -576,14 +576,17 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                 return RefreshIndicator(
                   onRefresh: _handleRefresh,
                   child: ListView(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.only(top: 16, bottom: 80),
                     children: [
                       // Expired
                       if (grouped['expired']!.isNotEmpty) ...[
-                        _buildSectionHeader(
-                          l10n.expiredItems,
-                          grouped['expired']!.length,
-                          AppTheme.errorColor,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: _buildSectionHeader(
+                            l10n.expiredItems,
+                            grouped['expired']!.length,
+                            AppTheme.errorColor,
+                          ),
                         ),
                         ...grouped['expired']!.map((product) => _buildProductCard(
                               context,
@@ -595,10 +598,13 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
                       // Today
                       if (grouped['today']!.isNotEmpty) ...[
-                        _buildSectionHeader(
-                          l10n.expiringToday2,
-                          grouped['today']!.length,
-                          AppTheme.errorColor,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: _buildSectionHeader(
+                            l10n.expiringToday2,
+                            grouped['today']!.length,
+                            AppTheme.errorColor,
+                          ),
                         ),
                         ...grouped['today']!.map((product) => _buildProductCard(
                               context,
@@ -610,10 +616,13 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
                       // Urgent (1-2 days)
                       if (grouped['urgent']!.isNotEmpty) ...[
-                        _buildSectionHeader(
-                          l10n.urgentDays,
-                          grouped['urgent']!.length,
-                          AppTheme.errorColor,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: _buildSectionHeader(
+                            l10n.urgentDays,
+                            grouped['urgent']!.length,
+                            AppTheme.errorColor,
+                          ),
                         ),
                         ...grouped['urgent']!.map((product) => _buildProductCard(
                               context,
@@ -625,10 +634,13 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
                       // Soon (3-7 days)
                       if (grouped['soon']!.isNotEmpty) ...[
-                        _buildSectionHeader(
-                          l10n.useSoonDays,
-                          grouped['soon']!.length,
-                          AppTheme.warningColor,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: _buildSectionHeader(
+                            l10n.useSoonDays,
+                            grouped['soon']!.length,
+                            AppTheme.warningColor,
+                          ),
                         ),
                         ...grouped['soon']!.map((product) => _buildProductCard(
                               context,
