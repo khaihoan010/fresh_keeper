@@ -282,32 +282,14 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
     }
   }
 
-  Future<void> _handleQuickAdd() async {
+  Future<void> _deleteProduct(UserProduct product) async {
     final l10n = AppLocalizations.of(context);
-    final productProvider = context.read<ProductProvider>();
-    final shoppingListProvider = context.read<ShoppingListProvider>();
 
-    // Find all products with quantity = 0
-    final zeroQuantityProducts = productProvider.products
-        .where((p) => p.quantity == 0)
-        .toList();
-
-    if (zeroQuantityProducts.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.noZeroQuantityProducts),
-          backgroundColor: AppTheme.warningColor,
-        ),
-      );
-      return;
-    }
-
-    // Show confirmation dialog
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.quickAdd),
-        content: Text(l10n.confirmQuickAdd(zeroQuantityProducts.length)),
+        title: Text(l10n.confirmDelete),
+        content: Text(l10n.confirmDeleteProduct(product.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -315,29 +297,44 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text(l10n.add),
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+            ),
+            child: Text(l10n.delete),
           ),
         ],
       ),
     );
 
     if (confirmed == true && mounted) {
-      // Add product names with units to shopping list
-      final items = zeroQuantityProducts.map((p) => {
-        'name': p.name,
-        'unit': p.unit,
-        'category': p.category,
-      }).toList();
-      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
+      final provider = context.read<ProductProvider>();
+      final success = await provider.deleteProduct(product.id);
 
-      if (mounted) {
+      if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            content: Text(l10n.productDeleted(product.name)),
             backgroundColor: AppTheme.successColor,
           ),
         );
+        await provider.loadExpiringSoon();
       }
+    }
+  }
+
+  Future<void> _markAsUsed(UserProduct product) async {
+    final l10n = AppLocalizations.of(context);
+    final provider = context.read<ProductProvider>();
+    final success = await provider.markAsUsed(product.id);
+
+    if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.productMarkedAsUsed(product.name)),
+          backgroundColor: AppTheme.successColor,
+        ),
+      );
+      await provider.loadExpiringSoon();
     }
   }
 
@@ -469,12 +466,6 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
                 ),
               ]
             : [
-                // Quick add button (lightning icon)
-                IconButton(
-                  icon: const Icon(Icons.flash_on),
-                  onPressed: _handleQuickAdd,
-                  tooltip: l10n.quickAdd,
-                ),
                 IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
@@ -714,6 +705,19 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
       product: product,
       accentColor: accentColor,
       onRefresh: _handleRefresh,
+      onEdit: () {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.editProduct,
+          arguments: product,
+        ).then((edited) {
+          if (edited == true) {
+            _handleRefresh();
+          }
+        });
+      },
+      onDelete: () => _deleteProduct(product),
+      onMarkUsed: () => _markAsUsed(product),
       isMultiSelectMode: multiSelectProvider.isMultiSelectMode,
       isSelected: multiSelectProvider.isSelected(product.id),
       onLongPress: () {
@@ -767,6 +771,9 @@ class _ExpiringSoonProductCard extends StatefulWidget {
   final UserProduct product;
   final Color accentColor;
   final VoidCallback onRefresh;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final VoidCallback onMarkUsed;
   final bool isMultiSelectMode;
   final bool isSelected;
   final VoidCallback onLongPress;
@@ -776,6 +783,9 @@ class _ExpiringSoonProductCard extends StatefulWidget {
     required this.product,
     required this.accentColor,
     required this.onRefresh,
+    required this.onEdit,
+    required this.onDelete,
+    required this.onMarkUsed,
     required this.isMultiSelectMode,
     required this.isSelected,
     required this.onLongPress,
@@ -837,6 +847,68 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
     await context.read<ProductProvider>().updateProduct(updatedProduct);
   }
 
+  Future<void> _updateProductUnit(String newUnit) async {
+    final updatedProduct = widget.product.copyWith(unit: newUnit);
+    await context.read<ProductProvider>().updateProduct(updatedProduct);
+  }
+
+  void _showQuantityEditDialog() {
+    final formattedQty = _currentQuantity == _currentQuantity.roundToDouble()
+        ? _currentQuantity.toInt().toString()
+        : _currentQuantity.toString();
+    final controller = TextEditingController(text: formattedQty);
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Số lượng'),
+        content: TextField(
+          controller: controller,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          autofocus: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+          onSubmitted: (value) {
+            final qty = double.tryParse(value) ?? _currentQuantity;
+            if (qty >= 0) {
+              setState(() {
+                _currentQuantity = qty;
+              });
+              _updateProductQuantity();
+            }
+            Navigator.pop(dialogContext);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () {
+              final qty = double.tryParse(controller.text) ?? _currentQuantity;
+              if (qty >= 0) {
+                setState(() {
+                  _currentQuantity = qty;
+                });
+                _updateProductQuantity();
+              }
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatQuantity(double qty) {
+    if (qty == qty.roundToDouble()) {
+      return qty.toInt().toString();
+    }
+    return qty.toStringAsFixed(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -844,145 +916,182 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
         ? l10n.daysOverdue(-widget.product.daysUntilExpiry)
         : l10n.daysRemaining(widget.product.daysUntilExpiry);
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: InkWell(
-        onTap: () {
-          if (widget.isMultiSelectMode) {
-            widget.onSelectToggle();
-          } else {
-            // Create updated product with current quantity before navigating
-            final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
-            Navigator.pushNamed(
-              context,
-              AppRoutes.productDetail,
-              arguments: updatedProduct,
-            ).then((_) {
-              // Reload data when returning from details
-              widget.onRefresh();
-            });
-          }
-        },
-        onLongPress: widget.isMultiSelectMode ? null : widget.onLongPress,
-        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              // Checkbox for multi-select mode
-              if (widget.isMultiSelectMode)
-                Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: Icon(
-                    widget.isSelected
-                        ? Icons.check_circle
-                        : Icons.circle_outlined,
-                    color: widget.isSelected
-                        ? AppTheme.primaryColor
-                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
-                    size: 24,
+    return Dismissible(
+      key: Key(widget.product.id),
+      direction: widget.isMultiSelectMode ? DismissDirection.none : DismissDirection.horizontal,
+      background: Container(
+        color: AppTheme.primaryColor,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 20),
+        child: const Icon(Icons.check, color: Colors.white, size: 32),
+      ),
+      secondaryBackground: Container(
+        color: AppTheme.errorColor,
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 20),
+        child: const Icon(Icons.delete, color: Colors.white, size: 32),
+      ),
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.startToEnd) {
+          widget.onMarkUsed();
+          return false;
+        } else {
+          widget.onDelete();
+          return false;
+        }
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: InkWell(
+          onTap: () {
+            if (widget.isMultiSelectMode) {
+              widget.onSelectToggle();
+            } else {
+              // Create updated product with current quantity before navigating
+              final updatedProduct = widget.product.copyWith(quantity: _currentQuantity);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.productDetail,
+                arguments: updatedProduct,
+              ).then((_) {
+                // Reload data when returning from details
+                widget.onRefresh();
+              });
+            }
+          },
+          onLongPress: widget.isMultiSelectMode ? null : widget.onLongPress,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                // Checkbox for multi-select mode
+                if (widget.isMultiSelectMode)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Icon(
+                      widget.isSelected
+                          ? Icons.check_circle
+                          : Icons.circle_outlined,
+                      color: widget.isSelected
+                          ? AppTheme.primaryColor
+                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                      size: 24,
+                    ),
+                  ),
+
+                // Icon
+                Text(
+                  AppConstants.categoryIcons[widget.product.category] ?? '📦',
+                  style: const TextStyle(fontSize: 36),
+                ),
+
+                const SizedBox(width: 12),
+
+                // Info (Name + Days)
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.product.name,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        daysText,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: widget.accentColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
-              // Icon
-              Text(
-                AppConstants.categoryIcons[widget.product.category] ?? '📦',
-                style: const TextStyle(fontSize: 36),
-              ),
-
-              const SizedBox(width: 12),
-
-              // Info (Name + Days)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.product.name,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      daysText,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: widget.accentColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Quantity Controls (hidden in multi-select mode)
-              if (!widget.isMultiSelectMode) ...[
-                const SizedBox(width: 8),
-                Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Decrease button
-                    InkWell(
-                      onTap: _decreaseQuantity,
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
+                // Quantity Controls (hidden in multi-select mode)
+                if (!widget.isMultiSelectMode) ...[
+                  const SizedBox(width: 8),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Decrease button
+                      IconButton(
+                        onPressed: _decreaseQuantity,
+                        icon: Icon(
+                          Icons.remove_circle_outline,
                           color: AppTheme.primaryColor,
-                          shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          Icons.remove,
-                          size: 12,
-                          color: Colors.white,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        iconSize: 24,
+                      ),
+
+                      const SizedBox(width: 4),
+
+                      // Quantity display (tappable)
+                      GestureDetector(
+                        onTap: _showQuantityEditDialog,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey[300]!),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            _formatQuantity(_currentQuantity),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
 
-                    const SizedBox(width: 6),
+                      const SizedBox(width: 4),
 
-                    // Quantity display
-                    Text(
-                      '${_currentQuantity % 1 == 0 ? _currentQuantity.toInt() : _currentQuantity.toStringAsFixed(1)} ${widget.product.unit}',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    const SizedBox(width: 6),
-
-                    // Increase button
-                    InkWell(
-                      onTap: _increaseQuantity,
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
+                      // Increase button
+                      IconButton(
+                        onPressed: _increaseQuantity,
+                        icon: Icon(
+                          Icons.add_circle_outline,
                           color: AppTheme.primaryColor,
-                          shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          Icons.add,
-                          size: 12,
-                          color: Colors.white,
-                        ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        iconSize: 24,
                       ),
-                    ),
-                  ],
-                ),
-                ),
+
+                      const SizedBox(width: 4),
+
+                      // Unit dropdown
+                      DropdownButton<String>(
+                        value: widget.product.unit,
+                        underline: const SizedBox(),
+                        isDense: true,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.black,
+                        ),
+                        items: AppConstants.units.map((unit) {
+                          return DropdownMenuItem(
+                            value: unit,
+                            child: Text(unit),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            _updateProductUnit(value);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

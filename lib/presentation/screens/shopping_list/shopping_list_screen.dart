@@ -13,6 +13,7 @@ import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/multi_select/multi_select_app_bar.dart';
 import '../../widgets/shopping_list/shopping_list_bottom_bar.dart';
 import 'store_items_screen.dart';
+import '../../../config/routes.dart';
 
 /// Shopping List View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -352,6 +353,65 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     }
   }
 
+  Future<void> _handleQuickAdd() async {
+    final l10n = AppLocalizations.of(context);
+    final productProvider = context.read<ProductProvider>();
+    final shoppingListProvider = context.read<ShoppingListProvider>();
+
+    // Find all products with quantity = 0
+    final zeroQuantityProducts = productProvider.products
+        .where((p) => p.quantity == 0)
+        .toList();
+
+    if (zeroQuantityProducts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.noZeroQuantityProducts),
+          backgroundColor: AppTheme.warningColor,
+        ),
+      );
+      return;
+    }
+
+    // Show confirmation dialog
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.quickAdd),
+        content: Text(l10n.confirmQuickAdd(zeroQuantityProducts.length)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.add),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      // Add product names with units to shopping list
+      final items = zeroQuantityProducts.map((p) => {
+        'name': p.name,
+        'unit': p.unit,
+        'category': p.category,
+      }).toList();
+      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.productsAddedToShoppingList(addedCount)),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -370,6 +430,12 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                   automaticallyImplyLeading: false,
                   title: Text(l10n.shoppingList),
                   actions: [
+                    // Quick Add - Add all 0 quantity products
+                    IconButton(
+                      icon: const Icon(Icons.flash_on),
+                      onPressed: _handleQuickAdd,
+                      tooltip: l10n.quickAdd,
+                    ),
                     Consumer<ShoppingListProvider>(
                       builder: (context, provider, _) {
                         if (provider.isEmpty) return const SizedBox.shrink();
