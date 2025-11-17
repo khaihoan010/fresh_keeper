@@ -298,6 +298,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     if (success) {
       if (mounted) {
+        // Hide keyboard before showing ads to prevent UI glitch
+        // This prevents the white space issue when ads close while keyboard was open
+        FocusManager.instance.primaryFocus?.unfocus();
+
         // Show ads after adding product (respects 3-product + 3-minute rules)
         final adsProvider = context.read<AdsProvider>();
         await adsProvider.onProductAdded();
