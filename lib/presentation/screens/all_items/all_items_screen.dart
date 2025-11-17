@@ -185,6 +185,20 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
     }
   }
 
+  Future<void> _updateProductQuantity(UserProduct product, double newQuantity) async {
+    final provider = context.read<ProductProvider>();
+    final updatedProduct = product.copyWith(quantity: newQuantity);
+    final success = await provider.updateProduct(updatedProduct);
+
+    if (success && mounted) {
+      setState(() {
+        _displayedProducts = provider.filteredProducts.isEmpty
+            ? provider.products
+            : provider.filteredProducts;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -356,6 +370,7 @@ class _AllItemsScreenState extends State<AllItemsScreen> {
                         },
                         onDelete: () => _deleteProduct(product),
                         onMarkUsed: () => _markAsUsed(product),
+                        onQuantityChanged: (newQuantity) => _updateProductQuantity(product, newQuantity),
                       );
                     },
                   ),
@@ -387,6 +402,7 @@ class _ProductCard extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback onMarkUsed;
+  final Function(double)? onQuantityChanged;
 
   const _ProductCard({
     required this.product,
@@ -394,7 +410,50 @@ class _ProductCard extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
     required this.onMarkUsed,
+    this.onQuantityChanged,
   });
+
+  void _showQuantityEditDialog(BuildContext context) {
+    final controller = TextEditingController(text: '${product.quantity}');
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Số lượng'),
+        content: TextField(
+          controller: controller,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          autofocus: true,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            suffixText: product.unit,
+          ),
+          onSubmitted: (value) {
+            final qty = double.tryParse(value) ?? product.quantity;
+            if (qty >= 0 && onQuantityChanged != null) {
+              onQuantityChanged!(qty);
+            }
+            Navigator.pop(dialogContext);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Hủy'),
+          ),
+          TextButton(
+            onPressed: () {
+              final qty = double.tryParse(controller.text) ?? product.quantity;
+              if (qty >= 0 && onQuantityChanged != null) {
+                onQuantityChanged!(qty);
+              }
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -452,9 +511,24 @@ class _ProductCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        '${product.quantity} ${product.unit}',
-                        style: Theme.of(context).textTheme.bodySmall,
+                      GestureDetector(
+                        onTap: onQuantityChanged != null
+                            ? () => _showQuantityEditDialog(context)
+                            : null,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey[300]!),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            '${product.quantity} ${product.unit}',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Row(
