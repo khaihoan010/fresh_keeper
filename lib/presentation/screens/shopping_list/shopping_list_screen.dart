@@ -673,7 +673,7 @@ class _ShoppingListItemTile extends StatelessWidget {
                     underline: const SizedBox(),
                     isDense: true,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Colors.black,
                         ),
                     items: AppConstants.units.map((unit) {
                       return DropdownMenuItem(
