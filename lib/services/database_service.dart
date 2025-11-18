@@ -460,6 +460,60 @@ class DatabaseService {
 
       debugPrint('✅ v12 upgrade completed: Shopping list with category support');
     }
+
+    if (oldVersion < 13) {
+      // Add nutrition data fields to shopping_list for preserving template info
+      debugPrint('🔄 Upgrading to v13: Adding nutrition data to shopping list...');
+
+      try {
+        // Add product_template_id to link with templates
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN product_template_id TEXT
+        ''');
+        debugPrint('✅ Added product_template_id column');
+
+        // Add name_en for English name
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN name_en TEXT
+        ''');
+        debugPrint('✅ Added name_en column');
+
+        // Add nutrition_data (JSON string)
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN nutrition_data TEXT
+        ''');
+        debugPrint('✅ Added nutrition_data column');
+
+        // Add health_benefits (JSON array)
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN health_benefits TEXT
+        ''');
+        debugPrint('✅ Added health_benefits column');
+
+        // Add health_warnings (JSON array)
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN health_warnings TEXT
+        ''');
+        debugPrint('✅ Added health_warnings column');
+
+        // Add storage_tips
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN storage_tips TEXT
+        ''');
+        debugPrint('✅ Added storage_tips column');
+
+      } catch (e) {
+        debugPrint('⚠️ Error adding nutrition columns to shopping_list: $e');
+      }
+
+      debugPrint('✅ v13 upgrade completed: Shopping list with nutrition data support');
+    }
   }
 
   /// Load initial data
