@@ -22,6 +22,35 @@ enum ProductStatus {
   }
 }
 
+/// Expiry Urgency Enum
+/// Categorizes products by how soon they expire
+enum ExpiryUrgency {
+  /// Product has already expired (before today)
+  expired,
+
+  /// Product expires today
+  today,
+
+  /// Product expires within 1-2 days (urgent)
+  urgent,
+
+  /// Product expires within 3-7 days (soon)
+  soon;
+
+  String get displayName {
+    switch (this) {
+      case ExpiryUrgency.expired:
+        return 'Đã hết hạn';
+      case ExpiryUrgency.today:
+        return 'Hết hạn hôm nay';
+      case ExpiryUrgency.urgent:
+        return 'Sắp hết hạn';
+      case ExpiryUrgency.soon:
+        return 'Còn hạn';
+    }
+  }
+}
+
 /// User Product Model
 /// Represents a product that user added to their fridge
 class UserProduct {
@@ -94,6 +123,17 @@ class UserProduct {
   /// Includes products expiring today, tomorrow, or day after tomorrow.
   bool get isUrgent {
     return daysUntilExpiry <= 2 && daysUntilExpiry >= 0;
+  }
+
+  /// Get expiry urgency category
+  ///
+  /// Provides a single source of truth for grouping products by urgency.
+  /// Used for consistent grouping across the app.
+  ExpiryUrgency get expiryUrgency {
+    if (isExpired) return ExpiryUrgency.expired;
+    if (daysUntilExpiry == 0) return ExpiryUrgency.today;
+    if (daysUntilExpiry <= 2) return ExpiryUrgency.urgent;
+    return ExpiryUrgency.soon; // 3-7 days
   }
 
   /// Status color based on days until expiry
