@@ -125,13 +125,13 @@ class ProductProvider extends ChangeNotifier {
   }
 
   /// Load expiring soon products
-  Future<void> loadExpiringSoon() async {
+  Future<void> loadExpiringSoon({bool notify = true}) async {
     try {
       final result = await _repository.getExpiringSoon(7);
       if (result.isSuccess) {
         _expiringSoon = result.data!;
         debugPrint('✅ Loaded ${_expiringSoon.length} expiring soon products');
-        notifyListeners();
+        if (notify) notifyListeners();
       }
     } catch (e) {
       debugPrint('❌ Exception loading expiring soon: $e');
@@ -139,36 +139,58 @@ class ProductProvider extends ChangeNotifier {
   }
 
   /// Load recent products
-  Future<void> loadRecentProducts() async {
+  Future<void> loadRecentProducts({bool notify = true}) async {
     try {
       final result = await _repository.getRecentProducts(7);
       if (result.isSuccess) {
         _recentProducts = result.data!;
         debugPrint('✅ Loaded ${_recentProducts.length} recent products');
-        notifyListeners();
+        if (notify) notifyListeners();
       }
     } catch (e) {
       debugPrint('❌ Exception loading recent products: $e');
     }
   }
 
-  /// Load dashboard data (all at once)
+  /// Load dashboard data (all at once) - optimized
+  ///
+  /// Loads all dashboard data in parallel and notifies listeners only once
+  /// at the end. This prevents multiple UI rebuilds during data loading.
   Future<void> loadDashboard() async {
-    _setLoading(true);
+    _isLoading = true;
     _error = null;
+    notifyListeners(); // Notify loading state started
 
     try {
-      await Future.wait([
-        loadProducts(),
-        loadExpiringSoon(),
-        loadRecentProducts(),
+      // Load all data in parallel WITHOUT notifying
+      final results = await Future.wait([
+        _repository.getAllProducts(),
+        _repository.getExpiringSoon(7),
+        _repository.getRecentProducts(7),
       ]);
-      debugPrint('✅ Dashboard data loaded');
+
+      // Update all state at once
+      if (results[0].isSuccess) {
+        _products = results[0].data!;
+        _filteredProducts = _products;
+        debugPrint('✅ Loaded ${_products.length} products');
+      }
+      if (results[1].isSuccess) {
+        _expiringSoon = results[1].data!;
+        debugPrint('✅ Loaded ${_expiringSoon.length} expiring soon products');
+      }
+      if (results[2].isSuccess) {
+        _recentProducts = results[2].data!;
+        debugPrint('✅ Loaded ${_recentProducts.length} recent products');
+      }
+
+      debugPrint('✅ Dashboard data loaded - notifying once');
     } catch (e) {
       _error = 'Đã xảy ra lỗi khi tải dữ liệu.';
       debugPrint('❌ Exception loading dashboard: $e');
     } finally {
-      _setLoading(false);
+      _isLoading = false;
+      notifyListeners(); // Single notification with all data loaded
     }
   }
 
