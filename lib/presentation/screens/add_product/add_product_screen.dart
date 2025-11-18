@@ -6,11 +6,13 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/product_icons.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../../utils/date_utils.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/ads_provider.dart';
+import '../../widgets/icon_picker_dialog.dart';
 import '../../../services/nutrition_api_service.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../../data/data_sources/local/product_local_data_source.dart';
@@ -40,6 +42,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   bool _isSearching = false;
   bool _isSearchingApi = false;
   ProductTemplate? _selectedTemplate;
+  String? _selectedIconId;
 
   @override
   void dispose() {
@@ -251,6 +254,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
   }
 
+  Future<void> _selectIcon() async {
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => IconPickerDialog(
+        currentIconId: _selectedIconId,
+        category: _selectedCategory,
+      ),
+    );
+
+    if (result != null) {
+      setState(() => _selectedIconId = result);
+    }
+  }
+
   Future<void> _saveProduct() async {
     final l10n = AppLocalizations.of(context);
 
@@ -282,6 +299,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       location: _selectedLocation,
       status: ProductStatus.active,
       templateId: _selectedTemplate?.id,
+      customIconId: _selectedIconId,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -418,6 +436,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             // Category
             _buildCategorySelector(),
+
+            const SizedBox(height: 16),
+
+            // Custom Icon
+            _buildIconSelector(),
 
             const SizedBox(height: 16),
 
@@ -746,6 +769,51 @@ class _AddProductScreenState extends State<AddProductScreen> {
           setState(() => _selectedCategory = value);
         }
       },
+    );
+  }
+
+  Widget _buildIconSelector() {
+    final l10n = AppLocalizations.of(context);
+
+    // Get current icon to display
+    String displayIcon;
+    if (_selectedIconId != null) {
+      final icon = ProductIcons.getIconById(_selectedIconId);
+      displayIcon = icon?.emoji ?? (AppConstants.categoryIcons[_selectedCategory] ?? '📦');
+    } else {
+      displayIcon = AppConstants.categoryIcons[_selectedCategory] ?? '📦';
+    }
+
+    return InkWell(
+      onTap: _selectIcon,
+      borderRadius: BorderRadius.circular(4),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: l10n.isVietnamese ? 'Biểu tượng' : 'Icon',
+          labelStyle: const TextStyle(fontSize: 13),
+          prefixIcon: const Icon(Icons.palette_outlined, size: 20),
+          suffixIcon: const Icon(Icons.arrow_forward_ios, size: 16),
+          border: const OutlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        ),
+        child: Row(
+          children: [
+            Text(
+              displayIcon,
+              style: const TextStyle(fontSize: 32),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                _selectedIconId != null
+                    ? (l10n.isVietnamese ? 'Biểu tượng tùy chỉnh' : 'Custom icon')
+                    : (l10n.isVietnamese ? 'Sử dụng biểu tượng danh mục' : 'Using category icon'),
+                style: const TextStyle(fontSize: 14),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

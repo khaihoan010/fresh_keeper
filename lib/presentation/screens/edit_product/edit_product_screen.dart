@@ -5,9 +5,11 @@ import 'package:intl/intl.dart';
 import '../../../config/theme.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/product_icons.dart';
 import '../../../data/models/user_product.dart';
 import '../../../utils/date_utils.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/icon_picker_dialog.dart';
 
 /// Edit Product Screen
 /// Form to edit existing products
@@ -33,6 +35,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late String _selectedLocation;
   late DateTime _purchaseDate;
   late DateTime _expiryDate;
+  String? _selectedIconId;
 
   @override
   void initState() {
@@ -46,6 +49,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _selectedLocation = widget.product.location ?? 'fridge';
     _purchaseDate = widget.product.purchaseDate;
     _expiryDate = widget.product.expiryDate;
+    _selectedIconId = widget.product.customIconId;
   }
 
   @override
@@ -88,6 +92,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
+  Future<void> _selectIcon() async {
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => IconPickerDialog(
+        currentIconId: _selectedIconId,
+        category: _selectedCategory,
+      ),
+    );
+
+    if (result != null) {
+      setState(() => _selectedIconId = result);
+    }
+  }
+
   Future<void> _saveProduct() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -104,6 +122,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       expiryDate: normalizedExpiryDate,
       notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
       location: _selectedLocation,
+      customIconId: _selectedIconId,
       updatedAt: DateTime.now(),
     );
 
@@ -222,6 +241,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
             // Category
             _buildCategorySelector(),
+
+            const SizedBox(height: 16),
+
+            // Custom Icon
+            _buildIconSelector(),
 
             const SizedBox(height: 16),
 
@@ -380,6 +404,51 @@ class _EditProductScreenState extends State<EditProductScreen> {
           setState(() => _selectedCategory = value);
         }
       },
+    );
+  }
+
+  Widget _buildIconSelector() {
+    final l10n = AppLocalizations.of(context);
+
+    // Get current icon to display
+    String displayIcon;
+    if (_selectedIconId != null) {
+      final icon = ProductIcons.getIconById(_selectedIconId);
+      displayIcon = icon?.emoji ?? (AppConstants.categoryIcons[_selectedCategory] ?? '📦');
+    } else {
+      displayIcon = AppConstants.categoryIcons[_selectedCategory] ?? '📦';
+    }
+
+    return InkWell(
+      onTap: _selectIcon,
+      borderRadius: BorderRadius.circular(4),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: l10n.isVietnamese ? 'Biểu tượng' : 'Icon',
+          labelStyle: const TextStyle(fontSize: 13),
+          prefixIcon: const Icon(Icons.palette_outlined, size: 20),
+          suffixIcon: const Icon(Icons.arrow_forward_ios, size: 16),
+          border: const OutlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        ),
+        child: Row(
+          children: [
+            Text(
+              displayIcon,
+              style: const TextStyle(fontSize: 32),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                _selectedIconId != null
+                    ? (l10n.isVietnamese ? 'Biểu tượng tùy chỉnh' : 'Custom icon')
+                    : (l10n.isVietnamese ? 'Sử dụng biểu tượng danh mục' : 'Using category icon'),
+                style: const TextStyle(fontSize: 14),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
