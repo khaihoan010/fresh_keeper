@@ -57,7 +57,8 @@ class ProductProvider extends ChangeNotifier {
   ProductProvider(this._repository);
 
   // State
-  List<UserProduct> _products = [];
+  List<UserProduct> _products = []; // All products (for stats)
+  List<UserProduct> _filteredProducts = []; // Filtered products (for display)
   List<UserProduct> _expiringSoon = [];
   List<UserProduct> _recentProducts = [];
   bool _isLoading = false;
@@ -74,13 +75,12 @@ class ProductProvider extends ChangeNotifier {
   String get selectedCategory => _selectedCategory;
   SortOption get sortBy => _sortBy;
 
-  /// Filtered and sorted products
+  /// Filtered and sorted products (optimized)
+  ///
+  /// Returns pre-filtered products from database, then sorted in memory.
+  /// This avoids filtering large datasets in memory.
   List<UserProduct> get filteredProducts {
-    var filtered = _selectedCategory == 'all'
-        ? List<UserProduct>.from(_products)
-        : _products.where((p) => p.category == _selectedCategory).toList();
-
-    return _sortProducts(filtered);
+    return _sortProducts(_filteredProducts);
   }
 
   /// Total count
@@ -109,6 +109,8 @@ class ProductProvider extends ChangeNotifier {
       final result = await _repository.getAllProducts();
       if (result.isSuccess) {
         _products = result.data!;
+        // Also update filtered products to match
+        _filteredProducts = _products;
         debugPrint('✅ Loaded ${_products.length} products');
       } else {
         _error = result.error;
@@ -295,12 +297,39 @@ class ProductProvider extends ChangeNotifier {
 
   // ==================== FILTER & SORT ====================
 
-  /// Set category filter
-  void setCategory(String category) {
-    if (_selectedCategory != category) {
-      _selectedCategory = category;
+  /// Set category filter (optimized with database-level filtering)
+  Future<void> setCategory(String category) async {
+    if (_selectedCategory == category) return;
+
+    _selectedCategory = category;
+    _setLoading(true);
+
+    try {
+      if (category == 'all') {
+        // Load all products from database
+        final result = await _repository.getAllProducts();
+        if (result.isSuccess) {
+          _products = result.data!;
+          _filteredProducts = _products;
+          debugPrint('📂 Category filter: all (${_products.length} products)');
+        }
+      } else {
+        // Load filtered products from database
+        final result = await _repository.getProductsByCategory(category);
+        if (result.isSuccess) {
+          _filteredProducts = result.data!;
+          debugPrint('📂 Category filter: $category (${_filteredProducts.length} products)');
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Error filtering by category: $e');
+      // Fallback to in-memory filtering if database query fails
+      _filteredProducts = category == 'all'
+          ? _products
+          : _products.where((p) => p.category == category).toList();
+    } finally {
+      _setLoading(false);
       notifyListeners();
-      debugPrint('📂 Category filter: $category');
     }
   }
 
