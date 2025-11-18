@@ -116,15 +116,17 @@ class ProductLocalDataSource {
   Future<List<UserProduct>> getExpiringSoon(int days) async {
     try {
       final db = await _databaseService.database;
+      // Normalize to start of day (00:00:00) for accurate date comparison
       final now = DateTime.now();
-      final futureDate = now.add(Duration(days: days));
+      final today = DateTime(now.year, now.month, now.day);
+      final futureDate = today.add(Duration(days: days + 1)); // +1 to include the Nth day
 
       final results = await db.query(
         AppConstants.tableUserProducts,
-        where: 'expiry_date <= ? AND expiry_date >= ? AND status = ?',
+        where: 'expiry_date >= ? AND expiry_date < ? AND status = ?',
         whereArgs: [
+          today.toIso8601String(),
           futureDate.toIso8601String(),
-          now.toIso8601String(),
           'active',
         ],
         orderBy: 'expiry_date ASC',
@@ -234,13 +236,15 @@ class ProductLocalDataSource {
   Future<int> getExpiringSoonCount(int days) async {
     try {
       final db = await _databaseService.database;
+      // Normalize to start of day (00:00:00) for accurate date comparison
       final now = DateTime.now();
-      final futureDate = now.add(Duration(days: days));
+      final today = DateTime(now.year, now.month, now.day);
+      final futureDate = today.add(Duration(days: days + 1)); // +1 to include the Nth day
 
       final result = await db.rawQuery(
         'SELECT COUNT(*) as count FROM ${AppConstants.tableUserProducts} '
-        'WHERE expiry_date <= ? AND expiry_date >= ? AND status = ?',
-        [futureDate.toIso8601String(), now.toIso8601String(), 'active'],
+        'WHERE expiry_date >= ? AND expiry_date < ? AND status = ?',
+        [today.toIso8601String(), futureDate.toIso8601String(), 'active'],
       );
       return Sqflite.firstIntValue(result) ?? 0;
     } catch (e) {
