@@ -310,6 +310,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       TextButton(
                         onPressed: () => Navigator.pop(dialogContext),
@@ -317,14 +318,16 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                       ),
                       const SizedBox(width: 8),
                       if (searchResults.isEmpty || showManualInput)
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_textController.text.trim().isNotEmpty) {
-                              _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
-                              Navigator.pop(dialogContext);
-                            }
-                          },
-                          child: Text(l10n.add),
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_textController.text.trim().isNotEmpty) {
+                                _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
+                                Navigator.pop(dialogContext);
+                              }
+                            },
+                            child: Text(l10n.add),
+                          ),
                         ),
                     ],
                   ),
