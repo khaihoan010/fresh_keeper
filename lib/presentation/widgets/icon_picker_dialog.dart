@@ -37,9 +37,9 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
 
   List<ProductIcon> _getIconsForTier() {
     if (_selectedTier == IconTier.free) {
-      return ProductIcons.getFreeIconsByCategory(widget.category);
+      return ProductIcons.freeIcons;
     } else {
-      return ProductIcons.getPremiumIconsByCategory(widget.category);
+      return ProductIcons.premiumIcons;
     }
   }
 
@@ -312,7 +312,7 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
                       tier: IconTier.free,
                       label: l10n.isVietnamese ? 'Miễn phí' : 'Free',
                       icon: Icons.check_circle,
-                      count: ProductIcons.getFreeIconsByCategory(widget.category).length,
+                      count: ProductIcons.freeIconCount,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -321,7 +321,7 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
                       tier: IconTier.premium,
                       label: 'Premium',
                       icon: Icons.workspace_premium,
-                      count: ProductIcons.getPremiumIconsByCategory(widget.category).length,
+                      count: ProductIcons.premiumIconCount,
                       isPremium: true,
                     ),
                   ),
@@ -393,6 +393,7 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
@@ -402,14 +403,17 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
                   : Colors.grey[600],
             ),
             const SizedBox(width: 6),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                color: isSelected
-                    ? (isPremium ? Colors.amber.shade700 : AppTheme.primaryColor)
-                    : Colors.grey[700],
+            Flexible(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                  color: isSelected
+                      ? (isPremium ? Colors.amber.shade700 : AppTheme.primaryColor)
+                      : Colors.grey[700],
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(width: 4),
