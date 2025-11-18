@@ -967,9 +967,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             hintText: l10n.enterTemplateName,
                             hintStyle: const TextStyle(fontSize: 14),
                             prefixIcon: const Icon(Icons.label_outline, size: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           autofocus: initialName.isEmpty,
@@ -979,14 +977,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         // Category Selector
                         DropdownButtonFormField<String>(
                           value: selectedCategory,
-                          style: const TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14, color: Colors.black87),
                           decoration: InputDecoration(
                             labelText: l10n.category,
                             labelStyle: const TextStyle(fontSize: 13),
                             prefixIcon: const Icon(Icons.category_outlined, size: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           items: AppConstants.categories.map((cat) {
@@ -1036,9 +1032,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             hintText: '7',
                             hintStyle: const TextStyle(fontSize: 14),
                             prefixIcon: const Icon(Icons.kitchen_outlined, size: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           keyboardType: TextInputType.number,
@@ -1055,9 +1049,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             hintText: '30',
                             hintStyle: const TextStyle(fontSize: 14),
                             prefixIcon: const Icon(Icons.ac_unit_outlined, size: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           keyboardType: TextInputType.number,
@@ -1074,9 +1066,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             hintText: '14',
                             hintStyle: const TextStyle(fontSize: 14),
                             prefixIcon: const Icon(Icons.inventory_2_outlined, size: 20),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           keyboardType: TextInputType.number,
