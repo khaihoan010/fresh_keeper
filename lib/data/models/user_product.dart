@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../config/theme.dart';
+import '../../utils/date_utils.dart';
 
 /// Product Status Enum
 enum ProductStatus {
@@ -62,26 +63,37 @@ class UserProduct {
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
-  /// Days until expiry
+  /// Days until expiry (normalized to start of day)
+  ///
+  /// IMPORTANT: Uses normalized dates to ensure consistency with database queries.
+  /// Compares dates at midnight (00:00:00) to avoid time-component issues.
   int get daysUntilExpiry {
-    final now = DateTime.now();
-    final difference = expiryDate.difference(now);
-    return difference.inDays;
+    final today = getToday();
+    final expiry = normalizeDate(expiryDate);
+    return expiry.difference(today).inDays;
   }
 
-  /// Is expired
+  /// Is expired (normalized comparison)
+  ///
+  /// Returns true if expiry date is before today (both normalized to midnight).
   bool get isExpired {
-    return DateTime.now().isAfter(expiryDate);
+    final today = getToday();
+    final expiry = normalizeDate(expiryDate);
+    return expiry.isBefore(today);
   }
 
-  /// Is expiring soon (within 7 days)
+  /// Is expiring soon (within 7 days, normalized)
+  ///
+  /// Includes products expiring from today through 7 days from now.
   bool get isExpiringSoon {
     return daysUntilExpiry <= 7 && daysUntilExpiry >= 0;
   }
 
-  /// Is urgent (within 3 days)
+  /// Is urgent (within 2 days, normalized)
+  ///
+  /// Includes products expiring today, tomorrow, or day after tomorrow.
   bool get isUrgent {
-    return daysUntilExpiry < 3 && daysUntilExpiry >= 0;
+    return daysUntilExpiry <= 2 && daysUntilExpiry >= 0;
   }
 
   /// Status color based on days until expiry
