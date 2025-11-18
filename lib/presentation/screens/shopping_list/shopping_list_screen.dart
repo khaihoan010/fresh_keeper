@@ -71,32 +71,49 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) => Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          clipBehavior: Clip.antiAlias,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
             constraints: const BoxConstraints(maxHeight: 600),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Title bar
+                // Title bar with close button
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(28),
-                      topRight: Radius.circular(28),
-                    ),
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.add_shopping_cart,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer),
-                      const SizedBox(width: 12),
-                      Text(
-                        l10n.addItem,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      Icon(
+                        Icons.add_shopping_cart,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          l10n.addItem,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                          size: 20,
+                        ),
+                        onPressed: () => Navigator.pop(dialogContext),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        tooltip: l10n.cancel,
                       ),
                     ],
                   ),
@@ -113,21 +130,23 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                         TextField(
                           controller: searchController,
                           autofocus: true,
+                          style: const TextStyle(fontSize: 14),
                           decoration: InputDecoration(
                             hintText: l10n.searchProduct,
-                            prefixIcon: const Icon(Icons.search),
+                            hintStyle: const TextStyle(fontSize: 14),
+                            prefixIcon: const Icon(Icons.search, size: 20),
                             suffixIcon: isSearching
                                 ? const Padding(
                                     padding: EdgeInsets.all(12),
                                     child: SizedBox(
-                                      width: 20,
-                                      height: 20,
+                                      width: 16,
+                                      height: 16,
                                       child: CircularProgressIndicator(strokeWidth: 2),
                                     ),
                                   )
                                 : searchController.text.isNotEmpty
                                     ? IconButton(
-                                        icon: const Icon(Icons.clear),
+                                        icon: const Icon(Icons.clear, size: 20),
                                         onPressed: () {
                                           searchController.clear();
                                           setDialogState(() {
@@ -138,6 +157,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                                       )
                                     : null,
                             border: const OutlineInputBorder(),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           ),
                           onChanged: (query) async {
                             if (query.length < 2) {
@@ -161,12 +181,12 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
 
                         // Search results
                         if (searchResults.isNotEmpty)
                           Container(
-                            constraints: const BoxConstraints(maxHeight: 300),
+                            constraints: const BoxConstraints(maxHeight: 250),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey[300]!),
                               borderRadius: BorderRadius.circular(8),
@@ -178,16 +198,20 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                                 final template = searchResults[index];
                                 return ListTile(
                                   dense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                   leading: Text(
                                     AppConstants.categoryIcons[template.category] ?? '📦',
-                                    style: const TextStyle(fontSize: 24),
+                                    style: const TextStyle(fontSize: 20),
                                   ),
-                                  title: Text(template.nameVi),
+                                  title: Text(
+                                    template.nameVi,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
                                   subtitle: Text(
                                     template.nameEn,
                                     style: const TextStyle(fontSize: 12),
                                   ),
-                                  trailing: const Icon(Icons.add_circle_outline),
+                                  trailing: const Icon(Icons.add_circle_outline, size: 20),
                                   onTap: () async {
                                     Navigator.pop(dialogContext);
                                     await _addItemFromTemplate(template);
@@ -203,33 +227,37 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                                 padding: const EdgeInsets.all(8),
                                 child: Text(
                                   l10n.noResults,
-                                  style: Theme.of(context).textTheme.bodySmall,
+                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 ),
                               ),
-                              const Divider(),
-                              const SizedBox(height: 8),
+                              const Divider(height: 16),
                               Text(
                                 l10n.enterProductName,
-                                style: Theme.of(context).textTheme.titleSmall,
+                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                               ),
                               const SizedBox(height: 8),
                             ],
                           ),
 
-                        // Manual input section (shown when no search or after "no results")
+                        // Manual input section
                         if (searchController.text.isEmpty || showManualInput) ...[
                           if (searchResults.isEmpty && searchController.text.length < 2)
-                            Text(
-                              l10n.enterProductName,
-                              style: Theme.of(context).textTheme.titleSmall,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                l10n.enterProductName,
+                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                              ),
                             ),
-                          const SizedBox(height: 8),
                           TextField(
                             controller: _textController,
+                            style: const TextStyle(fontSize: 14),
                             decoration: InputDecoration(
                               hintText: l10n.enterItemName,
+                              hintStyle: const TextStyle(fontSize: 14),
                               border: const OutlineInputBorder(),
-                              prefixIcon: const Icon(Icons.edit),
+                              prefixIcon: const Icon(Icons.edit, size: 20),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                             ),
                             textCapitalization: TextCapitalization.words,
                             onSubmitted: (value) {
@@ -239,12 +267,15 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                               }
                             },
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 12),
                           DropdownButtonFormField<String>(
                             value: selectedCategory,
+                            style: const TextStyle(fontSize: 14, color: Colors.black87),
                             decoration: InputDecoration(
                               labelText: l10n.category,
+                              labelStyle: const TextStyle(fontSize: 13),
                               border: const OutlineInputBorder(),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                             ),
                             items: AppConstants.categories.map((cat) {
                               return DropdownMenuItem(
@@ -252,7 +283,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
+                                    Text(cat['icon']!, style: const TextStyle(fontSize: 18)),
                                     const SizedBox(width: 8),
                                     Flexible(
                                       child: Text(
@@ -269,23 +300,25 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                               if (value != null) {
                                 setDialogState(() {
                                   selectedCategory = value;
-                                  // Update default unit when category changes
                                   selectedUnit = AppConstants.getDefaultUnitForCategory(value);
                                 });
                               }
                             },
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 12),
                           DropdownButtonFormField<String>(
                             value: selectedUnit,
+                            style: const TextStyle(fontSize: 14, color: Colors.black87),
                             decoration: InputDecoration(
                               labelText: l10n.unit,
+                              labelStyle: const TextStyle(fontSize: 13),
                               border: const OutlineInputBorder(),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                             ),
                             items: AppConstants.units.map((unit) {
                               return DropdownMenuItem(
                                 value: unit,
-                                child: Text(unit),
+                                child: Text(unit, style: const TextStyle(fontSize: 14)),
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -300,39 +333,32 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                   ),
                 ),
                 // Actions
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(28),
-                      bottomRight: Radius.circular(28),
+                if (searchResults.isEmpty || showManualInput)
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      border: Border(top: BorderSide(color: Colors.grey[200]!)),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_textController.text.trim().isNotEmpty) {
+                            _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
+                            Navigator.pop(dialogContext);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: Text(
+                          l10n.add,
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                        ),
+                      ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(dialogContext),
-                        child: Text(l10n.cancel),
-                      ),
-                      const SizedBox(width: 8),
-                      if (searchResults.isEmpty || showManualInput)
-                        Flexible(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_textController.text.trim().isNotEmpty) {
-                                _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
-                                Navigator.pop(dialogContext);
-                              }
-                            },
-                            child: Text(l10n.add),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
