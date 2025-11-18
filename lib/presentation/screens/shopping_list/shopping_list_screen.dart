@@ -250,6 +250,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                               return DropdownMenuItem(
                                 value: cat['id'],
                                 child: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
                                     const SizedBox(width: 8),
