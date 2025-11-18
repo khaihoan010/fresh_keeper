@@ -146,14 +146,18 @@ class UserProduct {
     return AppTheme.getExpiryStatusText(daysUntilExpiry);
   }
 
-  /// Days remaining text
+  /// Days remaining text (human-readable)
+  ///
+  /// Returns Vietnamese text describing expiry status.
+  /// With normalized dates, a product expiring today has daysUntilExpiry=0
+  /// and isExpired=false (not expired yet).
   String get daysRemainingText {
     if (isExpired) {
+      // Product has expired (before today)
       final daysExpired = -daysUntilExpiry;
-      return daysExpired == 0
-          ? 'Hết hạn hôm nay'
-          : 'Quá hạn $daysExpired ngày';
+      return 'Quá hạn $daysExpired ngày';
     } else if (daysUntilExpiry == 0) {
+      // Product expires today (not yet expired)
       return 'Hết hạn hôm nay';
     } else if (daysUntilExpiry == 1) {
       return 'Còn 1 ngày';
