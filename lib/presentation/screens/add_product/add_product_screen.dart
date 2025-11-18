@@ -337,20 +337,54 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.addProduct),
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, size: 22),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Row(
+          children: [
+            Icon(
+              Icons.add_shopping_cart,
+              size: 22,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              l10n.addProduct,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.qr_code_scanner),
+            icon: const Icon(Icons.qr_code_scanner, size: 22),
             tooltip: l10n.scanBarcode,
             onPressed: _scanBarcode,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
-          TextButton(
-            onPressed: _saveProduct,
-            child: Text(
-              l10n.save,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: TextButton.icon(
+              onPressed: _saveProduct,
+              icon: Icon(
+                Icons.save,
+                size: 20,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+              label: Text(
+                l10n.save,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
             ),
           ),

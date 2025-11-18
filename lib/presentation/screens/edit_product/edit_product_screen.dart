@@ -152,15 +152,48 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.editProduct),
-        actions: [
-          TextButton(
-            onPressed: _saveProduct,
-            child: Text(
-              l10n.save,
-              style: const TextStyle(
-                fontSize: 16,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, size: 22),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Row(
+          children: [
+            Icon(
+              Icons.edit_outlined,
+              size: 22,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              l10n.editProduct,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: TextButton.icon(
+              onPressed: _saveProduct,
+              icon: Icon(
+                Icons.save,
+                size: 20,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+              label: Text(
+                l10n.save,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
             ),
           ),
