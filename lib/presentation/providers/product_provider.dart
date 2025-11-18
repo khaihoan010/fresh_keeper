@@ -432,16 +432,6 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
-  /// Get product template by ID
-  Future<ProductTemplate?> getTemplate(String templateId) async {
-    try {
-      return await _repository.getProductTemplate(templateId);
-    } catch (e) {
-      debugPrint('❌ Exception getting template: $e');
-      return null;
-    }
-  }
-
   // ==================== HELPERS ====================
 
   /// Get product by ID
