@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../services/database_service.dart';
 import '../../../config/constants.dart';
+import '../../../utils/date_utils.dart';
 import '../../models/user_product.dart';
 import '../../models/product_template.dart';
 import '../../models/category.dart' as models;
@@ -116,15 +117,15 @@ class ProductLocalDataSource {
   Future<List<UserProduct>> getExpiringSoon(int days) async {
     try {
       final db = await _databaseService.database;
-      final now = DateTime.now();
-      final futureDate = now.add(Duration(days: days));
+      // Use date_utils for consistent date normalization
+      final (start, end) = getExpiryDateRange(days);
 
       final results = await db.query(
         AppConstants.tableUserProducts,
-        where: 'expiry_date <= ? AND expiry_date >= ? AND status = ?',
+        where: 'expiry_date >= ? AND expiry_date < ? AND status = ?',
         whereArgs: [
-          futureDate.toIso8601String(),
-          now.toIso8601String(),
+          start.toIso8601String(),
+          end.toIso8601String(),
           'active',
         ],
         orderBy: 'expiry_date ASC',
@@ -234,13 +235,13 @@ class ProductLocalDataSource {
   Future<int> getExpiringSoonCount(int days) async {
     try {
       final db = await _databaseService.database;
-      final now = DateTime.now();
-      final futureDate = now.add(Duration(days: days));
+      // Use date_utils for consistent date normalization
+      final (start, end) = getExpiryDateRange(days);
 
       final result = await db.rawQuery(
         'SELECT COUNT(*) as count FROM ${AppConstants.tableUserProducts} '
-        'WHERE expiry_date <= ? AND expiry_date >= ? AND status = ?',
-        [futureDate.toIso8601String(), now.toIso8601String(), 'active'],
+        'WHERE expiry_date >= ? AND expiry_date < ? AND status = ?',
+        [start.toIso8601String(), end.toIso8601String(), 'active'],
       );
       return Sqflite.firstIntValue(result) ?? 0;
     } catch (e) {

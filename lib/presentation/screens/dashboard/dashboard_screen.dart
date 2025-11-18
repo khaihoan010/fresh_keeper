@@ -260,10 +260,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   AppConstants.categoryIcons[product.category] ?? '📦',
                   style: const TextStyle(fontSize: 32),
                 ),
-                title: Text(product.name, style: Theme.of(context).textTheme.titleMedium),
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        product.name,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          // Dim text for expired products
+                          color: product.isExpired
+                              ? Theme.of(context).textTheme.bodySmall?.color
+                              : null,
+                        ),
+                      ),
+                    ),
+                    // Show expired badge for expired products
+                    if (product.isExpired)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppTheme.errorColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: AppTheme.errorColor.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          'Hết hạn',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: AppTheme.errorColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
                 subtitle: Text(
                   '$daysText • ${product.quantity} ${product.unit}',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    // Red text for overdue days
+                    color: product.isExpired
+                        ? AppTheme.errorColor
+                        : null,
+                  ),
                 ),
                 trailing: Container(
                   width: 12,

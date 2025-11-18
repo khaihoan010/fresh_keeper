@@ -8,6 +8,7 @@ import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
+import '../../../utils/date_utils.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/ads_provider.dart';
 import '../../../services/nutrition_api_service.dart';
@@ -265,6 +266,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
       return;
     }
 
+    // Normalize dates to midnight for consistent storage
+    final normalizedPurchaseDate = normalizeDate(_purchaseDate);
+    final normalizedExpiryDate = normalizeDate(_expiryDate!);
+
     final product = UserProduct(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: _nameController.text.trim(),
@@ -272,8 +277,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       category: _selectedCategory,
       quantity: double.parse(_quantityController.text),
       unit: _selectedUnit,
-      purchaseDate: _purchaseDate,
-      expiryDate: _expiryDate!,
+      purchaseDate: normalizedPurchaseDate,
+      expiryDate: normalizedExpiryDate,
       location: _selectedLocation,
       status: ProductStatus.active,
       templateId: _selectedTemplate?.id,

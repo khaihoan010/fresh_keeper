@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../config/theme.dart';
+import '../../utils/date_utils.dart';
 
 /// Product Status Enum
 enum ProductStatus {
@@ -17,6 +18,35 @@ enum ProductStatus {
         return 'Đã dùng';
       case ProductStatus.expired:
         return 'Hết hạn';
+    }
+  }
+}
+
+/// Expiry Urgency Enum
+/// Categorizes products by how soon they expire
+enum ExpiryUrgency {
+  /// Product has already expired (before today)
+  expired,
+
+  /// Product expires today
+  today,
+
+  /// Product expires within 1-2 days (urgent)
+  urgent,
+
+  /// Product expires within 3-7 days (soon)
+  soon;
+
+  String get displayName {
+    switch (this) {
+      case ExpiryUrgency.expired:
+        return 'Đã hết hạn';
+      case ExpiryUrgency.today:
+        return 'Hết hạn hôm nay';
+      case ExpiryUrgency.urgent:
+        return 'Sắp hết hạn';
+      case ExpiryUrgency.soon:
+        return 'Còn hạn';
     }
   }
 }
@@ -62,26 +92,48 @@ class UserProduct {
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
-  /// Days until expiry
+  /// Days until expiry (normalized to start of day)
+  ///
+  /// IMPORTANT: Uses normalized dates to ensure consistency with database queries.
+  /// Compares dates at midnight (00:00:00) to avoid time-component issues.
   int get daysUntilExpiry {
-    final now = DateTime.now();
-    final difference = expiryDate.difference(now);
-    return difference.inDays;
+    final today = getToday();
+    final expiry = normalizeDate(expiryDate);
+    return expiry.difference(today).inDays;
   }
 
-  /// Is expired
+  /// Is expired (normalized comparison)
+  ///
+  /// Returns true if expiry date is before today (both normalized to midnight).
   bool get isExpired {
-    return DateTime.now().isAfter(expiryDate);
+    final today = getToday();
+    final expiry = normalizeDate(expiryDate);
+    return expiry.isBefore(today);
   }
 
-  /// Is expiring soon (within 7 days)
+  /// Is expiring soon (within 7 days, normalized)
+  ///
+  /// Includes products expiring from today through 7 days from now.
   bool get isExpiringSoon {
     return daysUntilExpiry <= 7 && daysUntilExpiry >= 0;
   }
 
-  /// Is urgent (within 3 days)
+  /// Is urgent (within 2 days, normalized)
+  ///
+  /// Includes products expiring today, tomorrow, or day after tomorrow.
   bool get isUrgent {
-    return daysUntilExpiry < 3 && daysUntilExpiry >= 0;
+    return daysUntilExpiry <= 2 && daysUntilExpiry >= 0;
+  }
+
+  /// Get expiry urgency category
+  ///
+  /// Provides a single source of truth for grouping products by urgency.
+  /// Used for consistent grouping across the app.
+  ExpiryUrgency get expiryUrgency {
+    if (isExpired) return ExpiryUrgency.expired;
+    if (daysUntilExpiry == 0) return ExpiryUrgency.today;
+    if (daysUntilExpiry <= 2) return ExpiryUrgency.urgent;
+    return ExpiryUrgency.soon; // 3-7 days
   }
 
   /// Status color based on days until expiry
@@ -94,14 +146,18 @@ class UserProduct {
     return AppTheme.getExpiryStatusText(daysUntilExpiry);
   }
 
-  /// Days remaining text
+  /// Days remaining text (human-readable)
+  ///
+  /// Returns Vietnamese text describing expiry status.
+  /// With normalized dates, a product expiring today has daysUntilExpiry=0
+  /// and isExpired=false (not expired yet).
   String get daysRemainingText {
     if (isExpired) {
+      // Product has expired (before today)
       final daysExpired = -daysUntilExpiry;
-      return daysExpired == 0
-          ? 'Hết hạn hôm nay'
-          : 'Quá hạn $daysExpired ngày';
+      return 'Quá hạn $daysExpired ngày';
     } else if (daysUntilExpiry == 0) {
+      // Product expires today (not yet expired)
       return 'Hết hạn hôm nay';
     } else if (daysUntilExpiry == 1) {
       return 'Còn 1 ngày';

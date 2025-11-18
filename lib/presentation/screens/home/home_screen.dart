@@ -468,23 +468,7 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
       // Move products to selected location
       int movedCount = 0;
       for (final product in selectedProducts) {
-        DateTime? newExpiryDate;
-
-        // Recalculate expiry date if product has template
-        if (product.productTemplateId != null) {
-          final template = await productProvider.getTemplate(product.productTemplateId!);
-          if (template != null) {
-            newExpiryDate = template.calculateExpiryDate(
-              product.purchaseDate,
-              location: destination,
-            );
-          }
-        }
-
-        final updatedProduct = product.copyWith(
-          location: destination,
-          expiryDate: newExpiryDate ?? product.expiryDate,
-        );
+        final updatedProduct = product.copyWith(location: destination);
         final success = await productProvider.updateProduct(updatedProduct);
         if (success) movedCount++;
       }
@@ -565,18 +549,19 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
     } else {
       // Copy products to selected location (keep original)
       int copiedCount = 0;
-      final now = DateTime.now();
       for (final product in selectedProducts) {
-        // Create new product (duplicate) - set far future expiry date
+        // Create new product (duplicate) - keep original expiry date
+        // User can edit the expiry date manually if needed
         final copiedProduct = UserProduct(
           name: product.name,
           category: product.category,
           quantity: product.quantity,
           unit: product.unit,
           location: destination,
-          purchaseDate: now,
-          expiryDate: DateTime(now.year + 10, now.month, now.day), // 10 years future
+          purchaseDate: product.purchaseDate,
+          expiryDate: product.expiryDate, // Keep original expiry date
           notes: product.notes,
+          templateId: product.productTemplateId,
         );
         final success = await productProvider.addProduct(copiedProduct);
         if (success) copiedCount++;

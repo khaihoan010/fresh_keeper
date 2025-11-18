@@ -6,6 +6,7 @@ import '../../../config/theme.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
+import '../../../utils/date_utils.dart';
 import '../../providers/product_provider.dart';
 
 /// Edit Product Screen
@@ -90,13 +91,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Future<void> _saveProduct() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // Normalize dates to midnight for consistent storage
+    final normalizedPurchaseDate = normalizeDate(_purchaseDate);
+    final normalizedExpiryDate = normalizeDate(_expiryDate);
+
     final updatedProduct = widget.product.copyWith(
       name: _nameController.text.trim(),
       category: _selectedCategory,
       quantity: double.parse(_quantityController.text),
       unit: _selectedUnit,
-      purchaseDate: _purchaseDate,
-      expiryDate: _expiryDate,
+      purchaseDate: normalizedPurchaseDate,
+      expiryDate: normalizedExpiryDate,
       notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
       location: _selectedLocation,
       updatedAt: DateTime.now(),
@@ -391,24 +396,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
           ),
         );
       }).toList(),
-      onChanged: (value) async {
+      onChanged: (value) {
         if (value != null) {
           setState(() => _selectedLocation = value);
-
-          // Recalculate expiry date if product has template
-          if (widget.product.productTemplateId != null) {
-            final provider = context.read<ProductProvider>();
-            final template = await provider.getTemplate(widget.product.productTemplateId!);
-
-            if (template != null) {
-              setState(() {
-                _expiryDate = template.calculateExpiryDate(
-                  _purchaseDate,
-                  location: value,
-                );
-              });
-            }
-          }
         }
       },
     );
