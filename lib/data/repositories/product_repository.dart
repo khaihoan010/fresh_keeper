@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../utils/date_utils.dart';
 import '../data_sources/local/product_local_data_source.dart';
 import '../models/user_product.dart';
 import '../models/product_template.dart';
@@ -389,12 +390,17 @@ class ProductRepository {
       return 'Số lượng không được âm.';
     }
 
-    if (product.expiryDate.isBefore(product.purchaseDate)) {
+    // Normalize dates for comparison
+    final normalizedPurchase = normalizeDate(product.purchaseDate);
+    final normalizedExpiry = normalizeDate(product.expiryDate);
+    final today = getToday();
+
+    if (normalizedExpiry.isBefore(normalizedPurchase)) {
       return 'Ngày hết hạn phải sau ngày mua.';
     }
 
-    if (product.purchaseDate.isAfter(DateTime.now().add(const Duration(days: 1)))) {
-      return 'Ngày mua không thể là tương lai.';
+    if (normalizedPurchase.isAfter(today)) {
+      return 'Ngày mua không thể là ngày tương lai.';
     }
 
     return null; // Valid
