@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
+import '../../../config/product_icons.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
@@ -920,6 +921,16 @@ class _ProductCardState extends State<_ProductCard> {
     return AppConstants.getQuantityStep(unit);
   }
 
+  String _getProductIcon() {
+    // Check for custom icon first
+    if (widget.product.customIconId != null) {
+      final icon = ProductIcons.getIconById(widget.product.customIconId);
+      if (icon != null) return icon.emoji;
+    }
+    // Fallback to category icon
+    return AppConstants.categoryIcons[widget.product.category] ?? '📦';
+  }
+
   void _increaseQuantity() async {
     setState(() {
       final step = _getQuantityStep(widget.product.unit);
@@ -1167,7 +1178,7 @@ class _ProductCardState extends State<_ProductCard> {
 
                 // Icon
                 Text(
-                  AppConstants.categoryIcons[widget.product.category] ?? '📦',
+                  _getProductIcon(),
                   style: const TextStyle(fontSize: 36),
                 ),
 
