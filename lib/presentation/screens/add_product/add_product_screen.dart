@@ -450,13 +450,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             // Save button
             SizedBox(
-              height: 56,
+              height: 48,
               child: ElevatedButton.icon(
                 onPressed: _saveProduct,
-                icon: const Icon(Icons.check, size: 24),
+                icon: const Icon(Icons.check, size: 20),
                 label: Text(
                   l10n.addProduct,
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -653,13 +656,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(fontSize: 13),
         hintText: hint,
-        prefixIcon: Icon(icon),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        ),
+        hintStyle: const TextStyle(fontSize: 14),
+        prefixIcon: Icon(icon, size: 20),
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
       validator: validator,
     );
@@ -670,27 +675,33 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return DropdownButtonFormField<String>(
       value: _selectedCategory,
+      style: const TextStyle(fontSize: 14, color: Colors.black87),
       decoration: InputDecoration(
         labelText: l10n.category,
-        prefixIcon: const Icon(Icons.category_outlined),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        ),
+        labelStyle: const TextStyle(fontSize: 13),
+        prefixIcon: const Icon(Icons.category_outlined, size: 20),
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
       items: AppConstants.categories.map((category) {
         return DropdownMenuItem(
           value: category['id'],
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 category['icon'] as String,
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 18),
               ),
-              const SizedBox(width: 12),
-              Text(
-                l10n.isVietnamese
-                    ? (category['name_vi'] as String)
-                    : (category['name_en'] as String),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  l10n.isVietnamese
+                      ? (category['name_vi'] as String)
+                      : (category['name_en'] as String),
+                  style: const TextStyle(fontSize: 14),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -709,16 +720,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return DropdownButtonFormField<String>(
       value: _selectedUnit,
+      style: const TextStyle(fontSize: 14, color: Colors.black87),
       decoration: InputDecoration(
         labelText: l10n.unit,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        ),
+        labelStyle: const TextStyle(fontSize: 13),
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
       items: AppConstants.units.map((unit) {
         return DropdownMenuItem(
           value: unit,
-          child: Text(unit),
+          child: Text(unit, style: const TextStyle(fontSize: 14)),
         );
       }).toList(),
       onChanged: (value) {
@@ -740,25 +752,30 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return DropdownButtonFormField<String>(
       value: _selectedLocation,
+      style: const TextStyle(fontSize: 14, color: Colors.black87),
       decoration: InputDecoration(
         labelText: l10n.location,
-        prefixIcon: const Icon(Icons.location_on_outlined),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-        ),
+        labelStyle: const TextStyle(fontSize: 13),
+        prefixIcon: const Icon(Icons.location_on_outlined, size: 20),
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
       items: locations.map((location) {
         return DropdownMenuItem(
           value: location['value'] as String,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 location['icon'] as IconData,
-                size: 20,
+                size: 18,
                 color: AppTheme.primaryColor,
               ),
-              const SizedBox(width: 12),
-              Text(location['label'] as String),
+              const SizedBox(width: 8),
+              Text(
+                location['label'] as String,
+                style: const TextStyle(fontSize: 14),
+              ),
             ],
           ),
         );
@@ -790,14 +807,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+      borderRadius: BorderRadius.circular(4),
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: const Icon(Icons.calendar_today_outlined),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-          ),
+          labelStyle: const TextStyle(fontSize: 13),
+          prefixIcon: const Icon(Icons.calendar_today_outlined, size: 20),
+          border: const OutlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         ),
         child: Text(
           date != null
@@ -805,9 +822,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
               : isRequired
                   ? l10n.selectDate
                   : l10n.none,
-          style: date != null
-              ? Theme.of(context).textTheme.bodyMedium
-              : Theme.of(context).textTheme.bodySmall,
+          style: TextStyle(
+            fontSize: 14,
+            color: date != null ? Colors.black87 : Colors.black54,
+          ),
         ),
       ),
     );
