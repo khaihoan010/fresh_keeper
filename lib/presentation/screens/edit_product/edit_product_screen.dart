@@ -391,9 +391,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
           ),
         );
       }).toList(),
-      onChanged: (value) {
+      onChanged: (value) async {
         if (value != null) {
           setState(() => _selectedLocation = value);
+
+          // Recalculate expiry date if product has template
+          if (widget.product.productTemplateId != null) {
+            final provider = context.read<ProductProvider>();
+            final template = await provider.getTemplate(widget.product.productTemplateId!);
+
+            if (template != null) {
+              setState(() {
+                _expiryDate = template.calculateExpiryDate(
+                  _purchaseDate,
+                  location: value,
+                );
+              });
+            }
+          }
         }
       },
     );

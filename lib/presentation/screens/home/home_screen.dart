@@ -468,7 +468,23 @@ class _AllItemsViewState extends State<AllItemsView> with AutomaticKeepAliveClie
       // Move products to selected location
       int movedCount = 0;
       for (final product in selectedProducts) {
-        final updatedProduct = product.copyWith(location: destination);
+        DateTime? newExpiryDate;
+
+        // Recalculate expiry date if product has template
+        if (product.productTemplateId != null) {
+          final template = await productProvider.getTemplate(product.productTemplateId!);
+          if (template != null) {
+            newExpiryDate = template.calculateExpiryDate(
+              product.purchaseDate,
+              location: destination,
+            );
+          }
+        }
+
+        final updatedProduct = product.copyWith(
+          location: destination,
+          expiryDate: newExpiryDate ?? product.expiryDate,
+        );
         final success = await productProvider.updateProduct(updatedProduct);
         if (success) movedCount++;
       }
