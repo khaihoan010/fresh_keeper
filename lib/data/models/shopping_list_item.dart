@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../../config/constants.dart';
 import 'nutrition_data.dart';
 import 'product_template.dart';
 import 'user_product.dart';
@@ -51,12 +52,15 @@ class ShoppingListItem {
     String? unit,
     required int sortOrder,
   }) {
+    // Use provided unit or get default unit for category
+    final defaultUnit = unit ?? AppConstants.getDefaultUnitForCategory(template.category);
+
     return ShoppingListItem(
       id: id,
       name: template.nameVi,
       nameEn: template.nameEn,
       quantity: quantity,
-      unit: unit ?? 'cái',
+      unit: defaultUnit,
       category: template.category,
       isPurchased: false,
       sortOrder: sortOrder,

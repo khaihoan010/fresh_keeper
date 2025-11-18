@@ -186,6 +186,31 @@ class AppConstants {
     }
   }
 
+  /// Get default unit for a category
+  static String getDefaultUnitForCategory(String category) {
+    switch (category.toLowerCase()) {
+      case 'fruits': // Trái cây
+        return 'kg';
+      case 'meat': // Thịt
+        return 'g';
+      case 'vegetables': // Rau củ quả
+        return 'kg';
+      case 'eggs': // Trứng
+        return 'quả';
+      case 'dry_food': // Đồ khô
+        return 'cái';
+      case 'dairy': // Sữa và chế phẩm
+        return 'hộp';
+      case 'frozen': // Đồ đông lạnh
+        return 'cái';
+      case 'condiments': // Gia vị
+        return 'gói';
+      case 'other': // Khác
+      default:
+        return 'cái';
+    }
+  }
+
   // Date Formats
   static const String dateFormat = 'dd/MM/yyyy';
   static const String dateTimeFormat = 'dd/MM/yyyy HH:mm';

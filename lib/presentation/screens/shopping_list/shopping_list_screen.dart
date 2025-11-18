@@ -60,95 +60,278 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
   void _showAddItemDialog() {
     final l10n = AppLocalizations.of(context);
     _textController.clear();
+    final searchController = TextEditingController();
     String selectedUnit = 'cái';
     String selectedCategory = 'other';
+    List<ProductTemplate> searchResults = [];
+    bool isSearching = false;
+    bool showManualInput = false;
 
     showDialog(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setDialogState) => AlertDialog(
-          title: Text(l10n.addItem),
-          content: SingleChildScrollView(
+        builder: (context, setDialogState) => Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            constraints: const BoxConstraints(maxHeight: 600),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: _textController,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    hintText: l10n.enterItemName,
-                    border: const OutlineInputBorder(),
+                // Title bar
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(28),
+                      topRight: Radius.circular(28),
+                    ),
                   ),
-                  textCapitalization: TextCapitalization.words,
-                  onSubmitted: (value) {
-                    if (value.trim().isNotEmpty) {
-                      _addItem(value.trim(), selectedUnit, selectedCategory);
-                      Navigator.pop(dialogContext);
-                    }
-                  },
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  value: selectedCategory,
-                  decoration: InputDecoration(
-                    labelText: l10n.category,
-                    border: const OutlineInputBorder(),
-                  ),
-                  items: AppConstants.categories.map((cat) {
-                    return DropdownMenuItem(
-                      value: cat['id'],
-                      child: Row(
-                        children: [
-                          Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
-                          const SizedBox(width: 8),
-                          Text(l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!),
-                        ],
+                  child: Row(
+                    children: [
+                      Icon(Icons.add_shopping_cart,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer),
+                      const SizedBox(width: 12),
+                      Text(
+                        l10n.addItem,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    if (value != null) {
-                      setDialogState(() => selectedCategory = value);
-                    }
-                  },
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  value: selectedUnit,
-                  decoration: InputDecoration(
-                    labelText: l10n.unit,
-                    border: const OutlineInputBorder(),
+                    ],
                   ),
-                  items: AppConstants.units.map((unit) {
-                    return DropdownMenuItem(
-                      value: unit,
-                      child: Text(unit),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    if (value != null) {
-                      setDialogState(() => selectedUnit = value);
-                    }
-                  },
+                ),
+                // Content
+                Flexible(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Search field
+                        TextField(
+                          controller: searchController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            hintText: l10n.searchProduct,
+                            prefixIcon: const Icon(Icons.search),
+                            suffixIcon: isSearching
+                                ? const Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(strokeWidth: 2),
+                                    ),
+                                  )
+                                : searchController.text.isNotEmpty
+                                    ? IconButton(
+                                        icon: const Icon(Icons.clear),
+                                        onPressed: () {
+                                          searchController.clear();
+                                          setDialogState(() {
+                                            searchResults = [];
+                                            showManualInput = false;
+                                          });
+                                        },
+                                      )
+                                    : null,
+                            border: const OutlineInputBorder(),
+                          ),
+                          onChanged: (query) async {
+                            if (query.length < 2) {
+                              setDialogState(() {
+                                searchResults = [];
+                                isSearching = false;
+                                showManualInput = false;
+                              });
+                              return;
+                            }
+
+                            setDialogState(() => isSearching = true);
+
+                            final productProvider = context.read<ProductProvider>();
+                            final results = await productProvider.searchTemplates(query);
+
+                            setDialogState(() {
+                              searchResults = results.take(10).toList();
+                              isSearching = false;
+                              showManualInput = results.isEmpty;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Search results
+                        if (searchResults.isNotEmpty)
+                          Container(
+                            constraints: const BoxConstraints(maxHeight: 300),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey[300]!),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: searchResults.length,
+                              itemBuilder: (context, index) {
+                                final template = searchResults[index];
+                                return ListTile(
+                                  dense: true,
+                                  leading: Text(
+                                    AppConstants.categoryIcons[template.category] ?? '📦',
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  title: Text(template.nameVi),
+                                  subtitle: Text(
+                                    template.nameEn,
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  trailing: const Icon(Icons.add_circle_outline),
+                                  onTap: () async {
+                                    Navigator.pop(dialogContext);
+                                    await _addItemFromTemplate(template);
+                                  },
+                                );
+                              },
+                            ),
+                          )
+                        else if (searchController.text.length >= 2 && !isSearching && showManualInput)
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Text(
+                                  l10n.noResults,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ),
+                              const Divider(),
+                              const SizedBox(height: 8),
+                              Text(
+                                l10n.enterProductName,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+
+                        // Manual input section (shown when no search or after "no results")
+                        if (searchController.text.isEmpty || showManualInput) ...[
+                          if (searchResults.isEmpty && searchController.text.length < 2)
+                            Text(
+                              l10n.enterProductName,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          const SizedBox(height: 8),
+                          TextField(
+                            controller: _textController,
+                            decoration: InputDecoration(
+                              hintText: l10n.enterItemName,
+                              border: const OutlineInputBorder(),
+                              prefixIcon: const Icon(Icons.edit),
+                            ),
+                            textCapitalization: TextCapitalization.words,
+                            onSubmitted: (value) {
+                              if (value.trim().isNotEmpty) {
+                                _addItem(value.trim(), selectedUnit, selectedCategory);
+                                Navigator.pop(dialogContext);
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          DropdownButtonFormField<String>(
+                            value: selectedCategory,
+                            decoration: InputDecoration(
+                              labelText: l10n.category,
+                              border: const OutlineInputBorder(),
+                            ),
+                            items: AppConstants.categories.map((cat) {
+                              return DropdownMenuItem(
+                                value: cat['id'],
+                                child: Row(
+                                  children: [
+                                    Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
+                                    const SizedBox(width: 8),
+                                    Flexible(
+                                      child: Text(
+                                        l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!,
+                                        style: const TextStyle(fontSize: 14),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              if (value != null) {
+                                setDialogState(() {
+                                  selectedCategory = value;
+                                  // Update default unit when category changes
+                                  selectedUnit = AppConstants.getDefaultUnitForCategory(value);
+                                });
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          DropdownButtonFormField<String>(
+                            value: selectedUnit,
+                            decoration: InputDecoration(
+                              labelText: l10n.unit,
+                              border: const OutlineInputBorder(),
+                            ),
+                            items: AppConstants.units.map((unit) {
+                              return DropdownMenuItem(
+                                value: unit,
+                                child: Text(unit),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              if (value != null) {
+                                setDialogState(() => selectedUnit = value);
+                              }
+                            },
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+                // Actions
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(28),
+                      bottomRight: Radius.circular(28),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(dialogContext),
+                        child: Text(l10n.cancel),
+                      ),
+                      const SizedBox(width: 8),
+                      if (searchResults.isEmpty || showManualInput)
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_textController.text.trim().isNotEmpty) {
+                              _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
+                              Navigator.pop(dialogContext);
+                            }
+                          },
+                          child: Text(l10n.add),
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(l10n.cancel),
-            ),
-            TextButton(
-              onPressed: () {
-                if (_textController.text.trim().isNotEmpty) {
-                  _addItem(_textController.text.trim(), selectedUnit, selectedCategory);
-                  Navigator.pop(dialogContext);
-                }
-              },
-              child: Text(l10n.add),
-            ),
-          ],
         ),
       ),
     );
