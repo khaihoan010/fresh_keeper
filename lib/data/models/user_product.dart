@@ -70,6 +70,9 @@ class UserProduct {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  // Custom icon feature (premium)
+  final String? customIconId;  // null = use category default icon
+
   UserProduct({
     String? id,
     String? productTemplateId,
@@ -87,6 +90,7 @@ class UserProduct {
     this.status = ProductStatus.active,
     DateTime? createdAt,
     DateTime? updatedAt,
+    this.customIconId,
   })  : productTemplateId = productTemplateId ?? templateId,
         id = id ?? const Uuid().v4(),
         createdAt = createdAt ?? DateTime.now(),
@@ -184,6 +188,7 @@ class UserProduct {
       'status': status.name,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
+      'custom_icon_id': customIconId,
     };
   }
 
@@ -208,6 +213,7 @@ class UserProduct {
       ),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
+      customIconId: json['custom_icon_id'] as String?,
     );
   }
 
@@ -228,6 +234,7 @@ class UserProduct {
     ProductStatus? status,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? customIconId,
   }) {
     return UserProduct(
       id: id ?? this.id,
@@ -245,6 +252,7 @@ class UserProduct {
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? DateTime.now(),
+      customIconId: customIconId ?? this.customIconId,
     );
   }
 
