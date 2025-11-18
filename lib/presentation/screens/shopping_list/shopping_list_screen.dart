@@ -6,6 +6,7 @@ import '../../../config/app_localizations.dart';
 import '../../../config/constants.dart';
 import '../../../data/models/shopping_list_item.dart';
 import '../../../data/models/user_product.dart';
+import '../../../data/models/product_template.dart';
 import '../../providers/shopping_list_provider.dart';
 import '../../providers/multi_select_provider.dart';
 import '../../providers/product_provider.dart';
@@ -158,6 +159,150 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     final l10n = AppLocalizations.of(context);
 
     final success = await provider.addItem(name, unit: unit, category: category);
+
+    if (mounted) {
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.itemAdded),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(provider.error ?? l10n.itemAlreadyExists),
+            backgroundColor: AppTheme.errorColor,
+          ),
+        );
+      }
+    }
+  }
+
+  void _showProductSearchDialog() {
+    final l10n = AppLocalizations.of(context);
+    final searchController = TextEditingController();
+    List<ProductTemplate> searchResults = [];
+    bool isSearching = false;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Row(
+            children: [
+              const Icon(Icons.search, size: 24),
+              const SizedBox(width: 8),
+              Text(l10n.searchProducts),
+            ],
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Search field
+                TextField(
+                  controller: searchController,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    hintText: l10n.searchProduct,
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: isSearching
+                        ? const Padding(
+                            padding: EdgeInsets.all(12),
+                            child: SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          )
+                        : searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  searchController.clear();
+                                  setDialogState(() {
+                                    searchResults = [];
+                                  });
+                                },
+                              )
+                            : null,
+                    border: const OutlineInputBorder(),
+                  ),
+                  onChanged: (query) async {
+                    if (query.length < 2) {
+                      setDialogState(() {
+                        searchResults = [];
+                        isSearching = false;
+                      });
+                      return;
+                    }
+
+                    setDialogState(() => isSearching = true);
+
+                    final productProvider = context.read<ProductProvider>();
+                    final results = await productProvider.searchTemplates(query);
+
+                    setDialogState(() {
+                      searchResults = results.take(10).toList();
+                      isSearching = false;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                // Search results
+                if (searchResults.isNotEmpty)
+                  Flexible(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        final template = searchResults[index];
+                        return ListTile(
+                          leading: Text(
+                            AppConstants.categoryIcons[template.category] ?? '📦',
+                            style: const TextStyle(fontSize: 24),
+                          ),
+                          title: Text(template.nameVi),
+                          subtitle: Text(template.nameEn),
+                          trailing: const Icon(Icons.add_circle_outline),
+                          onTap: () async {
+                            Navigator.pop(dialogContext);
+                            await _addItemFromTemplate(template);
+                          },
+                        );
+                      },
+                    ),
+                  )
+                else if (searchController.text.length >= 2 && !isSearching)
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      l10n.noResults,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(l10n.cancel),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _addItemFromTemplate(ProductTemplate template) async {
+    final provider = context.read<ShoppingListProvider>();
+    final l10n = AppLocalizations.of(context);
+
+    final success = await provider.addItemFromTemplate(template);
 
     if (mounted) {
       if (success) {
@@ -430,6 +575,12 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                   automaticallyImplyLeading: false,
                   title: Text(l10n.shoppingList),
                   actions: [
+                    // Product Search - Search and add products with nutrition data
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: _showProductSearchDialog,
+                      tooltip: l10n.searchProducts,
+                    ),
                     // Quick Add - Add all 0 quantity products
                     IconButton(
                       icon: const Icon(Icons.flash_on),

@@ -6,6 +6,7 @@ import '../../../config/routes.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
 import '../../../data/models/user_product.dart';
+import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/multi_select_provider.dart';
 import '../../providers/shopping_list_provider.dart';
@@ -220,13 +221,19 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     // Handle move
     if (destination == 'shopping_list') {
-      // Add product names with units to shopping list and delete original products
-      final items = selectedProducts.map((p) => {
-        'name': p.name,
-        'unit': p.unit,
-        'category': p.category,
-      }).toList();
-      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
+      // Add products to shopping list with nutrition data preserved
+      int addedCount = 0;
+      for (final product in selectedProducts) {
+        // Look up template if product has templateId
+        ProductTemplate? template;
+        if (product.productTemplateId != null) {
+          template = await productProvider.getProductTemplate(product.productTemplateId!);
+        }
+
+        // Add to shopping list with nutrition data
+        final success = await shoppingListProvider.addItemFromUserProduct(product, template);
+        if (success) addedCount++;
+      }
 
       // Delete original products from inventory
       for (final product in selectedProducts) {
@@ -364,12 +371,19 @@ class _ExpiringSoonScreenState extends State<ExpiringSoonScreen> with SingleTick
 
     // Handle copy
     if (destination == 'shopping_list') {
-      // Add product names with units to shopping list
-      final items = selectedProducts.map((p) => {
-        'name': p.name,
-        'unit': p.unit,
-      }).toList();
-      final addedCount = await shoppingListProvider.addItemsWithUnits(items);
+      // Add products to shopping list with nutrition data preserved
+      int addedCount = 0;
+      for (final product in selectedProducts) {
+        // Look up template if product has templateId
+        ProductTemplate? template;
+        if (product.productTemplateId != null) {
+          template = await productProvider.getProductTemplate(product.productTemplateId!);
+        }
+
+        // Add to shopping list with nutrition data
+        final success = await shoppingListProvider.addItemFromUserProduct(product, template);
+        if (success) addedCount++;
+      }
 
       if (mounted) {
         multiSelectProvider.exitMultiSelectMode();

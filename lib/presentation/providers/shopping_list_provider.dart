@@ -4,6 +4,8 @@ import 'package:uuid/uuid.dart';
 
 import '../../config/constants.dart';
 import '../../data/models/shopping_list_item.dart';
+import '../../data/models/product_template.dart';
+import '../../data/models/user_product.dart';
 import '../../services/database_service.dart';
 
 /// Shopping List Provider
@@ -82,6 +84,86 @@ class ShoppingListProvider with ChangeNotifier {
     } catch (e) {
       _error = 'Failed to add item: $e';
       debugPrint('❌ Error adding item: $e');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  /// Add item from product template (with nutrition data preserved)
+  Future<bool> addItemFromTemplate(
+    ProductTemplate template, {
+    double quantity = 1.0,
+    String? unit,
+  }) async {
+    // Check for duplicates
+    if (_items.any((item) => item.name.toLowerCase() == template.nameVi.toLowerCase())) {
+      _error = 'Item already exists in shopping list';
+      notifyListeners();
+      return false;
+    }
+
+    try {
+      final db = await _databaseService.database;
+      final newItem = ShoppingListItem.fromTemplate(
+        template,
+        id: _uuid.v4(),
+        quantity: quantity,
+        unit: unit,
+        sortOrder: _items.length,
+      );
+
+      await db.insert(
+        AppConstants.tableShoppingList,
+        newItem.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      _items.add(newItem);
+      debugPrint('✅ Added item from template: ${newItem.name} (with nutrition data: ${newItem.nutritionData != null})');
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _error = 'Failed to add item from template: $e';
+      debugPrint('❌ Error adding item from template: $e');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  /// Add item from user product (when moving from fridge to shopping list)
+  /// Preserves nutrition data if template is provided
+  Future<bool> addItemFromUserProduct(
+    UserProduct product,
+    ProductTemplate? template,
+  ) async {
+    // Check for duplicates
+    if (_items.any((item) => item.name.toLowerCase() == product.name.toLowerCase())) {
+      _error = 'Item already exists in shopping list';
+      notifyListeners();
+      return false;
+    }
+
+    try {
+      final db = await _databaseService.database;
+      final newItem = ShoppingListItem.fromUserProduct(
+        product,
+        template,
+        sortOrder: _items.length,
+      );
+
+      await db.insert(
+        AppConstants.tableShoppingList,
+        newItem.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      _items.add(newItem);
+      debugPrint('✅ Added item from user product: ${newItem.name} (with nutrition data: ${newItem.nutritionData != null})');
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _error = 'Failed to add item from user product: $e';
+      debugPrint('❌ Error adding item from user product: $e');
       notifyListeners();
       return false;
     }
