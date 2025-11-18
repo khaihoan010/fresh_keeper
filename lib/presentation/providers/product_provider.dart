@@ -443,6 +443,16 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
+  /// Get product template by ID
+  Future<ProductTemplate?> getProductTemplate(String id) async {
+    try {
+      return await _repository.getProductTemplate(id);
+    } catch (e) {
+      debugPrint('❌ Exception getting template by ID: $e');
+      return null;
+    }
+  }
+
   /// Search user products
   Future<List<UserProduct>> searchProducts(String query) async {
     if (query.trim().length < 2) {
