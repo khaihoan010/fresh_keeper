@@ -954,51 +954,135 @@ class _ProductCardState extends State<_ProductCard> {
   }
 
   void _showQuantityEditDialog() {
+    final l10n = AppLocalizations.of(context);
     final formattedQty = _currentQuantity == _currentQuantity.roundToDouble()
         ? _currentQuantity.toInt().toString()
         : _currentQuantity.toString();
     final controller = TextEditingController(text: formattedQty);
+
     showDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Số lượng'),
-        content: TextField(
-          controller: controller,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          autofocus: true,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-          ),
-          onSubmitted: (value) {
-            final qty = double.tryParse(value) ?? _currentQuantity;
-            if (qty >= 0) {
-              setState(() {
-                _currentQuantity = qty;
-              });
-              _updateProductQuantity();
-            }
-            Navigator.pop(dialogContext);
-          },
+      builder: (dialogContext) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Hủy'),
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          constraints: const BoxConstraints(maxHeight: 300),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header with close button
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit_outlined,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        l10n.isVietnamese ? 'Chỉnh sửa số lượng' : 'Edit Quantity',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.close,
+                        size: 20,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                      onPressed: () => Navigator.pop(dialogContext),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Content
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    controller: controller,
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    autofocus: true,
+                    style: const TextStyle(fontSize: 14),
+                    decoration: InputDecoration(
+                      labelText: l10n.isVietnamese ? 'Số lượng' : 'Quantity',
+                      labelStyle: const TextStyle(fontSize: 13),
+                      hintText: '1',
+                      hintStyle: const TextStyle(fontSize: 14),
+                      prefixIcon: const Icon(Icons.numbers, size: 20),
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    ),
+                    onSubmitted: (value) {
+                      final qty = double.tryParse(value) ?? _currentQuantity;
+                      if (qty >= 0) {
+                        setState(() {
+                          _currentQuantity = qty;
+                        });
+                        _updateProductQuantity();
+                      }
+                      Navigator.pop(dialogContext);
+                    },
+                  ),
+                ),
+              ),
+
+              // Save button (full-width at bottom)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.grey[200]!,
+                      width: 1,
+                    ),
+                  ),
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    onPressed: () {
+                      final qty = double.tryParse(controller.text) ?? _currentQuantity;
+                      if (qty >= 0) {
+                        setState(() {
+                          _currentQuantity = qty;
+                        });
+                        _updateProductQuantity();
+                      }
+                      Navigator.pop(dialogContext);
+                    },
+                    child: Text(
+                      l10n.isVietnamese ? 'Lưu' : 'Save',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              final qty = double.tryParse(controller.text) ?? _currentQuantity;
-              if (qty >= 0) {
-                setState(() {
-                  _currentQuantity = qty;
-                });
-                _updateProductQuantity();
-              }
-              Navigator.pop(dialogContext);
-            },
-            child: const Text('OK'),
-          ),
-        ],
+        ),
       ),
     );
   }
