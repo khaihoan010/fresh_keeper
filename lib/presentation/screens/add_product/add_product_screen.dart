@@ -901,180 +901,275 @@ class _AddProductScreenState extends State<AddProductScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setState) => AlertDialog(
-          title: Row(
-            children: [
-              Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
-              const SizedBox(width: 12),
-              Text(l10n.createCustomTemplate),
-            ],
+        builder: (context, setState) => Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-          content: SingleChildScrollView(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            width: MediaQuery.of(this.context).size.width * 0.9,
+            constraints: const BoxConstraints(maxHeight: 650),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Template Name
-                TextField(
-                  controller: nameController,
-                  decoration: InputDecoration(
-                    labelText: l10n.templateName,
-                    hintText: l10n.enterTemplateName,
-                    prefixIcon: const Icon(Icons.label_outline),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                    ),
+                // Header with close button
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(this.context).colorScheme.primaryContainer,
                   ),
-                  autofocus: initialName.isEmpty,
-                ),
-                const SizedBox(height: 16),
-
-                // Category Selector
-                DropdownButtonFormField<String>(
-                  value: selectedCategory,
-                  decoration: InputDecoration(
-                    labelText: l10n.category,
-                    prefixIcon: const Icon(Icons.category_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                    ),
-                  ),
-                  items: AppConstants.categories.map((cat) {
-                    return DropdownMenuItem(
-                      value: cat['id'],
-                      child: Row(
-                        children: [
-                          Text(cat['icon']!, style: const TextStyle(fontSize: 20)),
-                          const SizedBox(width: 12),
-                          Text(l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!),
-                        ],
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add_circle_outline,
+                        color: Theme.of(this.context).colorScheme.onPrimaryContainer,
+                        size: 20,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() => selectedCategory = value);
-                    }
-                  },
-                ),
-                const SizedBox(height: 16),
-
-                // Shelf Life Section
-                Text(
-                  l10n.shelfLifeOptional,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          l10n.createCustomTemplate,
+                          style: Theme.of(this.context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(this.context).colorScheme.onPrimaryContainer,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          size: 20,
+                          color: Theme.of(this.context).colorScheme.onPrimaryContainer,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 12),
 
-                // Fridge Shelf Life
-                TextField(
-                  controller: fridgeLifeController,
-                  decoration: InputDecoration(
-                    labelText: l10n.fridgeShelfLife,
-                    hintText: '7',
-                    prefixIcon: const Icon(Icons.kitchen_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                // Content
+                Flexible(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Template Name
+                        TextField(
+                          controller: nameController,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            labelText: l10n.templateName,
+                            labelStyle: const TextStyle(fontSize: 13),
+                            hintText: l10n.enterTemplateName,
+                            hintStyle: const TextStyle(fontSize: 14),
+                            prefixIcon: const Icon(Icons.label_outline, size: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          ),
+                          autofocus: initialName.isEmpty,
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Category Selector
+                        DropdownButtonFormField<String>(
+                          value: selectedCategory,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            labelText: l10n.category,
+                            labelStyle: const TextStyle(fontSize: 13),
+                            prefixIcon: const Icon(Icons.category_outlined, size: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          ),
+                          items: AppConstants.categories.map((cat) {
+                            return DropdownMenuItem(
+                              value: cat['id'],
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(cat['icon']!, style: const TextStyle(fontSize: 18)),
+                                  const SizedBox(width: 8),
+                                  Flexible(
+                                    child: Text(
+                                      l10n.isVietnamese ? cat['name_vi']! : cat['name_en']!,
+                                      style: const TextStyle(fontSize: 14),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            if (value != null) {
+                              setState(() => selectedCategory = value);
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Shelf Life Section Header
+                        Text(
+                          l10n.shelfLifeOptional,
+                          style: Theme.of(this.context).textTheme.titleSmall?.copyWith(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Fridge Shelf Life
+                        TextField(
+                          controller: fridgeLifeController,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            labelText: l10n.fridgeShelfLife,
+                            labelStyle: const TextStyle(fontSize: 13),
+                            hintText: '7',
+                            hintStyle: const TextStyle(fontSize: 14),
+                            prefixIcon: const Icon(Icons.kitchen_outlined, size: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Freezer Shelf Life
+                        TextField(
+                          controller: freezerLifeController,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            labelText: l10n.freezerShelfLife,
+                            labelStyle: const TextStyle(fontSize: 13),
+                            hintText: '30',
+                            hintStyle: const TextStyle(fontSize: 14),
+                            prefixIcon: const Icon(Icons.ac_unit_outlined, size: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Pantry Shelf Life
+                        TextField(
+                          controller: pantryLifeController,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            labelText: l10n.pantryShelfLife,
+                            labelStyle: const TextStyle(fontSize: 13),
+                            hintText: '14',
+                            hintStyle: const TextStyle(fontSize: 14),
+                            prefixIcon: const Icon(Icons.inventory_2_outlined, size: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ],
                     ),
                   ),
-                  keyboardType: TextInputType.number,
                 ),
-                const SizedBox(height: 12),
 
-                // Freezer Shelf Life
-                TextField(
-                  controller: freezerLifeController,
-                  decoration: InputDecoration(
-                    labelText: l10n.freezerShelfLife,
-                    hintText: '30',
-                    prefixIcon: const Icon(Icons.ac_unit_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                // Save button (full-width at bottom)
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey[200]!,
+                        width: 1,
+                      ),
                     ),
                   ),
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: 12),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      onPressed: () async {
+                        final name = nameController.text.trim();
+                        if (name.isEmpty) {
+                          ScaffoldMessenger.of(this.context).showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.pleaseEnterProductName),
+                              backgroundColor: AppTheme.errorColor,
+                            ),
+                          );
+                          return;
+                        }
 
-                // Pantry Shelf Life
-                TextField(
-                  controller: pantryLifeController,
-                  decoration: InputDecoration(
-                    labelText: l10n.pantryShelfLife,
-                    hintText: '14',
-                    prefixIcon: const Icon(Icons.inventory_2_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                        // Create custom template
+                        final template = ProductTemplate(
+                          id: 'custom_${DateTime.now().millisecondsSinceEpoch}',
+                          nameVi: name,
+                          nameEn: name,
+                          aliases: [],
+                          category: selectedCategory,
+                          shelfLifeRefrigerated: int.tryParse(fridgeLifeController.text),
+                          shelfLifeFrozen: int.tryParse(freezerLifeController.text),
+                          shelfLifePantry: int.tryParse(pantryLifeController.text),
+                        );
+
+                        // Save to database
+                        final provider = this.context.read<ProductProvider>();
+                        final result = await provider.saveCustomTemplate(template);
+
+                        if (mounted) {
+                          Navigator.pop(context);
+
+                          if (result) {
+                            ScaffoldMessenger.of(this.context).showSnackBar(
+                              SnackBar(
+                                content: Text(l10n.templateCreated),
+                                backgroundColor: AppTheme.successColor,
+                              ),
+                            );
+
+                            // Select the newly created template
+                            _selectTemplate(template);
+                          } else {
+                            ScaffoldMessenger.of(this.context).showSnackBar(
+                              SnackBar(
+                                content: Text(l10n.isVietnamese
+                                    ? 'Không thể tạo mẫu'
+                                    : 'Cannot create template'),
+                                backgroundColor: AppTheme.errorColor,
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: Text(
+                        l10n.save,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
-                  keyboardType: TextInputType.number,
                 ),
               ],
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(l10n.cancel),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final name = nameController.text.trim();
-                if (name.isEmpty) {
-                  ScaffoldMessenger.of(this.context).showSnackBar(
-                    SnackBar(
-                      content: Text(l10n.pleaseEnterProductName),
-                      backgroundColor: AppTheme.errorColor,
-                    ),
-                  );
-                  return;
-                }
-
-                // Create custom template
-                final template = ProductTemplate(
-                  id: 'custom_${DateTime.now().millisecondsSinceEpoch}',
-                  nameVi: name,
-                  nameEn: name,
-                  aliases: [],
-                  category: selectedCategory,
-                  shelfLifeRefrigerated: int.tryParse(fridgeLifeController.text),
-                  shelfLifeFrozen: int.tryParse(freezerLifeController.text),
-                  shelfLifePantry: int.tryParse(pantryLifeController.text),
-                );
-
-                // Save to database
-                final provider = this.context.read<ProductProvider>();
-                final result = await provider.saveCustomTemplate(template);
-
-                if (mounted) {
-                  Navigator.pop(context);
-
-                  if (result) {
-                    ScaffoldMessenger.of(this.context).showSnackBar(
-                      SnackBar(
-                        content: Text(l10n.templateCreated),
-                        backgroundColor: AppTheme.successColor,
-                      ),
-                    );
-
-                    // Select the newly created template
-                    _selectTemplate(template);
-                  } else {
-                    ScaffoldMessenger.of(this.context).showSnackBar(
-                      SnackBar(
-                        content: Text(l10n.isVietnamese
-                            ? 'Không thể tạo mẫu'
-                            : 'Cannot create template'),
-                        backgroundColor: AppTheme.errorColor,
-                      ),
-                    );
-                  }
-                }
-              },
-              child: Text(l10n.save),
-            ),
-          ],
         ),
       ),
     );
