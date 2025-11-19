@@ -583,7 +583,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               ),
               IconButton(
                 icon: Icon(
-                  Icons.swap_horiz,
+                  Icons.sync_alt,
                   color: AppTheme.primaryColor,
                 ),
                 tooltip: _showTotalNutrition
