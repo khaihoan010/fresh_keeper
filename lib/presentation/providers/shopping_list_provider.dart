@@ -132,35 +132,65 @@ class ShoppingListProvider with ChangeNotifier {
 
   /// Add item from user product (when moving from fridge to shopping list)
   /// Preserves nutrition data if template is provided
+  /// If item already exists, updates it with the new icon and other data
   Future<bool> addItemFromUserProduct(
     UserProduct product,
     ProductTemplate? template,
   ) async {
-    // Check for duplicates
-    if (_items.any((item) => item.name.toLowerCase() == product.name.toLowerCase())) {
-      _error = 'Item already exists in shopping list';
-      notifyListeners();
-      return false;
-    }
-
     try {
       final db = await _databaseService.database;
-      final newItem = ShoppingListItem.fromUserProduct(
-        product,
-        template,
-        sortOrder: _items.length,
+
+      // Check if item already exists
+      final existingIndex = _items.indexWhere(
+        (item) => item.name.toLowerCase() == product.name.toLowerCase()
       );
 
-      await db.insert(
-        AppConstants.tableShoppingList,
-        newItem.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      if (existingIndex != -1) {
+        // Item exists - update it with new icon and data
+        final existingItem = _items[existingIndex];
+        final updatedItem = existingItem.copyWith(
+          customIconId: product.customIconId,
+          quantity: product.quantity,
+          unit: product.unit,
+          category: product.category,
+          nameEn: product.nameEn,
+          productTemplateId: product.productTemplateId,
+          nutritionData: template?.nutritionData,
+          healthBenefits: template?.healthBenefits,
+          healthWarnings: template?.healthWarnings,
+          storageTips: template?.storageTips,
+        );
 
-      _items.add(newItem);
-      debugPrint('✅ Added item from user product: ${newItem.name} (with nutrition data: ${newItem.nutritionData != null})');
-      notifyListeners();
-      return true;
+        await db.update(
+          AppConstants.tableShoppingList,
+          updatedItem.toMap(),
+          where: 'id = ?',
+          whereArgs: [existingItem.id],
+        );
+
+        _items[existingIndex] = updatedItem;
+        debugPrint('✅ Updated existing item with new icon: ${updatedItem.name} (customIconId: ${updatedItem.customIconId})');
+        notifyListeners();
+        return true;
+      } else {
+        // Item doesn't exist - add new item
+        final newItem = ShoppingListItem.fromUserProduct(
+          product,
+          template,
+          sortOrder: _items.length,
+        );
+
+        await db.insert(
+          AppConstants.tableShoppingList,
+          newItem.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+
+        _items.add(newItem);
+        debugPrint('✅ Added item from user product: ${newItem.name} (with nutrition data: ${newItem.nutritionData != null})');
+        notifyListeners();
+        return true;
+      }
     } catch (e) {
       _error = 'Failed to add item from user product: $e';
       debugPrint('❌ Error adding item from user product: $e');

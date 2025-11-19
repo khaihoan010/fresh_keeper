@@ -10,6 +10,7 @@ import '../../../data/models/user_product.dart';
 import '../../../utils/date_utils.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/icon_picker_dialog.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// Edit Product Screen
 /// Form to edit existing products
@@ -411,12 +412,25 @@ class _EditProductScreenState extends State<EditProductScreen> {
     final l10n = AppLocalizations.of(context);
 
     // Get current icon to display
-    String displayIcon;
+    Widget displayIcon;
     if (_selectedIconId != null) {
       final icon = ProductIcons.getIconById(_selectedIconId);
-      displayIcon = icon?.emoji ?? (AppConstants.categoryIcons[_selectedCategory] ?? '📦');
+      if (icon != null) {
+        // Use ProductIconWidget to properly render 3D PNG/SVG icons
+        displayIcon = ProductIconWidget(icon: icon, size: 32);
+      } else {
+        // Fallback to category icon as text emoji
+        displayIcon = Text(
+          AppConstants.categoryIcons[_selectedCategory] ?? '📦',
+          style: const TextStyle(fontSize: 32),
+        );
+      }
     } else {
-      displayIcon = AppConstants.categoryIcons[_selectedCategory] ?? '📦';
+      // Use category icon as text emoji
+      displayIcon = Text(
+        AppConstants.categoryIcons[_selectedCategory] ?? '📦',
+        style: const TextStyle(fontSize: 32),
+      );
     }
 
     return InkWell(
@@ -433,10 +447,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ),
         child: Row(
           children: [
-            Text(
-              displayIcon,
-              style: const TextStyle(fontSize: 32),
-            ),
+            displayIcon,
             const SizedBox(width: 12),
             Expanded(
               child: Text(
