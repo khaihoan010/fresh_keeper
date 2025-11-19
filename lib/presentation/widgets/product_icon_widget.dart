@@ -5,7 +5,7 @@ import '../../data/models/product_icon.dart';
 
 /// Product Icon Widget
 /// Renders product icons with support for both emoji and SVG assets
-/// - If icon has assetPath: renders SVG from assets
+/// - If icon has assetPath: renders SVG from assets (with emoji fallback on error)
 /// - If icon has no assetPath: renders emoji as text
 class ProductIconWidget extends StatelessWidget {
   final ProductIcon icon;
@@ -22,16 +22,33 @@ class ProductIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (icon.hasSvgAsset) {
-      // Render SVG asset
-      return SvgPicture.asset(
-        icon.assetPath!,
-        width: size,
-        height: size,
-        colorFilter: color != null
-            ? ColorFilter.mode(color!, BlendMode.srcIn)
-            : null,
-        placeholderBuilder: (context) => _buildEmojiPlaceholder(),
-      );
+      // Check if it's a PNG or SVG file
+      final isPng = icon.assetPath!.toLowerCase().endsWith('.png');
+
+      if (isPng) {
+        // Render PNG asset (3D icons)
+        return Image.asset(
+          icon.assetPath!,
+          width: size,
+          height: size,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) => _buildEmojiPlaceholder(),
+          // Show emoji if PNG fails to load
+        );
+      } else {
+        // Render SVG asset (Flat icons)
+        return SvgPicture.asset(
+          icon.assetPath!,
+          width: size,
+          height: size,
+          colorFilter: color != null
+              ? ColorFilter.mode(color!, BlendMode.srcIn)
+              : null,
+          placeholderBuilder: (context) => _buildEmojiPlaceholder(),
+          // Show emoji if SVG fails to load
+          fit: BoxFit.contain,
+        );
+      }
     } else {
       // Render emoji as text (fallback)
       return _buildEmojiPlaceholder();
