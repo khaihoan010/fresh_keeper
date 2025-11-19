@@ -583,12 +583,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
               ),
               IconButton(
                 icon: Icon(
-                  _showTotalNutrition ? Icons.calculate_outlined : Icons.scale_outlined,
+                  Icons.swap_horiz,
                   color: AppTheme.primaryColor,
                 ),
                 tooltip: _showTotalNutrition
-                    ? (l10n.isVietnamese ? 'Hiển thị trên 100g' : 'Show per 100g')
-                    : (l10n.isVietnamese ? 'Hiển thị tổng theo khối lượng' : 'Show total by quantity'),
+                    ? (l10n.isVietnamese ? 'Chuyển về 100g' : 'Switch to per 100g')
+                    : (l10n.isVietnamese ? 'Chuyển sang tổng' : 'Switch to total'),
                 onPressed: () {
                   setState(() {
                     _showTotalNutrition = !_showTotalNutrition;
