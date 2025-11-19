@@ -1,5 +1,10 @@
 {
   "flat": {
+    "amphora": {
+      "filename": "amphora.svg",
+      "path": "assets/product_icons/flat/amphora.svg",
+      "category": "other"
+    },
     "apple_green": {
       "filename": "apple_green.svg",
       "path": "assets/product_icons/flat/apple_green.svg",
@@ -13,6 +18,11 @@
     "avocado": {
       "filename": "avocado.svg",
       "path": "assets/product_icons/flat/avocado.svg",
+      "category": "other"
+    },
+    "baby_bottle": {
+      "filename": "baby_bottle.svg",
+      "path": "assets/product_icons/flat/baby_bottle.svg",
       "category": "other"
     },
     "bacon": {
@@ -35,6 +45,26 @@
       "path": "assets/product_icons/flat/banana.svg",
       "category": "fruits"
     },
+    "barley": {
+      "filename": "barley.svg",
+      "path": "assets/product_icons/flat/barley.svg",
+      "category": "other"
+    },
+    "basil": {
+      "filename": "basil.svg",
+      "path": "assets/product_icons/flat/basil.svg",
+      "category": "other"
+    },
+    "bay_leaf": {
+      "filename": "bay_leaf.svg",
+      "path": "assets/product_icons/flat/bay_leaf.svg",
+      "category": "other"
+    },
+    "bean_sprouts": {
+      "filename": "bean_sprouts.svg",
+      "path": "assets/product_icons/flat/bean_sprouts.svg",
+      "category": "dry_food"
+    },
     "beans": {
       "filename": "beans.svg",
       "path": "assets/product_icons/flat/beans.svg",
@@ -45,19 +75,64 @@
       "path": "assets/product_icons/flat/beef.svg",
       "category": "meat"
     },
+    "beer": {
+      "filename": "beer.svg",
+      "path": "assets/product_icons/flat/beer.svg",
+      "category": "other"
+    },
     "bell_pepper": {
       "filename": "bell_pepper.svg",
       "path": "assets/product_icons/flat/bell_pepper.svg",
       "category": "vegetables"
+    },
+    "bell_pepper_green": {
+      "filename": "bell_pepper_green.svg",
+      "path": "assets/product_icons/flat/bell_pepper_green.svg",
+      "category": "vegetables"
+    },
+    "bento": {
+      "filename": "bento.svg",
+      "path": "assets/product_icons/flat/bento.svg",
+      "category": "other"
+    },
+    "beverage_box": {
+      "filename": "beverage_box.svg",
+      "path": "assets/product_icons/flat/beverage_box.svg",
+      "category": "other"
+    },
+    "birthday_cake": {
+      "filename": "birthday_cake.svg",
+      "path": "assets/product_icons/flat/birthday_cake.svg",
+      "category": "other"
+    },
+    "birthday_cake_lit": {
+      "filename": "birthday_cake_lit.svg",
+      "path": "assets/product_icons/flat/birthday_cake_lit.svg",
+      "category": "other"
+    },
+    "black_beans": {
+      "filename": "black_beans.svg",
+      "path": "assets/product_icons/flat/black_beans.svg",
+      "category": "dry_food"
     },
     "blueberries": {
       "filename": "blueberries.svg",
       "path": "assets/product_icons/flat/blueberries.svg",
       "category": "other"
     },
+    "blueberry": {
+      "filename": "blueberry.svg",
+      "path": "assets/product_icons/flat/blueberry.svg",
+      "category": "fruits"
+    },
     "bottle": {
       "filename": "bottle.svg",
       "path": "assets/product_icons/flat/bottle.svg",
+      "category": "other"
+    },
+    "bowl_with_spoon": {
+      "filename": "bowl_with_spoon.svg",
+      "path": "assets/product_icons/flat/bowl_with_spoon.svg",
       "category": "other"
     },
     "bread": {
@@ -70,19 +145,44 @@
       "path": "assets/product_icons/flat/broccoli.svg",
       "category": "vegetables"
     },
+    "bubble_tea": {
+      "filename": "bubble_tea.svg",
+      "path": "assets/product_icons/flat/bubble_tea.svg",
+      "category": "other"
+    },
+    "burrito": {
+      "filename": "burrito.svg",
+      "path": "assets/product_icons/flat/burrito.svg",
+      "category": "other"
+    },
     "butter": {
       "filename": "butter.svg",
       "path": "assets/product_icons/flat/butter.svg",
       "category": "dairy"
+    },
+    "button_mushroom": {
+      "filename": "button_mushroom.svg",
+      "path": "assets/product_icons/flat/button_mushroom.svg",
+      "category": "vegetables"
     },
     "cabbage": {
       "filename": "cabbage.svg",
       "path": "assets/product_icons/flat/cabbage.svg",
       "category": "vegetables"
     },
+    "cake": {
+      "filename": "cake.svg",
+      "path": "assets/product_icons/flat/cake.svg",
+      "category": "other"
+    },
     "candy": {
       "filename": "candy.svg",
       "path": "assets/product_icons/flat/candy.svg",
+      "category": "other"
+    },
+    "canned_food": {
+      "filename": "canned_food.svg",
+      "path": "assets/product_icons/flat/canned_food.svg",
       "category": "other"
     },
     "carrot": {
@@ -90,15 +190,30 @@
       "path": "assets/product_icons/flat/carrot.svg",
       "category": "vegetables"
     },
+    "cassava": {
+      "filename": "cassava.svg",
+      "path": "assets/product_icons/flat/cassava.svg",
+      "category": "other"
+    },
     "cauliflower": {
       "filename": "cauliflower.svg",
       "path": "assets/product_icons/flat/cauliflower.svg",
       "category": "vegetables"
     },
+    "cayenne": {
+      "filename": "cayenne.svg",
+      "path": "assets/product_icons/flat/cayenne.svg",
+      "category": "other"
+    },
     "cereal": {
       "filename": "cereal.svg",
       "path": "assets/product_icons/flat/cereal.svg",
       "category": "other"
+    },
+    "champagne": {
+      "filename": "champagne.svg",
+      "path": "assets/product_icons/flat/champagne.svg",
+      "category": "meat"
     },
     "cheese": {
       "filename": "cheese.svg",
@@ -120,9 +235,49 @@
       "path": "assets/product_icons/flat/chicken.svg",
       "category": "meat"
     },
+    "chickpeas": {
+      "filename": "chickpeas.svg",
+      "path": "assets/product_icons/flat/chickpeas.svg",
+      "category": "vegetables"
+    },
+    "chili_powder": {
+      "filename": "chili_powder.svg",
+      "path": "assets/product_icons/flat/chili_powder.svg",
+      "category": "other"
+    },
     "chocolate": {
       "filename": "chocolate.svg",
       "path": "assets/product_icons/flat/chocolate.svg",
+      "category": "other"
+    },
+    "chocolate_bar": {
+      "filename": "chocolate_bar.svg",
+      "path": "assets/product_icons/flat/chocolate_bar.svg",
+      "category": "other"
+    },
+    "chopsticks": {
+      "filename": "chopsticks.svg",
+      "path": "assets/product_icons/flat/chopsticks.svg",
+      "category": "other"
+    },
+    "chopsticks_food": {
+      "filename": "chopsticks_food.svg",
+      "path": "assets/product_icons/flat/chopsticks_food.svg",
+      "category": "other"
+    },
+    "cilantro": {
+      "filename": "cilantro.svg",
+      "path": "assets/product_icons/flat/cilantro.svg",
+      "category": "other"
+    },
+    "clinking_beer_mugs": {
+      "filename": "clinking_beer_mugs.svg",
+      "path": "assets/product_icons/flat/clinking_beer_mugs.svg",
+      "category": "other"
+    },
+    "cocktail": {
+      "filename": "cocktail.svg",
+      "path": "assets/product_icons/flat/cocktail.svg",
       "category": "other"
     },
     "coconut": {
@@ -130,15 +285,35 @@
       "path": "assets/product_icons/flat/coconut.svg",
       "category": "dry_food"
     },
+    "coffee": {
+      "filename": "coffee.svg",
+      "path": "assets/product_icons/flat/coffee.svg",
+      "category": "other"
+    },
+    "condensed_milk": {
+      "filename": "condensed_milk.svg",
+      "path": "assets/product_icons/flat/condensed_milk.svg",
+      "category": "dairy"
+    },
     "cookie": {
       "filename": "cookie.svg",
       "path": "assets/product_icons/flat/cookie.svg",
+      "category": "other"
+    },
+    "cooking": {
+      "filename": "cooking.svg",
+      "path": "assets/product_icons/flat/cooking.svg",
       "category": "other"
     },
     "corn": {
       "filename": "corn.svg",
       "path": "assets/product_icons/flat/corn.svg",
       "category": "other"
+    },
+    "cottage_cheese": {
+      "filename": "cottage_cheese.svg",
+      "path": "assets/product_icons/flat/cottage_cheese.svg",
+      "category": "dairy"
     },
     "crab": {
       "filename": "crab.svg",
@@ -165,6 +340,51 @@
       "path": "assets/product_icons/flat/cucumber.svg",
       "category": "vegetables"
     },
+    "cup_with_straw": {
+      "filename": "cup_with_straw.svg",
+      "path": "assets/product_icons/flat/cup_with_straw.svg",
+      "category": "other"
+    },
+    "cupcake": {
+      "filename": "cupcake.svg",
+      "path": "assets/product_icons/flat/cupcake.svg",
+      "category": "other"
+    },
+    "curry": {
+      "filename": "curry.svg",
+      "path": "assets/product_icons/flat/curry.svg",
+      "category": "other"
+    },
+    "custard": {
+      "filename": "custard.svg",
+      "path": "assets/product_icons/flat/custard.svg",
+      "category": "other"
+    },
+    "dango": {
+      "filename": "dango.svg",
+      "path": "assets/product_icons/flat/dango.svg",
+      "category": "other"
+    },
+    "donut": {
+      "filename": "donut.svg",
+      "path": "assets/product_icons/flat/donut.svg",
+      "category": "dry_food"
+    },
+    "doughnut_chocolate": {
+      "filename": "doughnut_chocolate.svg",
+      "path": "assets/product_icons/flat/doughnut_chocolate.svg",
+      "category": "dry_food"
+    },
+    "duck_meat": {
+      "filename": "duck_meat.svg",
+      "path": "assets/product_icons/flat/duck_meat.svg",
+      "category": "meat"
+    },
+    "dumpling": {
+      "filename": "dumpling.svg",
+      "path": "assets/product_icons/flat/dumpling.svg",
+      "category": "other"
+    },
     "egg": {
       "filename": "egg.svg",
       "path": "assets/product_icons/flat/egg.svg",
@@ -175,15 +395,70 @@
       "path": "assets/product_icons/flat/eggplant.svg",
       "category": "eggs"
     },
+    "empanada": {
+      "filename": "empanada.svg",
+      "path": "assets/product_icons/flat/empanada.svg",
+      "category": "other"
+    },
+    "enoki": {
+      "filename": "enoki.svg",
+      "path": "assets/product_icons/flat/enoki.svg",
+      "category": "other"
+    },
+    "falafel": {
+      "filename": "falafel.svg",
+      "path": "assets/product_icons/flat/falafel.svg",
+      "category": "other"
+    },
     "fish": {
       "filename": "fish.svg",
       "path": "assets/product_icons/flat/fish.svg",
+      "category": "other"
+    },
+    "fish_cake": {
+      "filename": "fish_cake.svg",
+      "path": "assets/product_icons/flat/fish_cake.svg",
+      "category": "other"
+    },
+    "flatbread": {
+      "filename": "flatbread.svg",
+      "path": "assets/product_icons/flat/flatbread.svg",
+      "category": "dry_food"
+    },
+    "fork_and_knife": {
+      "filename": "fork_and_knife.svg",
+      "path": "assets/product_icons/flat/fork_and_knife.svg",
+      "category": "other"
+    },
+    "fork_and_knife_with_plate": {
+      "filename": "fork_and_knife_with_plate.svg",
+      "path": "assets/product_icons/flat/fork_and_knife_with_plate.svg",
+      "category": "other"
+    },
+    "fortune_cookie": {
+      "filename": "fortune_cookie.svg",
+      "path": "assets/product_icons/flat/fortune_cookie.svg",
+      "category": "other"
+    },
+    "french_fries": {
+      "filename": "french_fries.svg",
+      "path": "assets/product_icons/flat/french_fries.svg",
       "category": "other"
     },
     "fried_egg": {
       "filename": "fried_egg.svg",
       "path": "assets/product_icons/flat/fried_egg.svg",
       "category": "eggs"
+    },
+    "fried_egg_full": {
+      "filename": "fried_egg_full.svg",
+      "path": "assets/product_icons/flat/fried_egg_full.svg",
+      "category": "eggs"
+    },
+    "fried_shrimp": {
+      "filename": "fried_shrimp.svg",
+      "path": "assets/product_icons/flat/fried_shrimp.svg",
+      "category": "other"
     },
     "garlic": {
       "filename": "garlic.svg",
@@ -195,19 +470,44 @@
       "path": "assets/product_icons/flat/ginger.svg",
       "category": "other"
     },
+    "glass_of_milk": {
+      "filename": "glass_of_milk.svg",
+      "path": "assets/product_icons/flat/glass_of_milk.svg",
+      "category": "dairy"
+    },
     "grapes": {
       "filename": "grapes.svg",
       "path": "assets/product_icons/flat/grapes.svg",
       "category": "fruits"
+    },
+    "green_salad": {
+      "filename": "green_salad.svg",
+      "path": "assets/product_icons/flat/green_salad.svg",
+      "category": "other"
+    },
+    "habanero": {
+      "filename": "habanero.svg",
+      "path": "assets/product_icons/flat/habanero.svg",
+      "category": "other"
     },
     "ham": {
       "filename": "ham.svg",
       "path": "assets/product_icons/flat/ham.svg",
       "category": "meat"
     },
+    "hamburger": {
+      "filename": "hamburger.svg",
+      "path": "assets/product_icons/flat/hamburger.svg",
+      "category": "meat"
+    },
     "honey": {
       "filename": "honey.svg",
       "path": "assets/product_icons/flat/honey.svg",
+      "category": "other"
+    },
+    "hot_dog": {
+      "filename": "hot_dog.svg",
+      "path": "assets/product_icons/flat/hot_dog.svg",
       "category": "other"
     },
     "hot_pepper": {
@@ -220,14 +520,59 @@
       "path": "assets/product_icons/flat/ice_cream.svg",
       "category": "dairy"
     },
+    "ice_cream_cone": {
+      "filename": "ice_cream_cone.svg",
+      "path": "assets/product_icons/flat/ice_cream_cone.svg",
+      "category": "dairy"
+    },
+    "jalapeno": {
+      "filename": "jalapeno.svg",
+      "path": "assets/product_icons/flat/jalapeno.svg",
+      "category": "other"
+    },
+    "jam": {
+      "filename": "jam.svg",
+      "path": "assets/product_icons/flat/jam.svg",
+      "category": "other"
+    },
+    "jar": {
+      "filename": "jar.svg",
+      "path": "assets/product_icons/flat/jar.svg",
+      "category": "other"
+    },
+    "juice_box": {
+      "filename": "juice_box.svg",
+      "path": "assets/product_icons/flat/juice_box.svg",
+      "category": "frozen"
+    },
+    "kidney_beans": {
+      "filename": "kidney_beans.svg",
+      "path": "assets/product_icons/flat/kidney_beans.svg",
+      "category": "dry_food"
+    },
+    "kitchen_knife": {
+      "filename": "kitchen_knife.svg",
+      "path": "assets/product_icons/flat/kitchen_knife.svg",
+      "category": "other"
+    },
     "kiwi": {
       "filename": "kiwi.svg",
       "path": "assets/product_icons/flat/kiwi.svg",
       "category": "fruits"
     },
+    "lamb_chop": {
+      "filename": "lamb_chop.svg",
+      "path": "assets/product_icons/flat/lamb_chop.svg",
+      "category": "meat"
+    },
     "leafy_green": {
       "filename": "leafy_green.svg",
       "path": "assets/product_icons/flat/leafy_green.svg",
+      "category": "other"
+    },
+    "leafy_greens": {
+      "filename": "leafy_greens.svg",
+      "path": "assets/product_icons/flat/leafy_greens.svg",
       "category": "other"
     },
     "lemon": {
@@ -235,14 +580,29 @@
       "path": "assets/product_icons/flat/lemon.svg",
       "category": "fruits"
     },
+    "lentils": {
+      "filename": "lentils.svg",
+      "path": "assets/product_icons/flat/lentils.svg",
+      "category": "other"
+    },
     "lettuce": {
       "filename": "lettuce.svg",
       "path": "assets/product_icons/flat/lettuce.svg",
       "category": "vegetables"
     },
+    "lima_beans": {
+      "filename": "lima_beans.svg",
+      "path": "assets/product_icons/flat/lima_beans.svg",
+      "category": "dry_food"
+    },
     "lobster": {
       "filename": "lobster.svg",
       "path": "assets/product_icons/flat/lobster.svg",
+      "category": "other"
+    },
+    "lollipop": {
+      "filename": "lollipop.svg",
+      "path": "assets/product_icons/flat/lollipop.svg",
       "category": "other"
     },
     "mango": {
@@ -250,9 +610,24 @@
       "path": "assets/product_icons/flat/mango.svg",
       "category": "fruits"
     },
+    "maple_syrup": {
+      "filename": "maple_syrup.svg",
+      "path": "assets/product_icons/flat/maple_syrup.svg",
+      "category": "other"
+    },
+    "mate": {
+      "filename": "mate.svg",
+      "path": "assets/product_icons/flat/mate.svg",
+      "category": "other"
+    },
     "meat": {
       "filename": "meat.svg",
       "path": "assets/product_icons/flat/meat.svg",
+      "category": "meat"
+    },
+    "meatball": {
+      "filename": "meatball.svg",
+      "path": "assets/product_icons/flat/meatball.svg",
       "category": "meat"
     },
     "melon": {
@@ -265,20 +640,60 @@
       "path": "assets/product_icons/flat/milk.svg",
       "category": "dairy"
     },
+    "mint": {
+      "filename": "mint.svg",
+      "path": "assets/product_icons/flat/mint.svg",
+      "category": "other"
+    },
+    "moon_cake": {
+      "filename": "moon_cake.svg",
+      "path": "assets/product_icons/flat/moon_cake.svg",
+      "category": "other"
+    },
     "mushroom": {
       "filename": "mushroom.svg",
       "path": "assets/product_icons/flat/mushroom.svg",
       "category": "vegetables"
+    },
+    "mussel": {
+      "filename": "mussel.svg",
+      "path": "assets/product_icons/flat/mussel.svg",
+      "category": "other"
+    },
+    "naan": {
+      "filename": "naan.svg",
+      "path": "assets/product_icons/flat/naan.svg",
+      "category": "other"
     },
     "noodles": {
       "filename": "noodles.svg",
       "path": "assets/product_icons/flat/noodles.svg",
       "category": "dry_food"
     },
+    "octopus": {
+      "filename": "octopus.svg",
+      "path": "assets/product_icons/flat/octopus.svg",
+      "category": "other"
+    },
+    "oden": {
+      "filename": "oden.svg",
+      "path": "assets/product_icons/flat/oden.svg",
+      "category": "other"
+    },
+    "oil_bottle": {
+      "filename": "oil_bottle.svg",
+      "path": "assets/product_icons/flat/oil_bottle.svg",
+      "category": "condiments"
+    },
     "olive": {
       "filename": "olive.svg",
       "path": "assets/product_icons/flat/olive.svg",
       "category": "other"
+    },
+    "olive_oil": {
+      "filename": "olive_oil.svg",
+      "path": "assets/product_icons/flat/olive_oil.svg",
+      "category": "condiments"
     },
     "onion": {
       "filename": "onion.svg",
@@ -290,9 +705,29 @@
       "path": "assets/product_icons/flat/orange.svg",
       "category": "fruits"
     },
+    "oregano": {
+      "filename": "oregano.svg",
+      "path": "assets/product_icons/flat/oregano.svg",
+      "category": "other"
+    },
     "oyster": {
       "filename": "oyster.svg",
       "path": "assets/product_icons/flat/oyster.svg",
+      "category": "other"
+    },
+    "oyster_mushroom": {
+      "filename": "oyster_mushroom.svg",
+      "path": "assets/product_icons/flat/oyster_mushroom.svg",
+      "category": "vegetables"
+    },
+    "oyster_raw": {
+      "filename": "oyster_raw.svg",
+      "path": "assets/product_icons/flat/oyster_raw.svg",
+      "category": "other"
+    },
+    "pancakes": {
+      "filename": "pancakes.svg",
+      "path": "assets/product_icons/flat/pancakes.svg",
       "category": "other"
     },
     "papaya": {
@@ -300,10 +735,30 @@
       "path": "assets/product_icons/flat/papaya.svg",
       "category": "other"
     },
+    "paprika": {
+      "filename": "paprika.svg",
+      "path": "assets/product_icons/flat/paprika.svg",
+      "category": "other"
+    },
+    "parsley": {
+      "filename": "parsley.svg",
+      "path": "assets/product_icons/flat/parsley.svg",
+      "category": "other"
+    },
+    "parsnip": {
+      "filename": "parsnip.svg",
+      "path": "assets/product_icons/flat/parsnip.svg",
+      "category": "other"
+    },
     "peach": {
       "filename": "peach.svg",
       "path": "assets/product_icons/flat/peach.svg",
       "category": "fruits"
+    },
+    "peanut_butter": {
+      "filename": "peanut_butter.svg",
+      "path": "assets/product_icons/flat/peanut_butter.svg",
+      "category": "dairy"
     },
     "peanuts": {
       "filename": "peanuts.svg",
@@ -320,20 +775,65 @@
       "path": "assets/product_icons/flat/pepper_hot.svg",
       "category": "vegetables"
     },
+    "pickle": {
+      "filename": "pickle.svg",
+      "path": "assets/product_icons/flat/pickle.svg",
+      "category": "other"
+    },
+    "pie": {
+      "filename": "pie.svg",
+      "path": "assets/product_icons/flat/pie.svg",
+      "category": "other"
+    },
     "pineapple": {
       "filename": "pineapple.svg",
       "path": "assets/product_icons/flat/pineapple.svg",
       "category": "fruits"
+    },
+    "pinto_beans": {
+      "filename": "pinto_beans.svg",
+      "path": "assets/product_icons/flat/pinto_beans.svg",
+      "category": "dry_food"
+    },
+    "pita": {
+      "filename": "pita.svg",
+      "path": "assets/product_icons/flat/pita.svg",
+      "category": "other"
+    },
+    "pizza": {
+      "filename": "pizza.svg",
+      "path": "assets/product_icons/flat/pizza.svg",
+      "category": "other"
+    },
+    "poblano": {
+      "filename": "poblano.svg",
+      "path": "assets/product_icons/flat/poblano.svg",
+      "category": "other"
     },
     "popcorn": {
       "filename": "popcorn.svg",
       "path": "assets/product_icons/flat/popcorn.svg",
       "category": "other"
     },
+    "popcorn_bowl": {
+      "filename": "popcorn_bowl.svg",
+      "path": "assets/product_icons/flat/popcorn_bowl.svg",
+      "category": "other"
+    },
     "pork": {
       "filename": "pork.svg",
       "path": "assets/product_icons/flat/pork.svg",
       "category": "meat"
+    },
+    "portobello": {
+      "filename": "portobello.svg",
+      "path": "assets/product_icons/flat/portobello.svg",
+      "category": "other"
+    },
+    "pot_of_food": {
+      "filename": "pot_of_food.svg",
+      "path": "assets/product_icons/flat/pot_of_food.svg",
+      "category": "other"
     },
     "potato": {
       "filename": "potato.svg",
@@ -350,10 +850,25 @@
       "path": "assets/product_icons/flat/pretzel.svg",
       "category": "other"
     },
+    "pudding": {
+      "filename": "pudding.svg",
+      "path": "assets/product_icons/flat/pudding.svg",
+      "category": "other"
+    },
     "pumpkin": {
       "filename": "pumpkin.svg",
       "path": "assets/product_icons/flat/pumpkin.svg",
       "category": "vegetables"
+    },
+    "ramen": {
+      "filename": "ramen.svg",
+      "path": "assets/product_icons/flat/ramen.svg",
+      "category": "other"
+    },
+    "ribs": {
+      "filename": "ribs.svg",
+      "path": "assets/product_icons/flat/ribs.svg",
+      "category": "other"
     },
     "rice": {
       "filename": "rice.svg",
@@ -365,29 +880,114 @@
       "path": "assets/product_icons/flat/rice_ball.svg",
       "category": "frozen"
     },
+    "rice_brown": {
+      "filename": "rice_brown.svg",
+      "path": "assets/product_icons/flat/rice_brown.svg",
+      "category": "frozen"
+    },
     "rice_cracker": {
       "filename": "rice_cracker.svg",
       "path": "assets/product_icons/flat/rice_cracker.svg",
       "category": "frozen"
+    },
+    "rosemary": {
+      "filename": "rosemary.svg",
+      "path": "assets/product_icons/flat/rosemary.svg",
+      "category": "other"
+    },
+    "sake": {
+      "filename": "sake.svg",
+      "path": "assets/product_icons/flat/sake.svg",
+      "category": "other"
+    },
+    "salmon": {
+      "filename": "salmon.svg",
+      "path": "assets/product_icons/flat/salmon.svg",
+      "category": "other"
     },
     "salt": {
       "filename": "salt.svg",
       "path": "assets/product_icons/flat/salt.svg",
       "category": "condiments"
     },
+    "samosa": {
+      "filename": "samosa.svg",
+      "path": "assets/product_icons/flat/samosa.svg",
+      "category": "other"
+    },
+    "sandwich": {
+      "filename": "sandwich.svg",
+      "path": "assets/product_icons/flat/sandwich.svg",
+      "category": "other"
+    },
+    "sardine": {
+      "filename": "sardine.svg",
+      "path": "assets/product_icons/flat/sardine.svg",
+      "category": "other"
+    },
     "sausage": {
       "filename": "sausage.svg",
       "path": "assets/product_icons/flat/sausage.svg",
       "category": "meat"
+    },
+    "scallop": {
+      "filename": "scallop.svg",
+      "path": "assets/product_icons/flat/scallop.svg",
+      "category": "other"
+    },
+    "serrano": {
+      "filename": "serrano.svg",
+      "path": "assets/product_icons/flat/serrano.svg",
+      "category": "other"
+    },
+    "shallow_pan_of_food": {
+      "filename": "shallow_pan_of_food.svg",
+      "path": "assets/product_icons/flat/shallow_pan_of_food.svg",
+      "category": "other"
+    },
+    "shaved_ice": {
+      "filename": "shaved_ice.svg",
+      "path": "assets/product_icons/flat/shaved_ice.svg",
+      "category": "frozen"
+    },
+    "shiitake": {
+      "filename": "shiitake.svg",
+      "path": "assets/product_icons/flat/shiitake.svg",
+      "category": "other"
     },
     "shrimp": {
       "filename": "shrimp.svg",
       "path": "assets/product_icons/flat/shrimp.svg",
       "category": "other"
     },
+    "soft_drink": {
+      "filename": "soft_drink.svg",
+      "path": "assets/product_icons/flat/soft_drink.svg",
+      "category": "other"
+    },
+    "soft_ice_cream": {
+      "filename": "soft_ice_cream.svg",
+      "path": "assets/product_icons/flat/soft_ice_cream.svg",
+      "category": "dairy"
+    },
+    "sour_cream": {
+      "filename": "sour_cream.svg",
+      "path": "assets/product_icons/flat/sour_cream.svg",
+      "category": "dairy"
+    },
+    "soybeans": {
+      "filename": "soybeans.svg",
+      "path": "assets/product_icons/flat/soybeans.svg",
+      "category": "dry_food"
+    },
     "spaghetti": {
       "filename": "spaghetti.svg",
       "path": "assets/product_icons/flat/spaghetti.svg",
+      "category": "other"
+    },
+    "spoon": {
+      "filename": "spoon.svg",
+      "path": "assets/product_icons/flat/spoon.svg",
       "category": "other"
     },
     "squid": {
@@ -395,14 +995,79 @@
       "path": "assets/product_icons/flat/squid.svg",
       "category": "other"
     },
+    "steak": {
+      "filename": "steak.svg",
+      "path": "assets/product_icons/flat/steak.svg",
+      "category": "other"
+    },
     "strawberry": {
       "filename": "strawberry.svg",
       "path": "assets/product_icons/flat/strawberry.svg",
       "category": "fruits"
     },
+    "stuffed_flatbread": {
+      "filename": "stuffed_flatbread.svg",
+      "path": "assets/product_icons/flat/stuffed_flatbread.svg",
+      "category": "dry_food"
+    },
+    "sunflower_seeds": {
+      "filename": "sunflower_seeds.svg",
+      "path": "assets/product_icons/flat/sunflower_seeds.svg",
+      "category": "other"
+    },
+    "sushi": {
+      "filename": "sushi.svg",
+      "path": "assets/product_icons/flat/sushi.svg",
+      "category": "other"
+    },
+    "taco": {
+      "filename": "taco.svg",
+      "path": "assets/product_icons/flat/taco.svg",
+      "category": "other"
+    },
+    "takeout_box": {
+      "filename": "takeout_box.svg",
+      "path": "assets/product_icons/flat/takeout_box.svg",
+      "category": "other"
+    },
+    "tamale": {
+      "filename": "tamale.svg",
+      "path": "assets/product_icons/flat/tamale.svg",
+      "category": "other"
+    },
     "tangerine": {
       "filename": "tangerine.svg",
       "path": "assets/product_icons/flat/tangerine.svg",
+      "category": "other"
+    },
+    "taro": {
+      "filename": "taro.svg",
+      "path": "assets/product_icons/flat/taro.svg",
+      "category": "other"
+    },
+    "tea": {
+      "filename": "tea.svg",
+      "path": "assets/product_icons/flat/tea.svg",
+      "category": "other"
+    },
+    "teacup_without_handle": {
+      "filename": "teacup_without_handle.svg",
+      "path": "assets/product_icons/flat/teacup_without_handle.svg",
+      "category": "other"
+    },
+    "teapot": {
+      "filename": "teapot.svg",
+      "path": "assets/product_icons/flat/teapot.svg",
+      "category": "other"
+    },
+    "tempura": {
+      "filename": "tempura.svg",
+      "path": "assets/product_icons/flat/tempura.svg",
+      "category": "other"
+    },
+    "thyme": {
+      "filename": "thyme.svg",
+      "path": "assets/product_icons/flat/thyme.svg",
       "category": "other"
     },
     "tomato": {
@@ -410,9 +1075,39 @@
       "path": "assets/product_icons/flat/tomato.svg",
       "category": "vegetables"
     },
+    "tortilla": {
+      "filename": "tortilla.svg",
+      "path": "assets/product_icons/flat/tortilla.svg",
+      "category": "other"
+    },
+    "tropical_drink": {
+      "filename": "tropical_drink.svg",
+      "path": "assets/product_icons/flat/tropical_drink.svg",
+      "category": "other"
+    },
+    "tuna": {
+      "filename": "tuna.svg",
+      "path": "assets/product_icons/flat/tuna.svg",
+      "category": "other"
+    },
     "turkey": {
       "filename": "turkey.svg",
       "path": "assets/product_icons/flat/turkey.svg",
+      "category": "other"
+    },
+    "vanilla": {
+      "filename": "vanilla.svg",
+      "path": "assets/product_icons/flat/vanilla.svg",
+      "category": "other"
+    },
+    "vinegar_bottle": {
+      "filename": "vinegar_bottle.svg",
+      "path": "assets/product_icons/flat/vinegar_bottle.svg",
+      "category": "condiments"
+    },
+    "waffle": {
+      "filename": "waffle.svg",
+      "path": "assets/product_icons/flat/waffle.svg",
       "category": "other"
     },
     "watermelon": {
@@ -420,13 +1115,38 @@
       "path": "assets/product_icons/flat/watermelon.svg",
       "category": "fruits"
     },
+    "wheat": {
+      "filename": "wheat.svg",
+      "path": "assets/product_icons/flat/wheat.svg",
+      "category": "other"
+    },
+    "whipped_cream": {
+      "filename": "whipped_cream.svg",
+      "path": "assets/product_icons/flat/whipped_cream.svg",
+      "category": "dairy"
+    },
+    "wine_glass": {
+      "filename": "wine_glass.svg",
+      "path": "assets/product_icons/flat/wine_glass.svg",
+      "category": "other"
+    },
     "yogurt": {
       "filename": "yogurt.svg",
       "path": "assets/product_icons/flat/yogurt.svg",
       "category": "dairy"
+    },
+    "zucchini": {
+      "filename": "zucchini.svg",
+      "path": "assets/product_icons/flat/zucchini.svg",
+      "category": "vegetables"
     }
   },
   "3d": {
+    "amphora": {
+      "filename": "amphora.png",
+      "path": "assets/product_icons/3d/amphora.png",
+      "category": "other"
+    },
     "apple_green": {
       "filename": "apple_green.png",
       "path": "assets/product_icons/3d/apple_green.png",
@@ -440,6 +1160,11 @@
     "avocado": {
       "filename": "avocado.png",
       "path": "assets/product_icons/3d/avocado.png",
+      "category": "other"
+    },
+    "baby_bottle": {
+      "filename": "baby_bottle.png",
+      "path": "assets/product_icons/3d/baby_bottle.png",
       "category": "other"
     },
     "bacon": {
@@ -462,6 +1187,26 @@
       "path": "assets/product_icons/3d/banana.png",
       "category": "fruits"
     },
+    "barley": {
+      "filename": "barley.png",
+      "path": "assets/product_icons/3d/barley.png",
+      "category": "other"
+    },
+    "basil": {
+      "filename": "basil.png",
+      "path": "assets/product_icons/3d/basil.png",
+      "category": "other"
+    },
+    "bay_leaf": {
+      "filename": "bay_leaf.png",
+      "path": "assets/product_icons/3d/bay_leaf.png",
+      "category": "other"
+    },
+    "bean_sprouts": {
+      "filename": "bean_sprouts.png",
+      "path": "assets/product_icons/3d/bean_sprouts.png",
+      "category": "dry_food"
+    },
     "beans": {
       "filename": "beans.png",
       "path": "assets/product_icons/3d/beans.png",
@@ -472,19 +1217,64 @@
       "path": "assets/product_icons/3d/beef.png",
       "category": "meat"
     },
+    "beer": {
+      "filename": "beer.png",
+      "path": "assets/product_icons/3d/beer.png",
+      "category": "other"
+    },
     "bell_pepper": {
       "filename": "bell_pepper.png",
       "path": "assets/product_icons/3d/bell_pepper.png",
       "category": "vegetables"
+    },
+    "bell_pepper_green": {
+      "filename": "bell_pepper_green.png",
+      "path": "assets/product_icons/3d/bell_pepper_green.png",
+      "category": "vegetables"
+    },
+    "bento": {
+      "filename": "bento.png",
+      "path": "assets/product_icons/3d/bento.png",
+      "category": "other"
+    },
+    "beverage_box": {
+      "filename": "beverage_box.png",
+      "path": "assets/product_icons/3d/beverage_box.png",
+      "category": "other"
+    },
+    "birthday_cake": {
+      "filename": "birthday_cake.png",
+      "path": "assets/product_icons/3d/birthday_cake.png",
+      "category": "other"
+    },
+    "birthday_cake_lit": {
+      "filename": "birthday_cake_lit.png",
+      "path": "assets/product_icons/3d/birthday_cake_lit.png",
+      "category": "other"
+    },
+    "black_beans": {
+      "filename": "black_beans.png",
+      "path": "assets/product_icons/3d/black_beans.png",
+      "category": "dry_food"
     },
     "blueberries": {
       "filename": "blueberries.png",
       "path": "assets/product_icons/3d/blueberries.png",
       "category": "other"
     },
+    "blueberry": {
+      "filename": "blueberry.png",
+      "path": "assets/product_icons/3d/blueberry.png",
+      "category": "fruits"
+    },
     "bottle": {
       "filename": "bottle.png",
       "path": "assets/product_icons/3d/bottle.png",
+      "category": "other"
+    },
+    "bowl_with_spoon": {
+      "filename": "bowl_with_spoon.png",
+      "path": "assets/product_icons/3d/bowl_with_spoon.png",
       "category": "other"
     },
     "bread": {
@@ -497,19 +1287,44 @@
       "path": "assets/product_icons/3d/broccoli.png",
       "category": "vegetables"
     },
+    "bubble_tea": {
+      "filename": "bubble_tea.png",
+      "path": "assets/product_icons/3d/bubble_tea.png",
+      "category": "other"
+    },
+    "burrito": {
+      "filename": "burrito.png",
+      "path": "assets/product_icons/3d/burrito.png",
+      "category": "other"
+    },
     "butter": {
       "filename": "butter.png",
       "path": "assets/product_icons/3d/butter.png",
       "category": "dairy"
+    },
+    "button_mushroom": {
+      "filename": "button_mushroom.png",
+      "path": "assets/product_icons/3d/button_mushroom.png",
+      "category": "vegetables"
     },
     "cabbage": {
       "filename": "cabbage.png",
       "path": "assets/product_icons/3d/cabbage.png",
       "category": "vegetables"
     },
+    "cake": {
+      "filename": "cake.png",
+      "path": "assets/product_icons/3d/cake.png",
+      "category": "other"
+    },
     "candy": {
       "filename": "candy.png",
       "path": "assets/product_icons/3d/candy.png",
+      "category": "other"
+    },
+    "canned_food": {
+      "filename": "canned_food.png",
+      "path": "assets/product_icons/3d/canned_food.png",
       "category": "other"
     },
     "carrot": {
@@ -517,15 +1332,30 @@
       "path": "assets/product_icons/3d/carrot.png",
       "category": "vegetables"
     },
+    "cassava": {
+      "filename": "cassava.png",
+      "path": "assets/product_icons/3d/cassava.png",
+      "category": "other"
+    },
     "cauliflower": {
       "filename": "cauliflower.png",
       "path": "assets/product_icons/3d/cauliflower.png",
       "category": "vegetables"
     },
+    "cayenne": {
+      "filename": "cayenne.png",
+      "path": "assets/product_icons/3d/cayenne.png",
+      "category": "other"
+    },
     "cereal": {
       "filename": "cereal.png",
       "path": "assets/product_icons/3d/cereal.png",
       "category": "other"
+    },
+    "champagne": {
+      "filename": "champagne.png",
+      "path": "assets/product_icons/3d/champagne.png",
+      "category": "meat"
     },
     "cheese": {
       "filename": "cheese.png",
@@ -547,9 +1377,49 @@
       "path": "assets/product_icons/3d/chicken.png",
       "category": "meat"
     },
+    "chickpeas": {
+      "filename": "chickpeas.png",
+      "path": "assets/product_icons/3d/chickpeas.png",
+      "category": "vegetables"
+    },
+    "chili_powder": {
+      "filename": "chili_powder.png",
+      "path": "assets/product_icons/3d/chili_powder.png",
+      "category": "other"
+    },
     "chocolate": {
       "filename": "chocolate.png",
       "path": "assets/product_icons/3d/chocolate.png",
+      "category": "other"
+    },
+    "chocolate_bar": {
+      "filename": "chocolate_bar.png",
+      "path": "assets/product_icons/3d/chocolate_bar.png",
+      "category": "other"
+    },
+    "chopsticks": {
+      "filename": "chopsticks.png",
+      "path": "assets/product_icons/3d/chopsticks.png",
+      "category": "other"
+    },
+    "chopsticks_food": {
+      "filename": "chopsticks_food.png",
+      "path": "assets/product_icons/3d/chopsticks_food.png",
+      "category": "other"
+    },
+    "cilantro": {
+      "filename": "cilantro.png",
+      "path": "assets/product_icons/3d/cilantro.png",
+      "category": "other"
+    },
+    "clinking_beer_mugs": {
+      "filename": "clinking_beer_mugs.png",
+      "path": "assets/product_icons/3d/clinking_beer_mugs.png",
+      "category": "other"
+    },
+    "cocktail": {
+      "filename": "cocktail.png",
+      "path": "assets/product_icons/3d/cocktail.png",
       "category": "other"
     },
     "coconut": {
@@ -557,15 +1427,35 @@
       "path": "assets/product_icons/3d/coconut.png",
       "category": "dry_food"
     },
+    "coffee": {
+      "filename": "coffee.png",
+      "path": "assets/product_icons/3d/coffee.png",
+      "category": "other"
+    },
+    "condensed_milk": {
+      "filename": "condensed_milk.png",
+      "path": "assets/product_icons/3d/condensed_milk.png",
+      "category": "dairy"
+    },
     "cookie": {
       "filename": "cookie.png",
       "path": "assets/product_icons/3d/cookie.png",
+      "category": "other"
+    },
+    "cooking": {
+      "filename": "cooking.png",
+      "path": "assets/product_icons/3d/cooking.png",
       "category": "other"
     },
     "corn": {
       "filename": "corn.png",
       "path": "assets/product_icons/3d/corn.png",
       "category": "other"
+    },
+    "cottage_cheese": {
+      "filename": "cottage_cheese.png",
+      "path": "assets/product_icons/3d/cottage_cheese.png",
+      "category": "dairy"
     },
     "crab": {
       "filename": "crab.png",
@@ -592,6 +1482,51 @@
       "path": "assets/product_icons/3d/cucumber.png",
       "category": "vegetables"
     },
+    "cup_with_straw": {
+      "filename": "cup_with_straw.png",
+      "path": "assets/product_icons/3d/cup_with_straw.png",
+      "category": "other"
+    },
+    "cupcake": {
+      "filename": "cupcake.png",
+      "path": "assets/product_icons/3d/cupcake.png",
+      "category": "other"
+    },
+    "curry": {
+      "filename": "curry.png",
+      "path": "assets/product_icons/3d/curry.png",
+      "category": "other"
+    },
+    "custard": {
+      "filename": "custard.png",
+      "path": "assets/product_icons/3d/custard.png",
+      "category": "other"
+    },
+    "dango": {
+      "filename": "dango.png",
+      "path": "assets/product_icons/3d/dango.png",
+      "category": "other"
+    },
+    "donut": {
+      "filename": "donut.png",
+      "path": "assets/product_icons/3d/donut.png",
+      "category": "dry_food"
+    },
+    "doughnut_chocolate": {
+      "filename": "doughnut_chocolate.png",
+      "path": "assets/product_icons/3d/doughnut_chocolate.png",
+      "category": "dry_food"
+    },
+    "duck_meat": {
+      "filename": "duck_meat.png",
+      "path": "assets/product_icons/3d/duck_meat.png",
+      "category": "meat"
+    },
+    "dumpling": {
+      "filename": "dumpling.png",
+      "path": "assets/product_icons/3d/dumpling.png",
+      "category": "other"
+    },
     "egg": {
       "filename": "egg.png",
       "path": "assets/product_icons/3d/egg.png",
@@ -602,15 +1537,70 @@
       "path": "assets/product_icons/3d/eggplant.png",
       "category": "eggs"
     },
+    "empanada": {
+      "filename": "empanada.png",
+      "path": "assets/product_icons/3d/empanada.png",
+      "category": "other"
+    },
+    "enoki": {
+      "filename": "enoki.png",
+      "path": "assets/product_icons/3d/enoki.png",
+      "category": "other"
+    },
+    "falafel": {
+      "filename": "falafel.png",
+      "path": "assets/product_icons/3d/falafel.png",
+      "category": "other"
+    },
     "fish": {
       "filename": "fish.png",
       "path": "assets/product_icons/3d/fish.png",
+      "category": "other"
+    },
+    "fish_cake": {
+      "filename": "fish_cake.png",
+      "path": "assets/product_icons/3d/fish_cake.png",
+      "category": "other"
+    },
+    "flatbread": {
+      "filename": "flatbread.png",
+      "path": "assets/product_icons/3d/flatbread.png",
+      "category": "dry_food"
+    },
+    "fork_and_knife": {
+      "filename": "fork_and_knife.png",
+      "path": "assets/product_icons/3d/fork_and_knife.png",
+      "category": "other"
+    },
+    "fork_and_knife_with_plate": {
+      "filename": "fork_and_knife_with_plate.png",
+      "path": "assets/product_icons/3d/fork_and_knife_with_plate.png",
+      "category": "other"
+    },
+    "fortune_cookie": {
+      "filename": "fortune_cookie.png",
+      "path": "assets/product_icons/3d/fortune_cookie.png",
+      "category": "other"
+    },
+    "french_fries": {
+      "filename": "french_fries.png",
+      "path": "assets/product_icons/3d/french_fries.png",
       "category": "other"
     },
     "fried_egg": {
       "filename": "fried_egg.png",
       "path": "assets/product_icons/3d/fried_egg.png",
       "category": "eggs"
+    },
+    "fried_egg_full": {
+      "filename": "fried_egg_full.png",
+      "path": "assets/product_icons/3d/fried_egg_full.png",
+      "category": "eggs"
+    },
+    "fried_shrimp": {
+      "filename": "fried_shrimp.png",
+      "path": "assets/product_icons/3d/fried_shrimp.png",
+      "category": "other"
     },
     "garlic": {
       "filename": "garlic.png",
@@ -622,19 +1612,44 @@
       "path": "assets/product_icons/3d/ginger.png",
       "category": "other"
     },
+    "glass_of_milk": {
+      "filename": "glass_of_milk.png",
+      "path": "assets/product_icons/3d/glass_of_milk.png",
+      "category": "dairy"
+    },
     "grapes": {
       "filename": "grapes.png",
       "path": "assets/product_icons/3d/grapes.png",
       "category": "fruits"
+    },
+    "green_salad": {
+      "filename": "green_salad.png",
+      "path": "assets/product_icons/3d/green_salad.png",
+      "category": "other"
+    },
+    "habanero": {
+      "filename": "habanero.png",
+      "path": "assets/product_icons/3d/habanero.png",
+      "category": "other"
     },
     "ham": {
       "filename": "ham.png",
       "path": "assets/product_icons/3d/ham.png",
       "category": "meat"
     },
+    "hamburger": {
+      "filename": "hamburger.png",
+      "path": "assets/product_icons/3d/hamburger.png",
+      "category": "meat"
+    },
     "honey": {
       "filename": "honey.png",
       "path": "assets/product_icons/3d/honey.png",
+      "category": "other"
+    },
+    "hot_dog": {
+      "filename": "hot_dog.png",
+      "path": "assets/product_icons/3d/hot_dog.png",
       "category": "other"
     },
     "hot_pepper": {
@@ -647,14 +1662,59 @@
       "path": "assets/product_icons/3d/ice_cream.png",
       "category": "dairy"
     },
+    "ice_cream_cone": {
+      "filename": "ice_cream_cone.png",
+      "path": "assets/product_icons/3d/ice_cream_cone.png",
+      "category": "dairy"
+    },
+    "jalapeno": {
+      "filename": "jalapeno.png",
+      "path": "assets/product_icons/3d/jalapeno.png",
+      "category": "other"
+    },
+    "jam": {
+      "filename": "jam.png",
+      "path": "assets/product_icons/3d/jam.png",
+      "category": "other"
+    },
+    "jar": {
+      "filename": "jar.png",
+      "path": "assets/product_icons/3d/jar.png",
+      "category": "other"
+    },
+    "juice_box": {
+      "filename": "juice_box.png",
+      "path": "assets/product_icons/3d/juice_box.png",
+      "category": "frozen"
+    },
+    "kidney_beans": {
+      "filename": "kidney_beans.png",
+      "path": "assets/product_icons/3d/kidney_beans.png",
+      "category": "dry_food"
+    },
+    "kitchen_knife": {
+      "filename": "kitchen_knife.png",
+      "path": "assets/product_icons/3d/kitchen_knife.png",
+      "category": "other"
+    },
     "kiwi": {
       "filename": "kiwi.png",
       "path": "assets/product_icons/3d/kiwi.png",
       "category": "fruits"
     },
+    "lamb_chop": {
+      "filename": "lamb_chop.png",
+      "path": "assets/product_icons/3d/lamb_chop.png",
+      "category": "meat"
+    },
     "leafy_green": {
       "filename": "leafy_green.png",
       "path": "assets/product_icons/3d/leafy_green.png",
+      "category": "other"
+    },
+    "leafy_greens": {
+      "filename": "leafy_greens.png",
+      "path": "assets/product_icons/3d/leafy_greens.png",
       "category": "other"
     },
     "lemon": {
@@ -662,14 +1722,29 @@
       "path": "assets/product_icons/3d/lemon.png",
       "category": "fruits"
     },
+    "lentils": {
+      "filename": "lentils.png",
+      "path": "assets/product_icons/3d/lentils.png",
+      "category": "other"
+    },
     "lettuce": {
       "filename": "lettuce.png",
       "path": "assets/product_icons/3d/lettuce.png",
       "category": "vegetables"
     },
+    "lima_beans": {
+      "filename": "lima_beans.png",
+      "path": "assets/product_icons/3d/lima_beans.png",
+      "category": "dry_food"
+    },
     "lobster": {
       "filename": "lobster.png",
       "path": "assets/product_icons/3d/lobster.png",
+      "category": "other"
+    },
+    "lollipop": {
+      "filename": "lollipop.png",
+      "path": "assets/product_icons/3d/lollipop.png",
       "category": "other"
     },
     "mango": {
@@ -677,9 +1752,24 @@
       "path": "assets/product_icons/3d/mango.png",
       "category": "fruits"
     },
+    "maple_syrup": {
+      "filename": "maple_syrup.png",
+      "path": "assets/product_icons/3d/maple_syrup.png",
+      "category": "other"
+    },
+    "mate": {
+      "filename": "mate.png",
+      "path": "assets/product_icons/3d/mate.png",
+      "category": "other"
+    },
     "meat": {
       "filename": "meat.png",
       "path": "assets/product_icons/3d/meat.png",
+      "category": "meat"
+    },
+    "meatball": {
+      "filename": "meatball.png",
+      "path": "assets/product_icons/3d/meatball.png",
       "category": "meat"
     },
     "melon": {
@@ -692,20 +1782,60 @@
       "path": "assets/product_icons/3d/milk.png",
       "category": "dairy"
     },
+    "mint": {
+      "filename": "mint.png",
+      "path": "assets/product_icons/3d/mint.png",
+      "category": "other"
+    },
+    "moon_cake": {
+      "filename": "moon_cake.png",
+      "path": "assets/product_icons/3d/moon_cake.png",
+      "category": "other"
+    },
     "mushroom": {
       "filename": "mushroom.png",
       "path": "assets/product_icons/3d/mushroom.png",
       "category": "vegetables"
+    },
+    "mussel": {
+      "filename": "mussel.png",
+      "path": "assets/product_icons/3d/mussel.png",
+      "category": "other"
+    },
+    "naan": {
+      "filename": "naan.png",
+      "path": "assets/product_icons/3d/naan.png",
+      "category": "other"
     },
     "noodles": {
       "filename": "noodles.png",
       "path": "assets/product_icons/3d/noodles.png",
       "category": "dry_food"
     },
+    "octopus": {
+      "filename": "octopus.png",
+      "path": "assets/product_icons/3d/octopus.png",
+      "category": "other"
+    },
+    "oden": {
+      "filename": "oden.png",
+      "path": "assets/product_icons/3d/oden.png",
+      "category": "other"
+    },
+    "oil_bottle": {
+      "filename": "oil_bottle.png",
+      "path": "assets/product_icons/3d/oil_bottle.png",
+      "category": "condiments"
+    },
     "olive": {
       "filename": "olive.png",
       "path": "assets/product_icons/3d/olive.png",
       "category": "other"
+    },
+    "olive_oil": {
+      "filename": "olive_oil.png",
+      "path": "assets/product_icons/3d/olive_oil.png",
+      "category": "condiments"
     },
     "onion": {
       "filename": "onion.png",
@@ -717,9 +1847,29 @@
       "path": "assets/product_icons/3d/orange.png",
       "category": "fruits"
     },
+    "oregano": {
+      "filename": "oregano.png",
+      "path": "assets/product_icons/3d/oregano.png",
+      "category": "other"
+    },
     "oyster": {
       "filename": "oyster.png",
       "path": "assets/product_icons/3d/oyster.png",
+      "category": "other"
+    },
+    "oyster_mushroom": {
+      "filename": "oyster_mushroom.png",
+      "path": "assets/product_icons/3d/oyster_mushroom.png",
+      "category": "vegetables"
+    },
+    "oyster_raw": {
+      "filename": "oyster_raw.png",
+      "path": "assets/product_icons/3d/oyster_raw.png",
+      "category": "other"
+    },
+    "pancakes": {
+      "filename": "pancakes.png",
+      "path": "assets/product_icons/3d/pancakes.png",
       "category": "other"
     },
     "papaya": {
@@ -727,10 +1877,30 @@
       "path": "assets/product_icons/3d/papaya.png",
       "category": "other"
     },
+    "paprika": {
+      "filename": "paprika.png",
+      "path": "assets/product_icons/3d/paprika.png",
+      "category": "other"
+    },
+    "parsley": {
+      "filename": "parsley.png",
+      "path": "assets/product_icons/3d/parsley.png",
+      "category": "other"
+    },
+    "parsnip": {
+      "filename": "parsnip.png",
+      "path": "assets/product_icons/3d/parsnip.png",
+      "category": "other"
+    },
     "peach": {
       "filename": "peach.png",
       "path": "assets/product_icons/3d/peach.png",
       "category": "fruits"
+    },
+    "peanut_butter": {
+      "filename": "peanut_butter.png",
+      "path": "assets/product_icons/3d/peanut_butter.png",
+      "category": "dairy"
     },
     "peanuts": {
       "filename": "peanuts.png",
@@ -747,20 +1917,65 @@
       "path": "assets/product_icons/3d/pepper_hot.png",
       "category": "vegetables"
     },
+    "pickle": {
+      "filename": "pickle.png",
+      "path": "assets/product_icons/3d/pickle.png",
+      "category": "other"
+    },
+    "pie": {
+      "filename": "pie.png",
+      "path": "assets/product_icons/3d/pie.png",
+      "category": "other"
+    },
     "pineapple": {
       "filename": "pineapple.png",
       "path": "assets/product_icons/3d/pineapple.png",
       "category": "fruits"
+    },
+    "pinto_beans": {
+      "filename": "pinto_beans.png",
+      "path": "assets/product_icons/3d/pinto_beans.png",
+      "category": "dry_food"
+    },
+    "pita": {
+      "filename": "pita.png",
+      "path": "assets/product_icons/3d/pita.png",
+      "category": "other"
+    },
+    "pizza": {
+      "filename": "pizza.png",
+      "path": "assets/product_icons/3d/pizza.png",
+      "category": "other"
+    },
+    "poblano": {
+      "filename": "poblano.png",
+      "path": "assets/product_icons/3d/poblano.png",
+      "category": "other"
     },
     "popcorn": {
       "filename": "popcorn.png",
       "path": "assets/product_icons/3d/popcorn.png",
       "category": "other"
     },
+    "popcorn_bowl": {
+      "filename": "popcorn_bowl.png",
+      "path": "assets/product_icons/3d/popcorn_bowl.png",
+      "category": "other"
+    },
     "pork": {
       "filename": "pork.png",
       "path": "assets/product_icons/3d/pork.png",
       "category": "meat"
+    },
+    "portobello": {
+      "filename": "portobello.png",
+      "path": "assets/product_icons/3d/portobello.png",
+      "category": "other"
+    },
+    "pot_of_food": {
+      "filename": "pot_of_food.png",
+      "path": "assets/product_icons/3d/pot_of_food.png",
+      "category": "other"
     },
     "potato": {
       "filename": "potato.png",
@@ -777,10 +1992,25 @@
       "path": "assets/product_icons/3d/pretzel.png",
       "category": "other"
     },
+    "pudding": {
+      "filename": "pudding.png",
+      "path": "assets/product_icons/3d/pudding.png",
+      "category": "other"
+    },
     "pumpkin": {
       "filename": "pumpkin.png",
       "path": "assets/product_icons/3d/pumpkin.png",
       "category": "vegetables"
+    },
+    "ramen": {
+      "filename": "ramen.png",
+      "path": "assets/product_icons/3d/ramen.png",
+      "category": "other"
+    },
+    "ribs": {
+      "filename": "ribs.png",
+      "path": "assets/product_icons/3d/ribs.png",
+      "category": "other"
     },
     "rice": {
       "filename": "rice.png",
@@ -792,29 +2022,114 @@
       "path": "assets/product_icons/3d/rice_ball.png",
       "category": "frozen"
     },
+    "rice_brown": {
+      "filename": "rice_brown.png",
+      "path": "assets/product_icons/3d/rice_brown.png",
+      "category": "frozen"
+    },
     "rice_cracker": {
       "filename": "rice_cracker.png",
       "path": "assets/product_icons/3d/rice_cracker.png",
       "category": "frozen"
+    },
+    "rosemary": {
+      "filename": "rosemary.png",
+      "path": "assets/product_icons/3d/rosemary.png",
+      "category": "other"
+    },
+    "sake": {
+      "filename": "sake.png",
+      "path": "assets/product_icons/3d/sake.png",
+      "category": "other"
+    },
+    "salmon": {
+      "filename": "salmon.png",
+      "path": "assets/product_icons/3d/salmon.png",
+      "category": "other"
     },
     "salt": {
       "filename": "salt.png",
       "path": "assets/product_icons/3d/salt.png",
       "category": "condiments"
     },
+    "samosa": {
+      "filename": "samosa.png",
+      "path": "assets/product_icons/3d/samosa.png",
+      "category": "other"
+    },
+    "sandwich": {
+      "filename": "sandwich.png",
+      "path": "assets/product_icons/3d/sandwich.png",
+      "category": "other"
+    },
+    "sardine": {
+      "filename": "sardine.png",
+      "path": "assets/product_icons/3d/sardine.png",
+      "category": "other"
+    },
     "sausage": {
       "filename": "sausage.png",
       "path": "assets/product_icons/3d/sausage.png",
       "category": "meat"
+    },
+    "scallop": {
+      "filename": "scallop.png",
+      "path": "assets/product_icons/3d/scallop.png",
+      "category": "other"
+    },
+    "serrano": {
+      "filename": "serrano.png",
+      "path": "assets/product_icons/3d/serrano.png",
+      "category": "other"
+    },
+    "shallow_pan_of_food": {
+      "filename": "shallow_pan_of_food.png",
+      "path": "assets/product_icons/3d/shallow_pan_of_food.png",
+      "category": "other"
+    },
+    "shaved_ice": {
+      "filename": "shaved_ice.png",
+      "path": "assets/product_icons/3d/shaved_ice.png",
+      "category": "frozen"
+    },
+    "shiitake": {
+      "filename": "shiitake.png",
+      "path": "assets/product_icons/3d/shiitake.png",
+      "category": "other"
     },
     "shrimp": {
       "filename": "shrimp.png",
       "path": "assets/product_icons/3d/shrimp.png",
       "category": "other"
     },
+    "soft_drink": {
+      "filename": "soft_drink.png",
+      "path": "assets/product_icons/3d/soft_drink.png",
+      "category": "other"
+    },
+    "soft_ice_cream": {
+      "filename": "soft_ice_cream.png",
+      "path": "assets/product_icons/3d/soft_ice_cream.png",
+      "category": "dairy"
+    },
+    "sour_cream": {
+      "filename": "sour_cream.png",
+      "path": "assets/product_icons/3d/sour_cream.png",
+      "category": "dairy"
+    },
+    "soybeans": {
+      "filename": "soybeans.png",
+      "path": "assets/product_icons/3d/soybeans.png",
+      "category": "dry_food"
+    },
     "spaghetti": {
       "filename": "spaghetti.png",
       "path": "assets/product_icons/3d/spaghetti.png",
+      "category": "other"
+    },
+    "spoon": {
+      "filename": "spoon.png",
+      "path": "assets/product_icons/3d/spoon.png",
       "category": "other"
     },
     "squid": {
@@ -822,14 +2137,79 @@
       "path": "assets/product_icons/3d/squid.png",
       "category": "other"
     },
+    "steak": {
+      "filename": "steak.png",
+      "path": "assets/product_icons/3d/steak.png",
+      "category": "other"
+    },
     "strawberry": {
       "filename": "strawberry.png",
       "path": "assets/product_icons/3d/strawberry.png",
       "category": "fruits"
     },
+    "stuffed_flatbread": {
+      "filename": "stuffed_flatbread.png",
+      "path": "assets/product_icons/3d/stuffed_flatbread.png",
+      "category": "dry_food"
+    },
+    "sunflower_seeds": {
+      "filename": "sunflower_seeds.png",
+      "path": "assets/product_icons/3d/sunflower_seeds.png",
+      "category": "other"
+    },
+    "sushi": {
+      "filename": "sushi.png",
+      "path": "assets/product_icons/3d/sushi.png",
+      "category": "other"
+    },
+    "taco": {
+      "filename": "taco.png",
+      "path": "assets/product_icons/3d/taco.png",
+      "category": "other"
+    },
+    "takeout_box": {
+      "filename": "takeout_box.png",
+      "path": "assets/product_icons/3d/takeout_box.png",
+      "category": "other"
+    },
+    "tamale": {
+      "filename": "tamale.png",
+      "path": "assets/product_icons/3d/tamale.png",
+      "category": "other"
+    },
     "tangerine": {
       "filename": "tangerine.png",
       "path": "assets/product_icons/3d/tangerine.png",
+      "category": "other"
+    },
+    "taro": {
+      "filename": "taro.png",
+      "path": "assets/product_icons/3d/taro.png",
+      "category": "other"
+    },
+    "tea": {
+      "filename": "tea.png",
+      "path": "assets/product_icons/3d/tea.png",
+      "category": "other"
+    },
+    "teacup_without_handle": {
+      "filename": "teacup_without_handle.png",
+      "path": "assets/product_icons/3d/teacup_without_handle.png",
+      "category": "other"
+    },
+    "teapot": {
+      "filename": "teapot.png",
+      "path": "assets/product_icons/3d/teapot.png",
+      "category": "other"
+    },
+    "tempura": {
+      "filename": "tempura.png",
+      "path": "assets/product_icons/3d/tempura.png",
+      "category": "other"
+    },
+    "thyme": {
+      "filename": "thyme.png",
+      "path": "assets/product_icons/3d/thyme.png",
       "category": "other"
     },
     "tomato": {
@@ -837,9 +2217,39 @@
       "path": "assets/product_icons/3d/tomato.png",
       "category": "vegetables"
     },
+    "tortilla": {
+      "filename": "tortilla.png",
+      "path": "assets/product_icons/3d/tortilla.png",
+      "category": "other"
+    },
+    "tropical_drink": {
+      "filename": "tropical_drink.png",
+      "path": "assets/product_icons/3d/tropical_drink.png",
+      "category": "other"
+    },
+    "tuna": {
+      "filename": "tuna.png",
+      "path": "assets/product_icons/3d/tuna.png",
+      "category": "other"
+    },
     "turkey": {
       "filename": "turkey.png",
       "path": "assets/product_icons/3d/turkey.png",
+      "category": "other"
+    },
+    "vanilla": {
+      "filename": "vanilla.png",
+      "path": "assets/product_icons/3d/vanilla.png",
+      "category": "other"
+    },
+    "vinegar_bottle": {
+      "filename": "vinegar_bottle.png",
+      "path": "assets/product_icons/3d/vinegar_bottle.png",
+      "category": "condiments"
+    },
+    "waffle": {
+      "filename": "waffle.png",
+      "path": "assets/product_icons/3d/waffle.png",
       "category": "other"
     },
     "watermelon": {
@@ -847,10 +2257,30 @@
       "path": "assets/product_icons/3d/watermelon.png",
       "category": "fruits"
     },
+    "wheat": {
+      "filename": "wheat.png",
+      "path": "assets/product_icons/3d/wheat.png",
+      "category": "other"
+    },
+    "whipped_cream": {
+      "filename": "whipped_cream.png",
+      "path": "assets/product_icons/3d/whipped_cream.png",
+      "category": "dairy"
+    },
+    "wine_glass": {
+      "filename": "wine_glass.png",
+      "path": "assets/product_icons/3d/wine_glass.png",
+      "category": "other"
+    },
     "yogurt": {
       "filename": "yogurt.png",
       "path": "assets/product_icons/3d/yogurt.png",
       "category": "dairy"
+    },
+    "zucchini": {
+      "filename": "zucchini.png",
+      "path": "assets/product_icons/3d/zucchini.png",
+      "category": "vegetables"
     }
   }
 }
