@@ -628,6 +628,9 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
         location: config.location,
         purchaseDate: now,
         expiryDate: config.expiryDate,
+        customIconId: config.item.customIconId,
+        productTemplateId: config.item.productTemplateId,
+        nameEn: config.item.nameEn,
       );
       await productProvider.addProduct(product);
     }
