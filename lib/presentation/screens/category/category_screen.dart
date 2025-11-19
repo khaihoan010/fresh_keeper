@@ -3,10 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../../../config/app_localizations.dart';
 import '../../../config/constants.dart';
+import '../../../config/product_icons.dart';
 import '../../../config/theme.dart';
 import '../../../data/models/product_template.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// Category View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -604,6 +606,25 @@ class _TemplateGridTile extends StatelessWidget {
     required this.onTap,
   });
 
+  Widget _buildTemplateIcon() {
+    // If template has iconId, use ProductIconWidget
+    if (template.iconId != null) {
+      final icon = ProductIcons.getIconById(template.iconId);
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 42,
+        );
+      }
+    }
+
+    // Fallback to category emoji
+    return Text(
+      AppConstants.categoryIcons[template.category] ?? '📦',
+      style: const TextStyle(fontSize: 42),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -632,10 +653,7 @@ class _TemplateGridTile extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Text(
-                    AppConstants.categoryIcons[template.category] ?? '📦',
-                    style: const TextStyle(fontSize: 42),
-                  ),
+                  child: _buildTemplateIcon(),
                 ),
               ),
             ),
