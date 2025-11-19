@@ -14,6 +14,7 @@ import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/multi_select/multi_select_app_bar.dart';
 import '../../widgets/shopping_list/shopping_list_bottom_bar.dart';
+import '../../widgets/product_icon_widget.dart';
 import 'store_items_screen.dart';
 import '../../../config/routes.dart';
 
@@ -942,14 +943,22 @@ class _ShoppingListItemTile extends StatelessWidget {
     required this.onUnitChanged,
   });
 
-  String _getItemIcon() {
+  Widget _buildItemIcon() {
     // Check for custom icon first
     if (item.customIconId != null) {
       final icon = ProductIcons.getIconById(item.customIconId);
-      if (icon != null) return icon.emoji;
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 20,
+        );
+      }
     }
-    // Fallback to category icon
-    return AppConstants.categoryIcons[item.category] ?? '📦';
+    // Fallback to category icon (emoji text)
+    return Text(
+      AppConstants.categoryIcons[item.category] ?? '📦',
+      style: const TextStyle(fontSize: 20),
+    );
   }
 
   void _showQuantityEditDialog(BuildContext context) {
@@ -1037,10 +1046,7 @@ class _ShoppingListItemTile extends StatelessWidget {
               children: [
                 // Category/Custom icon
                 if (!isMultiSelectMode) ...[
-                  Text(
-                    _getItemIcon(),
-                    style: const TextStyle(fontSize: 20),
-                  ),
+                  _buildItemIcon(),
                   const SizedBox(width: 8),
                 ],
                 // Checkbox for multi-select mode

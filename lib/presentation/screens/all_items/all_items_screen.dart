@@ -9,6 +9,7 @@ import '../../../config/product_icons.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// All Items Screen
 /// Displays all products with filter, sort, and search
@@ -414,14 +415,22 @@ class _ProductCard extends StatelessWidget {
     this.onQuantityChanged,
   });
 
-  String _getProductIcon() {
+  Widget _buildProductIcon() {
     // Check for custom icon first
     if (product.customIconId != null) {
       final icon = ProductIcons.getIconById(product.customIconId);
-      if (icon != null) return icon.emoji;
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 40,
+        );
+      }
     }
-    // Fallback to category icon
-    return AppConstants.categoryIcons[product.category] ?? '📦';
+    // Fallback to category icon (emoji text)
+    return Text(
+      AppConstants.categoryIcons[product.category] ?? '📦',
+      style: const TextStyle(fontSize: 40),
+    );
   }
 
   void _showQuantityEditDialog(BuildContext context) {
@@ -503,10 +512,7 @@ class _ProductCard extends StatelessWidget {
             child: Row(
               children: [
                 // Icon
-                Text(
-                  _getProductIcon(),
-                  style: const TextStyle(fontSize: 40),
-                ),
+                _buildProductIcon(),
 
                 const SizedBox(width: 16),
 

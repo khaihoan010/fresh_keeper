@@ -15,6 +15,7 @@ import '../../widgets/ads/banner_ad_widget.dart';
 import '../../widgets/multi_select/multi_select_app_bar.dart';
 import '../../widgets/multi_select/multi_select_bottom_bar.dart';
 import '../../widgets/multi_select/location_selector_dialog.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// Expiring Soon View for Bottom Navigation
 /// Wrapper without Scaffold for use in IndexedStack
@@ -847,14 +848,22 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
     return AppConstants.getQuantityStep(unit);
   }
 
-  String _getProductIcon() {
+  Widget _buildProductIcon() {
     // Check for custom icon first
     if (widget.product.customIconId != null) {
       final icon = ProductIcons.getIconById(widget.product.customIconId);
-      if (icon != null) return icon.emoji;
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 36,
+        );
+      }
     }
-    // Fallback to category icon
-    return AppConstants.categoryIcons[widget.product.category] ?? '📦';
+    // Fallback to category icon (emoji text)
+    return Text(
+      AppConstants.categoryIcons[widget.product.category] ?? '📦',
+      style: const TextStyle(fontSize: 36),
+    );
   }
 
   void _increaseQuantity() async {
@@ -1019,10 +1028,7 @@ class _ExpiringSoonProductCardState extends State<_ExpiringSoonProductCard> {
                   ),
 
                 // Icon
-                Text(
-                  _getProductIcon(),
-                  style: const TextStyle(fontSize: 36),
-                ),
+                _buildProductIcon(),
 
                 const SizedBox(width: 12),
 
