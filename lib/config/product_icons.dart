@@ -5042,10 +5042,22 @@ class ProductIcons {
   /// Get total count of premium icons
   static int get premiumIconCount => premiumIcons.length;
 
-  static ProductIcon? getIconById(String? id) {
+  static ProductIcon? getIconById(String? id, {bool preferPremium = true}) {
     if (id == null) return null;
     try {
-      return allIcons.firstWhere((icon) => icon.id == id);
+      // If preferPremium, search premium icons first, then free icons
+      // This ensures VIP users see 3D icons when they select them
+      if (preferPremium) {
+        try {
+          return premiumIcons.firstWhere((icon) => icon.id == id);
+        } catch (e) {
+          // Not found in premium, try free icons
+          return freeIcons.firstWhere((icon) => icon.id == id);
+        }
+      } else {
+        // Search in order: free first, then premium
+        return allIcons.firstWhere((icon) => icon.id == id);
+      }
     } catch (e) {
       return null;
     }
