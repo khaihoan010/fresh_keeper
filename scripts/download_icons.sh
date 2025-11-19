@@ -34,22 +34,28 @@ echo "🍎 Copying icons..."
 echo ""
 
 # Function to copy icon
+# ICON_NAME: folder name like "Red apple" or "Banana"
+# OUTPUT_NAME: our output file name like "apple_red" or "banana"
 copy_icon() {
     local ICON_NAME=$1
     local OUTPUT_NAME=$2
-    local FLAT_PATH="$TEMP_DIR/assets/$ICON_NAME/Flat/${ICON_NAME}_flat.svg"
-    local THREED_PATH="$TEMP_DIR/assets/$ICON_NAME/3D/${ICON_NAME}_3d.svg"
+
+    # Convert folder name to file base name: "Red apple" → "red_apple"
+    local FILE_BASE=$(echo "$ICON_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')
+
+    local FLAT_PATH="$TEMP_DIR/assets/$ICON_NAME/Flat/${FILE_BASE}_flat.svg"
+    local THREED_PATH="$TEMP_DIR/assets/$ICON_NAME/3D/${FILE_BASE}_3d.png"
 
     if [ -f "$FLAT_PATH" ]; then
         cp "$FLAT_PATH" "$ASSETS_DIR/flat/${OUTPUT_NAME}.svg"
-        echo "  ✅ $OUTPUT_NAME (Flat)"
+        echo "  ✅ $OUTPUT_NAME (Flat SVG)"
     else
         echo "  ⚠️  $OUTPUT_NAME (Flat) - NOT FOUND: $FLAT_PATH"
     fi
 
     if [ -f "$THREED_PATH" ]; then
-        cp "$THREED_PATH" "$ASSETS_DIR/3d/${OUTPUT_NAME}.svg"
-        echo "  ✅ $OUTPUT_NAME (3D)"
+        cp "$THREED_PATH" "$ASSETS_DIR/3d/${OUTPUT_NAME}.png"
+        echo "  ✅ $OUTPUT_NAME (3D PNG)"
     else
         echo "  ⚠️  $OUTPUT_NAME (3D) - NOT FOUND: $THREED_PATH"
     fi
@@ -57,7 +63,7 @@ copy_icon() {
 
 # Fruits
 echo "🍎 FRUITS"
-copy_icon "Apple" "apple_red"
+copy_icon "Red apple" "apple_red"
 copy_icon "Green apple" "apple_green"
 copy_icon "Banana" "banana"
 copy_icon "Tangerine" "orange"
@@ -160,8 +166,8 @@ echo ""
 echo "✅ DONE!"
 echo ""
 echo "📊 Summary:"
-echo "  - Flat icons: $(ls -1 $ASSETS_DIR/flat/*.svg 2>/dev/null | wc -l)"
-echo "  - 3D icons: $(ls -1 $ASSETS_DIR/3d/*.svg 2>/dev/null | wc -l)"
+echo "  - Flat icons (SVG): $(ls -1 $ASSETS_DIR/flat/*.svg 2>/dev/null | wc -l)"
+echo "  - 3D icons (PNG): $(ls -1 $ASSETS_DIR/3d/*.png 2>/dev/null | wc -l)"
 echo ""
 echo "📁 Icons saved to:"
 echo "  - $ASSETS_DIR/flat/"
