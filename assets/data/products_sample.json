@@ -41,7 +41,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày.",
+      "iconId": "beer"
     },
     {
       "id": "bread_15",
@@ -82,7 +83,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 266 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 266 ngày.",
+      "iconId": "bread"
     },
     {
       "id": "pho_noodles",
@@ -123,7 +125,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 269 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 269 ngày.",
+      "iconId": "noodles"
     },
     {
       "id": "cauliflower_23",
@@ -162,7 +165,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 12 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 12 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "cauliflower"
     },
     {
       "id": "broccoli_22",
@@ -201,7 +205,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 11 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 11 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "broccoli"
     },
     {
       "id": "vermicelli_17",
@@ -242,7 +247,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 268 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 268 ngày.",
+      "iconId": "bread"
     },
     {
       "id": "avocado_35",
@@ -282,7 +288,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "avocado"
     },
     {
       "id": "butter_12",
@@ -323,7 +330,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 18 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 18 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "butter"
     },
     {
       "id": "pomelo_34",
@@ -363,7 +371,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "birthday_cake"
     },
     {
       "id": "octopus_19",
@@ -404,7 +413,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "cabbage_19",
@@ -444,7 +454,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "cabbage"
     },
     {
       "id": "wheat_flour",
@@ -485,7 +496,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 264 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 264 ngày.",
+      "iconId": "wheat"
     },
     {
       "id": "orange_23",
@@ -524,7 +536,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "orange"
     },
     {
       "id": "passion_fruit",
@@ -564,7 +577,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "banana_22",
@@ -603,7 +617,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "banana"
     },
     {
       "id": "crab_17",
@@ -643,7 +658,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "tomato_16",
@@ -683,7 +699,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "tomato"
     },
     {
       "id": "coffee_11",
@@ -724,7 +741,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày.",
+      "iconId": "coffee"
     },
     {
       "id": "carrot_18",
@@ -764,7 +782,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "carrot"
     },
     {
       "id": "eggplant_25",
@@ -804,7 +823,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "eggplant"
     },
     {
       "id": "tilapia_14",
@@ -845,7 +865,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "salmon_11",
@@ -886,7 +907,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "tuna_12",
@@ -927,7 +949,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "mackerel_13",
@@ -968,7 +991,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "catfish_15",
@@ -1009,7 +1033,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 1 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "chicken_wings",
@@ -1050,7 +1075,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "chicken"
     },
     {
       "id": "bok_choy",
@@ -1089,7 +1115,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 13 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 13 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "carrot"
     },
     {
       "id": "mustard_greens",
@@ -1129,7 +1156,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 12 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 12 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "leafy_greens"
     },
     {
       "id": "strawberry_38",
@@ -1169,7 +1197,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "strawberry"
     },
     {
       "id": "cucumber_17",
@@ -1209,7 +1238,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 6 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 6 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "cucumber"
     },
     {
       "id": "watermelon_27",
@@ -1249,7 +1279,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "melon"
     },
     {
       "id": "pineapple_28",
@@ -1290,7 +1321,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "pineapple"
     },
     {
       "id": "coconut_young",
@@ -1330,7 +1362,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 20 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "coconut"
     },
     {
       "id": "bean_sprouts",
@@ -1370,7 +1403,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "beans"
     },
     {
       "id": "vinegar_18",
@@ -1411,7 +1445,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 83 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 83 ngày.",
+      "iconId": "ketchup"
     },
     {
       "id": "brown_rice",
@@ -1452,7 +1487,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 262 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 262 ngày.",
+      "iconId": "rice"
     },
     {
       "id": "sticky_rice",
@@ -1493,7 +1529,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 263 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 263 ngày.",
+      "iconId": "rice"
     },
     {
       "id": "white_rice",
@@ -1534,7 +1571,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 261 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 261 ngày.",
+      "iconId": "rice"
     },
     {
       "id": "ginger_16",
@@ -1575,7 +1613,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 81 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 81 ngày.",
+      "iconId": "ginger"
     },
     {
       "id": "persimmon_37",
@@ -1615,7 +1654,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "ice_cream",
@@ -1655,7 +1695,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 20 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 20 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "ice_cream"
     },
     {
       "id": "cream_13",
@@ -1696,7 +1737,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 19 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 19 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "ice_cream"
     },
     {
       "id": "bitter_melon",
@@ -1736,7 +1778,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "melon"
     },
     {
       "id": "salt_12",
@@ -1777,7 +1820,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 86 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 86 ngày.",
+      "iconId": "salt"
     },
     {
       "id": "noodles_16",
@@ -1818,7 +1862,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 267 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 267 ngày.",
+      "iconId": "noodles"
     },
     {
       "id": "jackfruit_33",
@@ -1858,7 +1903,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "squid_18",
@@ -1899,7 +1945,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "clams_20",
@@ -1940,7 +1987,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "fish"
     },
     {
       "id": "grape_29",
@@ -1979,7 +2027,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 15 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "grapes"
     },
     {
       "id": "longan_31",
@@ -2019,7 +2068,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "orange_juice",
@@ -2060,7 +2110,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày.",
+      "iconId": "orange"
     },
     {
       "id": "lemon_water",
@@ -2101,7 +2152,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày.",
+      "iconId": "lemon"
     },
     {
       "id": "coconut_water",
@@ -2142,7 +2194,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày.",
+      "iconId": "coconut"
     },
     {
       "id": "sugarcane_juice",
@@ -2183,7 +2236,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "beverage_box"
     },
     {
       "id": "fish_sauce",
@@ -2224,7 +2278,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 84 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 84 ngày.",
+      "iconId": "fish"
     },
     {
       "id": "apple_juice",
@@ -2265,7 +2320,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 8 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "soy_sauce",
@@ -2306,7 +2362,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 85 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 85 ngày.",
+      "iconId": "soy_sauce"
     },
     {
       "id": "cheese_11",
@@ -2347,7 +2404,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 17 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 17 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "cheese"
     },
     {
       "id": "spinach_21",
@@ -2387,7 +2445,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "leafy_greens"
     },
     {
       "id": "water_spinach",
@@ -2427,7 +2486,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 11 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 11 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "leafy_greens"
     },
     {
       "id": "durian_40",
@@ -2467,7 +2527,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "yogurt_10",
@@ -2508,7 +2569,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 16 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 16 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "yogurt"
     },
     {
       "id": "milk_fresh",
@@ -2549,7 +2611,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 15 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 15 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "baby_bottle"
     },
     {
       "id": "soy_milk",
@@ -2589,7 +2652,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 8 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 8 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "baby_bottle"
     },
     {
       "id": "condensed_milk",
@@ -2629,7 +2693,8 @@
         "Bảo quản lạnh sau khi mở nắp",
         "Kiểm tra hạn sử dụng trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 15 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Nên sử dụng trong vòng 15 ngày sau khi mở nắp. Kiểm tra hạn sử dụng trên bao bì.",
+      "iconId": "baby_bottle"
     },
     {
       "id": "dragon_fruit",
@@ -2668,7 +2733,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 17 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "pork_belly",
@@ -2709,7 +2775,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "pork"
     },
     {
       "id": "beef_ribeye",
@@ -2750,7 +2817,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "beef"
     },
     {
       "id": "beef_sirloin",
@@ -2791,7 +2859,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "beef"
     },
     {
       "id": "ground_beef",
@@ -2832,7 +2901,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "beef"
     },
     {
       "id": "ground_pork",
@@ -2873,7 +2943,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 4 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "pork"
     },
     {
       "id": "pork_loin",
@@ -2914,7 +2985,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "pork"
     },
     {
       "id": "duck_meat",
@@ -2955,7 +3027,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "beef"
     },
     {
       "id": "pepper_14",
@@ -2996,7 +3069,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 88 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 88 ngày.",
+      "iconId": "bell_pepper"
     },
     {
       "id": "green_tea",
@@ -3037,7 +3111,8 @@
         "Bảo quản lạnh sau khi mở",
         "Hạn chế đồ uống có đường"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "tea"
     },
     {
       "id": "apple_fuji",
@@ -3077,7 +3152,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 19 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "shrimp_16",
@@ -3118,7 +3194,8 @@
         "Nấu chín kỹ để diệt vi khuẩn",
         "Người dị ứng hải sản nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Hải sản tươi nên sử dụng trong vòng 2 ngày. Đảm bảo bảo quản ở nhiệt độ thấp.",
+      "iconId": "shrimp"
     },
     {
       "id": "garlic_15",
@@ -3159,7 +3236,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 89 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 89 ngày.",
+      "iconId": "garlic"
     },
     {
       "id": "lychee_30",
@@ -3199,7 +3277,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "mango_24",
@@ -3239,7 +3318,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 16 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "mango"
     },
     {
       "id": "lettuce_20",
@@ -3279,7 +3359,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 9 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "leafy_greens"
     },
     {
       "id": "oatmeal_14",
@@ -3320,7 +3401,8 @@
         "Tránh ẩm mốc",
         "Người mắc bệnh tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 265 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 265 ngày.",
+      "iconId": "bread"
     },
     {
       "id": "papaya_26",
@@ -3360,7 +3442,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_red"
     },
     {
       "id": "chicken_thigh",
@@ -3401,7 +3484,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "chicken"
     },
     {
       "id": "sugar_13",
@@ -3442,7 +3526,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 87 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 87 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "guava_32",
@@ -3482,7 +3567,8 @@
         "Rửa sạch trước khi ăn",
         "Người dị ứng nên tránh"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 18 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "apple_green"
     },
     {
       "id": "chili_17",
@@ -3523,7 +3609,8 @@
         "Sử dụng vừa phải",
         "Bảo quản nơi khô ráo"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 82 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 82 ngày.",
+      "iconId": "chili"
     },
     {
       "id": "bell_pepper",
@@ -3563,7 +3650,8 @@
         "Rửa sạch trước khi chế biến",
         "Nên ăn trong ngày sau khi mua"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 13 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 13 ngày để giữ được giá trị dinh dưỡng và độ tươi ngon tốt nhất. Thời gian bảo quản có thể thay đổi tùy thuộc vào độ chín và điều kiện bảo quản.",
+      "iconId": "bell_pepper"
     },
     {
       "id": "chicken_breast",
@@ -3604,7 +3692,8 @@
         "Nấu chín kỹ trước khi ăn",
         "Hạn chế với người mắc bệnh tim mạch"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày. Thời gian có thể thay đổi tùy độ tươi khi mua.",
+      "iconId": "chicken"
     },
     {
       "id": "pumpkin",
@@ -3643,7 +3732,8 @@
         "Rửa sạch vỏ trước khi chế biến",
         "Người tiểu đường nên ăn vừa phải"
       ],
-      "storage_tips": "Bảo quản nguyên quả ở nơi khô ráo tối đa 30 ngày. Sau khi cắt, bảo quản trong tủ lạnh và sử dụng trong 5 ngày."
+      "storage_tips": "Bảo quản nguyên quả ở nơi khô ráo tối đa 30 ngày. Sau khi cắt, bảo quản trong tủ lạnh và sử dụng trong 5 ngày.",
+      "iconId": "pumpkin"
     },
     {
       "id": "chinese_cabbage",
@@ -3682,7 +3772,8 @@
         "Rửa sạch từng lá trước khi dùng",
         "Người có vấn đề tuyến giáp nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ độ giòn."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 10 ngày để giữ độ giòn.",
+      "iconId": "cabbage"
     },
     {
       "id": "winter_melon",
@@ -3722,7 +3813,8 @@
         "Rửa sạch vỏ trước khi chế biến",
         "Người huyết áp thấp nên hạn chế"
       ],
-      "storage_tips": "Bảo quản nguyên quả ở nơi khô ráo tối đa 60 ngày. Sau khi cắt, bảo quản trong tủ lạnh và dùng trong 7 ngày."
+      "storage_tips": "Bảo quản nguyên quả ở nơi khô ráo tối đa 60 ngày. Sau khi cắt, bảo quản trong tủ lạnh và dùng trong 7 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "sweet_potato_leaves",
@@ -3761,7 +3853,8 @@
         "Rửa sạch nhiều lần",
         "Nên luộc chín kỹ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 3 ngày. Rau lá dễ héo."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 3 ngày. Rau lá dễ héo.",
+      "iconId": "potato"
     },
     {
       "id": "rambutan",
@@ -3800,7 +3893,8 @@
         "Rửa sạch vỏ trước khi bóc",
         "Người tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày. Chôm chôm dễ hỏng sau khi hái."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày. Chôm chôm dễ hỏng sau khi hái.",
+      "iconId": "apple_red"
     },
     {
       "id": "custard_apple",
@@ -3840,7 +3934,8 @@
         "Hạt độc, không được ăn",
         "Người tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau khi chín, bảo quản trong tủ lạnh và dùng trong 5 ngày."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau khi chín, bảo quản trong tủ lạnh và dùng trong 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "star_fruit",
@@ -3880,7 +3975,8 @@
         "Người bệnh thận không nên ăn",
         "Chứa oxalate cao"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày để giữ độ giòn."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày để giữ độ giòn.",
+      "iconId": "apple_red"
     },
     {
       "id": "pomelo",
@@ -3919,7 +4015,8 @@
         "Có thể tương tác với một số thuốc",
         "Người dùng thuốc hạ huyết áp nên hỏi bác sĩ"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh. Đề xuất sử dụng trong vòng 21 ngày. Bưởi bảo quản lâu hơn nhiều trái cây khác."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh. Đề xuất sử dụng trong vòng 21 ngày. Bưởi bảo quản lâu hơn nhiều trái cây khác.",
+      "iconId": "apple_red"
     },
     {
       "id": "pork_ribs",
@@ -3959,7 +4056,8 @@
         "Nấu chín kỹ",
         "Nên ăn vừa phải"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thịt có xương dễ hỏng hơn."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thịt có xương dễ hỏng hơn.",
+      "iconId": "pork"
     },
     {
       "id": "beef_shank",
@@ -3998,7 +4096,8 @@
         "Nấu chín kỹ",
         "Người cholesterol cao nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thịt bò thịt đỏ bảo quản tốt hơn gà."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Thịt bò thịt đỏ bảo quản tốt hơn gà.",
+      "iconId": "beef"
     },
     {
       "id": "beef_steak",
@@ -4038,7 +4137,8 @@
         "Nấu chín vừa phải theo sở thích",
         "Người mỡ máu cao nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Bít tết nên để ở nhiệt độ phòng 30 phút trước khi nấu."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày. Bít tết nên để ở nhiệt độ phòng 30 phút trước khi nấu.",
+      "iconId": "steak"
     },
     {
       "id": "chayote",
@@ -4076,7 +4176,8 @@
       "health_warnings": [
         "Rửa sạch trước khi dùng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày.",
+      "iconId": "carrot"
     },
     {
       "id": "loofah",
@@ -4115,7 +4216,8 @@
       "health_warnings": [
         "Rửa sạch trước khi nấu"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày.",
+      "iconId": "pumpkin"
     },
     {
       "id": "okra",
@@ -4153,7 +4255,8 @@
       "health_warnings": [
         "Người sỏi thận nên hạn chế"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày.",
+      "iconId": "carrot"
     },
     {
       "id": "green_beans",
@@ -4191,7 +4294,8 @@
       "health_warnings": [
         "Rửa sạch trước khi nấu"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "beans"
     },
     {
       "id": "yard_long_bean",
@@ -4229,7 +4333,8 @@
       "health_warnings": [
         "Nên nấu chín"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 5 ngày.",
+      "iconId": "beans"
     },
     {
       "id": "kohlrabi",
@@ -4267,7 +4372,8 @@
       "health_warnings": [
         "Rửa sạch vỏ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày.",
+      "iconId": "carrot"
     },
     {
       "id": "radish",
@@ -4306,7 +4412,8 @@
       "health_warnings": [
         "Rửa sạch vỏ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 14 ngày.",
+      "iconId": "radish"
     },
     {
       "id": "taro",
@@ -4345,7 +4452,8 @@
         "Phải nấu chín mới ăn",
         "Người tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản ở nơi khô ráo, thoáng mát. Có thể bảo quản 21 ngày."
+      "storage_tips": "Bảo quản ở nơi khô ráo, thoáng mát. Có thể bảo quản 21 ngày.",
+      "iconId": "carrot"
     },
     {
       "id": "sweet_potato",
@@ -4383,7 +4491,8 @@
       "health_warnings": [
         "Người tiểu đường nên ăn vừa phải"
       ],
-      "storage_tips": "Bảo quản ở nơi khô ráo, thoáng mát. Không nên bảo quản trong tủ lạnh. Có thể bảo quản 30 ngày."
+      "storage_tips": "Bảo quản ở nơi khô ráo, thoáng mát. Không nên bảo quản trong tủ lạnh. Có thể bảo quản 30 ngày.",
+      "iconId": "sweet_potato"
     },
     {
       "id": "jicama",
@@ -4421,7 +4530,8 @@
       "health_warnings": [
         "Bỏ vỏ trước khi ăn"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 21 ngày.",
+      "iconId": "carrot"
     },
     {
       "id": "coconut",
@@ -4458,7 +4568,8 @@
       "health_warnings": [
         "Calo cao, nên ăn vừa phải"
       ],
-      "storage_tips": "Bảo quản nguyên quả ở nhiệt độ phòng tối đa 30 ngày. Sau khi bổ, bảo quản trong tủ lạnh và dùng trong 3 ngày."
+      "storage_tips": "Bảo quản nguyên quả ở nhiệt độ phòng tối đa 30 ngày. Sau khi bổ, bảo quản trong tủ lạnh và dùng trong 3 ngày.",
+      "iconId": "coconut"
     },
     {
       "id": "soursop",
@@ -4497,7 +4608,8 @@
         "Hạt độc, không ăn",
         "Ăn khi chín mềm"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau khi chín, dùng ngay hoặc bảo quản trong tủ lạnh 5 ngày."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau khi chín, dùng ngay hoặc bảo quản trong tủ lạnh 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "langsat",
@@ -4535,7 +4647,8 @@
       "health_warnings": [
         "Rửa sạch trước khi ăn"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "rose_apple",
@@ -4573,7 +4686,8 @@
       "health_warnings": [
         "Rửa sạch trước khi ăn"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "sapodilla",
@@ -4611,7 +4725,8 @@
       "health_warnings": [
         "Ăn khi chín mềm"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín mềm. Sau đó bảo quản trong tủ lạnh 7 ngày."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín mềm. Sau đó bảo quản trong tủ lạnh 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "pomegranate",
@@ -4649,7 +4764,8 @@
       "health_warnings": [
         "Người tiểu đường nên hạn chế"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh. Đề xuất sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh. Đề xuất sử dụng trong vòng 21 ngày.",
+      "iconId": "blueberries"
     },
     {
       "id": "plum",
@@ -4687,7 +4803,8 @@
       "health_warnings": [
         "Hạt không ăn được"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Đề xuất sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "kiwi",
@@ -4724,7 +4841,8 @@
       "health_warnings": [
         "Người dị ứng kiwi nên tránh"
       ],
-      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau đó bảo quản trong tủ lạnh 14 ngày."
+      "storage_tips": "Bảo quản ở nhiệt độ phòng cho đến khi chín. Sau đó bảo quản trong tủ lạnh 14 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "beef_brisket",
@@ -4763,7 +4881,8 @@
         "Nấu chín kỹ",
         "Hàm lượng mỡ vừa phải"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "lamb",
@@ -4803,7 +4922,8 @@
         "Hàm lượng mỡ cao",
         "Nấu chín kỹ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "quail",
@@ -4841,7 +4961,8 @@
       "health_warnings": [
         "Nấu chín kỹ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "goose",
@@ -4880,7 +5001,8 @@
         "Nấu chín kỹ",
         "Bỏ da để giảm mỡ"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "orange_sanh",
@@ -4919,7 +5041,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "orange"
     },
     {
       "id": "orange_canh",
@@ -4958,7 +5081,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "orange"
     },
     {
       "id": "tangerine",
@@ -4997,7 +5121,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày.",
+      "iconId": "tangerine"
     },
     {
       "id": "tangerine_hong",
@@ -5036,7 +5161,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày.",
+      "iconId": "tangerine"
     },
     {
       "id": "pomelo_green",
@@ -5075,7 +5201,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "pomelo_red",
@@ -5114,7 +5241,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "lime",
@@ -5153,7 +5281,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "lemon",
@@ -5192,7 +5321,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "lemon"
     },
     {
       "id": "kumquat",
@@ -5231,7 +5361,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày.",
+      "iconId": "shortcake"
     },
     {
       "id": "mango_cat",
@@ -5270,7 +5401,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "mango_tuong",
@@ -5309,7 +5441,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "mango_australia",
@@ -5348,7 +5481,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "mango_green",
@@ -5387,7 +5521,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "mango_hoa_loc",
@@ -5426,7 +5561,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "banana_tieu",
@@ -5465,7 +5601,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "banana"
     },
     {
       "id": "banana_ngu",
@@ -5504,7 +5641,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "banana"
     },
     {
       "id": "banana_su",
@@ -5543,7 +5681,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "banana"
     },
     {
       "id": "banana_cau",
@@ -5582,7 +5721,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "banana"
     },
     {
       "id": "banana_gia",
@@ -5621,7 +5761,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "banana"
     },
     {
       "id": "longan_hungyen",
@@ -5660,7 +5801,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "lychee_thieu",
@@ -5699,7 +5841,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "lychee_early",
@@ -5738,7 +5881,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "durian_monthong",
@@ -5777,7 +5921,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "durian_ri6",
@@ -5816,7 +5961,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "durian_musang",
@@ -5855,7 +6001,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "strawberry_dalat",
@@ -5894,7 +6041,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "strawberry"
     },
     {
       "id": "blueberry",
@@ -5933,7 +6081,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "blueberries"
     },
     {
       "id": "raspberry",
@@ -5972,7 +6121,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "blackberry",
@@ -6011,7 +6161,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "cranberry",
@@ -6050,7 +6201,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "mulberry",
@@ -6089,7 +6241,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "grape_black",
@@ -6128,7 +6281,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "grapes"
     },
     {
       "id": "grape_green",
@@ -6167,7 +6321,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "grapes"
     },
     {
       "id": "grape_red",
@@ -6206,7 +6361,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "grapes"
     },
     {
       "id": "grape_ninh_thuan",
@@ -6245,7 +6401,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "grapes"
     },
     {
       "id": "apple_gala",
@@ -6284,7 +6441,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "apple_green",
@@ -6323,7 +6481,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_green"
     },
     {
       "id": "apple_red",
@@ -6362,7 +6521,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "apple_envy",
@@ -6401,7 +6561,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "apple_pink_lady",
@@ -6440,7 +6601,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "pear_asian",
@@ -6479,7 +6641,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "pear"
     },
     {
       "id": "pear_european",
@@ -6518,7 +6681,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "pear"
     },
     {
       "id": "pear_korean",
@@ -6557,7 +6721,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "pear"
     },
     {
       "id": "watermelon_red",
@@ -6596,7 +6761,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "watermelon_yellow",
@@ -6635,7 +6801,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "cantaloupe",
@@ -6674,7 +6841,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "honeydew",
@@ -6713,7 +6881,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 10 ngày.",
+      "iconId": "honey"
     },
     {
       "id": "melon_pepino",
@@ -6752,7 +6921,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "mangosteen",
@@ -6791,7 +6961,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "mango"
     },
     {
       "id": "passion_fruit_yellow",
@@ -6830,7 +7001,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "avocado_booth",
@@ -6869,7 +7041,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "avocado"
     },
     {
       "id": "avocado_hass",
@@ -6908,7 +7081,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "avocado"
     },
     {
       "id": "dragon_fruit_white",
@@ -6947,7 +7121,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "dragon_fruit_red",
@@ -6986,7 +7161,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "pitaya",
@@ -7025,7 +7201,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "flatbread"
     },
     {
       "id": "milk_fruit",
@@ -7064,7 +7241,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "baby_bottle"
     },
     {
       "id": "sapoche",
@@ -7103,7 +7281,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "green_skin_grapefruit",
@@ -7142,7 +7321,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 21 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "wax_apple",
@@ -7181,7 +7361,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "croissant"
     },
     {
       "id": "water_apple",
@@ -7220,7 +7401,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "guava_white",
@@ -7259,7 +7441,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "guava_pink",
@@ -7298,7 +7481,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "papaya_red",
@@ -7337,7 +7521,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "papaya_yellow",
@@ -7376,7 +7561,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "jackfruit_mi",
@@ -7415,7 +7601,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "honey"
     },
     {
       "id": "jackfruit_tuoi",
@@ -7454,7 +7641,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "peach",
@@ -7493,7 +7681,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "peach"
     },
     {
       "id": "nectarine",
@@ -7532,7 +7721,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "apricot",
@@ -7571,7 +7761,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_green"
     },
     {
       "id": "cherry",
@@ -7610,7 +7801,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "cherries"
     },
     {
       "id": "cherry_rainier",
@@ -7649,7 +7841,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "cherries"
     },
     {
       "id": "date",
@@ -7688,7 +7881,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "fig",
@@ -7727,7 +7921,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "tamarind",
@@ -7766,7 +7961,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 14 ngày.",
+      "iconId": "melon"
     },
     {
       "id": "santol",
@@ -7805,7 +8001,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "cempedak",
@@ -7844,7 +8041,8 @@
         "Rửa sạch trước khi ăn",
         "Bảo quản tốt để tránh hỏng"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "apple_red"
     },
     {
       "id": "pork_ham",
@@ -7883,7 +8081,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_ear",
@@ -7922,7 +8121,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_snout",
@@ -7961,7 +8161,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_tongue",
@@ -8000,7 +8201,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_heart",
@@ -8039,7 +8241,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_liver",
@@ -8078,7 +8281,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_kidney",
@@ -8117,7 +8321,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_intestine",
@@ -8156,7 +8361,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_stomach",
@@ -8195,7 +8401,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_feet",
@@ -8234,7 +8441,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_tail",
@@ -8273,7 +8481,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_skin",
@@ -8312,7 +8521,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_blood",
@@ -8351,7 +8561,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_cartilage",
@@ -8390,7 +8601,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "beef_tongue",
@@ -8429,7 +8641,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_heart",
@@ -8468,7 +8681,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_liver",
@@ -8507,7 +8721,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_kidney",
@@ -8546,7 +8761,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_tripe",
@@ -8585,7 +8801,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_tail",
@@ -8624,7 +8841,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_tendon",
@@ -8663,7 +8881,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_bone_marrow",
@@ -8702,7 +8921,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "beef_chuck",
@@ -8741,7 +8961,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "chicken_heart",
@@ -8780,7 +9001,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_liver",
@@ -8819,7 +9041,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_gizzard",
@@ -8858,7 +9081,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_feet",
@@ -8897,7 +9121,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_neck",
@@ -8936,7 +9161,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_back",
@@ -8975,7 +9201,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_whole",
@@ -9014,7 +9241,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_breast_boneless",
@@ -9053,7 +9281,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "chicken_drumstick",
@@ -9092,7 +9321,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "duck_breast",
@@ -9131,7 +9361,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "duck_leg",
@@ -9170,7 +9401,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "duck_liver",
@@ -9209,7 +9441,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "duck_gizzard",
@@ -9248,7 +9481,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "duck_tongue",
@@ -9287,7 +9521,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "duck_whole",
@@ -9326,7 +9561,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "quail_whole",
@@ -9365,7 +9601,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "pigeon",
@@ -9404,7 +9641,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "turkey",
@@ -9443,7 +9681,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "poultry_leg"
     },
     {
       "id": "goat",
@@ -9482,7 +9721,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "rabbit",
@@ -9521,7 +9761,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 2 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "frog",
@@ -9560,7 +9801,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "snail",
@@ -9599,7 +9841,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 1 ngày.",
+      "iconId": "avocado"
     },
     {
       "id": "pork_sausage",
@@ -9638,7 +9881,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "chinese_sausage",
@@ -9677,7 +9921,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 30 ngày.",
+      "iconId": "sausage"
     },
     {
       "id": "pork_patty",
@@ -9716,7 +9961,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "pork_meatball",
@@ -9755,7 +10001,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "pork"
     },
     {
       "id": "beef_meatball",
@@ -9794,7 +10041,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "chicken_meatball",
@@ -9833,7 +10081,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 3 ngày.",
+      "iconId": "chicken"
     },
     {
       "id": "vietnamese_ham",
@@ -9872,7 +10121,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 5 ngày.",
+      "iconId": "beef"
     },
     {
       "id": "bacon",
@@ -9911,7 +10161,8 @@
         "Nấu chín kỹ",
         "Bảo quản lạnh ngay"
       ],
-      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày."
+      "storage_tips": "Bảo quản trong tủ lạnh ở nhiệt độ 0-4°C. Nên sử dụng trong vòng 7 ngày.",
+      "iconId": "bacon"
     }
   ]
 }
