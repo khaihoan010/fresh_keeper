@@ -7,6 +7,7 @@ import '../../config/routes.dart';
 import '../../config/theme.dart';
 import '../../data/models/product_icon.dart';
 import '../providers/subscription_provider.dart';
+import 'product_icon_widget.dart';
 
 /// Icon Picker Dialog
 /// Allows users to select custom icons for products
@@ -487,11 +488,11 @@ class _IconPickerDialogState extends State<IconPickerDialog> {
                   : null,
             ),
             child: Center(
-              child: Text(
-                icon.emoji,
-                style: TextStyle(
-                  fontSize: 32,
-                  color: isLocked ? Colors.grey[400] : null,
+              child: Opacity(
+                opacity: isLocked ? 0.4 : 1.0,
+                child: ProductIconWidget(
+                  icon: icon,
+                  size: 32,
                 ),
               ),
             ),
