@@ -68,7 +68,8 @@ class DatabaseService {
         image_path TEXT,
         status TEXT NOT NULL DEFAULT 'active',
         created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        updated_at TEXT NOT NULL,
+        custom_icon_id TEXT
       )
     ''');
 
@@ -513,6 +514,23 @@ class DatabaseService {
       }
 
       debugPrint('✅ v13 upgrade completed: Shopping list with nutrition data support');
+    }
+
+    if (oldVersion < 14) {
+      // Add custom_icon_id to user_products for custom product icons
+      debugPrint('🔄 Upgrading to v14: Adding custom icon support to products...');
+
+      try {
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableUserProducts}
+          ADD COLUMN custom_icon_id TEXT
+        ''');
+        debugPrint('✅ Added custom_icon_id column to user_products');
+      } catch (e) {
+        debugPrint('⚠️ Error adding custom_icon_id column: $e');
+      }
+
+      debugPrint('✅ v14 upgrade completed: Custom product icon support ready');
     }
   }
 
