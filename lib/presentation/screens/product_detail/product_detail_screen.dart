@@ -34,6 +34,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   late UserProduct _product;
   late TabController _tabController;
   ProductTemplate? _productTemplate;
+  bool _showTotalNutrition = false; // Toggle between per 100g and total
 
   @override
   void initState() {
@@ -156,6 +157,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
         }
       }
     });
+  }
+
+  /// Calculate nutrition multiplier based on product quantity
+  /// Assumes serving size is 100g, so 0.7kg = 700g = 7x multiplier
+  double _getNutritionMultiplier() {
+    if (!_showTotalNutrition) return 1.0;
+
+    final nutritionData = _productTemplate?.nutritionData;
+    if (nutritionData == null) return 1.0;
+
+    // Parse serving size to get grams (e.g., "100g" -> 100, "100ml" -> 100)
+    final servingSize = nutritionData.servingSize ?? '100g';
+    final servingMatch = RegExp(r'(\d+)').firstMatch(servingSize);
+    final servingGrams = servingMatch != null ? double.parse(servingMatch.group(1)!) : 100.0;
+
+    // Convert product quantity to grams based on unit
+    final quantity = _product.quantity;
+    final unit = _product.unit.toLowerCase();
+
+    double totalGrams;
+    if (unit == 'kg') {
+      totalGrams = quantity * 1000;
+    } else if (unit == 'g') {
+      totalGrams = quantity;
+    } else if (unit == 'ml' || unit == 'l') {
+      // Assume 1ml = 1g for liquids (approximation)
+      totalGrams = unit == 'l' ? quantity * 1000 : quantity;
+    } else {
+      // For other units (pieces, cái, etc.), return 1.0 (no multiplication)
+      return 1.0;
+    }
+
+    // Calculate multiplier: (totalGrams / servingGrams)
+    return totalGrams / servingGrams;
   }
 
   @override
@@ -526,16 +561,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
       );
     }
 
+    final multiplier = _getNutritionMultiplier();
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '🍎 ${l10n.nutritionValue} (${nutritionData.servingSize ?? l10n.servingSize})',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+          // Header with toggle button
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  _showTotalNutrition
+                      ? '🍎 ${l10n.nutritionValue} (${l10n.isVietnamese ? "Tổng" : "Total"}: ${_product.quantity}${_product.unit})'
+                      : '🍎 ${l10n.nutritionValue} (${nutritionData.servingSize ?? l10n.servingSize})',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  _showTotalNutrition ? Icons.calculate_outlined : Icons.scale_outlined,
+                  color: AppTheme.primaryColor,
+                ),
+                tooltip: _showTotalNutrition
+                    ? (l10n.isVietnamese ? 'Hiển thị trên 100g' : 'Show per 100g')
+                    : (l10n.isVietnamese ? 'Hiển thị tổng theo khối lượng' : 'Show total by quantity'),
+                onPressed: () {
+                  setState(() {
+                    _showTotalNutrition = !_showTotalNutrition;
+                  });
+                },
+              ),
+            ],
           ),
           const SizedBox(height: 16),
 
@@ -543,44 +603,44 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
           if (nutritionData.calories != null)
             _buildNutrientRow(
               l10n.calories,
-              '${nutritionData.calories!.toStringAsFixed(0)} kcal',
-              nutritionData.calories! / 2000,
+              '${(nutritionData.calories! * multiplier).toStringAsFixed(0)} kcal',
+              (nutritionData.calories! * multiplier) / 2000,
             ),
 
           if (nutritionData.protein != null)
             _buildNutrientRow(
               l10n.protein,
-              '${nutritionData.protein!.toStringAsFixed(1)}g',
-              nutritionData.protein! / 50,
+              '${(nutritionData.protein! * multiplier).toStringAsFixed(1)}g',
+              (nutritionData.protein! * multiplier) / 50,
             ),
 
           if (nutritionData.carbohydrates != null)
             _buildNutrientRow(
               l10n.carbohydrates,
-              '${nutritionData.carbohydrates!.toStringAsFixed(1)}g',
-              nutritionData.carbohydrates! / 300,
+              '${(nutritionData.carbohydrates! * multiplier).toStringAsFixed(1)}g',
+              (nutritionData.carbohydrates! * multiplier) / 300,
             ),
 
           if (nutritionData.fat != null)
             _buildNutrientRow(
               l10n.fat,
-              '${nutritionData.fat!.toStringAsFixed(1)}g',
-              nutritionData.fat! / 70,
+              '${(nutritionData.fat! * multiplier).toStringAsFixed(1)}g',
+              (nutritionData.fat! * multiplier) / 70,
             ),
 
           if (nutritionData.fiber != null)
             _buildNutrientRow(
               l10n.fiber,
-              '${nutritionData.fiber!.toStringAsFixed(1)}g',
-              nutritionData.fiber! / 25,
+              '${(nutritionData.fiber! * multiplier).toStringAsFixed(1)}g',
+              (nutritionData.fiber! * multiplier) / 25,
             ),
 
           if (nutritionData.sugar != null)
             _buildNutrientRow(
               l10n.sugar,
-              '${nutritionData.sugar!.toStringAsFixed(1)}g',
-              nutritionData.sugar! / 50,
-              isWarning: nutritionData.sugar! > 10,
+              '${(nutritionData.sugar! * multiplier).toStringAsFixed(1)}g',
+              (nutritionData.sugar! * multiplier) / 50,
+              isWarning: (nutritionData.sugar! * multiplier) > 10,
             ),
 
           // Vitamins
@@ -608,7 +668,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Text(
-                            '${entry.value.toStringAsFixed(1)} ${_getVitaminUnit(entry.key)}',
+                            '${(entry.value * multiplier).toStringAsFixed(1)} ${_getVitaminUnit(entry.key)}',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -647,7 +707,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Text(
-                            '${entry.value.toStringAsFixed(1)} mg',
+                            '${(entry.value * multiplier).toStringAsFixed(1)} mg',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),

@@ -607,9 +607,10 @@ class _TemplateGridTile extends StatelessWidget {
   });
 
   Widget _buildTemplateIcon() {
-    // If template has iconId, use ProductIconWidget
+    // Product templates should ALWAYS use flat (free) icons
+    // Only VIP users see 3D icons when they explicitly select them in icon picker
     if (template.iconId != null) {
-      final icon = ProductIcons.getIconById(template.iconId);
+      final icon = ProductIcons.getIconById(template.iconId, preferPremium: false);
       if (icon != null) {
         return ProductIconWidget(
           icon: icon,
