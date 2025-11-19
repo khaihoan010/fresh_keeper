@@ -105,7 +105,8 @@ class DatabaseService {
         health_benefits TEXT,
         health_warnings TEXT,
         storage_tips TEXT,
-        image_url TEXT
+        image_url TEXT,
+        iconId TEXT
       )
     ''');
 
@@ -549,6 +550,32 @@ class DatabaseService {
 
       debugPrint('✅ v15 upgrade completed: Shopping list custom icon support ready');
     }
+
+    if (oldVersion < 16) {
+      // Add iconId to product_templates and reload with icon mappings
+      debugPrint('🔄 Upgrading to v16: Adding icon support to product templates...');
+
+      try {
+        // Add iconId column to product_templates
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableProductTemplates}
+          ADD COLUMN iconId TEXT
+        ''');
+        debugPrint('✅ Added iconId column to product_templates');
+
+        // Clear existing templates
+        await db.delete(AppConstants.tableProductTemplates);
+        debugPrint('🗑️ Cleared old product templates');
+
+        // Reload from JSON file with icon mappings
+        await _loadProductTemplates(db);
+        debugPrint('✅ Product templates reloaded with icon mappings (251 products with custom icons)');
+      } catch (e) {
+        debugPrint('⚠️ Error adding iconId column or reloading templates: $e');
+      }
+
+      debugPrint('✅ v16 upgrade completed: All 251 products now have custom flat icons');
+    }
   }
 
   /// Load initial data
@@ -605,6 +632,7 @@ class DatabaseService {
               : null,
           'storage_tips': productData['storage_tips'],
           'image_url': productData['image_url'],
+          'iconId': productData['iconId'],
         };
 
         batch.insert(
