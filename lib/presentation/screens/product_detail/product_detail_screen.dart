@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
@@ -582,9 +583,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                 ),
               ),
               IconButton(
-                icon: Icon(
-                  Icons.sync_alt,
-                  color: AppTheme.primaryColor,
+                icon: SvgPicture.asset(
+                  'assets/icons/nutrition_toggle.svg',
+                  width: 24,
+                  height: 24,
                 ),
                 tooltip: _showTotalNutrition
                     ? (l10n.isVietnamese ? 'Chuyển về 100g' : 'Switch to per 100g')
