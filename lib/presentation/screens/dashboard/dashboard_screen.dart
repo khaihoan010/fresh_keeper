@@ -5,7 +5,9 @@ import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/product_icons.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// Dashboard Screen
 /// Shows overview of products and quick stats
@@ -256,10 +258,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             return Card(
               margin: const EdgeInsets.only(bottom: 8),
               child: ListTile(
-                leading: Text(
-                  AppConstants.categoryIcons[product.category] ?? '📦',
-                  style: const TextStyle(fontSize: 32),
-                ),
+                leading: _buildProductIcon(product),
                 title: Row(
                   children: [
                     Expanded(
@@ -323,6 +322,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
             );
           }),
       ],
+    );
+  }
+
+  /// Build product icon widget with support for custom icons
+  Widget _buildProductIcon(product) {
+    // Check for custom icon first
+    if (product.customIconId != null) {
+      final icon = ProductIcons.getIconById(product.customIconId);
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 32,
+        );
+      }
+    }
+    // Fallback to category icon (emoji text)
+    return Text(
+      AppConstants.categoryIcons[product.category] ?? '📦',
+      style: const TextStyle(fontSize: 32),
     );
   }
 }
