@@ -291,6 +291,12 @@ def generate_config():
     output.append("""  // Helper methods
   static List<ProductIcon> get allIcons => [...freeIcons, ...premiumIcons];
 
+  /// Get total count of free icons
+  static int get freeIconCount => freeIcons.length;
+
+  /// Get total count of premium icons
+  static int get premiumIconCount => premiumIcons.length;
+
   static ProductIcon? getIconById(String? id) {
     if (id == null) return null;
     try {
