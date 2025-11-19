@@ -532,6 +532,23 @@ class DatabaseService {
 
       debugPrint('✅ v14 upgrade completed: Custom product icon support ready');
     }
+
+    if (oldVersion < 15) {
+      // Add custom_icon_id to shopping_list for preserving icons when moving products
+      debugPrint('🔄 Upgrading to v15: Adding custom icon support to shopping list...');
+
+      try {
+        await db.execute('''
+          ALTER TABLE ${AppConstants.tableShoppingList}
+          ADD COLUMN custom_icon_id TEXT
+        ''');
+        debugPrint('✅ Added custom_icon_id column to shopping_list');
+      } catch (e) {
+        debugPrint('⚠️ Error adding custom_icon_id column to shopping_list: $e');
+      }
+
+      debugPrint('✅ v15 upgrade completed: Shopping list custom icon support ready');
+    }
   }
 
   /// Load initial data
