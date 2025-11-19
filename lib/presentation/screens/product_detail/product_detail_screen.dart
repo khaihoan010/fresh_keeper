@@ -7,10 +7,12 @@ import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/product_icons.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
 import '../../../data/models/nutrition_data.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/product_icon_widget.dart';
 import '../../../data/repositories/product_repository.dart';
 
 /// Product Detail Screen
@@ -250,10 +252,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         ],
                       ),
                       child: Center(
-                        child: Text(
-                          categoryData['icon'] as String,
-                          style: const TextStyle(fontSize: 48),
-                        ),
+                        child: _buildProductIcon(),
                       ),
                     ),
 
@@ -938,6 +937,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   String _getVitaminUnit(String key) {
     if (key.contains('vitamin_a')) return 'IU';
     return 'mg';
+  }
+
+  /// Build product icon widget with support for custom VIP icons
+  Widget _buildProductIcon() {
+    // Check for custom icon first
+    if (_product.customIconId != null) {
+      final icon = ProductIcons.getIconById(_product.customIconId);
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 48,
+        );
+      }
+    }
+    // Fallback to category icon (emoji text)
+    final categoryData = AppConstants.categories.firstWhere(
+      (c) => c['id'] == _product.category,
+      orElse: () => {
+        'icon': '📦',
+      },
+    );
+    return Text(
+      categoryData['icon'] as String,
+      style: const TextStyle(fontSize: 48),
+    );
   }
 }
 
