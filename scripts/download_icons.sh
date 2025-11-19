@@ -38,7 +38,7 @@ copy_icon() {
     local ICON_NAME=$1
     local OUTPUT_NAME=$2
     local FLAT_PATH="$TEMP_DIR/assets/$ICON_NAME/Flat/${ICON_NAME}_flat.svg"
-    local 3D_PATH="$TEMP_DIR/assets/$ICON_NAME/3D/${ICON_NAME}_3d.svg"
+    local THREED_PATH="$TEMP_DIR/assets/$ICON_NAME/3D/${ICON_NAME}_3d.svg"
 
     if [ -f "$FLAT_PATH" ]; then
         cp "$FLAT_PATH" "$ASSETS_DIR/flat/${OUTPUT_NAME}.svg"
@@ -47,11 +47,11 @@ copy_icon() {
         echo "  ⚠️  $OUTPUT_NAME (Flat) - NOT FOUND: $FLAT_PATH"
     fi
 
-    if [ -f "$3D_PATH" ]; then
-        cp "$3D_PATH" "$ASSETS_DIR/3d/${OUTPUT_NAME}.svg"
+    if [ -f "$THREED_PATH" ]; then
+        cp "$THREED_PATH" "$ASSETS_DIR/3d/${OUTPUT_NAME}.svg"
         echo "  ✅ $OUTPUT_NAME (3D)"
     else
-        echo "  ⚠️  $OUTPUT_NAME (3D) - NOT FOUND: $3D_PATH"
+        echo "  ⚠️  $OUTPUT_NAME (3D) - NOT FOUND: $THREED_PATH"
     fi
 }
 
