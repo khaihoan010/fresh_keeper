@@ -3,8 +3,10 @@ import 'package:intl/intl.dart';
 
 import '../../../config/app_localizations.dart';
 import '../../../config/constants.dart';
+import '../../../config/product_icons.dart';
 import '../../../config/theme.dart';
 import '../../../data/models/shopping_list_item.dart';
+import '../../widgets/product_icon_widget.dart';
 
 /// Store Items Screen
 /// Full screen to configure storage details for each shopping list item
@@ -215,7 +217,7 @@ class _StoreItemCardState extends State<_StoreItemCard> {
             // Item header with icon and quantity
             Row(
               children: [
-                // Category icon
+                // Category icon or custom icon
                 Container(
                   width: 48,
                   height: 48,
@@ -224,10 +226,7 @@ class _StoreItemCardState extends State<_StoreItemCard> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
-                    child: Text(
-                      AppConstants.categoryIcons[widget.config.category] ?? '🛒',
-                      style: const TextStyle(fontSize: 24),
-                    ),
+                    child: _buildItemIcon(),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -492,6 +491,25 @@ class _StoreItemCardState extends State<_StoreItemCard> {
   String _getDaysRemaining(DateTime expiryDate, AppLocalizations l10n) {
     final days = expiryDate.difference(DateTime.now()).inDays;
     return l10n.daysRemaining(days);
+  }
+
+  /// Build item icon widget with support for custom icons
+  Widget _buildItemIcon() {
+    // Check for custom icon first
+    if (widget.config.item.customIconId != null) {
+      final icon = ProductIcons.getIconById(widget.config.item.customIconId);
+      if (icon != null) {
+        return ProductIconWidget(
+          icon: icon,
+          size: 24,
+        );
+      }
+    }
+    // Fallback to category icon (emoji text)
+    return Text(
+      AppConstants.categoryIcons[widget.config.category] ?? '🛒',
+      style: const TextStyle(fontSize: 24),
+    );
   }
 }
 
