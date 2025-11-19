@@ -1920,4 +1920,10 @@ class ProductIcons {
     icons.sort((a, b) => a.displayOrder.compareTo(b.displayOrder));
     return icons;
   }
+
+  /// Get total count of free icons
+  static int get freeIconCount => freeIcons.length;
+
+  /// Get total count of premium icons
+  static int get premiumIconCount => premiumIcons.length;
 }
