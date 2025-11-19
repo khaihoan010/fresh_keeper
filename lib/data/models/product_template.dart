@@ -18,6 +18,7 @@ class ProductTemplate {
   final List<String>? healthWarnings;
   final String? storageTips;
   final String? imageUrl;
+  final String? iconId; // Icon ID for product display
 
   const ProductTemplate({
     required this.id,
@@ -34,6 +35,7 @@ class ProductTemplate {
     this.healthWarnings,
     this.storageTips,
     this.imageUrl,
+    this.iconId,
   });
 
   /// Calculate expiry date based on purchase date and location
@@ -73,6 +75,7 @@ class ProductTemplate {
           : null,
       'storage_tips': storageTips,
       'image_url': imageUrl,
+      'iconId': iconId,
     };
   }
 
@@ -113,6 +116,7 @@ class ProductTemplate {
           : null,
       storageTips: json['storage_tips'] as String?,
       imageUrl: json['image_url'] as String?,
+      iconId: json['iconId'] as String?,
     );
   }
 
