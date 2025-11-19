@@ -5,6 +5,7 @@ import '../../../config/theme.dart';
 import '../../../config/routes.dart';
 import '../../../config/constants.dart';
 import '../../../config/app_localizations.dart';
+import '../../../config/product_icons.dart';
 import '../../../data/models/user_product.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/ads/banner_ad_widget.dart';
@@ -413,6 +414,16 @@ class _ProductCard extends StatelessWidget {
     this.onQuantityChanged,
   });
 
+  String _getProductIcon() {
+    // Check for custom icon first
+    if (product.customIconId != null) {
+      final icon = ProductIcons.getIconById(product.customIconId);
+      if (icon != null) return icon.emoji;
+    }
+    // Fallback to category icon
+    return AppConstants.categoryIcons[product.category] ?? '📦';
+  }
+
   void _showQuantityEditDialog(BuildContext context) {
     final controller = TextEditingController(text: '${product.quantity}');
     showDialog(
@@ -493,7 +504,7 @@ class _ProductCard extends StatelessWidget {
               children: [
                 // Icon
                 Text(
-                  AppConstants.categoryIcons[product.category] ?? '📦',
+                  _getProductIcon(),
                   style: const TextStyle(fontSize: 40),
                 ),
 
