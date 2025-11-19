@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../config/theme.dart';
 import '../../../config/app_localizations.dart';
 import '../../../config/constants.dart';
+import '../../../config/product_icons.dart';
 import '../../../data/models/shopping_list_item.dart';
 import '../../../data/models/user_product.dart';
 import '../../../data/models/product_template.dart';
@@ -941,6 +942,16 @@ class _ShoppingListItemTile extends StatelessWidget {
     required this.onUnitChanged,
   });
 
+  String _getItemIcon() {
+    // Check for custom icon first
+    if (item.customIconId != null) {
+      final icon = ProductIcons.getIconById(item.customIconId);
+      if (icon != null) return icon.emoji;
+    }
+    // Fallback to category icon
+    return AppConstants.categoryIcons[item.category] ?? '📦';
+  }
+
   void _showQuantityEditDialog(BuildContext context) {
     final formattedQty = item.quantity == item.quantity.roundToDouble()
         ? item.quantity.toInt().toString()
@@ -1024,10 +1035,10 @@ class _ShoppingListItemTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             child: Row(
               children: [
-                // Category icon
+                // Category/Custom icon
                 if (!isMultiSelectMode) ...[
                   Text(
-                    AppConstants.categoryIcons[item.category] ?? '📦',
+                    _getItemIcon(),
                     style: const TextStyle(fontSize: 20),
                   ),
                   const SizedBox(width: 8),

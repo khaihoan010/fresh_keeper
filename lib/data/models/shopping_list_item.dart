@@ -27,6 +27,9 @@ class ShoppingListItem {
   final List<String>? healthWarnings;
   final String? storageTips;
 
+  // Custom icon support
+  final String? customIconId;
+
   ShoppingListItem({
     required this.id,
     required this.name,
@@ -42,6 +45,7 @@ class ShoppingListItem {
     this.healthBenefits,
     this.healthWarnings,
     this.storageTips,
+    this.customIconId,
   });
 
   /// Create from product template (when adding from search)
@@ -94,6 +98,7 @@ class ShoppingListItem {
       healthBenefits: template?.healthBenefits,
       healthWarnings: template?.healthWarnings,
       storageTips: template?.storageTips,
+      customIconId: product.customIconId,
     );
   }
 
@@ -120,6 +125,7 @@ class ShoppingListItem {
           ? List<String>.from(jsonDecode(map['health_warnings'] as String))
           : null,
       storageTips: map['storage_tips'] as String?,
+      customIconId: map['custom_icon_id'] as String?,
     );
   }
 
@@ -146,6 +152,7 @@ class ShoppingListItem {
           ? jsonEncode(healthWarnings)
           : null,
       'storage_tips': storageTips,
+      'custom_icon_id': customIconId,
     };
   }
 
@@ -165,6 +172,7 @@ class ShoppingListItem {
     List<String>? healthBenefits,
     List<String>? healthWarnings,
     String? storageTips,
+    String? customIconId,
   }) {
     return ShoppingListItem(
       id: id ?? this.id,
@@ -181,6 +189,7 @@ class ShoppingListItem {
       healthBenefits: healthBenefits ?? this.healthBenefits,
       healthWarnings: healthWarnings ?? this.healthWarnings,
       storageTips: storageTips ?? this.storageTips,
+      customIconId: customIconId ?? this.customIconId,
     );
   }
 
